@@ -4,9 +4,9 @@
       <h1>Weddix</h1>
       <md-bottom-bar>
         <md-bottom-bar-item md-icon="mode_edit" @click="changeRoute" md-active>Edit</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="favorite" @click="changeRoute" >Publish</md-bottom-bar-item>
-        </md-bottom-bar>
-      </header>
+        <md-bottom-bar-item md-icon="favorite" @click="changeRoute">Publish</md-bottom-bar-item>
+      </md-bottom-bar>
+    </header>
     <main>
       <router-view>
       </router-view>
@@ -18,8 +18,8 @@
 <script>
 export default {
   name: 'app',
-  methods:{
-    changeRoute(e){
+  methods: {
+    changeRoute(e) {
       var destRoute = (e.target.innerText.toLowerCase().includes('edit')) ? '/edit' : '/publish';
       this.$router.push(destRoute)
     }
@@ -35,7 +35,6 @@ body {
 
 header {
   text-align: center;
+
 }
-
-
 </style>

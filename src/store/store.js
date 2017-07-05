@@ -1,65 +1,57 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import cmpService from '../services/cmp.service'
 
 Vue.use(Vuex)
 
 
-
-
-
 const store = new Vuex.Store({
   state: {
-    selectedCmps: [
-      {
-        _id: 1,
-        type: 'SimpleText',
-        data: 'BUBU',
-        style: { 'background-color': 'grey' }
-      },
-      {
-        _id: 2,
-        type: 'SimpleText',
-        data: 'DADA'
-      },
-      {
-        _id: 3,
-        type: 'SimpleText',
-        data: 'lADA'
-      }],
-    tmplCmps: [
-      {
-        type: 'SimpleText',
-        data: 'Simple Text - PLACEHOLDER',
-        style: { 'background-color': 'grey' }
-      },
-      {
-        type: 'SimpleTitle',
-        data: 'Simple Title - PLACEHOLDER',
-        style: { 'background-color': 'grey' }
-      }]
+    selectedCmps: [],
+    tmplCmps: cmpService.tmplCmps
   },
   mutations: {
-    addCmp(state, { newCmpType }) {
-      console.log('this is the new cmp type to add', newCmpType)
-      var tempCmp = state.tmplCmps.find(cmp => cmp.type === newCmpType)
-      var newCmp = JSON.parse(JSON.stringify(tempCmp))
-      console.log(newCmp, '!!!')
+    loadCmp(state, {cmps}){
+      state.selectedCmps = cmps;
+    },
+    addCmp(state, { newCmp }) {      
       state.selectedCmps.push(newCmp);
+    },
+     deleteCmp(state, { cmp }) {
+      var idx = getCmpIdx(cmp);
+      state.selectedCmps.splice(idx, 1);
+
     },
     updateCmp(state, { cmp }) {
       var idx = getCmpIdx(cmp);
       state.selectedCmps.splice(idx, 1, cmp);
-
     }
   },
   actions: {
-    addCmp(context, payload) {
+    loadCmp(context, payload) {
+      payload.cmps = cmpService.getCmps()
+      //need to be a promise
+      console.log('payload in action:',payload)
       context.commit(payload)
     },
-    updateCmp(context, payload) {
+    addCmp(context, payload) {
+      var newCmp = cmpService.addCmp(payload.newCmpType);
+      //need to be a promise
+      payload.newCmp = newCmp;
+      console.log('payload sent from Action addCmp:',payload)
+      context.commit(payload)
+    },
+    deleteCmp(context, payload) {
+      //need to be a promise
+      cmpService.deleteCmp(payload.cmp)
       context.commit(payload);
-    }
+    },
+    updateCmp(context, payload) {
+       //need to be a promise
+      cmpService.updateCmp(payload.cmp)
+      context.commit(payload);
+    },
   }
 })
 
