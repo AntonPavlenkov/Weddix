@@ -66,21 +66,11 @@ export default {
             console.log('Entering Edit MOde')
 
         },
-        changeBgColor() {
-            console.log('cmpToEdit', this.cmpToEdit)
-            var newBgColor = prompt('enter new color');
-            this.cmpToEdit.style.backgroundColor = newBgColor;
-            console.log('cmpToEdit', this.cmpToEdit);
-            this.updateCmp();
-        },
-        changeStyleAtt() {
-
-        },
         updateCmp() {
             this.$store.dispatch({ type: "updateCmp", cmp: this.cmpToEdit });
         },
         updateNewStyle(cmpWithNewStyle) {
-            console.log(cmpWithNewStyle, 'Updated style')
+            // console.log(cmpWithNewStyle, 'Updated style')
             this.cmpToEdit = cmpWithNewStyle
             this.updateCmp()
         },

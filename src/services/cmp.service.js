@@ -56,10 +56,10 @@ function deleteCmp(cmp) {
 }
 
 function updateCmp(cmp) {
-    console.log(cmp,'CMP to update ARRIVED')
+    // console.log(cmp,'CMP to update ARRIVED')
      var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
      cmps.splice(idx,1,cmp);
-     console.log('updated cmp by service', cmps);
+    //  console.log('updated cmp by service', cmps);
 }
 
 // //TESTING:

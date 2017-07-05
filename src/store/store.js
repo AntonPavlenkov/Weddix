@@ -24,10 +24,10 @@ const store = new Vuex.Store({
 
     },
     updateCmp(state, { cmp }) {
-        console.log('CMP AT MUTATIONS',cmp)
+        // console.log('CMP AT MUTATIONS',cmp)
       var idx = getCmpIdx(cmp);
       state.selectedCmps.splice(idx, 1, cmp);
-      console.log(state.selectedCmps, 'Selected comps')
+      // console.log(state.selectedCmps, 'Selected comps')
     }
   },
   actions: {
@@ -51,7 +51,7 @@ const store = new Vuex.Store({
     },
     updateCmp(context, payload) {
        //need to be a promise
-       console.log(payload,'update request at store from actions')
+      //  console.log(payload,'update request at store from actions')
       cmpService.updateCmp(payload.cmp)
       context.commit(payload);
     },
