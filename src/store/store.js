@@ -8,39 +8,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-<<<<<<< HEAD
-    selectedCmps: [
-      {
-        _id: 1,
-        type: 'SimpleText',
-        data: 'BUBU',
-        style: { 'backgroundColor': 'grey', 'textAlign':'center', 'color':'black', 'fontSize':'16px','fontFamily':'robo', 'fontWeight':'normal'}
-      },
-      {
-        _id: 2,
-        type: 'SimpleText',
-        data: 'DADA'
-      },
-      {
-        _id: 3,
-        type: 'SimpleText',
-        data: 'lADA'
-      }],
-    tmplCmps: [
-      {
-        type: 'SimpleText',
-        data: 'Simple Text - PLACEHOLDER',
-       style: { 'backgroundColor': 'grey', 'textAlign':'center', 'color':'black', 'fontSize':'16px','fontFamily':'robo', 'fontWeight':'bold'}
-      },
-      {
-        type: 'SimpleTitle',
-        data: 'Simple Title - PLACEHOLDER',
-        style: { 'backgroundColor': 'grey', 'textAlign':'center', 'color':'black', 'fontSize':'16px','fontFamily':'robo', 'fontWeight':'normal'}
-      }]
-=======
     selectedCmps: [],
     tmplCmps: cmpService.tmplCmps
->>>>>>> keren-page-layout
   },
   mutations: {
     loadCmp(state, {cmps}){
