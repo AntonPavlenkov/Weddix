@@ -1,7 +1,14 @@
 <template>
-  <section>
-    <p class="main-title">Create a Stunning Digital Wedding Invitation</p>
-    <md-button class="md-raised md-primary" @click="changeRoute">Get Started!</md-button>
+  <section class="main-app ltr">
+  
+    <span class="welcome-message"><p>Create a Stunning</p>
+      <p> Digital Wedding</p>
+      <p>Invitation </p>
+    <md-button @click="$router.push('/edit')" class="md-raised md-primary">Get Started!</md-button>
+      
+      
+      </span>
+  
   </section>
 </template>
 
@@ -14,11 +21,6 @@ export default {
 
 
     }
-  },
-  methods: {
-    changeRoute(){
-      this.$router.push('/edit');
-    }
 
   },
 }
@@ -29,16 +31,38 @@ section {
   height: 100vh;
   width: 100%;
   margin: 0 auto;
+  height: 60vh;
   text-align: center;
-  background: url("../../assets/floral-bg.jpg") no-repeat;
-  background-size: cover;
-  /*background-repeat: repeat;*/
+  display: flex;
+  flex-flow: col wrap;
+  justify-content: center;
 }
 
-.main-title {
-  line-height: 2em;
-  font-family: 'Shadows Into Light', cursive;
-  font-size: 4em;
+.main-app {
+  background-image: url(../assets/land.png);
+  transition: background-position 15000ms ease-out;
+}
+
+.main-app.ltr {
+  background-position: 100% center;
+}
+
+.main-app.ltr:hover {
+  background-position: 0 center;
+}
+
+.welcome-message {
+  font-size: 3em;
+  font-family: fantasy;
+  font-weight: bold;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.md-raised {
+  margin: 20px;
 }
 </style>
 

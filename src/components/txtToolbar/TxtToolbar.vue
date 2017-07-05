@@ -1,9 +1,27 @@
 <template>
-<section class="text-toolbar  md-mini">
-<md-button  class="md-fab md-clean  md-mini">
+  <section class="text-toolbar  md-mini">
+  
+  
+    <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
+      <md-icon>format_color_fill</md-icon>
+      <color-picker :change="updateColor" @changeColor="changeFontColor"></color-picker>
+      <md-tooltip md-direction="top">Change color of the text</md-tooltip>
+    </md-button>
+  
+    
+
+  <md-menu md-align-trigger>
+<md-button md-menu-trigger class="md-fab md-clean  md-mini">
     <md-icon>text_format</md-icon>
      <md-tooltip md-direction="top">Choose text format</md-tooltip>
   </md-button>
+  <md-menu-content>
+    <md-menu-item @click="changeTextFont('cursive')">Cursive</md-menu-item>
+    <md-menu-item @click="changeTextFont('fantasy')">Fantasy</md-menu-item>
+    <md-menu-item @click="changeTextFont('monospace')">Monospace</md-menu-item>
+    <md-menu-item @click="changeTextFont('Arial, Helvetica, sans-serif')">Arial sans-serif</md-menu-item>
+  </md-menu-content>
+</md-menu>
 
   <md-button @click="changeAlign('right')" class="md-fab md-clean md-mini">
     <md-icon>format_align_right</md-icon>
@@ -25,23 +43,6 @@
      <md-tooltip md-direction="top">Bold text</md-tooltip>
   </md-button>
 
-<md-menu md-size="4">
-  <md-button md-menu-trigger class="md-fab md-clean  md-mini">
-    <md-icon>format_color_fill</md-icon>
-     <md-tooltip md-direction="top">Change color of the text</md-tooltip>
-  </md-button>
-  <md-menu-content>
-    <md-menu-item>
-      <span class="c1">White</span>
-    </md-menu-item>
-    <md-menu-item>
-      <span class="c2">Red</span>
-    </md-menu-item>
-    <md-menu-item>
-      <span class="c3">Green</span>
-    </md-menu-item>
-  </md-menu-content>
-</md-menu>
 
 
 <md-menu md-align-trigger>
@@ -50,12 +51,12 @@
      <md-tooltip md-direction="top">Change text size</md-tooltip>
   </md-button>
   <md-menu-content>
-    <md-menu-item>12px</md-menu-item>
-    <md-menu-item>16px</md-menu-item>
-    <md-menu-item>18px</md-menu-item>
-    <md-menu-item>20px</md-menu-item>
-    <md-menu-item>22px</md-menu-item>
-    <md-menu-item>24px</md-menu-item>
+    <md-menu-item @click="changeTextSize(12)">12px</md-menu-item>
+    <md-menu-item @click="changeTextSize(16)">16px</md-menu-item>
+    <md-menu-item @click="changeTextSize(18)">18px</md-menu-item>
+    <md-menu-item @click="changeTextSize(20)">20px</md-menu-item>
+    <md-menu-item @click="changeTextSize(22)">22px</md-menu-item>
+    <md-menu-item @click="changeTextSize(24)">24px</md-menu-item>
   </md-menu-content>
 </md-menu>
 
@@ -68,32 +69,54 @@
 </template>
 
 <script>
+import ColorPicker from './ColorPicker'
+
 export default {
   name: 'ToolBar',
-  props:['cmp'],
-  created(){
-       this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
+  props: ['cmp'],
+  components: { 'color-picker': ColorPicker },
+  created() {
+    this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
   },
-  data () {
+  data() {
     return {
-        cmpStyleEdit: null,
-        
+      cmpStyleEdit: null,
+      color: ""
+
     }
   },
-  methods:{
-    changeAlign(dir){
+  methods: {
+    changeAlign(dir) {
       this.cmpStyleEdit.style.textAlign = dir;
       this.$emit('updateStyle', this.cmpStyleEdit)
-      
+
     },
-    changeBold(){
-      if(this.cmpStyleEdit.style.fontWeight==='normal')
-      this.cmpStyleEdit.style.fontWeight = 'bold';
-      else{
+    changeBold() {
+      if (this.cmpStyleEdit.style.fontWeight === 'normal')
+        this.cmpStyleEdit.style.fontWeight = 'bold';
+      else {
         this.cmpStyleEdit.style.fontWeight = 'normal';
       }
       this.$emit('updateStyle', this.cmpStyleEdit)
     },
+    updateColor: function (event) {
+      this.color = event.color;
+    },
+
+    changeFontColor(newColor) {
+      this.cmpStyleEdit.style.color = newColor;
+      this.$emit('updateStyle', this.cmpStyleEdit)
+
+    },
+
+    changeTextSize(size){
+      this.cmpStyleEdit.style.fontSize = size+'px'
+      this.$emit('updateStyle', this.cmpStyleEdit)
+    },
+    changeTextFont(font){
+      this.cmpStyleEdit.style.fontFamily = font;
+      this.$emit('updateStyle', this.cmpStyleEdit)
+    }
 
   }
 }
@@ -101,28 +124,31 @@ export default {
 
 
 <style scoped>
-.text-toolbar{
+.text-toolbar {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   width: 100%;
-
 }
-.c1{
+
+.c1 {
   background-color: white;
   width: 100%;
   text-align: center;
 }
-.c2{
+
+.c2 {
   background-color: red;
   width: 100%;
   text-align: center;
 }
-.c3{
+
+.c3 {
   background-color: green;
   width: 100%;
-  text-align: center;
-  font-weight: normal
 }
 
+.color-picker-btn {
+  overflow: initial;
+}
 </style>

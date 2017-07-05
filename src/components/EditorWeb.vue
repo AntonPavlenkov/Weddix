@@ -63,13 +63,12 @@ export default {
     selectedCmps() {
       return this.$store.state.selectedCmps;
     },
-},
-methods: {
-  showTmplCmps() {
-    console.log(this.tmplCmps, 'These Templates')
-    this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
   },
-
+  methods: {
+    showTmplCmps() {
+      console.log(this.tmplCmps, 'These Templates')
+      this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
+    },
   addNewCmp() {
     this.closeDialog('dialog1')
     console.log(this.newCmpType, 'new cmp type')
@@ -97,7 +96,7 @@ components: {
 </script>
 
 
-<style scoped <style lang="scss">
+<style scoped style lang="scss">
 section {
   width: 90%;
   margin: 0 auto;
@@ -110,10 +109,6 @@ div :hover {
 .btn-holder {
   margin-top: 10px;
   text-align: center;
-  button {
-    height: 100px;
-    width: 100px;
-  }
 }
 
 .md-dialog {
