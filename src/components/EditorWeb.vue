@@ -33,7 +33,10 @@
         </form>
       </md-dialog-content>
     </md-dialog>
-    <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp.name" :cmp="cmp">
+    <component v-for="(cmp, idx) in selectedCmps" 
+            v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" 
+            :isFirst="idx === 0" 
+            :isLast="idx === lastIdxCmps">
     </component>
     <div class="btn-holder">
       <md-button class="md-icon-button md-raised md-accent" id="custom" @click="openDialog('dialog1')">
@@ -54,7 +57,7 @@ export default {
     this.$store.dispatch({ type: 'loadCmp' })
   },
   data() {
-    return {      
+    return {
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null
     }
@@ -63,35 +66,39 @@ export default {
     selectedCmps() {
       return this.$store.state.selectedCmps;
     },
+    lastIdxCmps() {
+        return this.selectedCmps.length-1;
+    },
+
   },
   methods: {
     showTmplCmps() {
       console.log(this.tmplCmps, 'These Templates')
       this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
     },
-  addNewCmp() {
-    this.closeDialog('dialog1')
-    console.log(this.newCmpType, 'new cmp type')
-    var newCmpType = this.newCmpType;
-    this.$store.dispatch({ type: 'addCmp', newCmpType })
+    addNewCmp() {
+      this.closeDialog('dialog1')
+      console.log(this.newCmpType, 'new cmp type')
+      var newCmpType = this.newCmpType;
+      this.$store.dispatch({ type: 'addCmp', newCmpType })
+    },
+    openDialog(ref) {
+      this.$refs[ref].open();
+    },
+    closeDialog(ref) {
+      this.$refs[ref].close();
+    },
+    onOpen() {
+      console.log('Opened');
+    },
+    onClose(type) {
+      console.log('Closed', type);
+    }
   },
-  openDialog(ref) {
-    this.$refs[ref].open();
-  },
-  closeDialog(ref) {
-    this.$refs[ref].close();
-  },
-  onOpen() {
-    console.log('Opened');
-  },
-  onClose(type) {
-    console.log('Closed', type);
-  }
-},
-components: {
-  SimpleText,
+  components: {
+    SimpleText,
     SimpleTitle
-}
+  }
 }
 </script>
 

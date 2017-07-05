@@ -9,28 +9,11 @@
                 <md-icon>edit</md-icon>
             </md-button>
     
-    
         </div>
         <transition name="fade">
             <div v-if="isEditMode" class="edit-console">
                 <txt-toolbar :cmp="cmp" @updateStyle="updateNewStyle"></txt-toolbar>
-    
-                <md-button @click="changeBgColor()" class="md-fab md-clean  md-mini">
-                    <md-icon>format_paint</md-icon>
-                </md-button>
-                <md-button class="md-fab md-clean  md-mini">
-                    <md-icon>delete_forever</md-icon>
-                </md-button>
-                </md-button>
-                <md-button class="md-fab md-clean  md-mini">
-                    <md-icon>arrow_upward</md-icon>
-                </md-button>
-                </md-button>
-                <md-button class="md-fab md-clean  md-mini">
-                    <md-icon>arrow_downward</md-icon>
-                </md-button>
-    
-                <!--<button @click="changeBgColor()">change bg color</button>-->
+                <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @updateStyle="updateNewStyle"></general-edit>
             </div>
         </transition>
     </section>
@@ -38,11 +21,13 @@
 
 <script>
 import TxtToolbar from './txtToolbar/TxtToolbar'
+import GeneralEdit from './generalEditToolbar/generalEditToolbar'
 export default {
     name: 'SimpleText',
-    props: ['cmp'],
+    props: ['cmp', 'isFirst', 'isLast'],
     components: {
-        TxtToolbar
+        TxtToolbar,
+        GeneralEdit
     },
     data() {
         return {
@@ -51,13 +36,23 @@ export default {
 
         }
     },
+    computed: {
+
+    },
     created() {
         this.cmpToEdit = JSON.parse(JSON.stringify(this.cmp));
     },
     methods: {
+        moveCmp(isUp) {
+            this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
+        },
+        deleteCmp() {
+            this.isEditMode = false;
+            this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
+
+        },
         enterEditMode() {
             this.isEditMode = !this.isEditMode
-            console.log('Entering Edit MOde')
 
         },
         changeBgColor() {
@@ -96,7 +91,6 @@ export default {
 <style scoped>
 .simple-text {
     transition: all .5s;
-    background-color: lightgreen;
     position: relative;
     /*width: 100%;*/
     margin-top: 5px;

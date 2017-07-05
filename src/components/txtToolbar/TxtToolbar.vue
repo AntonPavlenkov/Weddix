@@ -23,9 +23,11 @@
   </md-menu-content>
 </md-menu>
 
-  <md-button @click="changeAlign('right')" class="md-fab md-clean md-mini">
-    <md-icon>format_align_right</md-icon>
-     <md-tooltip md-direction="top">Text align right</md-tooltip>
+
+
+  <md-button @click="changeAlign('left')" class="md-fab md-clean  md-mini">
+    <md-icon>format_align_left</md-icon>
+     <md-tooltip md-direction="top">Text align left</md-tooltip>
   </md-button>
 
   <md-button @click="changeAlign('center')" class="md-fab md-clean  md-mini">
@@ -33,11 +35,11 @@
      <md-tooltip md-direction="top">Text align center</md-tooltip>
   </md-button>
 
-  <md-button @click="changeAlign('left')" class="md-fab md-clean  md-mini">
-    <md-icon>format_align_left</md-icon>
-     <md-tooltip md-direction="top">Text align left</md-tooltip>
+  <md-button @click="changeAlign('right')" class="md-fab md-clean md-mini">
+    <md-icon>format_align_right</md-icon>
+     <md-tooltip md-direction="top">Text align right</md-tooltip>
   </md-button>
-
+  
   <md-button @click="changeBold" class="md-fab md-clean  md-mini">
     <md-icon>format_bold</md-icon>
      <md-tooltip md-direction="top">Bold text</md-tooltip>
@@ -87,11 +89,13 @@ export default {
   },
   methods: {
     changeAlign(dir) {
+       this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
       this.cmpStyleEdit.style.textAlign = dir;
       this.$emit('updateStyle', this.cmpStyleEdit)
 
     },
     changeBold() {
+       this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
       if (this.cmpStyleEdit.style.fontWeight === 'normal')
         this.cmpStyleEdit.style.fontWeight = 'bold';
       else {
@@ -100,20 +104,23 @@ export default {
       this.$emit('updateStyle', this.cmpStyleEdit)
     },
     updateColor: function (event) {
+       this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
       this.color = event.color;
     },
 
     changeFontColor(newColor) {
+       this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
       this.cmpStyleEdit.style.color = newColor;
       this.$emit('updateStyle', this.cmpStyleEdit)
-
     },
 
     changeTextSize(size){
+       this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
       this.cmpStyleEdit.style.fontSize = size+'px'
       this.$emit('updateStyle', this.cmpStyleEdit)
     },
     changeTextFont(font){
+       this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
       this.cmpStyleEdit.style.fontFamily = font;
       this.$emit('updateStyle', this.cmpStyleEdit)
     }

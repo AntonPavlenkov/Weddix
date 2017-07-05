@@ -4,36 +4,37 @@ import axios from 'axios';
 var tmplCmps = [{
     type: 'SimpleText',
     data: 'Simple Text - PLACEHOLDER',
-    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
+    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     type: 'SimpleTitle',
     data: 'Simple Title - PLACEHOLDER',
-    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
+    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }];
 
 //***************************
 //dev mode  (withour server):
 //***************************
 //default start:
+
+var idCounter = 3;
 var cmps = [{
     _id: "1",
     type: "SimpleText",
     data: "BUBU",
-    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
+    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     _id: "2",
     type: "SimpleText",
     data: "DADA",
-    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
+    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }]
 
 //functions:
 function getCmps() {
     var copyOfCmps = JSON.parse(JSON.stringify(cmps));
-    console.log('returning cmps from service', copyOfCmps)
-    return copyOfCmps;
+     return Promise.resolve(copyOfCmps);
 }
 
 function getCmp(cmp) {
@@ -43,29 +44,39 @@ function getCmp(cmp) {
 function addCmp(cmpType) {
     var tempCmp = tmplCmps.find(tmpl => tmpl.type === cmpType)
     var newCmp = JSON.parse(JSON.stringify(tempCmp))
-    newCmp._id = (cmps.length+1)+'';
+    newCmp._id = (idCounter++) + '';
     cmps.push(newCmp);
-    console.log('added cmp in service', cmps)
-    return newCmp;
+    return Promise.resolve(newCmp);
 }
 
 function deleteCmp(cmp) {
     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
-    cmps.splice(idx,1);
-    console.log('delete cmp by service', cmps);
+    cmps.splice(idx, 1);
+    return Promise.resolve();
 }
 
 function updateCmp(cmp) {
-    console.log(cmp,'CMP to update ARRIVED')
-     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
-     cmps.splice(idx,1,cmp);
-     console.log('updated cmp by service', cmps);
+    var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
+    cmps.splice(idx, 1, cmp);
+    return Promise.resolve();
 }
 
-// //TESTING:
-// var testCmps = getCmps();
-// var newType = "SimpleTitle"
+//TODO: this still needs to be implemented as a server function (also in the server side)
+//is up => e.g. from idx 1 to idx 2
+function moveCmp(cmp, isUp) {
+    var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id);
+    var newIdx = (isUp) ? idx + 1 : idx - 1;
+    var movedCmp = cmps.splice(idx, 1);
+    cmps.splice(newIdx, 0, movedCmp[0]);
+     return Promise.resolve();
+}
+
+
+//TESTING:
+var testCmps = getCmps();
+// var newType = "SimpleText"
 // addCmp(newType);
+// moveCmp(cmps[1],false);
 
 // **************************
 //functions to work with server:
@@ -127,5 +138,6 @@ export default {
     getCmp,
     addCmp,
     deleteCmp,
-    updateCmp
+    updateCmp,
+    moveCmp
 }
