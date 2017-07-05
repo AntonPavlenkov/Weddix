@@ -49,47 +49,58 @@ import SimpleText from './SimpleText'
 import SimpleTitle from './SimpleTitle'
 export default {
   name: 'EditorWeb',
+<<<<<<< HEAD
+=======
+  created() {
+    console.log('Loading data from store');
+    this.$store.dispatch({ type: 'loadCmp' })
+  },
+>>>>>>> keren-page-layout
   data() {
-    return {
+    return {      
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null
     }
   },
   computed: {
     selectedCmps() {
-      console.log(this.$store.state.selectedCmps, 'Data from store')
-      return this.$store.state.selectedCmps
-    }
-  },
-  methods: {
-    showTmplCmps() {
-      console.log(this.tmplCmps, 'These Templates')
-      this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
+      return this.$store.state.selectedCmps;
     },
+},
+methods: {
+  showTmplCmps() {
+    console.log(this.tmplCmps, 'These Templates')
+    this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
+  },
 
-    addNewCmp() {
-      this.closeDialog('dialog1')
-      console.log(this.newCmpType, 'new cmp type')
-      var newCmpType = this.newCmpType;
-      this.$store.dispatch({ type: 'addCmp', newCmpType })
-    },
-    openDialog(ref) {
-      this.$refs[ref].open();
-    },
-    closeDialog(ref) {
-      this.$refs[ref].close();
-    },
-    onOpen() {
-      console.log('Opened');
-    },
-    onClose(type) {
-      console.log('Closed', type);
-    }
+  addNewCmp() {
+    this.closeDialog('dialog1')
+    console.log(this.newCmpType, 'new cmp type')
+    var newCmpType = this.newCmpType;
+    this.$store.dispatch({ type: 'addCmp', newCmpType })
   },
+  openDialog(ref) {
+    this.$refs[ref].open();
+  },
+  closeDialog(ref) {
+    this.$refs[ref].close();
+  },
+  onOpen() {
+    console.log('Opened');
+  },
+<<<<<<< HEAD
   components: {
     SimpleText,
-    SimpleTitle
+=======
+  onClose(type) {
+    console.log('Closed', type);
   }
+},
+components: {
+  SimpleText,
+>>>>>>> keren-page-layout
+    SimpleTitle
+}
 }
 </script>
 
@@ -113,6 +124,7 @@ div :hover {
   }
 }
 
+<<<<<<< HEAD
 .md-dialog {
   text-align: center;
   .catalogue {
@@ -130,6 +142,16 @@ div :hover {
     }
     h3 {
       text-align: center;
+=======
+  li {
+    margin: 10px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .content-container {
+      width: 100%;
+>>>>>>> keren-page-layout
     }
   }
 }
