@@ -9,15 +9,16 @@
                 <md-icon>edit</md-icon>
             </md-button>
     
-    
         </div>
         <transition name="fade">
             <div v-if="isEditMode" class="edit-console">
                 <txt-toolbar :cmp="cmp" @updateStyle="updateNewStyle"></txt-toolbar>
     
-                <md-button @click="changeBgColor()" class="md-fab md-clean  md-mini">
+                <md-button class="md-fab md-clean  md-mini color-picker-btn">
                     <md-icon>format_paint</md-icon>
+                    <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor', $event)"></color-picker>
                 </md-button>
+    
                 <md-button class="md-fab md-clean  md-mini">
                     <md-icon>delete_forever</md-icon>
                 </md-button>
@@ -38,16 +39,21 @@
 
 <script>
 import TxtToolbar from './txtToolbar/TxtToolbar'
+import ColorPicker from './txtToolbar/ColorPicker'
+
 export default {
     name: 'SimpleText',
     props: ['cmp'],
     components: {
-        TxtToolbar
+        TxtToolbar,
+        'color-picker': ColorPicker
     },
     data() {
         return {
             isEditMode: false,
-            cmpToEdit: null
+            cmpToEdit: null,
+            color: ""
+
 
         }
     },
@@ -77,9 +83,16 @@ export default {
             console.log(cmpWithNewStyle, 'Updated style')
             this.cmpToEdit = cmpWithNewStyle
             this.updateCmp()
-
+        },
+        changeCssProperty(prop, val) {
+            this.cmpToEdit.style[prop] = val;
+            this.updateCmp()
+        },
+        updateColor: function (event) {
+            this.color = event.color;
         }
-    },
+
+    }
     //   watch:{
     //       cmpToEdit: {
     //         handler: function(newValue) {
@@ -147,5 +160,9 @@ p {
 
 {
     opacity: 0
+}
+
+.color-picker-btn {
+    overflow: initial;
 }
 </style>
