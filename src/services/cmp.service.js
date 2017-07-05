@@ -4,12 +4,12 @@ import axios from 'axios';
 var tmplCmps = [{
     type: 'SimpleText',
     data: 'Simple Text - PLACEHOLDER',
-    style: { 'background-color': 'grey' }
+    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
 },
 {
     type: 'SimpleTitle',
     data: 'Simple Title - PLACEHOLDER',
-    style: { 'background-color': 'lightblue' }
+    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
 }];
 
 //***************************
@@ -20,13 +20,13 @@ var cmps = [{
     _id: "1",
     type: "SimpleText",
     data: "BUBU",
-    style: { backgroundColor: "grey" }
+    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
 },
 {
     _id: "2",
     type: "SimpleText",
     data: "DADA",
-    style: { backgroundColor: "pink" }
+    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
 }]
 
 //functions:
@@ -56,6 +56,7 @@ function deleteCmp(cmp) {
 }
 
 function updateCmp(cmp) {
+    console.log(cmp,'CMP to update ARRIVED')
      var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
      cmps.splice(idx,1,cmp);
      console.log('updated cmp by service', cmps);

@@ -49,13 +49,10 @@ import SimpleText from './SimpleText'
 import SimpleTitle from './SimpleTitle'
 export default {
   name: 'EditorWeb',
-<<<<<<< HEAD
-=======
   created() {
     console.log('Loading data from store');
     this.$store.dispatch({ type: 'loadCmp' })
   },
->>>>>>> keren-page-layout
   data() {
     return {      
       tmplCmps: this.$store.state.tmplCmps,
@@ -88,24 +85,19 @@ methods: {
   onOpen() {
     console.log('Opened');
   },
-<<<<<<< HEAD
-  components: {
-    SimpleText,
-=======
   onClose(type) {
     console.log('Closed', type);
   }
 },
 components: {
   SimpleText,
->>>>>>> keren-page-layout
     SimpleTitle
 }
 }
 </script>
 
 
-<style scoped <style lang="scss">
+<style scoped style lang="scss">
 section {
   width: 90%;
   margin: 0 auto;
@@ -124,25 +116,6 @@ div :hover {
   }
 }
 
-<<<<<<< HEAD
-.md-dialog {
-  text-align: center;
-  .catalogue {
-    padding: 0;
-    list-style: none;
-    li {
-      margin: 10px;
-      border: 1px solid black;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      .content-container {
-        width: 100%;
-      }
-    }
-    h3 {
-      text-align: center;
-=======
   li {
     margin: 10px;
     border: 1px solid black;
@@ -151,8 +124,7 @@ div :hover {
     align-items: center;
     .content-container {
       width: 100%;
->>>>>>> keren-page-layout
     }
   }
-}
+
 </style>

@@ -74,8 +74,10 @@ export default {
             this.$store.dispatch({ type: "updateCmp", cmp: this.cmpToEdit });
         },
         updateNewStyle(cmpWithNewStyle) {
-            console.log(cmpWithNewStyle)
+            console.log(cmpWithNewStyle, 'Updated style')
             this.cmpToEdit = cmpWithNewStyle
+            this.updateCmp()
+
         }
     },
     //   watch:{
