@@ -1,7 +1,7 @@
 <template>
   <section>
     <md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog1">
-      <md-dialog-title>Lorem ipsum dolor sit amet</md-dialog-title>
+      <md-dialog-title>Choose new component</md-dialog-title>
   
       <md-dialog-content>
         <ul class="catalogue">
@@ -101,8 +101,11 @@ section {
 div :hover {
   display: fixed;
 }
-
+.md-dialog{
+  text-align: center;
+}
 .catalogue {
+  padding: 0;
   list-style: none;
 
 
