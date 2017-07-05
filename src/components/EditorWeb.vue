@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <section>
     <md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog1">
       <md-dialog-title>Lorem ipsum dolor sit amet</md-dialog-title>
@@ -47,24 +46,6 @@
       <button @click="showTmplCmps">+</button>
     </span>-->
     <md-button class="md-primary md-raised" id="custom" @click="openDialog('dialog1')">Custom</md-button>
-=======
-<section>
-  <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp">
-  <!-- component changes when vm.currentView changes! -->
-</component>
-
-<span class="add-btn">
-  <button @click="showTmplCmps">+</button>
-</span>
-
-
-
-
-
-
-
-
->>>>>>> master
   </section>
 </template>
 
@@ -72,15 +53,7 @@
 import SimpleText from './SimpleText'
 import SimpleTitle from './SimpleTitle'
 export default {
-<<<<<<< HEAD
-  name: 'hello',
-  created() {
-=======
   name: 'EditorWeb',
-  created(){
->>>>>>> master
-
-  },
   data() {
     return {
       tmplCmps: this.$store.state.tmplCmps,
@@ -93,7 +66,6 @@ export default {
       return this.$store.state.selectedCmps
     }
   },
-<<<<<<< HEAD
   methods: {
     showTmplCmps() {
       console.log(this.tmplCmps, 'These Templates')
@@ -115,18 +87,6 @@ export default {
   },
 components: {
   SimpleText,
-=======
-methods:{
-showTmplCmps(){
-  console.log(this.tmplCmps, 'These Templates')
-  this.newCmpType = prompt('choose tmpl')//NEEEDED TO CHANGE
-  this.$store.dispatch({type:'addCmp', newCmpType:this.newCmpType})
-  
-}
-},
-  components:{
-    SimpleText,
->>>>>>> master
     SimpleTitle
 }
 }
