@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <header>
-    <h1>Stunning Digital Wedding Invitation</h1>
-    <router-link to="Edit">Edit</router-link>
-    <router-link to="Publish">Publish</router-link>
+      <h1>Stunning Digital Wedding Invitation</h1>
+      <router-link to="Edit">Edit</router-link>
+      <router-link to="Publish">Publish</router-link>
     </header>
     <main>
       <router-view>
-
       </router-view>
     </main>
   </div>
@@ -25,20 +24,14 @@ body {
   padding: 0;
 }
 
-#app {
- 
-}
+#app {}
 
-main {
- 
-}
+main {}
 
 header {
   text-align: center;
   background-color: lightgrey;
 }
 
-header span {
-  
-}
+header span {}
 </style>
