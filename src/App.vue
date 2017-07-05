@@ -9,6 +9,7 @@
       <router-view>
       </router-view>
     </main>
+    <footer> I AM FOOTER</footer>
   </div>
 </template>
 
