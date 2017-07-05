@@ -84,6 +84,7 @@ export default {
       }
       this.$emit('updateStyle', this.cmpStyleEdit)
     },
+    
     updateColor: function (event) {
       this.color = event.color;
     },
@@ -94,8 +95,6 @@ export default {
       this.cmpStyleEdit.style[prop] = val;
       this.$emit('updateStyle', this.cmpStyleEdit)
     }
-
-
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
 <section >
-    <h1>{{cmp.data}}</h1>
+    <h1>{{cmp.data.text_1}}</h1>
 
 
 

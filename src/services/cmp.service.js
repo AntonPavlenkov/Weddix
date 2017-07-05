@@ -3,13 +3,13 @@ import axios from 'axios';
 
 var tmplCmps = [{
     type: 'SimpleText',
-    data: 'Simple Text - PLACEHOLDER',
-    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
+    data: { text_1: 'Simple Text - PLACEHOLDER' },
+    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     type: 'SimpleTitle',
-    data: 'Simple Title - PLACEHOLDER',
-    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
+    data: { text_1: 'Simple Text - PLACEHOLDER' },
+    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }];
 
 //***************************
@@ -19,14 +19,19 @@ var tmplCmps = [{
 var cmps = [{
     _id: "1",
     type: "SimpleText",
-    data: "BUBU",
-    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
+    data: {
+        text_1: "BUBU"
+    },
+    text1: "BUBU",
+    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     _id: "2",
     type: "SimpleText",
-    data: "DADA",
-    style: { backgroundColor: "grey", textAlign: 'left',fontWeight:'normal',color:'black',fontFamily:'monospace',fontSize:'16px'}
+    data: {
+        text_1: "DADA"
+    },
+    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }]
 
 //functions:
@@ -43,7 +48,7 @@ function getCmp(cmp) {
 function addCmp(cmpType) {
     var tempCmp = tmplCmps.find(tmpl => tmpl.type === cmpType)
     var newCmp = JSON.parse(JSON.stringify(tempCmp))
-    newCmp._id = (cmps.length+1)+'';
+    newCmp._id = (cmps.length + 1) + '';
     cmps.push(newCmp);
     console.log('added cmp in service', cmps)
     return newCmp;
@@ -51,14 +56,14 @@ function addCmp(cmpType) {
 
 function deleteCmp(cmp) {
     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
-    cmps.splice(idx,1);
+    cmps.splice(idx, 1);
     console.log('delete cmp by service', cmps);
 }
 
 function updateCmp(cmp) {
     // console.log(cmp,'CMP to update ARRIVED')
-     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
-     cmps.splice(idx,1,cmp);
+    var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
+    cmps.splice(idx, 1, cmp);
     //  console.log('updated cmp by service', cmps);
 }
 

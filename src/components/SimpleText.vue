@@ -1,11 +1,11 @@
 <template>
     <section class="simple-text">
         <div class="content" :style="cmpToEdit.style">
-            <span :contenteditable="isEditMode">{{cmpToEdit.data}}</span>
+            <span :contenteditable="isEditable">{{cmp.data.text_1}}</span>
             <br>
-            <span :contenteditable="isEditMode"> Hello world </span>
+            <span :contenteditable="isEditable"> Hello world </span>
     
-            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
+            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode" v-if="isEditable">
                 <md-icon>edit</md-icon>
             </md-button>
     
@@ -43,7 +43,7 @@ import ColorPicker from './txtToolbar/ColorPicker'
 
 export default {
     name: 'SimpleText',
-    props: ['cmp'],
+    props: ['cmp','isEditable'],
     components: {
         TxtToolbar,
         'color-picker': ColorPicker

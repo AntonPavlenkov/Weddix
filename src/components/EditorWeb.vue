@@ -6,7 +6,7 @@
       <md-dialog-content>
         <ul class="catalogue">
           <li v-for="(cmp, idx) in tmplCmps" :key="idx">
-            <md-radio v-model="newCmpType" :md-value="cmp.type">
+            <md-radio v-model="newCmpType" :md-value="cmp.type" :isEditMode="false">
             </md-radio>
             <div class="content-container">
               <h3>{{cmp.type}}</h3>
@@ -33,7 +33,7 @@
         </form>
       </md-dialog-content>
     </md-dialog>
-    <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp.name" :cmp="cmp">
+    <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp.name" :cmp="cmp" :isEditable="true">
     </component>
     <div class="btn-holder">
       <md-button class="md-icon-button md-raised md-accent" id="custom" @click="openDialog('dialog1')">
