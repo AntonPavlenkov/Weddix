@@ -41,6 +41,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     addCmp(state, { newCmpType }) {
+      console.log('this is the new cmp type to add', newCmpType)
       var tempCmp = state.tmplCmps.find(cmp => cmp.type === newCmpType)
       var newCmp = JSON.parse(JSON.stringify(tempCmp))
       console.log(newCmp, '!!!')

@@ -1,24 +1,29 @@
 <template>
-<<<<<<< HEAD
   <section>
     <md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog1">
       <md-dialog-title>Lorem ipsum dolor sit amet</md-dialog-title>
   
       <md-dialog-content>
-        <ul>
-          <li v-for="(cmp, idx) in tmplCmps" :key="idx">{{cmp.type}} </li>
+        <ul class="catalogue">
+          <li v-for="(cmp, idx) in tmplCmps" :key="idx">
+            <md-radio v-model="newCmpType" :md-value="cmp.type">
+            </md-radio>
+            <div class="content-container">
+            <h3>{{cmp.type}}</h3>
+            <component v-bind:is="cmp.type" :cmp="cmp"></component>
+            </div>
+          </li>
         </ul>
       </md-dialog-content>
   
       <md-dialog-actions>
         <md-button class="md-primary" @click="closeDialog('dialog1')">Cancel</md-button>
-        <md-button class="md-primary" @click="closeDialog('dialog1')">Ok</md-button>
+        <md-button class="md-primary" @click="addNewCmp">Add</md-button>
       </md-dialog-actions>
     </md-dialog>
   
     <md-dialog md-open-from="#fab" md-close-to="#fab" ref="dialog2">
       <md-dialog-title>Create new note</md-dialog-title>
-  
       <md-dialog-content>
         <form>
           <md-input-container>
@@ -27,44 +32,10 @@
           </md-input-container>
         </form>
       </md-dialog-content>
-  
-      <md-dialog-actions>
-        <md-button class="md-primary" @click="closeDialog('dialog2')">Cancel</md-button>
-        <md-button class="md-primary" @click="closeDialog('dialog2')">Create</md-button>
-      </md-dialog-actions>
     </md-dialog>
-  
-    <!--<md-button class="md-primary md-raised" id="custom" @click="openDialog('dialog1')">Custom</md-button>
-    <md-button class="md-fab md-fab-bottom-right" id="fab" @click="openDialog('dialog2')">
-      <md-icon>add</md-icon>
-    </md-button>-->
-  
-    <component v-for="cmp in selectedCmps" v-bind:is="cmp.name" :key="cmp.name" :cmp="cmp">
-      <!-- component changes when vm.currentView changes! -->
+    <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp.name" :cmp="cmp">
     </component>
-  
-    <!--<span class="add-btn">
-      <button @click="showTmplCmps">+</button>
-    </span>-->
     <md-button class="md-primary md-raised" id="custom" @click="openDialog('dialog1')">Custom</md-button>
-=======
-<section>
-  <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp">
-  <!-- component changes when vm.currentView changes! -->
-</component>
-
-<span class="add-btn">
-  <button @click="showTmplCmps">+</button>
-</span>
-
-
-
-
-
-
-
-
->>>>>>> master
   </section>
 </template>
 
@@ -72,13 +43,8 @@
 import SimpleText from './SimpleText'
 import SimpleTitle from './SimpleTitle'
 export default {
-<<<<<<< HEAD
-  name: 'hello',
-  created() {
-=======
   name: 'EditorWeb',
-  created(){
->>>>>>> master
+  created() {
 
   },
   data() {
@@ -93,12 +59,17 @@ export default {
       return this.$store.state.selectedCmps
     }
   },
-<<<<<<< HEAD
   methods: {
     showTmplCmps() {
       console.log(this.tmplCmps, 'These Templates')
-      this.newCmpName = prompt('choose tmpl')//NEEEDED TO CHANGE
       this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
+    },
+
+    addNewCmp() {
+      this.closeDialog('dialog1')
+      console.log(this.newCmpType, 'new cmp type')
+      var newCmpType = this.newCmpType;
+      this.$store.dispatch({ type: 'addCmp', newCmpType })
     },
     openDialog(ref) {
       this.$refs[ref].open();
@@ -113,40 +84,40 @@ export default {
       console.log('Closed', type);
     }
   },
-components: {
-  SimpleText,
-=======
-methods:{
-showTmplCmps(){
-  console.log(this.tmplCmps, 'These Templates')
-  this.newCmpType = prompt('choose tmpl')//NEEEDED TO CHANGE
-  this.$store.dispatch({type:'addCmp', newCmpType:this.newCmpType})
-  
-}
-},
-  components:{
+  components: {
     SimpleText,
->>>>>>> master
     SimpleTitle
-}
+  }
 }
 </script>
 
 
-<style scoped>
+<style scoped <style lang="scss">
 section {
   width: 90%;
   margin: 0 auto;
 }
 
-diiiv {
-  position: relative;
-  height: 250px;
-  background-color: lightblue;
-  /*margin-top: 5px;*/
-}
-
 div :hover {
   display: fixed;
+}
+
+.catalogue {
+  list-style: none;
+
+
+  li {
+    margin: 10px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .content-container{
+      width:100%;
+    }
+  }
+  h3 {
+    text-align: center;
+  }
 }
 </style>
