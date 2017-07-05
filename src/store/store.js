@@ -15,7 +15,7 @@ const store = new Vuex.Store({
         _id: 1,
         type: 'SimpleText',
         data: 'BUBU',
-        style: { 'background-color': 'grey' }
+        style: { 'backgroundColor': 'grey', 'textAlign':'center', 'color':'black', 'fontSize':'16px','fontFamily':'robo', 'fontWeight':'normal'}
       },
       {
         _id: 2,
@@ -31,12 +31,12 @@ const store = new Vuex.Store({
       {
         type: 'SimpleText',
         data: 'Simple Text - PLACEHOLDER',
-        style: { 'background-color': 'grey' }
+       style: { 'backgroundColor': 'grey', 'textAlign':'center', 'color':'black', 'fontSize':'16px','fontFamily':'robo', 'fontWeight':'bold'}
       },
       {
         type: 'SimpleTitle',
         data: 'Simple Title - PLACEHOLDER',
-        style: { 'background-color': 'grey' }
+        style: { 'backgroundColor': 'grey', 'textAlign':'center', 'color':'black', 'fontSize':'16px','fontFamily':'robo', 'fontWeight':'normal'}
       }]
   },
   mutations: {
