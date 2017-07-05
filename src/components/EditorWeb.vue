@@ -1,20 +1,46 @@
 <template>
-<section>
-  <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp">
-  <!-- component changes when vm.currentView changes! -->
-</component>
-
-<span class="add-btn">
-  <button @click="showTmplCmps">+</button>
-</span>
-
-
-
-
-
-
-
-
+  <section>
+    <md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog1">
+      <md-dialog-title>Choose new component</md-dialog-title>
+  
+      <md-dialog-content>
+        <ul class="catalogue">
+          <li v-for="(cmp, idx) in tmplCmps" :key="idx">
+            <md-radio v-model="newCmpType" :md-value="cmp.type">
+            </md-radio>
+            <div class="content-container">
+              <h3>{{cmp.type}}</h3>
+              <component v-bind:is="cmp.type" :cmp="cmp"></component>
+            </div>
+          </li>
+        </ul>
+      </md-dialog-content>
+  
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="closeDialog('dialog1')">Cancel</md-button>
+        <md-button class="md-primary" @click="addNewCmp">Add</md-button>
+      </md-dialog-actions>
+    </md-dialog>
+  
+    <md-dialog md-open-from="#fab" md-close-to="#fab" ref="dialog2">
+      <md-dialog-title>Create new note</md-dialog-title>
+      <md-dialog-content>
+        <form>
+          <md-input-container>
+            <label>Note</label>
+            <md-textarea></md-textarea>
+          </md-input-container>
+        </form>
+      </md-dialog-content>
+    </md-dialog>
+    <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp.name" :cmp="cmp">
+    </component>
+    <div class="btn-holder">
+      <md-button class="md-icon-button md-raised md-accent" id="custom" @click="openDialog('dialog1')">
+        <md-icon>add</md-icon>
+      </md-button>
+    </div>
+  
   </section>
 </template>
 
@@ -23,30 +49,44 @@ import SimpleText from './SimpleText'
 import SimpleTitle from './SimpleTitle'
 export default {
   name: 'EditorWeb',
-  created(){
-
-  },
-  data () {
+  data() {
     return {
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null
     }
   },
-  computed:{
-    selectedCmps(){
+  computed: {
+    selectedCmps() {
       console.log(this.$store.state.selectedCmps, 'Data from store')
       return this.$store.state.selectedCmps
     }
   },
-methods:{
-showTmplCmps(){
-  console.log(this.tmplCmps, 'These Templates')
-  this.newCmpType = prompt('choose tmpl')//NEEEDED TO CHANGE
-  this.$store.dispatch({type:'addCmp', newCmpType:this.newCmpType})
-  
-}
-},
-  components:{
+  methods: {
+    showTmplCmps() {
+      console.log(this.tmplCmps, 'These Templates')
+      this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
+    },
+
+    addNewCmp() {
+      this.closeDialog('dialog1')
+      console.log(this.newCmpType, 'new cmp type')
+      var newCmpType = this.newCmpType;
+      this.$store.dispatch({ type: 'addCmp', newCmpType })
+    },
+    openDialog(ref) {
+      this.$refs[ref].open();
+    },
+    closeDialog(ref) {
+      this.$refs[ref].close();
+    },
+    onOpen() {
+      console.log('Opened');
+    },
+    onClose(type) {
+      console.log('Closed', type);
+    }
+  },
+  components: {
     SimpleText,
     SimpleTitle
   }
@@ -54,22 +94,43 @@ showTmplCmps(){
 </script>
 
 
-<style scoped>
-section{
-  width:90%;
+<style scoped <style lang="scss">
+section {
+  width: 90%;
   margin: 0 auto;
-  
-
 }
 
-div{
-  position: relative;
-  height: 250px;
-  background-color: lightblue;
-  /*margin-top: 5px;*/
-}
-div :hover{
+div :hover {
   display: fixed;
 }
 
+.btn-holder {
+  margin-top: 10px;
+  text-align: center;
+  button {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+.md-dialog {
+  text-align: center;
+  .catalogue {
+    padding: 0;
+    list-style: none;
+    li {
+      margin: 10px;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .content-container {
+        width: 100%;
+      }
+    }
+    h3 {
+      text-align: center;
+    }
+  }
+}
 </style>

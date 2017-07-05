@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <header>
-    <h1>Stunning Digital Wedding Invitation</h1>
-    <router-link to="Edit">Edit</router-link>
-    <router-link to="Publish">Publish</router-link>
-    </header>
+      <h1>Weddix</h1>
+      <md-bottom-bar>
+        <md-bottom-bar-item md-icon="mode_edit" @click="changeRoute" md-active>Edit</md-bottom-bar-item>
+        <md-bottom-bar-item md-icon="favorite" @click="changeRoute" >Publish</md-bottom-bar-item>
+        </md-bottom-bar>
+      </header>
     <main>
       <router-view>
-
       </router-view>
     </main>
     <footer> I AM FOOTER</footer>
@@ -16,7 +17,13 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  methods:{
+    changeRoute(e){
+      var destRoute = (e.target.innerText.toLowerCase().includes('edit')) ? '/edit' : '/publish';
+      this.$router.push(destRoute)
+    }
+  }
 }
 </script>
 
@@ -26,20 +33,9 @@ body {
   padding: 0;
 }
 
-#app {
- 
-}
-
-main {
- 
-}
-
 header {
   text-align: center;
-  background-color: lightgrey;
 }
 
-header span {
-  
-}
+
 </style>
