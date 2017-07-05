@@ -1,12 +1,14 @@
 <template>
 <section>
-  <component v-for="cmp in selectedCmps" v-bind:is="cmp.name" :key="cmp.name" :cmp="cmp">
+  <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp">
   <!-- component changes when vm.currentView changes! -->
 </component>
 
 <span class="add-btn">
   <button @click="showTmplCmps">+</button>
 </span>
+
+
 
 
 
@@ -20,14 +22,14 @@
 import SimpleText from './SimpleText'
 import SimpleTitle from './SimpleTitle'
 export default {
-  name: 'hello',
+  name: 'EditorWeb',
   created(){
 
   },
   data () {
     return {
       tmplCmps: this.$store.state.tmplCmps,
-      newCmpName: null
+      newCmpType: null
     }
   },
   computed:{
@@ -39,8 +41,8 @@ export default {
 methods:{
 showTmplCmps(){
   console.log(this.tmplCmps, 'These Templates')
-  this.newCmpName = prompt('choose tmpl')//NEEEDED TO CHANGE
-  this.$store.dispatch({type:'addCmp', newCmpName:this.newCmpName})
+  this.newCmpType = prompt('choose tmpl')//NEEEDED TO CHANGE
+  this.$store.dispatch({type:'addCmp', newCmpType:this.newCmpType})
   
 }
 },

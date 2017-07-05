@@ -10,25 +10,60 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    selectedCmps:[{name:'SimpleText', data:'BUBU'},{name:'SimpleText', data:'DADA'},{name:'SimpleText', data:'lADA'}],
-    tmplCmps:[{name:'SimpleText', data:'PLACEHOLDER'},{name:'SimpleTitle', data:'PLACEHOLDER'}]
+    selectedCmps: [
+      {
+        _id: 1,
+        type: 'SimpleText',
+        data: 'BUBU',
+        style: { 'background-color': 'grey' }
+      },
+      {
+        _id: 2,
+        type: 'SimpleText',
+        data: 'DADA'
+      },
+      {
+        _id: 3,
+        type: 'SimpleText',
+        data: 'lADA'
+      }],
+    tmplCmps: [
+      {
+        type: 'SimpleText',
+        data: 'Simple Text - PLACEHOLDER',
+        style: { 'background-color': 'grey' }
+      },
+      {
+        type: 'SimpleTitle',
+        data: 'Simple Title - PLACEHOLDER',
+        style: { 'background-color': 'grey' }
+      }]
   },
   mutations: {
-   addCmp(state, {newCmpName}){
-      var tempCmp =  state.tmplCmps.find(cmp=>cmp.name===newCmpName)
+    addCmp(state, { newCmpType }) {
+      var tempCmp = state.tmplCmps.find(cmp => cmp.type === newCmpType)
       var newCmp = JSON.parse(JSON.stringify(tempCmp))
-      console.log(newCmp,'!!!')
+      console.log(newCmp, '!!!')
       state.selectedCmps.push(newCmp);
-   }
+    },
+    updateCmp(state, { cmp }) {
+      var idx = getCmpIdx(cmp);
+      state.selectedCmps.splice(idx, 1, cmp);
+
+    }
   },
   actions: {
-   addCmp(context, payload){
-       console.log('Adding new ', payload)
-       context.commit(payload)
-   }
+    addCmp(context, payload) {
+      context.commit(payload)
+    },
+    updateCmp(context, payload) {
+      context.commit(payload);
+    }
   }
 })
 
-
+function getCmpIdx(cmp) {
+  return store.state.selectedCmps.findIndex(currCmp => currCmp._id === cmp._id)
+}
 
 export default store;

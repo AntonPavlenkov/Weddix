@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'SimpleText',
+  name: 'SimpleTitle',
   props:['cmp'],
   data () {
     return {
