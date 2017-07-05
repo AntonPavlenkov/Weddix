@@ -9,8 +9,8 @@
             <md-radio v-model="newCmpType" :md-value="cmp.type">
             </md-radio>
             <div class="content-container">
-            <h3>{{cmp.type}}</h3>
-            <component v-bind:is="cmp.type" :cmp="cmp"></component>
+              <h3>{{cmp.type}}</h3>
+              <component v-bind:is="cmp.type" :cmp="cmp"></component>
             </div>
           </li>
         </ul>
@@ -35,7 +35,12 @@
     </md-dialog>
     <component v-for="cmp in selectedCmps" v-bind:is="cmp.type" :key="cmp.name" :cmp="cmp">
     </component>
-    <md-button class="md-primary md-raised" id="custom" @click="openDialog('dialog1')">Custom</md-button>
+    <div class="btn-holder">
+      <md-button class="md-icon-button md-raised md-accent" id="custom" @click="openDialog('dialog1')">
+        <md-icon>add</md-icon>
+      </md-button>
+    </div>
+  
   </section>
 </template>
 
@@ -98,26 +103,34 @@ section {
 div :hover {
   display: fixed;
 }
-.md-dialog{
+
+.btn-holder {
+  margin-top: 10px;
   text-align: center;
-}
-.catalogue {
-  padding: 0;
-  list-style: none;
-
-
-  li {
-    margin: 10px;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    .content-container{
-      width:100%;
-    }
+  button {
+    height: 100px;
+    width: 100px;
   }
-  h3 {
-    text-align: center;
+}
+
+.md-dialog {
+  text-align: center;
+  .catalogue {
+    padding: 0;
+    list-style: none;
+    li {
+      margin: 10px;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .content-container {
+        width: 100%;
+      }
+    }
+    h3 {
+      text-align: center;
+    }
   }
 }
 </style>
