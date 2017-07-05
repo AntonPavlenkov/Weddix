@@ -44,12 +44,6 @@ import SimpleText from './SimpleText'
 import SimpleTitle from './SimpleTitle'
 export default {
   name: 'EditorWeb',
-<<<<<<< HEAD
-  created() {
-
-  },
-=======
->>>>>>> keren-page-layout
   data() {
     return {
       tmplCmps: this.$store.state.tmplCmps,
@@ -87,13 +81,8 @@ export default {
       console.log('Closed', type);
     }
   },
-<<<<<<< HEAD
   components: {
     SimpleText,
-=======
-components: {
-  SimpleText,
->>>>>>> keren-page-layout
     SimpleTitle
   }
 }
