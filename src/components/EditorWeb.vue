@@ -54,7 +54,7 @@ export default {
     this.$store.dispatch({ type: 'loadCmp' })
   },
   data() {
-    return {
+    return {      
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null
     }
@@ -69,30 +69,29 @@ export default {
       console.log(this.tmplCmps, 'These Templates')
       this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
     },
-
-    addNewCmp() {
-      this.closeDialog('dialog1')
-      console.log(this.newCmpType, 'new cmp type')
-      var newCmpType = this.newCmpType;
-      this.$store.dispatch({ type: 'addCmp', newCmpType })
-    },
-    openDialog(ref) {
-      this.$refs[ref].open();
-    },
-    closeDialog(ref) {
-      this.$refs[ref].close();
-    },
-    onOpen() {
-      console.log('Opened');
-    },
-    onClose(type) {
-      console.log('Closed', type);
-    }
+  addNewCmp() {
+    this.closeDialog('dialog1')
+    console.log(this.newCmpType, 'new cmp type')
+    var newCmpType = this.newCmpType;
+    this.$store.dispatch({ type: 'addCmp', newCmpType })
   },
-  components: {
-    SimpleText,
-    SimpleTitle
+  openDialog(ref) {
+    this.$refs[ref].open();
+  },
+  closeDialog(ref) {
+    this.$refs[ref].close();
+  },
+  onOpen() {
+    console.log('Opened');
+  },
+  onClose(type) {
+    console.log('Closed', type);
   }
+},
+components: {
+  SimpleText,
+    SimpleTitle
+}
 }
 </script>
 

@@ -1,29 +1,6 @@
 <template>
   <section class="text-toolbar  md-mini">
-    <md-button class="md-fab md-clean  md-mini">
-      <md-icon>text_format</md-icon>
-      <md-tooltip md-direction="top">Choose text format</md-tooltip>
-    </md-button>
   
-    <md-button @click="changeAlign('right')" class="md-fab md-clean md-mini">
-      <md-icon>format_align_right</md-icon>
-      <md-tooltip md-direction="top">Text align right</md-tooltip>
-    </md-button>
-  
-    <md-button @click="changeAlign('center')" class="md-fab md-clean  md-mini">
-      <md-icon>format_align_center</md-icon>
-      <md-tooltip md-direction="top">Text align center</md-tooltip>
-    </md-button>
-  
-    <md-button @click="changeAlign('left')" class="md-fab md-clean  md-mini">
-      <md-icon>format_align_left</md-icon>
-      <md-tooltip md-direction="top">Text align left</md-tooltip>
-    </md-button>
-  
-    <md-button @click="changeBold" class="md-fab md-clean  md-mini">
-      <md-icon>format_bold</md-icon>
-      <md-tooltip md-direction="top">Bold text</md-tooltip>
-    </md-button>
   
     <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
       <md-icon>format_color_fill</md-icon>
@@ -46,6 +23,25 @@
   </md-menu-content>
 </md-menu>
 
+  <md-button @click="changeAlign('right')" class="md-fab md-clean md-mini">
+    <md-icon>format_align_right</md-icon>
+     <md-tooltip md-direction="top">Text align right</md-tooltip>
+  </md-button>
+
+  <md-button @click="changeAlign('center')" class="md-fab md-clean  md-mini">
+    <md-icon>format_align_center</md-icon>
+     <md-tooltip md-direction="top">Text align center</md-tooltip>
+  </md-button>
+
+  <md-button @click="changeAlign('left')" class="md-fab md-clean  md-mini">
+    <md-icon>format_align_left</md-icon>
+     <md-tooltip md-direction="top">Text align left</md-tooltip>
+  </md-button>
+
+  <md-button @click="changeBold" class="md-fab md-clean  md-mini">
+    <md-icon>format_bold</md-icon>
+     <md-tooltip md-direction="top">Bold text</md-tooltip>
+  </md-button>
 
 
 
