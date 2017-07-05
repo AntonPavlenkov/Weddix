@@ -21,13 +21,15 @@ export default {
 
 
     }
-  }
+
+  },
 }
 </script>
 
 <style scoped>
 section {
-  width: 90%;
+  height: 100vh;
+  width: 100%;
   margin: 0 auto;
   height: 60vh;
   text-align: center;
