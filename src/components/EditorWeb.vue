@@ -49,6 +49,10 @@ import SimpleText from './SimpleText'
 import SimpleTitle from './SimpleTitle'
 export default {
   name: 'EditorWeb',
+  created() {
+    console.log('Loading data from store');
+    this.$store.dispatch({ type: 'loadCmp' })
+  },
   data() {
     return {
       tmplCmps: this.$store.state.tmplCmps,
@@ -57,9 +61,8 @@ export default {
   },
   computed: {
     selectedCmps() {
-      console.log(this.$store.state.selectedCmps, 'Data from store')
-      return this.$store.state.selectedCmps
-    }
+      return this.$store.state.selectedCmps;
+    },
   },
   methods: {
     showTmplCmps() {
@@ -94,7 +97,7 @@ export default {
 </script>
 
 
-<style scoped <style lang="scss">
+<style scoped style lang="scss">
 section {
   width: 90%;
   margin: 0 auto;
@@ -107,10 +110,6 @@ div :hover {
 .btn-holder {
   margin-top: 10px;
   text-align: center;
-  button {
-    height: 100px;
-    width: 100px;
-  }
 }
 
 .md-dialog {
