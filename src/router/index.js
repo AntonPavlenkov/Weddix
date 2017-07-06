@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Welcome from '@/components/Welcome'
-import EditorWeb from '@/components/EditorWeb'
-import PublishPage from '@/components/PublishPage'
+import Welcome from '@/pages/Welcome'
+import EditPage from '@/pages/EditPage'
+import PublishPage from '@/pages/PublishPage'
 
 Vue.use(Router)
 
@@ -15,13 +15,15 @@ export default new Router({
     },
         {
       path: '/edit',
-      name: 'EditorWeb',
-      component: EditorWeb
+      name: 'EditPage',
+      component: EditPage
     },
         {
       path: '/publish',
       name: 'PublishPage',
       component: PublishPage
     }
-  ]
+  ],
+  mode: 'history'
+
 })

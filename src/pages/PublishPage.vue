@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import SimpleText from './cmpTmpls/SimpleText'
-import SimpleTitle from './cmpTmpls/SimpleTitle'
+import SimpleText from '../components/cmpTmpls/SimpleText'
+import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
 export default {
   name: 'PublishPage',
   data() {

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import MainFooter from './components/MainFooter'
+import MainFooter from './pages/MainFooter'
 export default {
   name: 'app',
   components:{
