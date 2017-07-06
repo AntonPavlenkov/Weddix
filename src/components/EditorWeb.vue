@@ -33,12 +33,15 @@
         </form>
       </md-dialog-content>
     </md-dialog>
+      <transition-group name="list" tag="p">
+
     <component v-if="selectedCmps" v-for="(cmp, idx) in selectedCmps" 
             v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" 
             :isEditable="true"
             :isFirst="idx === 0" 
             :isLast="idx === lastIdxCmps">
     </component>
+    </transition-group>
     <div class="btn-holder">
       <md-button class="md-icon-button md-raised md-accent" id="custom" @click="openDialog('dialog1')">
         <md-icon>add</md-icon>
@@ -139,4 +142,14 @@ div :hover {
     }
   }
 }
+
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
 </style>
