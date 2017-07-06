@@ -1,5 +1,6 @@
 const urlCmp = 'http://localhost:3003/data/cmp';
 import axios from 'axios';
+var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repellat quod, illo inventore. Possimus odit officiis ut dolore, nisi sed sunt aliquam ipsa, et eligendi dolores. Iusto hic, commodi labore.';
 
 var tmplCmps = [{
     type: 'SimpleText',
@@ -15,6 +16,23 @@ var tmplCmps = [{
     type: 'LocationMap',
     data: { position:{ lat: 32.087893, lng: 34.803038 }, address: { line1:'Line1', line2:'Line2' ,line3:'Line3'} },
     style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+},
+{
+    type: 'ImgCarousel',
+    data: {
+        imgUrls: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5HZTy2RjjHZcdM7yTCEfkDvwT6-GzlpA7R74GnbXkaqgfyiB5", 
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfRI6OR4uaU5pMP5q4tVeM0UxqJYHVABP0IeVecqkUBqTxM7cV", 
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhsadDoYifEEMztf5jeM3V0GoVTT9nu3_gCfJqFgWeoqoFcle0XA", 
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF6McM2IpYI2U6nn-mFORZF4FZLpZwjsuF448sbcN9PxHRwsrLpg"
+        ]
+    },
+        style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+},
+{
+    type: 'CoupleAbout',
+     data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder , aboutImgUrl1: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', mainImgUrl: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png',  aboutName2: 'Prince', aboutInfo2: loremIpsumHolder , aboutImgUrl2: 'http://www.cornwallminingalliance.org/wp-content/uploads/2016/04/Placeholder-male-10.jpg'},
+    style: { backgroundColor: "white", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }
 ];
 
@@ -39,12 +57,6 @@ var cmps = [{
         text_1: "DADA"
     },
     style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
-},
-{
-    _id: "3",
-    type: "LocationMap",
-    data: { position: { lat: 32.087893, lng: 34.803038 }, address: { line1:'Gan Hapekan', line2:'4 HaShaked St.' ,line3:'Tel Aviv'} },
-    style: { backgroundColor: "white", textAlign: "left", fontWeight:"normal", color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }
 ]
 

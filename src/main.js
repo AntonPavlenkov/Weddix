@@ -5,6 +5,7 @@ import VueMaterial from 'vue-material'
 import App from './App'
 import router from './router'
 import store from './store/store'
+import Carousel3d from 'vue-carousel-3d';
 import 'vue-material/dist/vue-material.css'
 import * as VueGoogleMaps from 'vue2-google-maps';
 
@@ -17,7 +18,9 @@ Vue.use(VueGoogleMaps, {
   }
 });
 
-Vue.use(VueMaterial)
+Vue.use(VueMaterial);
+Vue.use(Carousel3d);
+
 
 /* eslint-disable no-new */
 new Vue({

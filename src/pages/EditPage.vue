@@ -33,9 +33,9 @@
         </form>
       </md-dialog-content>
     </md-dialog>
-    <transition-group name="list" tag="p">
+    <transition-group v-if="selectedCmps" name="list" tag="p">
   
-      <component v-if="selectedCmps" v-for="(cmp, idx) in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
+      <component v-for="(cmp, idx) in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
       </component>
     </transition-group>
     <div class="btn-holder">
@@ -51,12 +51,16 @@
 import SimpleText from '../components/cmpTmpls/SimpleText'
 import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
 import LocationMap from '../components/cmpTmpls/LocationMap'
+import ImgCarousel from '../components/cmpTmpls/ImgCarousel'
+import CoupleAbout from '../components/cmpTmpls/CoupleAbout'
 export default {
   name: 'EditPage',
   components: {
     SimpleText,
     SimpleTitle,
-    LocationMap
+    LocationMap,
+    ImgCarousel,
+    CoupleAbout
   },
   created() {
     console.log('Loading data from store');
