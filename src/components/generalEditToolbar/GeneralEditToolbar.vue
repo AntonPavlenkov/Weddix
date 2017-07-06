@@ -2,7 +2,7 @@
     <section>
         <md-button md-menu-trigger  class="md-fab md-clean  md-mini color-picker-btn">
             <md-icon>format_paint</md-icon>
-            <color-picker :change="updateColor" @changeColor="changeFontColor"></color-picker>
+            <color-picker :change="updateColor" @changeColor="changeBgColor"></color-picker>
             <md-tooltip md-direction="top">Change background color</md-tooltip>
         </md-button>
         <md-button class="md-fab md-clean  md-mini" @click="deleteCmp">
@@ -50,7 +50,7 @@ export default {
             this.color = event.color;
         },
 
-        changeFontColor(newColor) {
+        changeBgColor(newColor) {
             this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
             this.cmpStyleEdit.style.backgroundColor = newColor;
             this.$emit('updateStyle', this.cmpStyleEdit)

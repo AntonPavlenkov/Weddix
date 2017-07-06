@@ -33,7 +33,7 @@
         </form>
       </md-dialog-content>
     </md-dialog>
-    <component v-for="(cmp, idx) in selectedCmps" 
+    <component v-if="selectedCmps" v-for="(cmp, idx) in selectedCmps" 
             v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" 
             :isFirst="idx === 0" 
             :isLast="idx === lastIdxCmps">
