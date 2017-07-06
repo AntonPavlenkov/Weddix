@@ -54,6 +54,7 @@
 <script>
 import SimpleText from '../components/cmpTmpls/SimpleText'
 import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
+import CoupleAbout from '../components/cmpTmpls/CoupleAbout'
 export default {
   name: 'EditPage',
   created() {
@@ -101,7 +102,8 @@ export default {
   },
   components: {
     SimpleText,
-    SimpleTitle
+    SimpleTitle,
+    CoupleAbout
   }
 }
 </script>
