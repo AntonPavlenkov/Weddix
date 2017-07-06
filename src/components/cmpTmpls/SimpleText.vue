@@ -1,7 +1,7 @@
 <template>
     <section class="simple-text">
         <div class="content" :style="cmp.style">
-            <span :contenteditable="isEditable">{{cmp.data.text_1}}</span>
+            <span :contenteditable="isEditable">{{cmp.data.text1}}</span>
             <br>
             <span :contenteditable="isEditable"> Hello world </span>
     

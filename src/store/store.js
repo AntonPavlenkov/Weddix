@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import cmpService from '../services/cmp.service'
+import _ from 'lodash'
 
 Vue.use(Vuex)
 
@@ -58,10 +59,9 @@ const store = new Vuex.Store({
         })
     },
     updateCmp(context, payload) {
-      cmpService.updateCmp(payload.cmp)
-        .then(() => {
-          context.commit(payload);
-        })
+      //support frequesnt changes by updating the client and debounce calls to server
+      context.commit(payload);
+      debounced(payload.cmp);
     },
     moveCmp(context, payload) {
       cmpService.moveCmp(payload.cmp, payload.isUp)
@@ -75,5 +75,14 @@ const store = new Vuex.Store({
 function getCmpIdx(cmp) {
   return store.state.selectedCmps.findIndex(currCmp => currCmp._id === cmp._id)
 }
+
+//this debounce is in order to prevent heavy traffic to server 
+//when there are frequent updates (e.g. color picker slider)
+var debounced = _.debounce(function (cmp) {
+  cmpService.updateCmp(cmp)
+    .then(res => {
+      console.log(res)
+    })
+}, 1000);
 
 export default store;
