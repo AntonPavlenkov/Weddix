@@ -1,5 +1,6 @@
 const urlCmp = 'http://localhost:3003/data/cmp';
 import axios from 'axios';
+var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repellat quod, illo inventore. Possimus odit officiis ut dolore, nisi sed sunt aliquam ipsa, et eligendi dolores. Iusto hic, commodi labore.';
 
 var tmplCmps = [{
     type: 'SimpleText',
@@ -22,6 +23,11 @@ var tmplCmps = [{
         ]
     },
         style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+},
+{
+    type: 'CoupleAbout',
+     data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder , aboutImgUrl1: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', mainImgUrl: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png',  aboutName2: 'Prince', aboutInfo2: loremIpsumHolder , aboutImgUrl2: 'http://www.cornwallminingalliance.org/wp-content/uploads/2016/04/Placeholder-male-10.jpg'},
+    style: { backgroundColor: "white", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }
 ];
 
