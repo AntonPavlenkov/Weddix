@@ -6,8 +6,16 @@ import App from './App'
 import router from './router'
 import store from './store/store'
 import 'vue-material/dist/vue-material.css'
+import * as VueGoogleMaps from 'vue2-google-maps';
 
 Vue.config.productionTip = false
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyDCry_PLFjoDuWFTJp-4ecimkVkkeMmcPU',
+    libraries: 'places',
+  }
+});
 
 Vue.use(VueMaterial)
 

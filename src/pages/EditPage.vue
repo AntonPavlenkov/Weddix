@@ -33,14 +33,10 @@
         </form>
       </md-dialog-content>
     </md-dialog>
-      <transition-group name="list" tag="p">
-
-    <component v-if="selectedCmps" v-for="(cmp, idx) in selectedCmps" 
-            v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" 
-            :isEditable="true"
-            :isFirst="idx === 0" 
-            :isLast="idx === lastIdxCmps">
-    </component>
+    <transition-group name="list" tag="p">
+  
+      <component v-if="selectedCmps" v-for="(cmp, idx) in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
+      </component>
     </transition-group>
     <div class="btn-holder">
       <md-button class="md-icon-button md-raised md-accent" id="custom" @click="openDialog('dialog1')">
@@ -54,8 +50,14 @@
 <script>
 import SimpleText from '../components/cmpTmpls/SimpleText'
 import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
+import LocationMap from '../components/cmpTmpls/LocationMap'
 export default {
   name: 'EditPage',
+  components: {
+    SimpleText,
+    SimpleTitle,
+    LocationMap
+  },
   created() {
     console.log('Loading data from store');
     this.$store.dispatch({ type: 'loadCmp' })
@@ -71,7 +73,7 @@ export default {
       return this.$store.state.selectedCmps;
     },
     lastIdxCmps() {
-        return this.selectedCmps.length-1;
+      return this.selectedCmps.length - 1;
     },
 
   },
@@ -99,10 +101,7 @@ export default {
       console.log('Closed', type);
     }
   },
-  components: {
-    SimpleText,
-    SimpleTitle
-  }
+
 }
 </script>
 
@@ -144,12 +143,14 @@ div :hover {
 }
 
 
-.list-enter-active, .list-leave-active {
+.list-enter-active,
+.list-leave-active {
   transition: all 1s;
 }
-.list-enter, .list-leave-to {
+
+.list-enter,
+.list-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
-
 </style>

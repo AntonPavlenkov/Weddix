@@ -4,13 +4,19 @@ import axios from 'axios';
 var tmplCmps = [{
     type: 'SimpleText',
     data: { text_1: 'Simple Text - PLACEHOLDER' },
-    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+    style: { backgroundColor: 'grey', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     type: 'SimpleTitle',
-    data: { text_1: 'Simple Text - PLACEHOLDER' },
-    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
-}];
+    data: { text_1: 'Simple Title - PLACEHOLDER' },
+    style: { backgroundColor: 'grey', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+},
+{
+    type: 'LocationMap',
+    data: { position:{ lat: 32.087893, lng: 34.803038 }, address: { line1:'Line1', line2:'Line2' ,line3:'Line3'} },
+    style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+}
+];
 
 //***************************
 //dev mode  (withour server):
@@ -24,7 +30,7 @@ var cmps = [{
     data: {
         text_1: "BUBU"
     },
-    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+    style: { backgroundColor: "grey", textAlign: "left", fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     _id: "2",
@@ -33,12 +39,19 @@ var cmps = [{
         text_1: "DADA"
     },
     style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
-}]
+},
+{
+    _id: "3",
+    type: "LocationMap",
+    data: { position: { lat: 32.087893, lng: 34.803038 }, address: { line1:'Gan Hapekan', line2:'4 HaShaked St.' ,line3:'Tel Aviv'} },
+    style: { backgroundColor: "white", textAlign: "left", fontWeight:"normal", color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+}
+]
 
 //functions:
 function getCmps() {
     var copyOfCmps = JSON.parse(JSON.stringify(cmps));
-     return Promise.resolve(copyOfCmps);
+    return Promise.resolve(copyOfCmps);
 }
 
 function getCmp(cmp) {
@@ -72,7 +85,7 @@ function moveCmp(cmp, isUp) {
     var newIdx = (isUp) ? idx + 1 : idx - 1;
     var movedCmp = cmps.splice(idx, 1);
     cmps.splice(newIdx, 0, movedCmp[0]);
-     return Promise.resolve();
+    return Promise.resolve();
 }
 
 

@@ -23,12 +23,12 @@ const store = new Vuex.Store({
       var idx = getCmpIdx(cmp);
       console.log(idx)
       state.selectedCmps.splice(idx, 1);
-      console.log('state.selectedCmps', state.selectedCmps)
+      // console.log('state.selectedCmps', state.selectedCmps)
     },
     updateCmp(state, { cmp }) {
       var idx = getCmpIdx(cmp);
       state.selectedCmps.splice(idx, 1, cmp);
-      console.log(state.selectedCmps, 'Selected comps')
+      // console.log(state.selectedCmps, 'Selected comps')
     },
     moveCmp(state, { cmp, isUp }) {
       var idx = getCmpIdx(cmp);
