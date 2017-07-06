@@ -1,0 +1,14 @@
+[
+{
+        "_id": "1",
+        "type": "SimpleText",
+        "data": "BUBU",
+        "style": { "backgroundColor": "grey" }
+      },
+      {
+        "_id": "2",
+        "type": "SimpleText",
+        "data": "DADA",
+        "style": { "backgroundColor": "pink" }
+      }
+]

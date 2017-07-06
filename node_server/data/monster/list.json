@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Daniel",
+    "power": "3",
+    "imgUrl": "http://localhost:3003/file-1491082393825.jpg",
+    "_id": 1
+  },
+  {
+    "name": "Yaron",
+    "power": "5",
+    "imgUrl": "http://localhost:3003/file-1491082403447.jpg",
+    "_id": 2
+  },
+  {
+    "name": "Zohar",
+    "power": 4,
+    "imgUrl": "http://localhost:3003/file-1491082421545.JPG"
+  },
+  {
+    "name": "Roni",
+    "power": "3",
+    "imgUrl": "http://localhost:3003/file-1491082487832.jpg",
+    "_id": 3
+  }
+]
