@@ -1,8 +1,8 @@
 <template>
     <section>
-        <md-button md-menu-trigger  class="md-fab md-clean  md-mini color-picker-btn">
+        <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
             <md-icon>format_paint</md-icon>
-            <color-picker :change="updateColor" @changeColor="changeBgColor"></color-picker>
+            <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
             <md-tooltip md-direction="top">Change background color</md-tooltip>
         </md-button>
         <md-button class="md-fab md-clean  md-mini" @click="deleteCmp">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import ColorPicker from '../txtToolbar/ColorPicker'
+import ColorPicker from './ColorPicker'
 export default {
     name: 'GeneralEditToolbar',
     props: ['cmp', 'isFirst', 'isLast'],
@@ -31,11 +31,16 @@ export default {
         ColorPicker
     },
     created() {
-        this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
+        // this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
+    },
+    computed: {
+        cmpStyleEdit() {
+            return JSON.parse(JSON.stringify(this.cmp))
+        }
     },
     data() {
         return {
-            cmpStyleEdit: null,
+            // cmpStyleEdit: null,
             color: ""
         }
     },
@@ -50,11 +55,17 @@ export default {
             this.color = event.color;
         },
 
-        changeBgColor(newColor) {
-            this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
-            this.cmpStyleEdit.style.backgroundColor = newColor;
-            this.$emit('updateStyle', this.cmpStyleEdit)
-        },
+        // changeBgColor(newColor) {
+        //     this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
+        //     this.cmpStyleEdit.style.backgroundColor = newColor;
+        //     this.$emit('updateStyle', this.cmpStyleEdit)
+        // },
+        changeCssProperty(prop, val) {
+            // console.log(prop, 'prop')
+            // console.log(val,'val')
+            this.cmpStyleEdit.style[prop] = val;
+            this.$emit('update', this.cmpStyleEdit)
+        }
     },
 }
 </script>
@@ -104,7 +115,7 @@ p {
 }
 
 .color-picker-btn {
-  overflow: initial;
+    overflow: initial;
 }
 
 .fade-enter-active,

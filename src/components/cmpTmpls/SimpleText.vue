@@ -1,30 +1,30 @@
 <template>
     <section class="simple-text">
-        <div class="content" :style="cmpToEdit.style">
-            <span :contenteditable="isEditMode">{{cmpToEdit.data}}</span>
+        <div class="content" :style="cmp.style">
+            <span :contenteditable="isEditable">{{cmp.data.text_1}}</span>
             <br>
-            <span :contenteditable="isEditMode"> Hello world </span>
+            <span :contenteditable="isEditable"> Hello world </span>
     
-            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
+            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode" v-if="isEditable">
                 <md-icon>edit</md-icon>
             </md-button>
     
         </div>
         <transition name="fade">
             <div v-if="isEditMode" class="edit-console">
-                <txt-toolbar :cmp="cmp" @updateStyle="updateNewStyle"></txt-toolbar>
-                <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @updateStyle="updateNewStyle"></general-edit>
+                <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
+                <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
             </div>
         </transition>
     </section>
 </template>
 
 <script>
-import TxtToolbar from './txtToolbar/TxtToolbar'
-import GeneralEdit from './generalEditToolbar/generalEditToolbar'
+import TxtToolbar from '../toolbars/TxtToolbar'
+import GeneralEdit from '../toolbars/generalEditToolbar'
 export default {
     name: 'SimpleText',
-    props: ['cmp', 'isFirst', 'isLast'],
+    props: ['cmp', 'isFirst', 'isLast', 'isEditable'],
     components: {
         TxtToolbar,
         GeneralEdit
@@ -32,15 +32,15 @@ export default {
     data() {
         return {
             isEditMode: false,
-            cmpToEdit: null
+            color: ""
+
 
         }
     },
-    computed: {
-
-    },
-    created() {
-        this.cmpToEdit = JSON.parse(JSON.stringify(this.cmp));
+    computed:{
+        cmpToEdit(){
+            return JSON.parse(JSON.stringify(this.cmp))
+        }
     },
     methods: {
         moveCmp(isUp) {
@@ -53,28 +53,19 @@ export default {
         },
         enterEditMode() {
             this.isEditMode = !this.isEditMode
-
         },
-        changeBgColor() {
-            console.log('cmpToEdit', this.cmpToEdit)
-            var newBgColor = prompt('enter new color');
-            this.cmpToEdit.style.backgroundColor = newBgColor;
-            console.log('cmpToEdit', this.cmpToEdit);
-            this.updateCmp();
+        updateCmp(updatedCmp) {
+            this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
-        changeStyleAtt() {
-
-        },
-        updateCmp() {
-            this.$store.dispatch({ type: "updateCmp", cmp: this.cmpToEdit });
-        },
-        updateNewStyle(cmpWithNewStyle) {
-            console.log(cmpWithNewStyle, 'Updated style')
-            this.cmpToEdit = cmpWithNewStyle
-            this.updateCmp()
-
+        // changeCssProperty(prop, val) {
+        //     this.cmpToEdit.style[prop] = val;
+        //     this.updateCmp(this.cmpToEdit)
+        // },
+        updateColor: function (event) {
+            this.color = event.color;
         }
-    },
+
+    }
     //   watch:{
     //       cmpToEdit: {
     //         handler: function(newValue) {
@@ -141,5 +132,9 @@ p {
 
 {
     opacity: 0
+}
+
+.color-picker-btn {
+    overflow: initial;
 }
 </style>

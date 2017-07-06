@@ -2,15 +2,15 @@
   <section>
     <h2>publish page</h2>
       
-    <component v-for="cmp in selectedCmps" v-bind:is="cmp.name" :key="cmp.name" :cmp="cmp">
-    </component>
+    <!--<component v-for="cmp in selectedCmps" v-bind:is="cmp.name" :key="cmp.name" :cmp="cmp">
+    </component>-->
    
   </section>
 </template>
 
 <script>
-import SimpleText from './SimpleText'
-import SimpleTitle from './SimpleTitle'
+import SimpleText from './cmpTmpls/SimpleText'
+import SimpleTitle from './cmpTmpls/SimpleTitle'
 export default {
   name: 'PublishPage',
   data() {

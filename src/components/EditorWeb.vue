@@ -6,7 +6,7 @@
       <md-dialog-content>
         <ul class="catalogue">
           <li v-for="(cmp, idx) in tmplCmps" :key="idx">
-            <md-radio v-model="newCmpType" :md-value="cmp.type">
+            <md-radio v-model="newCmpType" :md-value="cmp.type" :isEditMode="false">
             </md-radio>
             <div class="content-container">
               <h3>{{cmp.type}}</h3>
@@ -35,6 +35,7 @@
     </md-dialog>
     <component v-if="selectedCmps" v-for="(cmp, idx) in selectedCmps" 
             v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" 
+            :isEditable="true"
             :isFirst="idx === 0" 
             :isLast="idx === lastIdxCmps">
     </component>
@@ -48,8 +49,8 @@
 </template>
 
 <script>
-import SimpleText from './SimpleText'
-import SimpleTitle from './SimpleTitle'
+import SimpleText from './cmpTmpls/SimpleText'
+import SimpleTitle from './cmpTmpls/SimpleTitle'
 export default {
   name: 'EditorWeb',
   created() {

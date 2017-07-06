@@ -3,12 +3,12 @@ import axios from 'axios';
 
 var tmplCmps = [{
     type: 'SimpleText',
-    data: 'Simple Text - PLACEHOLDER',
+    data: { text_1: 'Simple Text - PLACEHOLDER' },
     style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     type: 'SimpleTitle',
-    data: 'Simple Title - PLACEHOLDER',
+    data: { text_1: 'Simple Text - PLACEHOLDER' },
     style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }];
 
@@ -21,13 +21,17 @@ var idCounter = 3;
 var cmps = [{
     _id: "1",
     type: "SimpleText",
-    data: "BUBU",
+    data: {
+        text_1: "BUBU"
+    },
     style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     _id: "2",
     type: "SimpleText",
-    data: "DADA",
+    data: {
+        text_1: "DADA"
+    },
     style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }]
 
