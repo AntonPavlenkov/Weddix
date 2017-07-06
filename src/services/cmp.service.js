@@ -14,24 +14,24 @@ var tmplCmps = [{
 },
 {
     type: 'LocationMap',
-    data: { position:{ lat: 32.087893, lng: 34.803038 }, address: { line1:'Line1', line2:'Line2' ,line3:'Line3'} },
+    data: { position: { lat: 32.087893, lng: 34.803038 }, address: { line1: 'Line1', line2: 'Line2', line3: 'Line3' } },
     style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     type: 'ImgCarousel',
     data: {
         imgUrls: [
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5HZTy2RjjHZcdM7yTCEfkDvwT6-GzlpA7R74GnbXkaqgfyiB5", 
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfRI6OR4uaU5pMP5q4tVeM0UxqJYHVABP0IeVecqkUBqTxM7cV", 
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhsadDoYifEEMztf5jeM3V0GoVTT9nu3_gCfJqFgWeoqoFcle0XA", 
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5HZTy2RjjHZcdM7yTCEfkDvwT6-GzlpA7R74GnbXkaqgfyiB5",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfRI6OR4uaU5pMP5q4tVeM0UxqJYHVABP0IeVecqkUBqTxM7cV",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhsadDoYifEEMztf5jeM3V0GoVTT9nu3_gCfJqFgWeoqoFcle0XA",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF6McM2IpYI2U6nn-mFORZF4FZLpZwjsuF448sbcN9PxHRwsrLpg"
         ]
     },
-        style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+    style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 },
 {
     type: 'CoupleAbout',
-     data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder , aboutImgUrl1: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', mainImgUrl: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png',  aboutName2: 'Prince', aboutInfo2: loremIpsumHolder , aboutImgUrl2: 'http://www.cornwallminingalliance.org/wp-content/uploads/2016/04/Placeholder-male-10.jpg'},
+    data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', mainImgUrl: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'http://www.cornwallminingalliance.org/wp-content/uploads/2016/04/Placeholder-male-10.jpg' },
     style: { backgroundColor: "white", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
 }
 ];
@@ -42,7 +42,9 @@ var tmplCmps = [{
 //default start:
 
 var idCounter = 3;
-var cmps = [{
+var cmps;
+
+var hardCoded = [{
     _id: "1",
     type: "SimpleText",
     data: {
@@ -62,6 +64,7 @@ var cmps = [{
 
 //functions:
 function getCmps() {
+    cmps = bringDataFromLocal() || hardCoded;
     var copyOfCmps = JSON.parse(JSON.stringify(cmps));
     return Promise.resolve(copyOfCmps);
 }
@@ -75,18 +78,21 @@ function addCmp(cmpType) {
     var newCmp = JSON.parse(JSON.stringify(tempCmp))
     newCmp._id = (idCounter++) + '';
     cmps.push(newCmp);
+    localStorage.setItem('weddixPage', JSON.stringify(cmps));
     return Promise.resolve(newCmp);
 }
 
 function deleteCmp(cmp) {
     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
     cmps.splice(idx, 1);
+    localStorage.setItem('weddixPage', JSON.stringify(cmps));
     return Promise.resolve();
 }
 
 function updateCmp(cmp) {
     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
     cmps.splice(idx, 1, cmp);
+    localStorage.setItem('weddixPage', JSON.stringify(cmps));
     return Promise.resolve();
 }
 
@@ -97,6 +103,7 @@ function moveCmp(cmp, isUp) {
     var newIdx = (isUp) ? idx + 1 : idx - 1;
     var movedCmp = cmps.splice(idx, 1);
     cmps.splice(newIdx, 0, movedCmp[0]);
+    localStorage.setItem('weddixPage', JSON.stringify(cmps));
     return Promise.resolve();
 }
 
@@ -160,6 +167,18 @@ var testCmps = getCmps();
 //         });
 // }
 
+function bringDataFromLocal() {
+    var weddixPage = localStorage.getItem('weddixPage');
+    if (weddixPage) {
+        return JSON.parse(weddixPage)
+    } 
+    return false
+}
+
+function resetUserWork() {
+    cmps = hardCoded;
+    localStorage.setItem('weddixPage', JSON.stringify(cmps));
+}
 
 export default {
     tmplCmps,
