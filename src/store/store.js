@@ -5,7 +5,6 @@ import cmpService from '../services/cmp.service'
 
 Vue.use(Vuex)
 
-
 const store = new Vuex.Store({
   state: {
     selectedCmps: [],

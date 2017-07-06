@@ -10,7 +10,20 @@ var tmplCmps = [{
     type: 'SimpleTitle',
     data: { text_1: 'Simple Text - PLACEHOLDER' },
     style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
-}];
+},
+{
+    type: 'ImgCarousel',
+    data: {
+        imgUrls: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5HZTy2RjjHZcdM7yTCEfkDvwT6-GzlpA7R74GnbXkaqgfyiB5", 
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfRI6OR4uaU5pMP5q4tVeM0UxqJYHVABP0IeVecqkUBqTxM7cV", 
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhsadDoYifEEMztf5jeM3V0GoVTT9nu3_gCfJqFgWeoqoFcle0XA", 
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF6McM2IpYI2U6nn-mFORZF4FZLpZwjsuF448sbcN9PxHRwsrLpg"
+        ]
+    },
+        style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+}
+];
 
 //***************************
 //dev mode  (withour server):
@@ -38,7 +51,7 @@ var cmps = [{
 //functions:
 function getCmps() {
     var copyOfCmps = JSON.parse(JSON.stringify(cmps));
-     return Promise.resolve(copyOfCmps);
+    return Promise.resolve(copyOfCmps);
 }
 
 function getCmp(cmp) {
@@ -72,7 +85,7 @@ function moveCmp(cmp, isUp) {
     var newIdx = (isUp) ? idx + 1 : idx - 1;
     var movedCmp = cmps.splice(idx, 1);
     cmps.splice(newIdx, 0, movedCmp[0]);
-     return Promise.resolve();
+    return Promise.resolve();
 }
 
 
