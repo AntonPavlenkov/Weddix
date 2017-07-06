@@ -65,12 +65,13 @@ export default {
   name: 'ToolBar',
   props: ['cmp'],
   components: { 'color-picker': ColorPicker },
-  created() {
-    this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
+  computed: {
+    cmpStyleEdit(){
+      return JSON.parse(JSON.stringify(this.cmp))
+    } 
   },
   data() {
     return {
-      cmpStyleEdit: null,
       color: ""
 
     }
@@ -82,7 +83,7 @@ export default {
       else {
         this.cmpStyleEdit.style.fontWeight = 'normal';
       }
-      this.$emit('updateStyle', this.cmpStyleEdit)
+      this.$emit('update', this.cmpStyleEdit)
     },
     
     updateColor: function (event) {
@@ -90,10 +91,10 @@ export default {
     },
 
     changeCssProperty(prop, val) {
-      console.log(prop, 'prop')
-      console.log(val,'val')
+      // console.log(prop, 'prop')
+      // console.log(val,'val')
       this.cmpStyleEdit.style[prop] = val;
-      this.$emit('updateStyle', this.cmpStyleEdit)
+      this.$emit('update', this.cmpStyleEdit)
     }
   }
 }

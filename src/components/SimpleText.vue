@@ -1,6 +1,6 @@
 <template>
     <section class="simple-text">
-        <div class="content" :style="cmpToEdit.style">
+        <div class="content" :style="cmp.style">
             <span :contenteditable="isEditable">{{cmp.data.text_1}}</span>
             <br>
             <span :contenteditable="isEditable"> Hello world </span>
@@ -12,7 +12,7 @@
         </div>
         <transition name="fade">
             <div v-if="isEditMode" class="edit-console">
-                <txt-toolbar :cmp="cmp" @updateStyle="updateNewStyle"></txt-toolbar>
+                <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
     
                 <md-button class="md-fab md-clean  md-mini color-picker-btn">
                     <md-icon>format_paint</md-icon>
@@ -51,32 +51,27 @@ export default {
     data() {
         return {
             isEditMode: false,
-            cmpToEdit: null,
             color: ""
 
 
         }
     },
-    created() {
-        this.cmpToEdit = JSON.parse(JSON.stringify(this.cmp));
+    computed:{
+        cmpToEdit(){
+            return JSON.parse(JSON.stringify(this.cmp))
+        }
     },
     methods: {
         enterEditMode() {
             this.isEditMode = !this.isEditMode
             console.log('Entering Edit MOde')
-
         },
-        updateCmp() {
-            this.$store.dispatch({ type: "updateCmp", cmp: this.cmpToEdit });
-        },
-        updateNewStyle(cmpWithNewStyle) {
-            // console.log(cmpWithNewStyle, 'Updated style')
-            this.cmpToEdit = cmpWithNewStyle
-            this.updateCmp()
+        updateCmp(updatedCmp) {
+            this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
         changeCssProperty(prop, val) {
             this.cmpToEdit.style[prop] = val;
-            this.updateCmp()
+            this.updateCmp(this.cmpToEdit)
         },
         updateColor: function (event) {
             this.color = event.color;
