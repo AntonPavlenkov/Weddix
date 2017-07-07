@@ -33,9 +33,9 @@
         </form>
       </md-dialog-content>
     </md-dialog>
-    <transition-group v-if="selectedCmps" name="list" tag="p">
+    <transition-group v-if="cmpsToDisplay" name="list" tag="p">
   
-      <component v-for="(cmp, idx) in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
+      <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
       </component>
     </transition-group>
     <div class="btn-holder">
@@ -63,8 +63,9 @@ export default {
     CoupleAbout
   },
   created() {
-    console.log('Loading data from store');
+    console.log('edit page: Loading data from store');
     this.$store.dispatch({ type: 'loadCmp' })
+    this.$store.dispatch({ type: 'loadPageEditObj' })
   },
   data() {
     return {
@@ -73,19 +74,18 @@ export default {
     }
   },
   computed: {
-    selectedCmps() {
-      return this.$store.state.selectedCmps;
+    // selectedCmps() {
+    //   return this.$store.state.selectedCmps;
+    // },
+    cmpsToDisplay() {
+      return this.$store.getters.cmpsToDisplay;
     },
     lastIdxCmps() {
-      return this.selectedCmps.length - 1;
+      return this.cmpsToDisplay.length - 1;
     },
 
   },
   methods: {
-    showTmplCmps() {
-      console.log(this.tmplCmps, 'These Templates')
-      this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
-    },
     addNewCmp() {
       this.closeDialog('dialog1')
       console.log(this.newCmpType, 'new cmp type')
@@ -98,12 +98,12 @@ export default {
     closeDialog(ref) {
       this.$refs[ref].close();
     },
-    onOpen() {
-      console.log('Opened');
-    },
-    onClose(type) {
-      console.log('Closed', type);
-    }
+    // onOpen() {
+    //   console.log('Opened');
+    // },
+    // onClose(type) {
+    //   console.log('Closed', type);
+    // }
   },
 
 }
