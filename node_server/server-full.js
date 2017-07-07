@@ -47,7 +47,8 @@ function dbConnect() {
 
 	return new Promise((resolve, reject) => {
 		// Connection URL
-		var url = 'mongodb://kerendot:weddix123@ds159591.mlab.com:59591/weddix';
+		// var url = 'mongodb://kerendot:weddix123@ds159591.mlab.com:59591/weddix';
+		var url = 'mongodb://localhost:27017/weddix';
 		// Use connect method to connect to the Server
 		mongodb.MongoClient.connect(url, function (err, db) {
 			if (err) {
