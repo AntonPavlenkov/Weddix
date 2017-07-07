@@ -1,6 +1,6 @@
 <template>
   <section>
-    <md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog1">
+    <md-dialog md-open-from="#custom" md-close-to="#custom" ref="addDialog">
       <md-dialog-title>Choose new component</md-dialog-title>
   
       <md-dialog-content>
@@ -17,7 +17,7 @@
       </md-dialog-content>
   
       <md-dialog-actions>
-        <md-button class="md-primary" @click="closeDialog('dialog1')">Cancel</md-button>
+        <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
         <md-button class="md-primary" @click="addNewCmp">Add</md-button>
       </md-dialog-actions>
     </md-dialog>
@@ -38,8 +38,11 @@
       <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
       </component>
     </transition-group>
+    <div class="btn-holder" v-if="isLoading">
+      <md-spinner md-indeterminate class="btn-holder"></md-spinner>
+    </div>
     <div class="btn-holder">
-      <md-button class="md-icon-button md-raised md-accent" id="custom" @click="openDialog('dialog1')">
+      <md-button class="md-icon-button md-raised md-primary" id="custom" @click="openDialog('addDialog')">
         <md-icon>add</md-icon>
       </md-button>
     </div>
@@ -70,24 +73,25 @@ export default {
   data() {
     return {
       tmplCmps: this.$store.state.tmplCmps,
-      newCmpType: null
+      newCmpType: null,
+      
     }
   },
   computed: {
-    // selectedCmps() {
-    //   return this.$store.state.selectedCmps;
-    // },
     cmpsToDisplay() {
       return this.$store.getters.cmpsToDisplay;
     },
     lastIdxCmps() {
       return this.cmpsToDisplay.length - 1;
     },
+    isLoading(){
+      return this.$store.getters.isLoading;
+    },
 
   },
   methods: {
     addNewCmp() {
-      this.closeDialog('dialog1')
+      this.closeDialog('addDialog')
       console.log(this.newCmpType, 'new cmp type')
       var newCmpType = this.newCmpType;
       this.$store.dispatch({ type: 'addCmp', newCmpType })
