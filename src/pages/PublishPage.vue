@@ -1,33 +1,35 @@
 <template>
   <section>
     <h2>publish page</h2>
-      
-    <!--<component v-for="cmp in selectedCmps" v-bind:is="cmp.name" :key="cmp.name" :cmp="cmp">
-    </component>-->
-   
+    <component v-if="cmpsToDisplay" v-for="cmp in cmpsToDisplay" v-bind:is="'Dumb'+cmp.type" :key="cmp.type" :cmp="cmp">
+      </component>
+  
   </section>
 </template>
 
 <script>
-import SimpleText from '../components/cmpTmpls/SimpleText'
-import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
+import DumbCoupleAbout from '../components/cmpPublish/DumbCoupleAbout'
+import DumbImgCarousel from '../components/cmpPublish/DumbImgCarousel'
+import DumbLocationMap from '../components/cmpPublish/DumbLocationMap'
+import DumbSimpleText from '../components/cmpPublish/DumbSimpleText'
 export default {
   name: 'PublishPage',
+  components: {
+    DumbCoupleAbout,
+    DumbImgCarousel,
+    DumbLocationMap,
+    DumbSimpleText
+  },
   data() {
     return {
-
     }
   },
   computed: {
-    selectedCmps() {
-      return this.$store.state.selectedCmps
-    }
+    cmpsToDisplay() {
+      return this.$store.getters.cmpsToDisplay;
+    },
   },
 
-components: {
-  SimpleText,
-    SimpleTitle
-}
 }
 </script>
 
@@ -37,5 +39,4 @@ section {
   width: 90%;
   margin: 0 auto;
 }
-
 </style>
