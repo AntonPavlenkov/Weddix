@@ -17,7 +17,7 @@
         </div>
     
         <!-- edit button-->
-        <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode" v-if="isEditable">
+        <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
             <md-icon>edit</md-icon>
         </md-button>
         <transition name="fade">
@@ -41,7 +41,7 @@ const ZOOM_CLOSE = 18;
 
 export default {
     name: 'LocationMap',
-    props: ['cmp', 'isFirst', 'isLast', 'isEditable'],
+    props: ['cmp', 'isFirst', 'isLast'],
     components: {
         TxtToolbar,
         GeneralEdit,

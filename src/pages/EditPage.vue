@@ -35,7 +35,7 @@
     </md-dialog>
     <transition-group v-if="cmpsToDisplay" name="list" tag="p">
   
-      <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
+      <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
       </component>
     </transition-group>
     <div class="btn-holder" v-if="isLoading">
@@ -45,8 +45,7 @@
       <md-button class="md-icon-button md-raised md-primary" id="custom" @click="openDialog('addDialog')">
         <md-icon>add</md-icon>
       </md-button>
-    </div>
-  
+    </div>  
   </section>
 </template>
 
@@ -102,12 +101,6 @@ export default {
     closeDialog(ref) {
       this.$refs[ref].close();
     },
-    // onOpen() {
-    //   console.log('Opened');
-    // },
-    // onClose(type) {
-    //   console.log('Closed', type);
-    // }
   },
 
 }
@@ -116,7 +109,7 @@ export default {
 
 <style scoped style lang="scss">
 section {
-  width: 90%;
+  // width: 90%;
   margin: 0 auto;
 }
 
@@ -125,7 +118,7 @@ div :hover {
 }
 
 .btn-holder {
-  margin-top: 10px;
+  margin: 10px auto;
   text-align: center;
 }
 

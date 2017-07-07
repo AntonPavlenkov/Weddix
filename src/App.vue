@@ -1,19 +1,13 @@
 <template>
   <div id="app">
-    <header>
-      <h1><router-link to="/"> Weddix</router-link> </h1>
-      <md-bottom-bar>
-        <md-bottom-bar-item md-icon="mode_edit" @click="changeRoute" md-active>Edit</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="favorite" @click="changeRoute">Publish</md-bottom-bar-item>
-      </md-bottom-bar>
-    </header>
+
     <main>
       <router-view>
       </router-view>
     </main>
-    <MainFooter> 
+    <!--<MainFooter> 
       
-    </MainFooter>
+    </MainFooter>-->
   </div>
 </template>
 

@@ -2,8 +2,6 @@
     <section class="simple-text">
         <div class="content" :style="cmp.style">
             <span>{{cmp.data.text1}}</span>
-            <br>
-            <span> Hello world </span>
         </div>
     </section>
 </template>
@@ -20,13 +18,8 @@ export default {
 .simple-text {
     transition: all .5s;
     position: relative;
-    /*width: 100%;*/
-    margin-top: 5px;
+    margin: 15px;
     transition: all .5s;
-}
-
-.content {
-    height: 100px;
 }
 
 p {
