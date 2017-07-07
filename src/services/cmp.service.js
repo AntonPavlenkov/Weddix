@@ -59,6 +59,10 @@ function getCmps() {
         .catch(function (error) {
             console.log(error);
         });
+        // ELAD!!!
+//     cmps = bringDataFromLocal() || hardCoded;
+//     var copyOfCmps = JSON.parse(JSON.stringify(cmps));
+//     return Promise.resolve(copyOfCmps);
 }
 
 //not really relevant to this app....
@@ -109,7 +113,6 @@ function updateCmp(cmp) {
 function updatePage(pageEdit) {
     return axios.put(`${urlPage}/${pageEdit._id}`, pageEdit)
         .then(function (response) {
-            // console.log(response.data)
             return response.data;
         })
         .catch(function (error) {
@@ -128,18 +131,6 @@ function getPageEdit() {
 }
 
 
-//tests:
-// moveCmp();
-
-// //is up => e.g. from idx 1 to idx 2
-// function moveCmp(cmp, isUp) {
-//     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id);
-//     var newIdx = (isUp) ? idx + 1 : idx - 1;
-//     var movedCmp = cmps.splice(idx, 1);
-//     cmps.splice(newIdx, 0, movedCmp[0]);
-//     return Promise.resolve();
-// }
-
 export default {
     tmplCmps,
     getCmps,
@@ -150,6 +141,9 @@ export default {
     updatePage,
     getPageEdit
 }
+
+
+
 
 //***************************
 //dev mode  (withour server):
@@ -205,12 +199,4 @@ export default {
 //     return Promise.resolve();
 // }
 
-// //TODO: this still needs to be implemented as a server function (also in the server side)
-// //is up => e.g. from idx 1 to idx 2
-// function moveCmp(cmp, isUp) {
-//     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id);
-//     var newIdx = (isUp) ? idx + 1 : idx - 1;
-//     var movedCmp = cmps.splice(idx, 1);
-//     cmps.splice(newIdx, 0, movedCmp[0]);
-//     return Promise.resolve();
-// }
+
