@@ -59,7 +59,7 @@ const store = new Vuex.Store({
     loadCmp(context, payload) {
       cmpService.getCmps()
         .then(res => {
-          console.log('loaded from db:',res)
+          console.log('loaded cmps from db:',res)
           payload.cmps = res;
           context.commit(payload);
         })
@@ -67,7 +67,7 @@ const store = new Vuex.Store({
     loadPageEditObj(context, payload) {
       cmpService.getPageEdit()
         .then(res => {
-          console.log('loaded from db:',res)          
+          console.log('loaded page from db:',res)          
           payload.pageEditObj = res[0];
           context.commit(payload);
         })
