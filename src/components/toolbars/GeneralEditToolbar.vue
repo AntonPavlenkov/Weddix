@@ -12,12 +12,12 @@
         </md-button>
         <md-button v-if="!isFirst" class="md-fab md-clean  md-mini" @click="moveCmp(false)">
             <md-icon>arrow_upward</md-icon>
-            <md-tooltip md-direction="top">Move down</md-tooltip>
+            <md-tooltip md-direction="top">Move up</md-tooltip>
         </md-button>
         </md-button>
         <md-button v-if="!isLast" class="md-fab md-clean  md-mini" @click="moveCmp(true)">
             <md-icon>arrow_downward</md-icon>
-            <md-tooltip md-direction="top">Move up</md-tooltip>
+            <md-tooltip md-direction="top">Move down</md-tooltip>
         </md-button>
     </section>
 </template>

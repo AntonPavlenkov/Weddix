@@ -88,9 +88,10 @@ export default {
 <style scoped>
 .location-map {
     transition: all .5s;
+    box-sizing: border-box;
+    width: 100%;
     position: relative;
     margin-top: 5px;
-    transition: all .5s;
 }
 
 .content {

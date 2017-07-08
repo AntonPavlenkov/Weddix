@@ -1,16 +1,15 @@
 <template>
-  <section>
-    <md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog1">
+  <section class="edit-page">
+    <md-dialog class="dialog" md-open-from="#custom" md-close-to="#custom" ref="dialog1">
       <md-dialog-title>Choose new component</md-dialog-title>
-  
       <md-dialog-content>
         <ul class="catalogue">
-          <li v-for="(cmp, idx) in tmplCmps" :key="idx">
-            <md-radio v-model="newCmpType" :md-value="cmp.type" :isEditMode="false">
-            </md-radio>
-            <div class="content-container">
+          <li  class="preview" v-for="(cmp, idx) in tmplCmps"
+          @click="addNewCmp(cmp.type)"
+           :key="idx">
+            <div :src="cmp.cmpPreview" class="content-container">
               <h3>{{cmp.type}}</h3>
-              <component v-bind:is="cmp.type" :cmp="cmp"></component>
+             <img :src="cmp.cmpPreview">
             </div>
           </li>
         </ul>
@@ -18,11 +17,10 @@
   
       <md-dialog-actions>
         <md-button class="md-primary" @click="closeDialog('dialog1')">Cancel</md-button>
-        <md-button class="md-primary" @click="addNewCmp">Add</md-button>
       </md-dialog-actions>
     </md-dialog>
   
-    <md-dialog md-open-from="#fab" md-close-to="#fab" ref="dialog2">
+    <!--<md-dialog md-open-from="#fab" md-close-to="#fab" ref="dialog2">
       <md-dialog-title>Create new note</md-dialog-title>
       <md-dialog-content>
         <form>
@@ -32,12 +30,13 @@
           </md-input-container>
         </form>
       </md-dialog-content>
-    </md-dialog>
+    </md-dialog>-->
     <transition-group v-if="selectedCmps" name="list" tag="p">
   
-      <component v-for="(cmp, idx) in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
+      <component class="cmpStyle" v-for="(cmp, idx) in selectedCmps" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
       </component>
     </transition-group>
+
     <div class="btn-holder">
       <md-button class="md-icon-button md-raised md-accent" id="custom" @click="openDialog('dialog1')">
         <md-icon>add</md-icon>
@@ -86,10 +85,10 @@ export default {
       console.log(this.tmplCmps, 'These Templates')
       this.$store.dispatch({ type: 'addCmp', newCmpName: this.newCmpName })
     },
-    addNewCmp() {
+    addNewCmp(newCmp) {
       this.closeDialog('dialog1')
-      console.log(this.newCmpType, 'new cmp type')
-      var newCmpType = this.newCmpType;
+      console.log(this.newCmpType, 'new cmp type', newCmp)
+      var newCmpType = newCmp;
       this.$store.dispatch({ type: 'addCmp', newCmpType })
     },
     openDialog(ref) {
@@ -111,20 +110,32 @@ export default {
 
 
 <style scoped style lang="scss">
-section {
+.edit-page{
+  min-height: 100vh;
   width: 90%;
   margin: 0 auto;
+
 }
 
-div :hover {
-  display: fixed;
+// div :hover {
+//   display: fixed;
+// }
+.preview{
+  cursor: pointer;
 }
 
 .btn-holder {
-  margin-top: 10px;
+  margin: 10px;
   text-align: center;
 }
-
+.cmpStyle:hover{
+  box-sizing: border-box;
+  outline : #42A5F5 solid 1px;
+}
+.dialog{
+  margin: 0 auto;
+  width: 70%;
+}
 .md-dialog {
   text-align: center;
   .catalogue {
@@ -136,9 +147,7 @@ div :hover {
       display: flex;
       flex-direction: row;
       align-items: center;
-      .content-container {
-        width: 100%;
-      }
+     
     }
     h3 {
       text-align: center;

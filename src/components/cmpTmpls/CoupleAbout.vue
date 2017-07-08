@@ -104,11 +104,12 @@ export default {
 <style scoped>
 .couple-about {
     transition: all .5s;
-    transition: all .5s;
+    box-sizing: content-box;
+    width: 100%;
 }
 
 .content {
-    box-sizing: border-box;
+    box-sizing: content-box;
     padding: 30px;
     display: flex;
     flex-flow: row nowrap;
@@ -134,7 +135,6 @@ export default {
     flex-flow: row wrap;
     justify-content: center;
     align-content: space-between;
-    background: lightgray;
 }
 
 .about-1,

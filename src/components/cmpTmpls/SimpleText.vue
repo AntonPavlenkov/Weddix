@@ -81,9 +81,9 @@ export default {
 
 <style scoped>
 .simple-text {
-    transition: all .5s;
+    /*transition: all .5s;*/
     position: relative;
-    /*width: 100%;*/
+    width: 100%;
     margin-top: 5px;
     transition: all .5s;
 }

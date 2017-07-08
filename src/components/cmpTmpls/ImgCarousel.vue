@@ -3,7 +3,7 @@
   <section>
     <div class="content">
       <carousel-3d>
-        <slide v-for="(imgUrl, i) in cmp.data.imgUrls" :index="i">
+        <slide v-for="(imgUrl, i) in cmp.data.imgUrls" :index="i" :key="i">
           <img :src="imgUrl" style='height: 100%; width: 100%;'>
         </slide>
       </carousel-3d>
@@ -15,7 +15,7 @@
     <transition name="fade">
       <div v-if="isEditMode" class="edit-console">
         <form novalidate @submit.stop.prevent="updateUrls" class="urls-form">
-          <md-input-container v-for="(imgUrl, i) in cmpToEdit.data.imgUrls">
+          <md-input-container v-for="(imgUrl, i) in cmpToEdit.data.imgUrls" :key="i">
             <label>{{'img -' + (i+1)}}</label>
             <md-input :value="imgUrl"></md-input>
           </md-input-container>
@@ -91,7 +91,9 @@ export default {
 
 <style scoped lang="scss">
 section {
+  transition: all .5s;
   position: relative;
+  width: 100%;
 }
 
 .edit-btn {

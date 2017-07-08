@@ -14,8 +14,9 @@ var tmplCmps = [{
 },
 {
     type: 'LocationMap',
-    data: { position:{ lat: 32.087893, lng: 34.803038 }, address: { line1:'Line1', line2:'Line2' ,line3:'Line3'} },
-    style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+    data: { position:{ lat: 32.087893, lng: 34.803038 }, address: { line1:'המרכז הרפואי לחיות רמת גן', line2:'HaBonim St 5, Ramat Gan' ,line3:'52462'} },
+    style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' },
+    cmpPreview: 'http://i.imgur.com/owR4CHf.png'
 },
 {
     type: 'ImgCarousel',
@@ -27,12 +28,14 @@ var tmplCmps = [{
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF6McM2IpYI2U6nn-mFORZF4FZLpZwjsuF448sbcN9PxHRwsrLpg"
         ]
     },
-        style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+        style: { backgroundColor: "white", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' },
+        cmpPreview: 'http://i.imgur.com/zPORY7y.png'
 },
 {
     type: 'CoupleAbout',
-     data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder , aboutImgUrl1: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', mainImgUrl: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png',  aboutName2: 'Prince', aboutInfo2: loremIpsumHolder , aboutImgUrl2: 'http://www.cornwallminingalliance.org/wp-content/uploads/2016/04/Placeholder-male-10.jpg'},
-    style: { backgroundColor: "white", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+     data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder , aboutImgUrl1: 'https://wpclipart.com/holiday/wedding/bride_groom/bride_vale_flowers.png', mainImgUrl: 'https://www.shareicon.net/download/2016/05/25/770451_people_512x512.png',  aboutName2: 'Prince', aboutInfo2: loremIpsumHolder , aboutImgUrl2: 'http://pngimg.com/uploads/groom/groom_PNG19603.png'},
+    style: { backgroundColor: "white", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' },
+    cmpPreview: 'http://i.imgur.com/z6MJtQZ.png'
 }
 ];
 
