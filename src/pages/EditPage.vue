@@ -35,26 +35,6 @@
       </md-button>
     </div>
   
-    <!--new component modal-->
-    <!--<md-dialog md-open-from="#custom" md-close-to="#custom" ref="addDialog">
-              <md-dialog-title>Choose new component</md-dialog-title>
-              <md-dialog-content>
-                <ul class="catalogue">
-                  <li v-for="(cmp, idx) in tmplCmps" :key="idx">
-                    <md-radio v-model="newCmpType" :md-value="cmp.type" :isEditMode="false">
-                    </md-radio>
-                    <div class="content-container">
-                      <h3>{{cmp.type}}</h3>
-                      <component v-bind:is="cmp.type" :cmp="cmp"></component>
-                    </div>
-                  </li>
-                </ul>
-              </md-dialog-content>
-              <md-dialog-actions>
-                <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
-                <md-button class="md-primary" @click="addNewCmp">Add</md-button>
-              </md-dialog-actions>
-            </md-dialog>-->
   </section>
 </template>
 
@@ -66,6 +46,7 @@ import LocationMap from '../components/cmpTmpls/LocationMap'
 import ImgCarousel from '../components/cmpTmpls/ImgCarousel'
 import CoupleAbout from '../components/cmpTmpls/CoupleAbout'
 import ImgTitle from '../components/cmpTmpls/ImgTitle'
+import CountDown from '../components/cmpTmpls/CountDown'
 export default {
   name: 'EditPage',
   components: {
@@ -75,7 +56,8 @@ export default {
     ImgCarousel,
     CoupleAbout,
     ImgTitle,
-    draggable 
+    draggable,
+    CountDown
   },
   created() {
     console.log('edit page: Loading data from store');
@@ -86,7 +68,6 @@ export default {
     return {
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null,
-      // dragMode: false
     }
   },
   computed: {
@@ -119,11 +100,6 @@ export default {
       var oldIndex = ev.oldIndex;
       this.$store.dispatch({ type: 'dragCmp', newIndex, oldIndex })
     },
-    // changeDragMode(newMode) {
-    //   this.dragMode = newMode;
-    //   console.log(newMode)
-    // }
-
   },
 
 }
@@ -152,6 +128,10 @@ export default {
 .dialog {
   margin: 0 auto;
   width: 70%;
+}
+
+.dialog:focus {
+  outline: none;
 }
 
 .md-dialog {
@@ -224,7 +204,7 @@ export default {
   }
   .btn-close {
     position: absolute;
-    top:10px;
+    top: 10px;
     right: 0;
     cursor: pointer;
   }
