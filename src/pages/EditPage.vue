@@ -4,12 +4,10 @@
       <md-dialog-title>Choose new component</md-dialog-title>
       <md-dialog-content>
         <ul class="catalogue">
-          <li  class="preview" v-for="(cmp, idx) in tmplCmps"
-          @click="addNewCmp(cmp.type)"
-           :key="idx">
+          <li class="preview" v-for="(cmp, idx) in tmplCmps" @click="addNewCmp(cmp.type)" :key="idx">
             <div :src="cmp.cmpPreview" class="content-container">
               <h3>{{cmp.type}}</h3>
-             <img :src="cmp.cmpPreview">
+              <img :src="cmp.cmpPreview">
             </div>
           </li>
         </ul>
@@ -20,47 +18,48 @@
       </md-dialog-actions>
     </md-dialog>
   
- 
+    <draggable :list="cmpsToDisplay" @end="onEnd" :options="{draggable:'section',disabled:dragMode}">
+      <transition-group name="cmps" tag="p">
+        <component @changeDragMode="changeDragMode" v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
+        </component>
+      </transition-group>
+    </draggable>
   
-    <transition-group v-if="cmpsToDisplay" name="list" tag="p">
-      <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
-      </component>
-    </transition-group>
-
     <div class="btn-holder" v-if="isLoading">
       <md-spinner md-indeterminate class="btn-holder"></md-spinner>
     </div>
-
-    <div class="btn-holder">  
+  
+    <div class="btn-holder">
       <md-button class="md-icon-button md-raised md-primary" id="custom" @click="openDialog('addDialog')">
         <md-icon>add</md-icon>
       </md-button>
     </div>
-
+  
     <!--new component modal-->
     <!--<md-dialog md-open-from="#custom" md-close-to="#custom" ref="addDialog">
-      <md-dialog-title>Choose new component</md-dialog-title>
-      <md-dialog-content>
-        <ul class="catalogue">
-          <li v-for="(cmp, idx) in tmplCmps" :key="idx">
-            <md-radio v-model="newCmpType" :md-value="cmp.type" :isEditMode="false">
-            </md-radio>
-            <div class="content-container">
-              <h3>{{cmp.type}}</h3>
-              <component v-bind:is="cmp.type" :cmp="cmp"></component>
-            </div>
-          </li>
-        </ul>
-      </md-dialog-content>
-      <md-dialog-actions>
-        <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
-        <md-button class="md-primary" @click="addNewCmp">Add</md-button>
-      </md-dialog-actions>
-    </md-dialog>-->
+          <md-dialog-title>Choose new component</md-dialog-title>
+          <md-dialog-content>
+            <ul class="catalogue">
+              <li v-for="(cmp, idx) in tmplCmps" :key="idx">
+                <md-radio v-model="newCmpType" :md-value="cmp.type" :isEditMode="false">
+                </md-radio>
+                <div class="content-container">
+                  <h3>{{cmp.type}}</h3>
+                  <component v-bind:is="cmp.type" :cmp="cmp"></component>
+                </div>
+              </li>
+            </ul>
+          </md-dialog-content>
+          <md-dialog-actions>
+            <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
+            <md-button class="md-primary" @click="addNewCmp">Add</md-button>
+          </md-dialog-actions>
+        </md-dialog>-->
   </section>
 </template>
 
 <script>
+  import draggable from 'vuedraggable'
 import SimpleText from '../components/cmpTmpls/SimpleText'
 import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
 import LocationMap from '../components/cmpTmpls/LocationMap'
@@ -73,7 +72,8 @@ export default {
     SimpleTitle,
     LocationMap,
     ImgCarousel,
-    CoupleAbout
+    CoupleAbout,
+    draggable 
   },
   created() {
     console.log('edit page: Loading data from store');
@@ -84,7 +84,7 @@ export default {
     return {
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null,
-
+      dragMode:false
     }
   },
   computed: {
@@ -112,6 +112,16 @@ export default {
     closeDialog(ref) {
       this.$refs[ref].close();
     },
+    onEnd(ev) {
+      var newIndex = ev.newIndex;
+      var oldIndex = ev.oldIndex;
+      this.$store.dispatch({ type: 'dragCmp', newIndex, oldIndex })
+    },
+    changeDragMode(newMode) {
+      this.dragMode = newMode;
+      console.log(newMode)
+    }
+
   },
 
 }
@@ -119,15 +129,14 @@ export default {
 
 
 <style scoped style lang="scss">
-.edit-page{
+.edit-page {
   min-height: 100vh;
-
 }
 
 // div :hover {
 //   display: fixed;
 // }
-.preview{
+.preview {
   cursor: pointer;
 }
 
@@ -135,14 +144,17 @@ export default {
   margin: 10px auto;
   text-align: center;
 }
-.cmpStyle:hover{
+
+.cmpStyle:hover {
   box-sizing: border-box;
-  outline : #42A5F5 solid 1px;
+  outline: #42A5F5 solid 1px;
 }
-.dialog{
+
+.dialog {
   margin: 0 auto;
   width: 70%;
 }
+
 .md-dialog {
   text-align: center;
   .catalogue {
@@ -154,7 +166,6 @@ export default {
       display: flex;
       flex-direction: row;
       align-items: center;
-     
     }
     h3 {
       text-align: center;
