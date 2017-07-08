@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="img-title">
         <div class="content" :style="cmp.style">
             <span contenteditable @blur="updateText('name1')">{{cmp.data.name1}}</span>
             <div class="demo" :class="{[cmp.shape]: true}">
@@ -8,9 +8,6 @@
                 </svg>
             </div>
             <span contenteditable @blur="updateText('name2')">{{cmp.data.name2}}</span>
-            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
-                <md-icon>edit</md-icon>
-            </md-button>
             <svg class="defs">
                 <defs>
                     <clipPath id="star-clip">
@@ -26,6 +23,13 @@
             </svg>
     
         </div>
+        <!--edit buttons-->
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+            <md-icon>edit</md-icon>
+        </md-button>
+        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
+            <md-icon>swap_vertical_circle</md-icon>
+        </md-button>
     
         <transition name="fade">
             <div v-if="isEditMode" class="edit-console" v-draggable>
@@ -44,6 +48,9 @@
                     </md-button>
                     <md-menu-content>
                         <md-menu-item @click="changeImageShape('star')">Star</md-menu-item>
+                        <md-menu-item @click="changeImageShape('hex')">Hexagon</md-menu-item>
+                        <md-menu-item @click="changeImageShape('heart')">Heart</md-menu-item>
+    
                     </md-menu-content>
                 </md-menu>
     
@@ -117,6 +124,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.img-title {
+    position: relative;
+}
+
 .content {
     display: flex;
     justify-content: space-around;
@@ -140,28 +151,6 @@ export default {
 
 .heart image {
     clip-path: url(#heart-clip);
-}
-
-.sason {
-    clip-path: url(#heart-clip);
-    background-image: url(https://s3.buysellads.com/1279518/5520640-1482344315.png);
-    background-size: cover;
-    width: 300px;
-    height: 250px;
-}
-
-
-
-.edit-btn {
-    position: absolute;
-    top: 0%;
-    left: 85%;
-    opacity: 0.2;
-    transition: all .5s;
-    &:hover {
-        opacity: 1;
-        cursor: pointer;
-    }
 }
 </style>
 
