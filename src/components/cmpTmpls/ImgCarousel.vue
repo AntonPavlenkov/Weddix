@@ -34,7 +34,7 @@
 <script>
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
-import { Carousel3d, Slide } from 'vue-carousel-3d';
+  import { Carousel3d, Slide } from 'vue-carousel-3d';
 export default {
   name: 'img-carousel',
   props: ['cmp', 'isFirst', 'isLast'],

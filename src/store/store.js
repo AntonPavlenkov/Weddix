@@ -37,7 +37,7 @@ const store = new Vuex.Store({
   },
 
   mutations: {
-    setIsAdding(state, {isAdding}){
+    setIsAdding(state, { isAdding }) {
       console.log('set is adding')
       state.isAdding = isAdding;
     },
@@ -64,12 +64,16 @@ const store = new Vuex.Store({
     moveCmp(state, { cmpsOrder }) {
       state.pageEditObj.cmpsOrder = cmpsOrder
     },
+    dragCmp(state, { cmpsOrder }) {
+      state.pageEditObj.cmpsOrder = cmpsOrder
+    },
+
   },
   actions: {
     loadCmp(context, payload) {
       cmpService.getCmps()
         .then(res => {
-          console.log('loaded cmps from db:',res)
+          console.log('loaded cmps from db:', res)
           payload.cmps = res;
           context.commit(payload);
         })
@@ -77,14 +81,14 @@ const store = new Vuex.Store({
     loadPageEditObj(context, payload) {
       cmpService.getPageEdit()
         .then(res => {
-          console.log('loaded page from db:',res)          
+          console.log('loaded page from db:', res)
           payload.pageEditObj = res[0];
           context.commit(payload);
         })
     },
     addCmp(context, payload) {
       //set "isAdding" to false to enable spinner while waiting for db
-      context.commit({type:'setIsAdding', isAdding:true});
+      context.commit({ type: 'setIsAdding', isAdding: true });
       cmpService.addCmp(payload.newCmpType)
         .then(cmp => {
           payload.newCmp = cmp;
@@ -92,7 +96,7 @@ const store = new Vuex.Store({
           pageEditCopy.cmpsOrder.push(cmp._id)
           payload.newPage = pageEditCopy;
           //set "isAdding" to false to disable spinner
-          context.commit({type:'setIsAdding', isAdding:false});
+          context.commit({ type: 'setIsAdding', isAdding: false });
           //commit the new cmp as usual
           context.commit(payload);
           cmpService.updatePage(pageEditCopy)
@@ -135,6 +139,21 @@ const store = new Vuex.Store({
           // do some validation....
         })
     },
+    dragCmp(context, payload) {
+      var newIndex = payload.newIndex;
+      var oldIndex = payload.oldIndex;
+      console.log('newIndex', newIndex)
+      console.log('oldIndex', oldIndex)
+      var order = context.state.pageEditObj.cmpsOrder.slice();
+      [order[oldIndex], order[newIndex]] = [order[newIndex], order[oldIndex]]
+      payload.cmpsOrder = order;
+      context.commit(payload);
+      //pageEdit is updated with newOrder because the commit is done
+      cmpService.updatePage(context.state.pageEditObj)
+        .then(() => {
+          // do some validation....
+        })
+    }
   }
 })
 

@@ -1,12 +1,12 @@
 <template>
     <section class="simple-title">
         <div class="content" :style="cmp.style">
-            <p :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
+            <p :contenteditable="isEditMode" class="main-title" @click="modifyDragMode(true)" @blur="modifyDragMode(false)">{{cmp.data.mainTitle}}</p>
             <br>
-            <p :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
+            <p :contenteditable="isEditMode" class="sub-title"  @click="modifyDragMode(true)" @blur="modifyDragMode(false)"> {{cmp.data.subTitle}} </p>
             <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
                 <md-icon>edit</md-icon>
-            </md-button>    
+            </md-button>
         </div>
         <transition name="fade">
             <div v-if="isEditMode" class="edit-console">
@@ -33,8 +33,8 @@ export default {
             color: ""
         }
     },
-    computed:{
-        cmpToEdit(){
+    computed: {
+        cmpToEdit() {
             return JSON.parse(JSON.stringify(this.cmp))
         }
     },
@@ -52,6 +52,16 @@ export default {
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
+        modifyDragMode(newMode) {
+            if (this.isEditMode) {
+                console.log('inside')
+                this.$emit('changeDragMode', newMode)
+            }
+            else {
+                console.log('outside edit')
+                this.$emit('changeDragMode', false)
+            }
+        }
     }
 }
 </script>
@@ -72,18 +82,18 @@ p {
     line-height: 50px;
 }
 
-.main-title{
+.main-title {
     font-size: 70px;
 }
 
-.sub-title{
+.sub-title {
     font-size: 35px;
 }
 
 .edit-btn {
     position: absolute;
     left: 85%;
-    top:40%;
+    top: 40%;
     opacity: 0.2;
     transition: all .5s;
 }
@@ -107,7 +117,7 @@ p {
 }
 
 .fade-enter,
-.fade-leave-to{
+.fade-leave-to {
     opacity: 0
 }
 
