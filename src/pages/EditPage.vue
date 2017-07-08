@@ -65,6 +65,7 @@ import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
 import LocationMap from '../components/cmpTmpls/LocationMap'
 import ImgCarousel from '../components/cmpTmpls/ImgCarousel'
 import CoupleAbout from '../components/cmpTmpls/CoupleAbout'
+import CountDown from '../components/cmpTmpls/CountDown'
 export default {
   name: 'EditPage',
   components: {
@@ -73,7 +74,8 @@ export default {
     LocationMap,
     ImgCarousel,
     CoupleAbout,
-    draggable 
+    draggable,
+    CountDown
   },
   created() {
     console.log('edit page: Loading data from store');
@@ -154,13 +156,9 @@ export default {
   margin: 0 auto;
   width: 70%;
 }
-<<<<<<< HEAD
 .dialog:focus{
   outline: none;
 }
-=======
-
->>>>>>> b344ad65071265b991ccfd871b5e506c6c67ece6
 .md-dialog {
   text-align: center;
   .catalogue {

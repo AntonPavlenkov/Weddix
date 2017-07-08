@@ -43,7 +43,13 @@ const tmplCmps = [
         data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'https://wpclipart.com/holiday/wedding/bride_groom/bride_vale_flowers.png', mainImgUrl: 'https://www.shareicon.net/download/2016/05/25/770451_people_512x512.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'http://pngimg.com/uploads/groom/groom_PNG19603.png' },
         style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
         cmpPreview: 'http://i.imgur.com/z6MJtQZ.png'
-    }
+    },
+    {
+        type: 'CountDown',
+        data: { mainTitle: 'Gal and Guy' , subTitle:'Are getting married'},
+        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Rouge script', fontSize: '30px' },
+        cmpPreview: 'http://i.imgur.com/rrOX6tM.png'
+    },
 ];
 
 
