@@ -65,6 +65,7 @@ import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
 import LocationMap from '../components/cmpTmpls/LocationMap'
 import ImgCarousel from '../components/cmpTmpls/ImgCarousel'
 import CoupleAbout from '../components/cmpTmpls/CoupleAbout'
+import ImgTitle from '../components/cmpTmpls/ImgTitle'
 export default {
   name: 'EditPage',
   components: {
@@ -73,6 +74,7 @@ export default {
     LocationMap,
     ImgCarousel,
     CoupleAbout,
+    ImgTitle,
     draggable 
   },
   created() {
