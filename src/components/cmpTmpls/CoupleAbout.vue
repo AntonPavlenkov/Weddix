@@ -3,25 +3,35 @@
         <div class="content" :style="cmp.style">
             <!--@click="modifyDragMode(true)" @blur="modifyDragMode(false)"-->
             <div class="about-1">
-                <span @blur="updateText('aboutName1')" @click="modifyDragMode(true)" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>
+                <!--<span @blur="updateText('aboutName1')" @click="modifyDragMode(true)" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>-->
+                <span @blur="updateText('aboutName1')" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>
                 <img @click="updateUrl('aboutImgUrl1')" :src="cmp.data.aboutImgUrl1" class="about-1-img" width="100px" height="200px">
-                <span @blur="updateText('aboutInfo1')" @click="modifyDragMode(true)" :style="cmp.style" :contenteditable="isEditMode" class="about-1-info">{{cmp.data.aboutInfo1}}</span>
+                <!--<span @blur="updateText('aboutInfo1')" @click="modifyDragMode(true)" :style="cmp.style" :contenteditable="isEditMode" class="about-1-info">{{cmp.data.aboutInfo1}}</span>-->
+                <span @blur="updateText('aboutInfo1')" :style="cmp.style" :contenteditable="isEditMode" class="about-1-info">{{cmp.data.aboutInfo1}}</span>
             </div>
             <div class="main-img-container">
                 <img @click="updateUrl('mainImgUrl')" clsas="main-img" :src="cmp.data.mainImgUrl" class="main-img" width="100%">
             </div>
             <div class="about-2">
-                <span @blur="updateText('aboutName2')"  @click="modifyDragMode(true)"  :contenteditable="isEditMode" class="about-2-name">{{cmp.data.aboutName2}}</span>
+                <!--<span @blur="updateText('aboutName2')"  @click="modifyDragMode(true)"  :contenteditable="isEditMode" class="about-2-name">{{cmp.data.aboutName2}}</span>-->
+                <span @blur="updateText('aboutName2')" :contenteditable="isEditMode" class="about-2-name">{{cmp.data.aboutName2}}</span>
                 <img @click="updateUrl('aboutImgUrl2')" :src="cmp.data.aboutImgUrl2" class="about-2-img" width="100px" height="200px">
-                <span @blur="updateText('aboutInfo2')"  @click="modifyDragMode(true)" :style="cmp.style" :contenteditable="isEditMode" class="about-2-info">{{cmp.data.aboutInfo2}}</span>
+                <!--<span @blur="updateText('aboutInfo2')"  @click="modifyDragMode(true)" :style="cmp.style" :contenteditable="isEditMode" class="about-2-info">{{cmp.data.aboutInfo2}}</span>-->
+                <span @blur="updateText('aboutInfo2')" :style="cmp.style" :contenteditable="isEditMode" class="about-2-info">{{cmp.data.aboutInfo2}}</span>
             </div>
-            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
-                <md-icon>edit</md-icon>
-            </md-button>
     
         </div>
+    
+        <!--edit butttons-->
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+            <md-icon>edit</md-icon>
+        </md-button>
+        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
+            <md-icon>swap_vertical_circle</md-icon>
+        </md-button>
+
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console">
+            <div v-if="isEditMode" class="edit-console" v-draggable>
                 <md-input-container v-if="newUrl" md-clearable class="input-newUrl">
                     <label>Enter New Url</label>
                     <md-input v-model="newUrl"></md-input>
@@ -63,10 +73,6 @@ export default {
         }
     },
     methods: {
-        updateText(text) {
-            this.cmpToEdit.data[text] = event.target.innerText
-            this.updateCmp(this.cmpToEdit)
-        },
         updateUrl(url) {
             this.newUrl = this.cmpToEdit.data[url]
             this.selectedPicture = url
@@ -87,24 +93,20 @@ export default {
         enterEditMode() {
             this.isEditMode = !this.isEditMode
         },
-        updateCmp(updatedCmp, dragModeNew) {
-            console.log(dragModeNew)
-            this.modifyDragMode(dragModeNew)
+        updateText(text) {
+            this.cmpToEdit.data[text] = event.target.innerText;
+            // this.modifyDragMode(true);
+            this.updateCmp(this.cmpToEdit);
+        },
+        updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
         updateColor: function (event) {
             this.color = event.color;
         },
-        modifyDragMode(newMode) {
-            if (this.isEditMode) {
-                console.log('inside')
-                this.$emit('changeDragMode', newMode)
-            }
-            else {
-                console.log('outside edit')
-                this.$emit('changeDragMode', false)
-            }
-        }
+        // modifyDragMode(newMode) {
+        //     this.$emit('changeDragMode', newMode)
+        // }
 
 
     }
@@ -118,6 +120,7 @@ export default {
     transition: all .5s;
     box-sizing: content-box;
     width: 100%;
+    position: relative;
 }
 
 .content {
@@ -127,27 +130,8 @@ export default {
     flex-flow: row nowrap;
 }
 
-.edit-btn {
-    position: absolute;
-    left: 85%;
-    opacity: 0.2;
-    transition: all .5s;
-}
-
 .input-newUrl {
     width: 80%;
-}
-
-.edit-btn:hover {
-    opacity: 1;
-    cursor: pointer;
-}
-
-.edit-console {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-content: space-between;
 }
 
 .about-1,
@@ -185,19 +169,5 @@ export default {
 
 .main-img {
     border-radius: 50%;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .5s
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0
-}
-
-.color-picker-btn {
-    overflow: initial;
 }
 </style>

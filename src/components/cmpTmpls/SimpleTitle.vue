@@ -1,15 +1,22 @@
 <template>
     <section class="simple-title">
         <div class="content" :style="cmp.style">
-            <p :contenteditable="isEditMode" class="main-title" @click="modifyDragMode(true)" @blur="modifyDragMode(false)">{{cmp.data.mainTitle}}</p>
-            <br>
-            <p :contenteditable="isEditMode" class="sub-title"  @click="modifyDragMode(true)" @blur="modifyDragMode(false)"> {{cmp.data.subTitle}} </p>
-            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
-                <md-icon>edit</md-icon>
-            </md-button>
+            <!--<p :contenteditable="isEditMode" class="main-title" @click="modifyDragMode(true)" @blur="modifyDragMode(false)">{{cmp.data.mainTitle}}</p>-->
+            <p :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
+            <!--<p :contenteditable="isEditMode" class="sub-title"  @click="modifyDragMode(true)" @blur="modifyDragMode(false)"> {{cmp.data.subTitle}} </p>-->
+            <p :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
+    
+        <!--edit buttons-->
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+            <md-icon>edit</md-icon>
+        </md-button>
+        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
+            <md-icon>swap_vertical_circle</md-icon>
+        </md-button>
+    
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console">
+            <div v-if="isEditMode" class="edit-console" v-draggable>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
             </div>
@@ -52,16 +59,16 @@ export default {
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
-        modifyDragMode(newMode) {
-            if (this.isEditMode) {
-                console.log('inside')
-                this.$emit('changeDragMode', newMode)
-            }
-            else {
-                console.log('outside edit')
-                this.$emit('changeDragMode', false)
-            }
-        }
+        // modifyDragMode(newMode) {
+        //     if (this.isEditMode) {
+        //         console.log('inside')
+        //         this.$emit('changeDragMode', newMode)
+        //     }
+        //     else {
+        //         console.log('outside edit')
+        //         this.$emit('changeDragMode', false)
+        //     }
+        // }
     }
 }
 </script>
@@ -79,49 +86,17 @@ export default {
 p {
     margin: 0;
     padding: 0;
-    line-height: 50px;
+    line-height: 70px;
 }
 
-.main-title {
+
+/*.main-title {
     font-size: 70px;
 }
 
 .sub-title {
     font-size: 35px;
-}
+}*/
 
-.edit-btn {
-    position: absolute;
-    left: 85%;
-    top: 40%;
-    opacity: 0.2;
-    transition: all .5s;
-}
 
-.edit-btn:hover {
-    opacity: 1;
-    cursor: pointer;
-}
-
-.edit-console {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-content: space-between;
-    background: lightgray;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .5s
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0
-}
-
-.color-picker-btn {
-    overflow: initial;
-}
 </style>
