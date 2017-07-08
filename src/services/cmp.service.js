@@ -9,8 +9,12 @@ var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit
 const tmplCmps = [
     {
         type: 'SimpleText',
-        data: { text1: 'Come join us on our happy day' },
-        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
+        data: { 
+            txtLine1: 'Come join us on our happy day',
+            txtLine2: 'We\'ll meet on 7pm for light dinner' ,
+            txtLine3: 'Followed by dancing into the night!',
+         },
+        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '20px' },
         cmpPreview: 'http://i.imgur.com/CzBQKi4.png'
     },
     {

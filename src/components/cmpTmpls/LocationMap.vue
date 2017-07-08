@@ -16,9 +16,12 @@
     
         </div>
     
-        <!-- edit button-->
-        <md-button class="edit-btn md-fab md-mini md-warn" @click="enterEditMode">
+        <!-- edit buttons-->
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
             <md-icon>edit</md-icon>
+        </md-button>
+        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
+            <md-icon>swap_vertical_circle</md-icon>
         </md-button>
         <transition name="fade">
             <div v-if="isEditMode" class="edit-console" v-draggable>
@@ -51,7 +54,6 @@ export default {
         return {
             isEditMode: false,
             color: "",
-
         }
     },
     computed: {
@@ -62,7 +64,11 @@ export default {
             return this.cmp.data.position
         },
     },
+
     methods: {
+        dragStarted(e) {
+            console.log('dragging', e);
+        },
         moveCmp(isUp) {
             this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
         },
@@ -79,6 +85,7 @@ export default {
         updateColor: function (event) {
             this.color = event.color;
         },
+
     }
 }
 </script>
@@ -109,44 +116,4 @@ p {
     padding: 0;
 }
 
-.edit-btn {
-    position: absolute;
-    left: 85%;
-    top: 40%;
-    opacity: 0.2;
-    transition: all .5s;
-}
-
-.edit-btn:hover {
-    opacity: 1;
-    cursor: pointer;
-}
-
-.edit-console {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-content: space-between;
-
-    position: absolute;
-    width: 200px;
-    border: 1px solid black;
-    top: 10%;
-    right: 0;
-    background-color: white;
-    opacity: 0.9;
-    box-shadow: 0px 0px 26px 1px rgba(0, 0, 0, 0.75);
-    border-radius: 10px;
-
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .5s
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0
-}
 </style>

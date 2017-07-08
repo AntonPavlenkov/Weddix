@@ -1,19 +1,24 @@
 <template>
   <!--<h1>elad</h1>-->
-  <section>
+  <section class="img-carousel">
     <div class="content">
       <carousel-3d>
         <slide v-for="(imgUrl, i) in cmp.data.imgUrls" :index="i" :key="i">
           <img :src="imgUrl" style='height: 100%; width: 100%;'>
         </slide>
       </carousel-3d>
-      <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
-        <md-icon>edit</md-icon>
-      </md-button>
-  
     </div>
+
+    <!--edit buttons-->
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+            <md-icon>edit</md-icon>
+        </md-button>
+        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
+            <md-icon>swap_vertical_circle</md-icon>
+        </md-button>
+  
     <transition name="fade">
-      <div v-if="isEditMode" class="edit-console">
+      <div v-if="isEditMode" class="edit-console" v-draggable>
         <form novalidate @submit.stop.prevent="updateUrls" class="urls-form">
           <md-input-container v-for="(imgUrl, i) in cmpToEdit.data.imgUrls" :key="i">
             <label>{{'img -' + (i+1)}}</label>
@@ -34,7 +39,7 @@
 <script>
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
-  import { Carousel3d, Slide } from 'vue-carousel-3d';
+import { Carousel3d, Slide } from 'vue-carousel-3d';
 export default {
   name: 'img-carousel',
   props: ['cmp', 'isFirst', 'isLast'],
@@ -86,55 +91,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-section {
+.img-carousel {
   transition: all .5s;
   position: relative;
   width: 100%;
 }
 
-.edit-btn {
-  position: absolute;
-  left: 85%;
-  top: 10%;
-  opacity: 0.2;
-  transition: all .5s;
-}
-
-.edit-btn:hover {
-  opacity: 1;
-  cursor: pointer;
-}
-
 .edit-console {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-content: space-between;
-  /*top: 0;
-    position: absolute;*/
-  background: lightgray;
-  /*width: 25%;
-    z-index: 5;*/
   .urls-form {
     width: 100%;
     text-align: center;
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity .5s
-}
-
-.fade-enter,
-.fade-leave-to
-/* .fade-leave-active in <2.1.8 */
-
-{
-  opacity: 0
-}
-
-.color-picker-btn {
-  overflow: initial;
 }
 </style>

@@ -1,16 +1,23 @@
 <template>
     <section class="simple-text">
         <div class="content" :style="cmp.style">
-            <span :contenteditable="isEditMode">{{cmp.data.text1}}</span>
+            <p :contenteditable="isEditMode">{{cmp.data.txtLine1}}</p>
+            <p :contenteditable="isEditMode">{{cmp.data.txtLine2}}</p>
+            <p :contenteditable="isEditMode">{{cmp.data.txtLine3}}</p>
             <br>
-    
-            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
-                <md-icon>edit</md-icon>
-            </md-button>
-    
         </div>
+    
+        <!--edit buttons-->
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+            <md-icon>edit</md-icon>
+        </md-button>
+        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
+            <md-icon>swap_vertical_circle</md-icon>
+        </md-button>
+
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console">
+            <div v-if="isEditMode" class="edit-console" v-draggable>
+                <md-icon class="btn-close">close</md-icon>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
             </div>
@@ -62,56 +69,17 @@ export default {
 
 <style scoped>
 .simple-text {
-    /*transition: all .5s;*/
     position: relative;
-    margin: 15px;
+    margin: 15px 0;
     transition: all .5s;
 }
 
-p {
+.content {
     margin: 0;
     padding: 0;
+    line-height: 20px;
 }
 
-.edit-btn {
-    position: absolute;
-    left: 85%;
-    top: 10%;
-    opacity: 0.2;
-    transition: all .5s;
-}
 
-.edit-btn:hover {
-    opacity: 1;
-    cursor: pointer;
-}
 
-.edit-console {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-content: space-between;
-    /*top: 0;
-    position: absolute;*/
-    background: lightgray;
-    /*width: 25%;
-    z-index: 5;*/
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .5s
-}
-
-.fade-enter,
-.fade-leave-to
-/* .fade-leave-active in <2.1.8 */
-
-{
-    opacity: 0
-}
-
-.color-picker-btn {
-    overflow: initial;
-}
 </style>
