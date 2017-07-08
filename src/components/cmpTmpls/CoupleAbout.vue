@@ -82,7 +82,6 @@ export default {
         deleteCmp() {
             this.isEditMode = false;
             this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-
         },
         enterEditMode() {
             this.isEditMode = !this.isEditMode

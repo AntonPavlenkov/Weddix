@@ -10,6 +10,7 @@
         </md-tab>
         <md-tab md-icon="cloud_upload" md-label="PUBLISH" md-tooltip="Get a direct link">
         </md-tab>
+  
       </md-tabs>
     </header>
   
@@ -23,6 +24,11 @@ export default {
   name: 'GeneralPage',
   computed: {
     pageId() { return this.$store.state.pageEditObj._id }
+  },
+  mounted() {
+    //this elemenmt is not relevant to our app
+    var elTabsContent = document.querySelector('.md-tabs-content')
+    elTabsContent.style.display = 'none';
   },
   methods: {
     changeRoute(tabIdx) {
@@ -46,8 +52,10 @@ export default {
 
 <style scoped lang="scss">
 .navbar {
-  // background-color: #ecf3f3;
+  background-color: #ecf3f3;
 }
+
+
 
 section {
   margin: 0 auto;
@@ -60,9 +68,7 @@ section {
   top: 25px;
   font-family: 'Rouge Script', cursive;
   font-size: 55px;
-  font-weight: 900;
-  // letter-spacing: 0.1em;
+  font-weight: 900; // letter-spacing: 0.1em;
   text-shadow: 3px 3px 8px rgba(64, 117, 159, 1);
 }
-
 </style>
