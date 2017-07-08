@@ -2,25 +2,25 @@ const urlCmp = 'http://localhost:3003/data/cmp';
 const urlPage = 'http://localhost:3003/data/pageEdit';
 import axios from 'axios';
 
-//var to allow quick access to Lorem
-var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repellat quod, illo inventore. Possimus odit officiis ut dolore, nisi sed sunt aliquam ipsa, et eligendi dolores. Iusto hic, commodi labore.';
+//var to allow quick access to Lorem string
+var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repellat quod, illo inventore. Possimus odit officii';
 
 //these are the cmps templates, with some default data
 const tmplCmps = [
     {
         type: 'SimpleText',
-        data: { text1: 'Simple Text - PLACEHOLDER' },
-        style: { backgroundColor: 'grey', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+        data: { text1: 'Come join us on our happy day' },
+        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' }
     },
     {
         type: 'SimpleTitle',
-        data: { text1: 'Simple Title - PLACEHOLDER' },
-        style: { backgroundColor: 'grey', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+        data: { mainTitle: 'Gal and Guy' , subTitle:'Are getting married'},
+        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Rouge script', fontSize: '30px' }
     },
     {
         type: 'LocationMap',
         data: { position: { lat: 32.087893, lng: 34.803038 }, address: { line1: 'Line1', line2: 'Line2', line3: 'Line3' } },
-        style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+        style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' }
     },
     {
         type: 'ImgCarousel',
@@ -32,12 +32,12 @@ const tmplCmps = [
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF6McM2IpYI2U6nn-mFORZF4FZLpZwjsuF448sbcN9PxHRwsrLpg"
             ]
         },
-        style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+        style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' }
     },
     {
         type: 'CoupleAbout',
         data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', mainImgUrl: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'http://www.cornwallminingalliance.org/wp-content/uploads/2016/04/Placeholder-male-10.jpg' },
-        style: { backgroundColor: "white", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
+        style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' }
     }
 ];
 

@@ -4,7 +4,7 @@
     <span class="welcome-message"><p>Create a Stunning</p>
       <p> Digital Wedding</p>
       <p>Invitation </p>
-    <md-button @click="$router.push('/edit')" class="md-raised md-primary">Get Started!</md-button>
+    <md-button @click="$router.push('/page/edit')" class="md-raised md-primary">Get Started!</md-button>
       
       
       </span>

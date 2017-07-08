@@ -33,7 +33,6 @@ export default {
   watch: {
     position: {
       handler: function (newPosition) {
-        console.log('watcher')
         this.center = newPosition;
         this.zoom = ZOOM_CLOSE;
       },

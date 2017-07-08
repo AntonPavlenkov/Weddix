@@ -13,73 +13,23 @@
                     <md-tooltip md-direction="top">Take me there!</md-tooltip>
                 </md-button>
             </div>
-    
         </div>
-    
-        <!-- edit button-->
-        <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode" v-if="isEditable">
-            <md-icon>edit</md-icon>
-        </md-button>
-        <transition name="fade">
-            <div v-if="isEditMode" class="edit-console">
-                <map-toolbar :cmp="cmp" @update="updateCmp"></map-toolbar>
-                <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
-                <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-    
-            </div>
-        </transition>
     </section>
 </template>
 
 <script>
-import MapCmp from './MapCmp'
-import MapToolbar from '../toolbars/MapToolbar'
-import TxtToolbar from '../toolbars/TxtToolbar'
-import GeneralEdit from '../toolbars/generalEditToolbar'
-
-const ZOOM_CLOSE = 18;
+import MapCmp from '../cmpTmpls/MapCmp'
 
 export default {
     name: 'LocationMap',
-    props: ['cmp', 'isFirst', 'isLast', 'isEditable'],
+    props: ['cmp'],
     components: {
-        TxtToolbar,
-        GeneralEdit,
         MapCmp,
-        MapToolbar
-    },
-    data() {
-        return {
-            isEditMode: false,
-            color: "",
-
-        }
     },
     computed: {
-        cmpToEdit() {
-            return JSON.parse(JSON.stringify(this.cmp))
-        },
         position() {
             return this.cmp.data.position
-        },
-    },
-    methods: {
-        moveCmp(isUp) {
-            this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
-        },
-        deleteCmp() {
-            this.isEditMode = false;
-            this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-        },
-        enterEditMode() {
-            this.isEditMode = !this.isEditMode
-        },
-        updateCmp(updatedCmp) {
-            this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
-        },
-        updateColor: function (event) {
-            this.color = event.color;
-        },
+        }
     }
 }
 </script>

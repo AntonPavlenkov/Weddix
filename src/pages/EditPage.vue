@@ -1,8 +1,37 @@
 <template>
   <section>
+  
+    <!--what is this for??? can be deleted?-->
+    <md-dialog md-open-from="#fab" md-close-to="#fab" ref="dialog2">
+      <md-dialog-title>Create new note</md-dialog-title>
+      <md-dialog-content>
+        <form>
+          <md-input-container>
+            <label>Note</label>
+            <md-textarea></md-textarea>
+          </md-input-container>
+        </form>
+      </md-dialog-content>
+    </md-dialog>
+  
+    <transition-group v-if="cmpsToDisplay" name="list" tag="p">
+      <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
+      </component>
+    </transition-group>
+
+    <div class="btn-holder" v-if="isLoading">
+      <md-spinner md-indeterminate class="btn-holder"></md-spinner>
+    </div>
+
+    <div class="btn-holder">  
+      <md-button class="md-icon-button md-raised md-primary" id="custom" @click="openDialog('addDialog')">
+        <md-icon>add</md-icon>
+      </md-button>
+    </div>
+
+    <!--new component modal-->
     <md-dialog md-open-from="#custom" md-close-to="#custom" ref="addDialog">
       <md-dialog-title>Choose new component</md-dialog-title>
-  
       <md-dialog-content>
         <ul class="catalogue">
           <li v-for="(cmp, idx) in tmplCmps" :key="idx">
@@ -15,38 +44,11 @@
           </li>
         </ul>
       </md-dialog-content>
-  
       <md-dialog-actions>
         <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
         <md-button class="md-primary" @click="addNewCmp">Add</md-button>
       </md-dialog-actions>
     </md-dialog>
-  
-    <md-dialog md-open-from="#fab" md-close-to="#fab" ref="dialog2">
-      <md-dialog-title>Create new note</md-dialog-title>
-      <md-dialog-content>
-        <form>
-          <md-input-container>
-            <label>Note</label>
-            <md-textarea></md-textarea>
-          </md-input-container>
-        </form>
-      </md-dialog-content>
-    </md-dialog>
-    <transition-group v-if="cmpsToDisplay" name="list" tag="p">
-  
-      <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
-      </component>
-    </transition-group>
-    <div class="btn-holder" v-if="isLoading">
-      <md-spinner md-indeterminate class="btn-holder"></md-spinner>
-    </div>
-    <div class="btn-holder">
-      <md-button class="md-icon-button md-raised md-primary" id="custom" @click="openDialog('addDialog')">
-        <md-icon>add</md-icon>
-      </md-button>
-    </div>
-  
   </section>
 </template>
 
@@ -74,7 +76,7 @@ export default {
     return {
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null,
-      
+
     }
   },
   computed: {
@@ -84,7 +86,7 @@ export default {
     lastIdxCmps() {
       return this.cmpsToDisplay.length - 1;
     },
-    isLoading(){
+    isLoading() {
       return this.$store.getters.isLoading;
     },
 
@@ -102,12 +104,6 @@ export default {
     closeDialog(ref) {
       this.$refs[ref].close();
     },
-    // onOpen() {
-    //   console.log('Opened');
-    // },
-    // onClose(type) {
-    //   console.log('Closed', type);
-    // }
   },
 
 }
@@ -116,7 +112,7 @@ export default {
 
 <style scoped style lang="scss">
 section {
-  width: 90%;
+  // width: 90%;
   margin: 0 auto;
 }
 
@@ -125,7 +121,7 @@ div :hover {
 }
 
 .btn-holder {
-  margin-top: 10px;
+  margin: 10px auto;
   text-align: center;
 }
 
