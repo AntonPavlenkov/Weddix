@@ -49,6 +49,7 @@ export default {
 }
 
 .about-details {
+  align-self: center;
   display: flex;
   flex-flow: row wrap;
 }

@@ -1,6 +1,6 @@
 <template>
     <section class="count-down" :style="cmp.style">
-        <div class="content" :style="cmp.style">
+        <div class="content" >
         <div class="clock"></div>
 	<div class="message"></div>
         
@@ -11,8 +11,8 @@
     
         </div>
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console">
-            <datepicker :value="date"></datepicker>
+            <div v-if="isEditMode" class="edit-console" v-draggable>
+            <datepicker :disabled="disabled" v-on:selected="setTimer" v-model="date"></datepicker>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
             </div>
         </transition>
@@ -26,6 +26,7 @@ import GeneralEdit from '../toolbars/generalEditToolbar'
 import flipclock from '../../assets/Clock/flipclock.min.js'
 import  '../../assets/Clock/flipclock.css'
 import Datepicker from 'vuejs-datepicker';
+// import moment from 'moment'
 var clock; 
 		
 export default {
@@ -33,19 +34,20 @@ export default {
     props: ['cmp', 'isFirst', 'isLast'],
     components: {
         GeneralEdit,
-        Datepicker
+        Datepicker,
         
     },
     mounted(){
         this.clockInit()
-        this.clockStart()
-       
     },
     data() {
         return {
             isEditMode: false,
             color: "",
-            date: new Date(2016, 9,  16)
+            date: new Date(),
+            setDate: null,
+            disabled: {
+            to: new Date()}
 
 
         }
@@ -75,15 +77,22 @@ export default {
 		        autoStart: false,
 		        callbacks: {
 		        	stop: function() {
-		        		$('.message').html('The clock has stopped!')
+		        		// $('.message').html('The clock has stopped!')
 		        	}
 		        }
 		    });
         },
         clockStart(){
-            clock.setTime(2000000);
+            clock.setTime(this.setDate);
 		    clock.setCountdown(true);
 		    clock.start();
+        },
+        setTimer(time){
+            let date = new Date;
+            this.setDate = (date.setTime(time) - Date.now())/1000
+            this.clockStart()
+            console.log(time, date.setTime(time), this.setDate)
+            
         }
     }
 }
@@ -122,17 +131,7 @@ p{
     cursor: pointer;
 }
 
-.edit-console {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-content: space-between;
-    /*top: 0;
-    position: absolute;*/
-    background: lightgray;
-    /*width: 25%;
-    z-index: 5;*/
-}
+
 
 .fade-enter-active,
 .fade-leave-active {

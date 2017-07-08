@@ -66,6 +66,7 @@ import LocationMap from '../components/cmpTmpls/LocationMap'
 import ImgCarousel from '../components/cmpTmpls/ImgCarousel'
 import CoupleAbout from '../components/cmpTmpls/CoupleAbout'
 import CountDown from '../components/cmpTmpls/CountDown'
+// import CountDown from '../components/cmpTmpls/CountDown'
 export default {
   name: 'EditPage',
   components: {
@@ -74,7 +75,8 @@ export default {
     LocationMap,
     ImgCarousel,
     CoupleAbout,
-    draggable
+    draggable,
+    CountDown
   },
   created() {
     console.log('edit page: Loading data from store');
