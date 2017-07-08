@@ -2,9 +2,9 @@
     <section class="simple-title">
         <div class="content" :style="cmp.style">
             <!--<p :contenteditable="isEditMode" class="main-title" @click="modifyDragMode(true)" @blur="modifyDragMode(false)">{{cmp.data.mainTitle}}</p>-->
-            <p :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
+            <p @blur="updateText('mainTitle')" :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
             <!--<p :contenteditable="isEditMode" class="sub-title"  @click="modifyDragMode(true)" @blur="modifyDragMode(false)"> {{cmp.data.subTitle}} </p>-->
-            <p :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
+            <p @blur="updateText('subTitle')" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
     
         <!--edit buttons-->
@@ -59,6 +59,10 @@ export default {
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
+        updateText(dataItem) {
+            this.cmpToEdit.data[dataItem] = event.target.innerText;
+            this.updateCmp(this.cmpToEdit);
+        },
         // modifyDragMode(newMode) {
         //     if (this.isEditMode) {
         //         console.log('inside')
@@ -81,6 +85,7 @@ export default {
     margin-top: 30px;
     transition: all .5s;
     margin: 0;
+    padding: 30px;
 }
 
 p {
@@ -88,6 +93,17 @@ p {
     padding: 0;
     line-height: 70px;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0
+}
+
 
 
 /*.main-title {
@@ -97,6 +113,4 @@ p {
 .sub-title {
     font-size: 35px;
 }*/
-
-
 </style>

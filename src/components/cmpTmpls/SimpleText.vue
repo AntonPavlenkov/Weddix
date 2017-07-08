@@ -1,23 +1,29 @@
 <template>
-    <section class="simple-text">
-        <div class="content" :style="cmp.style">
-            <p :contenteditable="isEditMode">{{cmp.data.txtLine1}}</p>
-            <p :contenteditable="isEditMode">{{cmp.data.txtLine2}}</p>
-            <p :contenteditable="isEditMode">{{cmp.data.txtLine3}}</p>
+    <section class="simple-text":style="cmp.style">
+        <div class="content" >
+            <p @blur="updateText('txtLine1')" :contenteditable="isEditMode">{{cmp.data.txtLine1}}</p>
+            <p @blur="updateText('txtLine2')" :contenteditable="isEditMode">{{cmp.data.txtLine2}}</p>
+            <p @blur="updateText('txtLine3')" :contenteditable="isEditMode">{{cmp.data.txtLine3}}</p>
             <br>
         </div>
     
         <!--edit buttons-->
-        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
             <md-icon>edit</md-icon>
+            <md-tooltip md-direction="top">Edit</md-tooltip>
         </md-button>
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
             <md-icon>swap_vertical_circle</md-icon>
+            <md-tooltip md-direction="top">Reorder</md-tooltip>
         </md-button>
-
+    
         <transition name="fade">
             <div v-if="isEditMode" class="edit-console" v-draggable>
-                <md-icon class="btn-close">close</md-icon>
+                <p>{{cmp.label}}</p>
+                <md-button class="btn-close md-icon-button" @click="toggleEditMode">
+                    <md-icon>close</md-icon>
+                    <md-tooltip md-direction="top">Close</md-tooltip>
+                </md-button>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
             </div>
@@ -38,9 +44,7 @@ export default {
     data() {
         return {
             isEditMode: false,
-            color: ""
-
-
+            color: "",
         }
     },
     computed: {
@@ -56,11 +60,15 @@ export default {
             this.isEditMode = false;
             this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
         },
-        enterEditMode() {
+        toggleEditMode() {
             this.isEditMode = !this.isEditMode
         },
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
+        },
+        updateText(dataItem) {
+            this.cmpToEdit.data[dataItem] = event.target.innerText;
+            this.updateCmp(this.cmpToEdit);
         },
     }
 }
@@ -72,6 +80,7 @@ export default {
     position: relative;
     margin: 15px 0;
     transition: all .5s;
+    padding: 30px;
 }
 
 .content {
@@ -80,6 +89,13 @@ export default {
     line-height: 20px;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s
+}
 
-
+.fade-enter,
+.fade-leave-to {
+    opacity: 0
+}
 </style>

@@ -11,13 +11,13 @@
                 </div>
                 <div class="color-picker__inner">
                     <div class="control" v-bind:style="gradientH">
-                        <input type="range" min="0" max="360" v-model="h" @input="pubilshColor" />
+                        <input type="range" min="0" max="360" v-model="h" @input="pubilshColor" @mousedown.stop />
                     </div>
                     <div class="control" v-bind:style="gradientS">
-                        <input type="range" min="0" max="100" v-model="s" @input="pubilshColor" />
+                        <input type="range" min="0" max="100" v-model="s" @input="pubilshColor" @mousedown.stop />
                     </div>
                     <div class="control" v-bind:style="gradientL">
-                        <input type="range" min="0" max="100" v-model="l" @input="pubilshColor" />
+                        <input type="range" min="0" max="100" v-model="l" @input="pubilshColor" @mousedown.stop />
                     </div>
                 </div>
             </div>
@@ -149,7 +149,7 @@ export default {
         },
         pubilshColor() {
             this.$emit('changeColor', this.color)
-        }
+        },
     },
 
     mounted: function () {

@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 .map-cmp {
-  width: 30%;
+  width: 50%;
   margin: 0 20px;
   box-shadow: 8px 9px 55px -7px rgba(0,0,0,0.67);
   border: solid 1px #E5E9F2;
