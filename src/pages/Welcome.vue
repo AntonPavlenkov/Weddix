@@ -62,16 +62,19 @@ section {
 
 .welcome-message {
   font-size: 3em;
-  font-family: cursive;
-  font-weight: 1000;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 900;
+  line-height: 1em;
+  letter-spacing: 0.1em;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
   align-content: center;
+  text-shadow: 4px 4px 8px rgba(154, 150, 150, 1);
 }
 
 .md-raised {
-  margin: 20px;
+  margin: 40px;
 }
 
 span {

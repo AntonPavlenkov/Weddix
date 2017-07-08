@@ -40,7 +40,7 @@ Vue.directive('draggable', {
       document.removeEventListener('mouseup', mouseup);
     }
 
-    el.addEventListener('mousedown', function(e) {
+    el.addEventListener('mousedown', function (e) {
       startX = el.offsetLeft;
       startY = el.offsetTop;
       initialMouseX = e.clientX;
