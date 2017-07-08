@@ -18,9 +18,9 @@
       </md-dialog-actions>
     </md-dialog>
   
-    <draggable :list="cmpsToDisplay" @end="onEnd" :options="{draggable:'section',disabled:dragMode}">
+    <draggable :list="cmpsToDisplay" @end="onEnd" :options="{draggable:'section', handle:'.btn-dragndrop'}">
       <transition-group name="cmps" tag="p">
-        <component @changeDragMode="changeDragMode" v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isEditable="true" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
+        <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
         </component>
       </transition-group>
     </draggable>
@@ -37,29 +37,29 @@
   
     <!--new component modal-->
     <!--<md-dialog md-open-from="#custom" md-close-to="#custom" ref="addDialog">
-          <md-dialog-title>Choose new component</md-dialog-title>
-          <md-dialog-content>
-            <ul class="catalogue">
-              <li v-for="(cmp, idx) in tmplCmps" :key="idx">
-                <md-radio v-model="newCmpType" :md-value="cmp.type" :isEditMode="false">
-                </md-radio>
-                <div class="content-container">
-                  <h3>{{cmp.type}}</h3>
-                  <component v-bind:is="cmp.type" :cmp="cmp"></component>
-                </div>
-              </li>
-            </ul>
-          </md-dialog-content>
-          <md-dialog-actions>
-            <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
-            <md-button class="md-primary" @click="addNewCmp">Add</md-button>
-          </md-dialog-actions>
-        </md-dialog>-->
+              <md-dialog-title>Choose new component</md-dialog-title>
+              <md-dialog-content>
+                <ul class="catalogue">
+                  <li v-for="(cmp, idx) in tmplCmps" :key="idx">
+                    <md-radio v-model="newCmpType" :md-value="cmp.type" :isEditMode="false">
+                    </md-radio>
+                    <div class="content-container">
+                      <h3>{{cmp.type}}</h3>
+                      <component v-bind:is="cmp.type" :cmp="cmp"></component>
+                    </div>
+                  </li>
+                </ul>
+              </md-dialog-content>
+              <md-dialog-actions>
+                <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
+                <md-button class="md-primary" @click="addNewCmp">Add</md-button>
+              </md-dialog-actions>
+            </md-dialog>-->
   </section>
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
+import draggable from 'vuedraggable'
 import SimpleText from '../components/cmpTmpls/SimpleText'
 import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
 import LocationMap from '../components/cmpTmpls/LocationMap'
@@ -86,7 +86,7 @@ export default {
     return {
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null,
-      dragMode: false
+      // dragMode: false
     }
   },
   computed: {
@@ -119,10 +119,10 @@ export default {
       var oldIndex = ev.oldIndex;
       this.$store.dispatch({ type: 'dragCmp', newIndex, oldIndex })
     },
-    changeDragMode(newMode) {
-      this.dragMode = newMode;
-      console.log(newMode)
-    }
+    // changeDragMode(newMode) {
+    //   this.dragMode = newMode;
+    //   console.log(newMode)
+    // }
 
   },
 
@@ -130,14 +130,11 @@ export default {
 </script>
 
 
-<style scoped style lang="scss">
+<style style lang="scss">
 .edit-page {
   min-height: 100vh;
 }
 
-// div :hover {
-//   display: fixed;
-// }
 .preview {
   cursor: pointer;
 }
@@ -175,6 +172,63 @@ export default {
   }
 }
 
+.btn-modify {
+  position: absolute;
+  opacity: 0.2;
+  transition: all .5s;
+  right: 5%;
+}
+
+.btn-modify:hover {
+  opacity: 1;
+}
+
+.btn-edit {
+  top: 10px;
+}
+
+.btn-modify:hover {
+  cursor: pointer;
+}
+
+.btn-dragndrop {
+  top: 60px;
+}
+
+.btn-dragndrop:hover {
+  cursor: move;
+}
+
+.edit-console {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  padding: 5px;
+  position: absolute;
+  width: 300px;
+  border: 1px solid lightgrey;
+  top: 10%;
+  right: 10%;
+  background-color: white;
+  opacity: 0.9;
+  box-shadow: 8px 9px 55px -7px rgba(0, 0, 0, 0.67);
+  border-radius: 5px;
+  cursor: move;
+  p {
+    width: 100%;
+    text-align: center;
+    background-color: #f9d8ce;
+    font-size: 16px;
+  }
+  .btn-close {
+    position: absolute;
+    top:10px;
+    right: 0;
+    cursor: pointer;
+  }
+}
 
 .list-enter-active,
 .list-leave-active {

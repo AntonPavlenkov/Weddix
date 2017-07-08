@@ -101,7 +101,7 @@ export default {
     changeCssProperty(prop, val) {
       this.cmpStyleEdit.style[prop] = val;
       this.$emit('update', this.cmpStyleEdit)
-    }
+    },
   }
 }
 </script>
