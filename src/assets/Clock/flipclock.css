@@ -79,7 +79,7 @@
 
 .flip-clock-wrapper ul li {
   z-index: 1;
-  position: absolute;
+  position: initial;
   left: 0;
   top: 0;
   width: 100%;
@@ -92,7 +92,7 @@
   z-index: 2; }
 
 .flip-clock-wrapper ul li a {
-  display: block;
+  display: initial;
   height: 100%;
   -webkit-perspective: 200px;
   -moz-perspective: 200px;

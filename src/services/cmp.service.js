@@ -50,8 +50,8 @@ const tmplCmps = [
     },
     {
         type: 'CountDown',
-        data: { mainTitle: 'Gal and Guy' , subTitle:'Are getting married'},
-        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Rouge script', fontSize: '30px' },
+        data: { date: ''},
+        style: {backgroundColor: 'white'},
         cmpPreview: 'http://i.imgur.com/rrOX6tM.png'
     },
 ];

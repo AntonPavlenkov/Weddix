@@ -26,7 +26,6 @@ import GeneralEdit from '../toolbars/generalEditToolbar'
 import flipclock from '../../assets/Clock/flipclock.min.js'
 import  '../../assets/Clock/flipclock.css'
 import Datepicker from 'vuejs-datepicker';
-// import moment from 'moment'
 var clock; 
 		
 export default {
@@ -37,8 +36,11 @@ export default {
         Datepicker,
         
     },
+    created(){
+    },
     mounted(){
         this.clockInit()
+        this.setTimer(this.cmpToEdit.data.date)
     },
     data() {
         return {
@@ -48,8 +50,6 @@ export default {
             setDate: null,
             disabled: {
             to: new Date()}
-
-
         }
     },
     computed: {
@@ -89,9 +89,11 @@ export default {
         },
         setTimer(time){
             let date = new Date;
+            if(!time) return
+            this.cmpToEdit.data.date = date.setTime(time);
             this.setDate = (date.setTime(time) - Date.now())/1000
             this.clockStart()
-            console.log(time, date.setTime(time), this.setDate)
+            this.updateCmp(this.cmpToEdit)
             
         }
     }
@@ -110,8 +112,18 @@ export default {
     width: 100%;
 }
 .clock{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    justify-content: center;
     margin: 5em 0;
     width: 100%;
+}
+section.count-down.cmps-enter-to > li.flip-clock-before{
+    position: initial;
+}
+.flip-clock-wrapper ul li a {
+    display: initial;
 }
 p{
     margin: 0;
