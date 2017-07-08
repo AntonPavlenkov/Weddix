@@ -84,7 +84,7 @@ export default {
     return {
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null,
-      dragMode:false
+      dragMode: false
     }
   },
   computed: {
