@@ -9,6 +9,7 @@ var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit
 const tmplCmps = [
     {
         type: 'SimpleText',
+        label:'Informative Section',
         data: { 
             txtLine1: 'Come join us on our happy day',
             txtLine2: 'We\'ll meet on 7pm for light dinner' ,
@@ -18,17 +19,20 @@ const tmplCmps = [
     },
     {
         type: 'SimpleTitle',
+        label:'Title (Textual)',
         data: { mainTitle: 'Gal and Guy' , subTitle:'Are getting married'},
         style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Rouge script', fontSize: '30px' }
     },
     {
         type: 'LocationMap',
-        data: { position: { lat: 32.087893, lng: 34.803038 }, address: { line1: 'Line1', line2: 'Line2', line3: 'Line3' } },
+        label:'Location',
+        data: { position: { lat: null, lng: null }, address: { line1: 'HaShaked Garden', line2: 'Egozi 4', line3: 'Ramat Gina' } },
         style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
         cmpPreview: 'http://i.imgur.com/owR4CHf.png'
     },
     {
         type: 'ImgCarousel',
+        label:'Changing Images',
         data: {
             imgUrls: [
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5HZTy2RjjHZcdM7yTCEfkDvwT6-GzlpA7R74GnbXkaqgfyiB5",
@@ -42,6 +46,7 @@ const tmplCmps = [
     },
     {
         type: 'CoupleAbout',
+        label:'Introduction',
         data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', mainImgUrl: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'http://www.cornwallminingalliance.org/wp-content/uploads/2016/04/Placeholder-male-10.jpg' },
         style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
         cmpPreview: 'http://i.imgur.com/z6MJtQZ.png'

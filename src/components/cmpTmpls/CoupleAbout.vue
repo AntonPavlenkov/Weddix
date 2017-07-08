@@ -104,13 +104,7 @@ export default {
         updateColor: function (event) {
             this.color = event.color;
         },
-        // modifyDragMode(newMode) {
-        //     this.$emit('changeDragMode', newMode)
-        // }
-
-
     }
-
 }
 </script>
 
@@ -169,5 +163,15 @@ export default {
 
 .main-img {
     border-radius: 50%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
 }
 </style>
