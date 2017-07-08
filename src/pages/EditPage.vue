@@ -143,6 +143,9 @@ export default {
   margin: 0 auto;
   width: 70%;
 }
+.dialog:focus{
+  outline: none;
+}
 .md-dialog {
   text-align: center;
   .catalogue {

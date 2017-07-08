@@ -3,19 +3,21 @@ const urlPage = 'http://localhost:3003/data/pageEdit';
 import axios from 'axios';
 
 //var to allow quick access to Lorem string
-var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repellat quod, illo inventore. Possimus odit officii';
+var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, incidunt a delectus, ut saepe accusamus assumenda optio sapiente molestiae. Labore, vel rerum delectus harum quod sint distinctio earum laborum. Illum?';
 
 //these are the cmps templates, with some default data
 const tmplCmps = [
     {
         type: 'SimpleText',
         data: { text1: 'Come join us on our happy day' },
-        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' }
+        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
+        cmpPreview: 'http://i.imgur.com/CzBQKi4.png'
     },
     {
         type: 'SimpleTitle',
         data: { mainTitle: 'Gal and Guy' , subTitle:'Are getting married'},
-        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Rouge script', fontSize: '30px' }
+        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Rouge script', fontSize: '30px' },
+        cmpPreview: 'http://i.imgur.com/hPmUK91.png'
     },
     {
         type: 'LocationMap',
@@ -38,7 +40,7 @@ const tmplCmps = [
     },
     {
         type: 'CoupleAbout',
-        data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', mainImgUrl: 'http://ira-realty.com/wp-content/uploads/2015/11/female-placeholder.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'http://www.cornwallminingalliance.org/wp-content/uploads/2016/04/Placeholder-male-10.jpg' },
+        data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'https://wpclipart.com/holiday/wedding/bride_groom/bride_vale_flowers.png', mainImgUrl: 'https://www.shareicon.net/download/2016/05/25/770451_people_512x512.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'http://pngimg.com/uploads/groom/groom_PNG19603.png' },
         style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
         cmpPreview: 'http://i.imgur.com/z6MJtQZ.png'
     }
