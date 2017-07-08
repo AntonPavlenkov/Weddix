@@ -1,11 +1,10 @@
 <template>
     <section class="simple-text">
         <div class="content" :style="cmp.style">
-            <span :contenteditable="isEditable">{{cmp.data.text_1}}</span>
+            <span :contenteditable="isEditMode">{{cmp.data.text1}}</span>
             <br>
-            <span :contenteditable="isEditable"> Hello world </span>
     
-            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode" v-if="isEditable">
+            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
                 <md-icon>edit</md-icon>
             </md-button>
     
@@ -24,7 +23,7 @@ import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 export default {
     name: 'SimpleText',
-    props: ['cmp', 'isFirst', 'isLast', 'isEditable'],
+    props: ['cmp', 'isFirst', 'isLast'],
     components: {
         TxtToolbar,
         GeneralEdit
@@ -37,8 +36,8 @@ export default {
 
         }
     },
-    computed:{
-        cmpToEdit(){
+    computed: {
+        cmpToEdit() {
             return JSON.parse(JSON.stringify(this.cmp))
         }
     },
@@ -49,7 +48,6 @@ export default {
         deleteCmp() {
             this.isEditMode = false;
             this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-
         },
         enterEditMode() {
             this.isEditMode = !this.isEditMode
@@ -57,24 +55,7 @@ export default {
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
-        // changeCssProperty(prop, val) {
-        //     this.cmpToEdit.style[prop] = val;
-        //     this.updateCmp(this.cmpToEdit)
-        // },
-        updateColor: function (event) {
-            this.color = event.color;
-        }
-
     }
-    //   watch:{
-    //       cmpToEdit: {
-    //         handler: function(newValue) {
-    //             console.log('in handler');
-    //             this.$store.dispatch({type:"updateCmp", cmp:this.cmpToEdit})
-    //         },
-    //         deep: true           
-    //       }
-    //   }
 }
 </script>
 
@@ -83,13 +64,8 @@ export default {
 .simple-text {
     /*transition: all .5s;*/
     position: relative;
-    width: 100%;
-    margin-top: 5px;
+    margin: 15px;
     transition: all .5s;
-}
-
-.content {
-    height: 100px;
 }
 
 p {
@@ -100,6 +76,7 @@ p {
 .edit-btn {
     position: absolute;
     left: 85%;
+    top: 10%;
     opacity: 0.2;
     transition: all .5s;
 }

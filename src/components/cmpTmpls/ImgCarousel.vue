@@ -7,7 +7,7 @@
           <img :src="imgUrl" style='height: 100%; width: 100%;'>
         </slide>
       </carousel-3d>
-      <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode" v-if="isEditable">
+      <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
         <md-icon>edit</md-icon>
       </md-button>
   
@@ -37,7 +37,7 @@ import GeneralEdit from '../toolbars/generalEditToolbar'
 import { Carousel3d, Slide } from 'vue-carousel-3d';
 export default {
   name: 'img-carousel',
-  props: ['cmp', 'isFirst', 'isLast', 'isEditable'],
+  props: ['cmp', 'isFirst', 'isLast'],
   data() {
     return {
       isEditMode: false
@@ -66,10 +66,6 @@ export default {
     updateCmp(updatedCmp) {
       this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
     },
-    // changeCssProperty(prop, val) {
-    //     this.cmpToEdit.style[prop] = val;
-    //     this.updateCmp(this.cmpToEdit)
-    // },
     updateColor: function (event) {
       this.color = event.color;
     },

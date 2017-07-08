@@ -8,17 +8,20 @@
       <br>
       <span>Invitation </span>
       <br>
-      <md-button @click="$router.push('/edit')" class="md-raised md-primary">Get Started!</md-button>
+      <md-button @click="$router.push('/page/edit')" class="md-raised md-primary">Get Started!</md-button>
   
     </div>
-  
+  <!--<main-footer></main-footer>-->
   </section>
 </template>
 
 <script>
+import MainFooter from './MainFooter'
 export default {
   name: 'Welcome',
-
+  components:{
+    MainFooter
+  },
   data() {
     return {
 

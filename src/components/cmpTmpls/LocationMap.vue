@@ -17,15 +17,14 @@
         </div>
     
         <!-- edit button-->
-        <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode" v-if="isEditable">
+        <md-button class="edit-btn md-fab md-mini md-warn" @click="enterEditMode">
             <md-icon>edit</md-icon>
         </md-button>
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console">
+            <div v-if="isEditMode" class="edit-console" v-draggable>
                 <map-toolbar :cmp="cmp" @update="updateCmp"></map-toolbar>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-    
             </div>
         </transition>
     </section>
@@ -41,7 +40,7 @@ const ZOOM_CLOSE = 18;
 
 export default {
     name: 'LocationMap',
-    props: ['cmp', 'isFirst', 'isLast', 'isEditable'],
+    props: ['cmp', 'isFirst', 'isLast'],
     components: {
         TxtToolbar,
         GeneralEdit,
@@ -85,7 +84,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 .location-map {
     transition: all .5s;
     box-sizing: border-box;
@@ -128,7 +127,17 @@ p {
     flex-flow: row wrap;
     justify-content: center;
     align-content: space-between;
-    /*background: lightgray;*/
+
+    position: absolute;
+    width: 200px;
+    border: 1px solid black;
+    top: 10%;
+    right: 0;
+    background-color: white;
+    opacity: 0.9;
+    box-shadow: 0px 0px 26px 1px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+
 }
 
 .fade-enter-active,

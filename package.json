@@ -6,11 +6,14 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "start": "node build/dev-server.js",
+    "node-server": "node node_server/server-full.js",
+    "start": "npm-run-all --parallel dev node-server",
     "build": "node build/build.js"
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "lodash": "^4.17.4",
+    "npm-run-all": "^4.0.2",
     "vue": "^2.3.3",
     "vue-carousel-3d": "^0.1.18",
     "vue-color": "^2.2.0",
@@ -18,6 +21,7 @@
     "vue-material": "^0.7.4",
     "vue-router": "^2.3.1",
     "vue2-google-maps": "^0.7.9",
+    "vuedraggable": "^2.14.1",
     "vuex": "^2.3.1"
   },
   "devDependencies": {

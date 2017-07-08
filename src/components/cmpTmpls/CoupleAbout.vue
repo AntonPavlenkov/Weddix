@@ -1,7 +1,6 @@
 <template>
     <section class="couple-about">
         <div class="content" :style="cmp.style">
-            <!--<span :contenteditable="isEditable" >Thursday - 31 OCTOBER 2013</span>-->
             <div class="about-1">
                 <span @blur="updateText('aboutName1')" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>
                 <img @click="updateUrl('aboutImgUrl1')" :src="cmp.data.aboutImgUrl1" class="about-1-img" width="100px" height="200px">
@@ -15,7 +14,7 @@
                 <img @click="updateUrl('aboutImgUrl2')" :src="cmp.data.aboutImgUrl2" class="about-2-img" width="100px" height="200px">
                 <span @blur="updateText('aboutInfo2')" :style="cmp.style" :contenteditable="isEditMode" class="about-2-info">{{cmp.data.aboutInfo2}}</span>
             </div>
-            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode" v-if="isEditable">
+            <md-button class="md-fab edit-btn md-mini md-warn" @click="enterEditMode">
                 <md-icon>edit</md-icon>
             </md-button>
     
@@ -41,7 +40,7 @@ import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 export default {
     name: 'CoupleAbout',
-    props: ['cmp', 'isFirst', 'isLast', 'isEditable'],
+    props: ['cmp', 'isFirst', 'isLast'],
     components: {
         TxtToolbar,
         GeneralEdit
@@ -83,7 +82,6 @@ export default {
         deleteCmp() {
             this.isEditMode = false;
             this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-
         },
         enterEditMode() {
             this.isEditMode = !this.isEditMode

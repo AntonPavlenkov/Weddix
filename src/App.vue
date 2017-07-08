@@ -1,21 +1,14 @@
 <template>
   <div id="app">
-    <header>
-      <span @click="changeRoute('/')" class="home"><h1> Weddix </h1></span>
-      <md-bottom-bar>
-        <md-bottom-bar-item md-icon="mode_edit" @click="changeRoute('/edit')" md-active>Edit</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="favorite" @click="changeRoute('/publish')">Publish</md-bottom-bar-item>
-      </md-bottom-bar>
-    </header>
     <main>
      
       <router-view>
       </router-view>
       
     </main>
-    <MainFooter> 
+    <!--<MainFooter> 
       
-    </MainFooter>
+    </MainFooter>-->
   </div>
 </template>
 

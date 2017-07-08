@@ -1,11 +1,8 @@
 <template>
   <section>
-    <!--<h2>PUBLISH</h2>-->
-    <div class="btn-holder" v-if="isLoading">
-      <md-spinner md-indeterminate class="btn-holder"></md-spinner>
-    </div>
+    <!--<h2>PREVIEW</h2>-->
     <component v-if="cmpsToDisplay" v-for="cmp in cmpsToDisplay" v-bind:is="'Dumb'+cmp.type" :key="cmp.type" :cmp="cmp">
-    </component>
+      </component>
   
   </section>
 </template>
@@ -27,23 +24,14 @@ export default {
   },
   data() {
     return {
-      isLoading: true
     }
-  },
-  created() {
-    console.log('publish page: Loading data from store');
-    this.$store.dispatch({ type: 'loadCmp' })
-    this.$store.dispatch({ type: 'loadPageEditObj' })
   },
   computed: {
     cmpsToDisplay() {
-      var cmps = this.$store.getters.cmpsToDisplay;
-      if (cmps) {
-        this.isLoading = false;
-      }
-      return cmps;
+      return this.$store.getters.cmpsToDisplay;
     },
   },
+
 }
 </script>
 
@@ -53,9 +41,4 @@ section {
   /*width: 90%;*/
   margin: 0 auto;
 }
-.btn-holder {
-  margin-top: 10px;
-  text-align: center;
-}
-
 </style>

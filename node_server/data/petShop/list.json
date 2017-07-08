@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Big bone",
+    "price": 15,
+    "_id": 0
+  },
+  {
+    "title": "Small Bone",
+    "price": 5.5,
+    "_id": 1
+  },
+  {
+    "title": "Catnip spray",
+    "price": 7,
+    "_id": 2
+  },
+  {
+    "title": "Scratching Post",
+    "price": 80,
+    "_id": 3
+  },
+  {
+    "title": "Dog bed",
+    "price": 150,
+    "_id": 4
+  },
+  {
+    "title": "Cat Food -  Can",
+    "price": 5,
+    "_id": 5
+  },
+  {
+    "title": "Cat Food - Dry 5kg",
+    "price": 25,
+    "_id": 6
+  },
+  {
+    "title": "Dog Food -  Can",
+    "price": 7,
+    "_id": 7
+  },
+  {
+    "title": "Dog Food - Dry 5kg",
+    "price": 45,
+    "_id": 8
+  }
+]
