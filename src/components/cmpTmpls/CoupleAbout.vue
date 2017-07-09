@@ -25,6 +25,7 @@
             <md-icon>swap_vertical_circle</md-icon>
         </md-button>
         <transition name="fade">
+            
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <couple-toolbar v-if="selectedImgType!==''" :cmp="cmp" :selectedImgType="selectedImgType" @update="updateCmp"></couple-toolbar>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
