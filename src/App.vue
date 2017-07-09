@@ -48,16 +48,6 @@ a.router-link-active {
 router-view {
   background-color: #F9FAFC;
 }
-<<<<<<< HEAD
 
 
-=======
-.page-enter-active, .page-leave-active {
-  transition: opacity 1s, transform 1s;
-}
-.page-enter, .page-leave-to {
-  opacity: 0;
-  transform: translateX(-30%);
-}
->>>>>>> origin/master
 </style>
