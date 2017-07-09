@@ -1,13 +1,13 @@
 <template>
-    <section>
+    <section class="couple-form">
         <md-input-container md-clearable class="input-newUrl">
             <label>Enter New Url</label>
             <md-input v-model="url"></md-input>
         </md-input-container>
-        <md-button @click="saveNewUrl"  class="md-fab md-mini md-clean">
+        <md-button @click="saveNewUrl" class="md-fab md-mini md-clean">
             <md-icon>save</md-icon>
+            <md-tooltip md-direction="top">Save</md-tooltip>
         </md-button>
-    
     </section>
 </template>
 <script>
@@ -16,11 +16,11 @@ export default {
     props: ['cmp', 'selectedImgType'],
     data() {
         return {
-             url: this.cmp.data[this.selectedImgType]
+            url: this.cmp.data[this.selectedImgType]
         }
     },
-    created(){
-      
+    created() {
+
     },
     computed: {
         cmpToEdit() {
@@ -36,8 +36,8 @@ export default {
             this.updateCmp(this.cmpToEdit)
         },
     },
-    watch:{
-        selectedImgType(newVal){
+    watch: {
+        selectedImgType(newVal) {
             this.url = this.cmp.data[newVal]
         }
     }
@@ -45,7 +45,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.couple-form{
+    text-align: center;
+}
 </style>
 
 

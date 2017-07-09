@@ -24,8 +24,13 @@
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
             <md-icon>swap_vertical_circle</md-icon>
         </md-button>
+        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
+            <md-icon>delete_forever</md-icon>
+            <md-tooltip md-direction="top">Delete</md-tooltip>
+        </md-button>
+    
         <transition name="fade">
-            
+    
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <couple-toolbar v-if="selectedImgType!==''" :cmp="cmp" :selectedImgType="selectedImgType" @update="updateCmp"></couple-toolbar>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
@@ -47,14 +52,14 @@ export default {
         TxtToolbar,
         GeneralEdit,
         EditConsole,
-        CoupleToolbar        
+        CoupleToolbar
     },
     data() {
         return {
             isEditMode: false,
             // color: "",
             // currUrl: '',
-            selectedImgType:''
+            selectedImgType: ''
         }
     },
     computed: {
@@ -163,29 +168,30 @@ export default {
 
 
 @media (max-width: 650px) {
-   .content {
-    box-sizing: content-box;
-    padding: 5px;;
-    display: flex;
-    flex-flow: column nowrap;
-}
-.main-img-container {
-    width: 100%;
-}
-.about-1,
-.about-2 {
-    width: 100%;
-    text-align: center;
-    line-height: 100%;
-}
+    .content {
+        box-sizing: content-box;
+        padding: 5px;
+        ;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    .main-img-container {
+        width: 100%;
+    }
+    .about-1,
+    .about-2 {
+        width: 100%;
+        text-align: center;
+        line-height: 100%;
+    }
 
-.about-1-img,
-.about-2-img {
-    display: block;
-    border-radius: 0;
+    .about-1-img,
+    .about-2-img {
+        display: block;
+        border-radius: 0;
+    }
+    .main-img {
+        border-radius: 0;
+    }
 }
-.main-img {
-    border-radius: 0;
-}
-  }
 </style>

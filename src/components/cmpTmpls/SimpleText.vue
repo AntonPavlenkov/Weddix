@@ -16,6 +16,10 @@
             <md-icon>swap_vertical_circle</md-icon>
             <md-tooltip md-direction="top">Reorder</md-tooltip>
         </md-button>
+        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
+            <md-icon>delete_forever</md-icon>
+            <md-tooltip md-direction="top">Delete</md-tooltip>
+        </md-button>
     
         <transition name="fade">
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>

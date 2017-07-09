@@ -22,6 +22,11 @@
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
             <md-icon>swap_vertical_circle</md-icon>
         </md-button>
+        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
+            <md-icon>delete_forever</md-icon>
+            <md-tooltip md-direction="top">Delete</md-tooltip>
+        </md-button>
+    
         <transition name="fade">
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <map-toolbar :cmp="cmp" @update="updateCmp"></map-toolbar>
@@ -127,13 +132,9 @@ p {
 }
 
 @media (max-width: 650px) {
-.content {
-    flex-flow: column-reverse nowrap;
-    padding: 5px;
-}
-
-
-
-
+    .content {
+        flex-flow: column-reverse nowrap;
+        padding: 5px;
+    }
 }
 </style>
