@@ -23,7 +23,7 @@
         </div>
     
         <!--edit butttons-->
-        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
             <md-icon>edit</md-icon>
         </md-button>
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
@@ -90,7 +90,7 @@ export default {
             this.isEditMode = false;
             this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
         },
-        enterEditMode() {
+        toggleEditMode() {
             this.isEditMode = !this.isEditMode
         },
         updateText(text) {

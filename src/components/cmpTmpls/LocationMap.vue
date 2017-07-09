@@ -2,7 +2,7 @@
     <section class="location-map">
         <div class="content" :style="cmp.style">
             <!--map cmp-->
-            <map-cmp :position="position"></map-cmp>
+            <map-cmp :position="position" :zoom="zoom"></map-cmp>
             <div class="address">
                 <!--text area-->
                 <h2>{{cmp.data.address.line1}}</h2>
@@ -17,18 +17,18 @@
         </div>
     
         <!-- edit buttons-->
-        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
             <md-icon>edit</md-icon>
         </md-button>
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
             <md-icon>swap_vertical_circle</md-icon>
         </md-button>
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console" v-draggable>
+            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <map-toolbar :cmp="cmp" @update="updateCmp"></map-toolbar>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-            </div>
+            </edit-console>
         </transition>
     </section>
 </template>
@@ -38,6 +38,7 @@ import MapCmp from './MapCmp'
 import MapToolbar from '../toolbars/MapToolbar'
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
+import EditConsole from '../toolbars/EditConsole'
 
 const ZOOM_CLOSE = 18;
 
@@ -48,7 +49,8 @@ export default {
         TxtToolbar,
         GeneralEdit,
         MapCmp,
-        MapToolbar
+        MapToolbar,
+        EditConsole
     },
     data() {
         return {
@@ -63,12 +65,12 @@ export default {
         position() {
             return this.cmp.data.position
         },
+        zoom() {
+            return this.cmp.data.zoom
+        }
     },
 
     methods: {
-        dragStarted(e) {
-            console.log('dragging', e);
-        },
         moveCmp(isUp) {
             this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
         },
@@ -76,7 +78,7 @@ export default {
             this.isEditMode = false;
             this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
         },
-        enterEditMode() {
+        toggleEditMode() {
             this.isEditMode = !this.isEditMode
         },
         updateCmp(updatedCmp) {
@@ -118,12 +120,11 @@ p {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .5s
+    transition: opacity .5s
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0
+    opacity: 0
 }
-
 </style>

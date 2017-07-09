@@ -21,10 +21,9 @@
                     </clipPath>
                 </defs>
             </svg>
-    
         </div>
         <!--edit buttons-->
-        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
             <md-icon>edit</md-icon>
         </md-button>
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
@@ -32,31 +31,11 @@
         </md-button>
     
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console" v-draggable>
-                <md-input-container md-clearable class="input-newUrl">
-                    <label>Url of Img</label>
-                    <md-input v-model="newUrl"></md-input>
-                </md-input-container>
-                <md-button @click="saveNewUrl" class="md-fab md-mini md-clean">
-                    <md-icon>save</md-icon>
-                </md-button>
-    
-                <md-menu md-align-trigger>
-                    <md-button md-menu-trigger class="md-fab md-clean  md-mini">
-                        <md-icon>image</md-icon>
-                        <md-tooltip md-direction="top">Change Main Image Shape</md-tooltip>
-                    </md-button>
-                    <md-menu-content>
-                        <md-menu-item @click="changeImageShape('star')">Star</md-menu-item>
-                        <md-menu-item @click="changeImageShape('hex')">Hexagon</md-menu-item>
-                        <md-menu-item @click="changeImageShape('heart')">Heart</md-menu-item>
-    
-                    </md-menu-content>
-                </md-menu>
-    
+            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
+                <toolbar-img-title :cmp="cmp" @update="updateCmp"></toolbar-img-title>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-            </div>
+            </edit-console>
         </transition>
     
     </section>
@@ -64,12 +43,16 @@
 <script>
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
+import EditConsole from '../toolbars/EditConsole'
+import ToolbarImgTitle from '../toolbars/ToolbarImgTitle'
 export default {
     name: 'ImgTitle',
     props: ['cmp', 'isFirst', 'isLast'],
     components: {
         TxtToolbar,
-        GeneralEdit
+        GeneralEdit,
+        EditConsole,
+        ToolbarImgTitle
     },
     data() {
         return {
@@ -86,23 +69,12 @@ export default {
     },
 
     methods: {
-        updateCmp(updatedCmp, dragModeNew) {
-            // console.log(dragModeNew)
-            // this.modifyDragMode(dragModeNew)
+        updateCmp(updatedCmp) {
+            console.log('updating',updatedCmp)
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
-
         updateText(text) {
             this.cmpToEdit.data[text] = event.target.innerText
-            this.updateCmp(this.cmpToEdit)
-        },
-        updateUrl(url) {
-            this.newUrl = this.cmpToEdit.data[url]
-            this.selectedPicture = url
-        },
-        saveNewUrl() {
-            console.log(this.newUrl)
-            this.cmpToEdit.data.imgUrl = this.newUrl
             this.updateCmp(this.cmpToEdit)
         },
         moveCmp(isUp) {
@@ -112,13 +84,9 @@ export default {
             this.isEditMode = false;
             this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
         },
-        enterEditMode() {
+        toggleEditMode() {
             this.isEditMode = !this.isEditMode
         },
-        changeImageShape(newShape) {
-            this.cmpToEdit.shape = newShape;
-            this.updateCmp(this.cmpToEdit)
-        }
     }
 }
 </script>
