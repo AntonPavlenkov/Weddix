@@ -1,5 +1,6 @@
-const urlCmp = 'http://localhost:3003/data/cmp';
-const urlPage = 'http://localhost:3003/data/pageEdit';
+// const urlCmp = 'http://localhost:3003/data/cmp';
+// const urlPage = 'http://localhost:3003/data/pageEdit';
+const urlUser = 'http://localhost:3003/data/user';
 import axios from 'axios';
 
 //var to allow quick access to Lorem string
@@ -83,67 +84,60 @@ const tmplCmps = [
 // **************************
 //functions to work with server:
 //***************************
-function getCmps() {
-    return axios.get(urlCmp)
-        .then(function (response) {
-            return response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    // ELAD!!!
-    //     cmps = bringDataFromLocal() || hardCoded;
-    //     var copyOfCmps = JSON.parse(JSON.stringify(cmps));
-    //     return Promise.resolve(copyOfCmps);
+
+function createUser(){
+    //need to write this - POST
 }
 
-//not really relevant to this app....
-function getCmp(cmp) {
-    return axios.get(`${urlCmp}/${cmp._id}`)
+function getUser() {
+    return axios.get(urlUser)
         .then(function (response) {
-            return response.data;
+            //we need only the first (and only) user
+            //in the future (when login will be implemented),
+            //this will be replaced by a get with ID
+            return response.data[0];
         })
         .catch(function (error) {
             console.log(error);
         });
 }
 
+// function addCmp(cmpType) {
+//     //find a template that matches by type and send it to server
+//     var newCmp = tmplCmps.find(tmpl => tmpl.type === cmpType)
+//     return axios.post(urlCmp, newCmp)
+//         .then(function (response) {
+//             return response.data;
+//         })
+//         .catch(function (error) {
+//             console.log(error);
+//         });
+// }
 
-function addCmp(cmpType) {
-    //find a template that matches by type and send it to server
-    var newCmp = tmplCmps.find(tmpl => tmpl.type === cmpType)
-    return axios.post(urlCmp, newCmp)
-        .then(function (response) {
-            return response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
+// function deleteCmp(cmp) {
+//     return axios.delete(`${urlCmp}/${cmp._id}`)
+//         .then(function (response) {
+//             return response.data;
+//         })
+//         .catch(function (error) {
+//             console.log(error);
+//         });
+// }
 
-function deleteCmp(cmp) {
-    return axios.delete(`${urlCmp}/${cmp._id}`)
-        .then(function (response) {
-            return response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
+// function updateCmp(cmp) {
+//     console.log('send update to server of:', cmp)
+//     return axios.put(`${urlCmp}/${cmp._id}`, cmp)
+//         .then(function (response) {
+//             return response.data;
+//         })
+//         .catch(function (error) {
+//             console.log(error);
+//         });
+// }
 
-function updateCmp(cmp) {
-    console.log('send update to server of:', cmp)
-    return axios.put(`${urlCmp}/${cmp._id}`, cmp)
-        .then(function (response) {
-            return response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
-function updatePage(pageEdit) {
-    return axios.put(`${urlPage}/${pageEdit._id}`, pageEdit)
+function updateUser(user) {
+    console.log('send update to server of:', user)
+    return axios.put(`${urlUser}/${user._id}`, user)
         .then(function (response) {
             return response.data;
         })
@@ -152,16 +146,6 @@ function updatePage(pageEdit) {
         });
 }
 
-function getPageEdit() {
-    return axios.get(urlPage)
-        .then(function (response) {
-            console.log(response.data)
-            return response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
 
 function saveToStorage(key, any) {
     try {
@@ -186,13 +170,10 @@ function loadFromStorage(key) {
 
 export default {
     tmplCmps,
-    getCmps,
-    getCmp,
-    addCmp,
-    deleteCmp,
-    updateCmp,
-    updatePage,
-    getPageEdit
+    getUser,
+    createUser,
+    updateUser,
+
 }
 
 

@@ -8,133 +8,130 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    user: null,
     selectedCmps: null,
     tmplCmps: cmpService.tmplCmps,
     isEditMode: false,
-    pageEditObj: null,
+    // pageEditObj: null,
     isAdding: false,
     // isLoading: true
   },
   getters: {
     //create the array that holds the cmps by the correct order, for rendreing
     cmpsToDisplay: state => {
-      if (!state.selectedCmps || !state.pageEditObj) {
-        return null;
-      }
-      //make sure both selectedCmps and cmpsOrder are up to date
-      if (state.selectedCmps.length === state.pageEditObj.cmpsOrder.length) {
-        var cmpsToDisplay = [];
-        state.pageEditObj.cmpsOrder.forEach(cmpId => {
-          cmpsToDisplay.push(getCmpById(cmpId))
-        });
-        return cmpsToDisplay;
-      }
+      // if (!state.selectedCmps || !state.pageEditObj) {
+      //   return null;
+      // }
+      // //make sure both selectedCmps and cmpsOrder are up to date
+      // if (state.selectedCmps.length === state.pageEditObj.cmpsOrder.length) {
+      //   var cmpsToDisplay = [];
+      //   state.pageEditObj.cmpsOrder.forEach(cmpId => {
+      //     cmpsToDisplay.push(getCmpById(cmpId))
+      //   });
+      return state.selectedCmps;
     },
     isLoading: (state, getters) => {
-      var isLoading = (!getters.cmpsToDisplay || state.isAdding)
+      var isLoading = (!getters.cmpsToDisplay)
       return isLoading;
     }
   },
-
   mutations: {
-    setIsAdding(state, { isAdding }) {
-      console.log('set is adding')
-      state.isAdding = isAdding;
+    // setIsAdding(state, { isAdding }) {
+    //   console.log('set is adding')
+    //   state.isAdding = isAdding;
+    // },
+    // loadCmp(state, { cmps }) {
+    //   state.selectedCmps = cmps;
+    // },
+    // loadPageEditObj(state, { pageEditObj }) {
+    //   state.pageEditObj = pageEditObj;
+    // },
+    loadUser(state, { user }){
+      state.user = user;
+      state.selectedCmps = user.cmps;
     },
-    loadCmp(state, { cmps }) {
-      state.selectedCmps = cmps;
+    addCmp(state, { user }) {
+      state.user = user;
+      state.selectedCmps = user.cmps;
     },
-    loadPageEditObj(state, { pageEditObj }) {
-      state.pageEditObj = pageEditObj;
+    deleteCmp(state, { user }) {
+      state.user = user;
+      state.selectedCmps = user.cmps;
     },
-    addCmp(state, { newCmp, newPage }) {
-      state.selectedCmps.push(newCmp);
-      state.pageEditObj = newPage;
+    updateCmp(state, { user }) {
+      state.user = user;
+      state.selectedCmps = user.cmps;
     },
-    deleteCmp(state, { cmp }) {
-      var idxToDeleteFromCmps = getCmpIdx(cmp);
-      var idxToDeleteFromOrder = state.pageEditObj.cmpsOrder.indexOf(cmp._id);
-      state.selectedCmps.splice(idxToDeleteFromCmps, 1);
-      state.pageEditObj.cmpsOrder.splice(idxToDeleteFromOrder, 1);
+    moveCmp(state, { user }) {
+      state.user = user;
+      state.selectedCmps = user.cmps;
     },
-    updateCmp(state, { cmp }) {
-      var idx = getCmpIdx(cmp);
-      state.selectedCmps.splice(idx, 1, cmp);
-    },
-    moveCmp(state, { cmpsOrder }) {
-      state.pageEditObj.cmpsOrder = cmpsOrder
-    },
-    dragCmp(state, { cmpsOrder }) {
-      state.pageEditObj.cmpsOrder = cmpsOrder
+    dragCmp(state, { user }) {
+      state.user = user;
+      state.selectedCmps = user.cmps;
     },
 
   },
   actions: {
-    loadCmp(context, payload) {
-      cmpService.getCmps()
-        .then(res => {
-          console.log('loaded cmps from db:', res)
-          payload.cmps = res;
-          context.commit(payload);
+    loadUser(context, payload){
+      cmpService.getUser()
+      .then(res=>{
+        payload.user = res;
+        context.commit(payload);
+      })
+    },
+    addCmp(context, payload) {//payload has newCmpType (string)
+      //  find a template that matches by type 
+      let newCmp = cmpService.tmplCmps.find(tmpl => tmpl.type === payload.newCmpType);
+      console.log('newCmp',newCmp)
+      // console.log('payload',payload)
+      //modify "user" and send to server with PUT
+      let userToEdit = JSON.parse(JSON.stringify(context.state.user));
+      userToEdit.cmps.push(newCmp);
+      userToEdit.cmps[userToEdit.cmps.length-1]._id = findNextId();
+      console.log('user to edit',userToEdit)
+      //put the new user obj on the payload
+      payload.user = userToEdit;
+      context.commit(payload);
+      cmpService.updateUser(userToEdit)
+        .then(user => {
+          //do validation...
         })
     },
-    loadPageEditObj(context, payload) {
-      cmpService.getPageEdit()
-        .then(res => {
-          console.log('loaded page from db:', res)
-          payload.pageEditObj = res[0];
-          context.commit(payload);
-        })
-    },
-    addCmp(context, payload) {
-      //set "isAdding" to false to enable spinner while waiting for db
-      context.commit({ type: 'setIsAdding', isAdding: true });
-      cmpService.addCmp(payload.newCmpType)
-        .then(cmp => {
-          payload.newCmp = cmp;
-          var pageEditCopy = Object.assign(context.state.pageEditObj);
-          pageEditCopy.cmpsOrder.push(cmp._id)
-          payload.newPage = pageEditCopy;
-          //set "isAdding" to false to disable spinner
-          context.commit({ type: 'setIsAdding', isAdding: false });
-          //commit the new cmp as usual
-          context.commit(payload);
-          cmpService.updatePage(pageEditCopy)
-            .then(res => {
-              //do validation...
-            })
-        })
-    },
-    deleteCmp(context, payload) {
+    deleteCmp(context, payload) {//payload has: cmp
+      // splice from coppied array and send new User to service
+      let userToEdit = JSON.parse(JSON.stringify(context.state.user));
+      let idxToDeleteFromCmps = getCmpIdx(payload.cmp);
+      userToEdit.cmps.splice(idxToDeleteFromCmps,1);
+      console.log('userToEdit in delete',userToEdit)
+      payload.user = userToEdit;
       context.commit(payload);
       //update cmps collection in db
-      cmpService.deleteCmp(payload.cmp)
-        .then(() => {
-          //do validation...
-        })
-      //update page in db
-      cmpService.updatePage(context.state.pageEditObj)
+      cmpService.updateUser(userToEdit)
         .then(() => {
           //do validation...
         })
     },
-    updateCmp(context, payload) {
+    updateCmp(context, payload) {//payload has: cmp
       //support frequesnt changes by updating the client and debounce calls to server
+      let userToEdit = JSON.parse(JSON.stringify(context.state.user));
+      var idx = getCmpIdx(payload.cmp);
+      userToEdit.cmps.splice(idx, 1, payload.cmp);
+      payload.user = userToEdit;
       context.commit(payload);
-      debounced(payload.cmp);
+      debounced(userToEdit);
     },
-    moveCmp(context, payload) {
-      var order = context.state.pageEditObj.cmpsOrder.slice();
+    moveCmp(context, payload) {//payload has: cmp, isUp
       //need to find the idx of the cmp in currOrder array
-      var currIdx = order.findIndex(currId => currId === payload.cmp._id)
+      var currIdx = context.state.user.cmps.findIndex(cmp => cmp._id === payload.cmp._id)
       //newIdx is the destination of the cmp
       var newIdx = (payload.isUp) ? currIdx + 1 : currIdx - 1;
+      let userToEdit = JSON.parse(JSON.stringify(context.state.user));
       //swap array values:
-      [order[currIdx], order[newIdx]] = [order[newIdx], order[currIdx]]
-      payload.cmpsOrder = order;
+      [userToEdit.cmps[currIdx], userToEdit.cmps[newIdx]] = [userToEdit.cmps[newIdx], userToEdit.cmps[currIdx]]
+      payload.user = userToEdit;
       context.commit(payload);
-      //pageEdit is updated with newOrder because the commit is done
-      cmpService.updatePage(context.state.pageEditObj)
+      cmpService.updateUser(userToEdit)
         .then(() => {
           // do some validation....
         })
@@ -144,12 +141,15 @@ const store = new Vuex.Store({
       var oldIndex = payload.oldIndex;
       console.log('newIndex', newIndex)
       console.log('oldIndex', oldIndex)
-      var order = context.state.pageEditObj.cmpsOrder.slice();
-      [order[oldIndex], order[newIndex]] = [order[newIndex], order[oldIndex]]
-      payload.cmpsOrder = order;
+      let userToEdit = JSON.parse(JSON.stringify(context.state.user));
+      let cmps = userToEdit.cmps
+      //swap the cmps:
+      var draggedCmp = cmps[oldIndex];
+      cmps[oldIndex] = cmps[newIndex];
+      cmps[oldIndex] = draggedCmp;
+      payload.user = userToEdit;
       context.commit(payload);
-      //pageEdit is updated with newOrder because the commit is done
-      cmpService.updatePage(context.state.pageEditObj)
+      cmpService.updateUser(userToEdit)
         .then(() => {
           // do some validation....
         })
@@ -169,11 +169,22 @@ function getCmpById(cmpId) {
   return store.state.selectedCmps.find(cmp => cmp._id === cmpId)
 }
 
+function findNextId()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
 
 //this debounce is in order to prevent heavy traffic to server 
 //when there are frequent updates (e.g. color picker slider)
-var debounced = _.debounce(function (cmp) {
-  cmpService.updateCmp(cmp)
+var debounced = _.debounce(function (user) {
+  cmpService.updateUser(user)
     .then(res => {
       console.log(res)
       // do some validation....
