@@ -67,7 +67,7 @@ export default {
 .about-2 {
     width: 30%;
     text-align: center;
-    line-height: 30px;
+    line-height: 100%;
 }
 
 .about-1-img:hover {

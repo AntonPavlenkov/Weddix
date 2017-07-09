@@ -117,7 +117,7 @@ export default {
 .about-2 {
     width: 40%;
     text-align: center;
-    line-height: 30px;
+    line-height: 100%;
 }
 
 .about-1-img:hover {
@@ -177,7 +177,7 @@ export default {
 .about-2 {
     width: 100%;
     text-align: center;
-    line-height: 30px;
+    line-height: 100%;
 }
 
 .about-1-img,
