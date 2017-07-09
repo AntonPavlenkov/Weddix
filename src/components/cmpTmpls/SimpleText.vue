@@ -1,6 +1,6 @@
 <template>
-    <section class="simple-text":style="cmp.style" :class="{'mark-class': isEditMode}">
-        <div class="content" >
+    <section class="simple-text" :style="cmp.style" :class="{'mark-class': isEditMode}">
+        <div class="content">
             <p @blur="updateText('txtLine1')" :contenteditable="isEditMode">{{cmp.data.txtLine1}}</p>
             <p @blur="updateText('txtLine2')" :contenteditable="isEditMode">{{cmp.data.txtLine2}}</p>
             <p @blur="updateText('txtLine3')" :contenteditable="isEditMode">{{cmp.data.txtLine3}}</p>
@@ -18,10 +18,10 @@
         </md-button>
     
         <transition name="fade">
-           <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
+            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-           </edit-console>
+            </edit-console>
         </transition>
     </section>
 </template>

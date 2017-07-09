@@ -101,7 +101,7 @@ function updateUser(user) {
     saveToStorage('WeddixUser', user)
     console.log('send update to server of:', user)
     return axios.put(`${urlUser}/${user._id}`, user)
-        .then(function (response) {
+        .then( (response) => {
             return response.data;
         })
         .catch(function (error) {
