@@ -192,7 +192,7 @@ export default {
   top: 10%;
   right: 10%;
   background-color: white;
-  opacity: 0.9;
+  opacity: 0.95;
   box-shadow: 8px 9px 55px -7px rgba(0, 0, 0, 0.67);
   border-radius: 5px;
   cursor: move;

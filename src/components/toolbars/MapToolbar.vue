@@ -35,11 +35,12 @@ export default {
             this.isInputShown  = !this.isInputShown
         },
         setPlace(place) {
-            //set position:
+            //set position & close zoom:
             this.cmpUpdated.data.position = {
                 lat: place.geometry.location.lat(),
                 lng: place.geometry.location.lng(),
             }
+            this.cmpUpdated.data.zoom = 18;
             //set name:
             this.cmpUpdated.data.address.line1 = place.name;
             //get relevant additional info:

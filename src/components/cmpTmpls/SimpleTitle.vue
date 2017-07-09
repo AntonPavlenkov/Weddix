@@ -1,14 +1,12 @@
 <template>
     <section class="simple-title">
         <div class="content" :style="cmp.style">
-            <!--<p :contenteditable="isEditMode" class="main-title" @click="modifyDragMode(true)" @blur="modifyDragMode(false)">{{cmp.data.mainTitle}}</p>-->
             <p @blur="updateText('mainTitle')" :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
-            <!--<p :contenteditable="isEditMode" class="sub-title"  @click="modifyDragMode(true)" @blur="modifyDragMode(false)"> {{cmp.data.subTitle}} </p>-->
             <p @blur="updateText('subTitle')" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
     
         <!--edit buttons-->
-        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="enterEditMode">
+        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
             <md-icon>edit</md-icon>
         </md-button>
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
@@ -16,10 +14,10 @@
         </md-button>
     
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console" v-draggable>
+            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-            </div>
+           </edit-console>
         </transition>
     </section>
 </template>
@@ -27,12 +25,14 @@
 <script>
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
+import EditConsole from '../toolbars/EditConsole'
 export default {
     name: 'SimpleText',
     props: ['cmp', 'isFirst', 'isLast'],
     components: {
         TxtToolbar,
-        GeneralEdit
+        GeneralEdit,
+        EditConsole
     },
     data() {
         return {
@@ -53,7 +53,7 @@ export default {
             this.isEditMode = false;
             this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
         },
-        enterEditMode() {
+        toggleEditMode() {
             this.isEditMode = !this.isEditMode
         },
         updateCmp(updatedCmp) {
@@ -63,17 +63,7 @@ export default {
             this.cmpToEdit.data[dataItem] = event.target.innerText;
             this.updateCmp(this.cmpToEdit);
         },
-        // modifyDragMode(newMode) {
-        //     if (this.isEditMode) {
-        //         console.log('inside')
-        //         this.$emit('changeDragMode', newMode)
-        //     }
-        //     else {
-        //         console.log('outside edit')
-        //         this.$emit('changeDragMode', false)
-        //     }
-        // }
-    }
+   }
 }
 </script>
 

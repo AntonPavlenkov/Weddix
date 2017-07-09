@@ -9,32 +9,18 @@
 <script>
 
 const CENTER_DEFAULT = { lat: 32.087893, lng: 34.803038 };
-const ZOOM_DEFAULT = 11;
-const ZOOM_CLOSE = 17;
 
 export default {
-  props: ['position'],
+  props: ['position','zoom'],
   data() {
     return {
       center: CENTER_DEFAULT,
-      zoom: ZOOM_DEFAULT,
     }
-  },
-  methods: {
-  },
-  computed:{
-    // newPosition(){
-    //    console.log('computed')
-    //     this.center = this.position;
-    //     this.zoom = ZOOM_CLOSE;
-    //     return this.position;
-    // }
   },
   watch: {
     position: {
       handler: function (newPosition) {
         this.center = newPosition;
-        this.zoom = ZOOM_CLOSE;
       },
       deep: true
     }
