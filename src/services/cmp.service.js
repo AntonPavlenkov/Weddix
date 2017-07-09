@@ -76,25 +76,20 @@ const tmplCmps = [
 
 
 
-//TESTING:
-// var testCmps = getCmps();
-// testCmps.then(res => { console.log('inital array from db:', res) });
 
-
-// **************************
-//functions to work with server:
-//***************************
-
-function createUser(){
+function createUser() {
     //need to write this - POST
 }
 
 function getUser() {
+    let dataFromLocal = loadFromStorage('WeddixUser');
+    if (dataFromLocal) return  Promise.resolve(dataFromLocal);
     return axios.get(urlUser)
         .then(function (response) {
             //we need only the first (and only) user
             //in the future (when login will be implemented),
             //this will be replaced by a get with ID
+            saveToStorage('WeddixUser', response.data[0])
             return response.data[0];
         })
         .catch(function (error) {
@@ -102,47 +97,15 @@ function getUser() {
         });
 }
 
-// function addCmp(cmpType) {
-//     //find a template that matches by type and send it to server
-//     var newCmp = tmplCmps.find(tmpl => tmpl.type === cmpType)
-//     return axios.post(urlCmp, newCmp)
-//         .then(function (response) {
-//             return response.data;
-//         })
-//         .catch(function (error) {
-//             console.log(error);
-//         });
-// }
-
-// function deleteCmp(cmp) {
-//     return axios.delete(`${urlCmp}/${cmp._id}`)
-//         .then(function (response) {
-//             return response.data;
-//         })
-//         .catch(function (error) {
-//             console.log(error);
-//         });
-// }
-
-// function updateCmp(cmp) {
-//     console.log('send update to server of:', cmp)
-//     return axios.put(`${urlCmp}/${cmp._id}`, cmp)
-//         .then(function (response) {
-//             return response.data;
-//         })
-//         .catch(function (error) {
-//             console.log(error);
-//         });
-// }
-
 function updateUser(user) {
+    saveToStorage('WeddixUser', user)
     console.log('send update to server of:', user)
     return axios.put(`${urlUser}/${user._id}`, user)
         .then(function (response) {
             return response.data;
         })
         .catch(function (error) {
-            console.log(error);
+        console.log(error);
         });
 }
 
@@ -178,59 +141,5 @@ export default {
 
 
 
-
-//***************************
-//dev mode  (withour server):
-//***************************
-//default start:
-
-// var idCounter = 3;
-// var cmps = [{
-//     _id: "1",
-//     type: "SimpleText",
-//     data: {
-//         text1: "BUBU"
-//     },
-//     style: { backgroundColor: "grey", textAlign: "left", fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
-// },
-// {
-//     _id: "2",
-//     type: "SimpleText",
-//     data: {
-//         text1: "DADA"
-//     },
-//     style: { backgroundColor: "grey", textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'monospace', fontSize: '16px' }
-// }
-// ]
-
-// //functions:
-// function getCmps() {
-//     var copyOfCmps = JSON.parse(JSON.stringify(cmps));
-//     return Promise.resolve(copyOfCmps);
-// }
-
-// function getCmp(cmp) {
-//     console.log('action not supported in dev mode')
-// }
-
-// function addCmp(cmpType) {
-//     var tempCmp = tmplCmps.find(tmpl => tmpl.type === cmpType)
-//     var newCmp = JSON.parse(JSON.stringify(tempCmp))
-//     newCmp._id = (idCounter++) + '';
-//     cmps.push(newCmp);
-//     return Promise.resolve(newCmp);
-// }
-
-// function deleteCmp(cmp) {
-//     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
-//     cmps.splice(idx, 1);
-//     return Promise.resolve();
-// }
-
-// function updateCmp(cmp) {
-//     var idx = cmps.findIndex(currCmp => currCmp._id === cmp._id)
-//     cmps.splice(idx, 1, cmp);
-//     return Promise.resolve();
-// }
 
 
