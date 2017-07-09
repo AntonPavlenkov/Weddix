@@ -117,14 +117,14 @@ export default {
 }
 
 .border-default {
-  border-width: 5px;
+  border-width: 2px;
   border-style: dashed;
   border-color: (rgba(0, 0, 0, 0))
 }
 
 
 .mark-class {
-  border-color: red;
+  border-color: #ff5722;
   z-index: 1;
 }
 .mark-class-edit {
@@ -137,7 +137,7 @@ export default {
 }
 
 .btn-holder {
-  margin: 10px auto;
+  margin: 1 0px auto;
   text-align: center;
 }
 
