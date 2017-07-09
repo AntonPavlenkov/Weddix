@@ -3,7 +3,7 @@
         <div class="content" :style="cmp.style">
             <p class="main-title">{{cmp.data.mainTitle}}</p>
             <br>
-            <p class="sub-title"> {{cmp.data.subTitle}} </p>
+            <p class="sub-title" :style="{fontSize: subTitleFontSize}"> {{cmp.data.subTitle}} </p>
         </div>
     </section>
 </template>
@@ -12,6 +12,13 @@
 export default {
     name: 'SimpleTitle',
     props: ['cmp'],
+    computed:{
+             subTitleFontSize() {
+            var currentFontSizeValue = this.cmp.style.fontSize;
+            return +currentFontSizeValue.substring(0, currentFontSizeValue.indexOf("px")) * 0.6 + 'px';
+        }
+    }
+
 }
 </script>
 

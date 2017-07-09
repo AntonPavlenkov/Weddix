@@ -2,7 +2,7 @@
     <section class="simple-title">
         <div class="content" :style="cmp.style" :class="{'mark-class': isEditMode}">
             <p @blur="updateText('mainTitle')" :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
-            <p @blur="updateText('subTitle')" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
+            <p @blur="updateText('subTitle')" :style="{fontSize: subTitleFontSize}" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
     
         <!--edit buttons-->
@@ -17,7 +17,7 @@
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-           </edit-console>
+            </edit-console>
         </transition>
     </section>
 </template>
@@ -43,6 +43,10 @@ export default {
     computed: {
         cmpToEdit() {
             return JSON.parse(JSON.stringify(this.cmp))
+        },
+         subTitleFontSize() {
+            var currentFontSizeValue = this.cmp.style.fontSize;
+            return +currentFontSizeValue.substring(0, currentFontSizeValue.indexOf("px")) * 0.6 + 'px';
         }
     },
     methods: {
@@ -63,7 +67,7 @@ export default {
             this.cmpToEdit.data[dataItem] = event.target.innerText;
             this.updateCmp(this.cmpToEdit);
         },
-   }
+    }
 }
 </script>
 
@@ -93,6 +97,9 @@ p {
 .fade-leave-to {
     opacity: 0
 }
+
+
+
 
 
 

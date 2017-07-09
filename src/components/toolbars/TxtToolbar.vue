@@ -77,7 +77,6 @@ export default {
       var currentFontSizeValue = this.cmp.style.fontSize
       // cut the px from the end of the value
       return +currentFontSizeValue.substring( 0, currentFontSizeValue.indexOf("px") );
-
     }
   },
   data() {
