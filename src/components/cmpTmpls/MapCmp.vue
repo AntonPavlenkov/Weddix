@@ -1,5 +1,5 @@
 <template>
-  <section class="map-cmp">
+  <section class="map-cmp cmp-father">
     <gmap-map class="map" :center="center" :zoom="zoom">
       <gmap-marker :position="position"></gmap-marker>
     </gmap-map>

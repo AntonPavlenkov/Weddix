@@ -1,6 +1,6 @@
 <template>
-    <section class="img-title" :class="{'mark-class':isEditMode}"   >
-        <div class="content" :style="cmp.style">
+    <section class="img-title cmp-father" :class="{'mark-class':isEditMode}" >
+        <div class="content" :style="cmp.style"  >
             <span class="name1" contenteditable @blur="updateText('name1')">{{cmp.data.name1}}</span>
             <div class="demo" :class="{[cmp.shape]: true}">
                 <svg width="300" height="300">
@@ -70,7 +70,7 @@ export default {
 
     methods: {
         updateCmp(updatedCmp) {
-            console.log('updating',updatedCmp)
+            console.log('updating', updatedCmp)
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
         updateText(text) {
@@ -96,9 +96,12 @@ export default {
     position: relative;
     transition: all .5s;
 }
-.name1,.name2{
+
+.name1,
+.name2 {
     padding: 20px 0;
 }
+
 .content {
     display: flex;
     justify-content: space-around;
@@ -128,17 +131,16 @@ export default {
     clip-path: url(#heart-clip);
 }
 
-@media (max-width: 650px){
+@media (max-width: 650px) {
     .content {
-    display: flex;
-    flex-flow: row wrap;
-}
- .demo{
-    order: 3;
-    width: 100%;
-    text-align: center;
- }
-
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .demo {
+        order: 3;
+        width: 100%;
+        text-align: center;
+    }
 }
 </style>
 

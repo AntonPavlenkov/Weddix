@@ -1,6 +1,6 @@
 <template>
-    <section class="simple-title">
-        <div class="content" :style="cmp.style" :class="{'mark-class': isEditMode}">
+    <section class="simple-title cmp-father" :style="cmp.style">
+        <div class="content"  :class="{'mark-class': isEditMode}">
             <p @blur="updateText('mainTitle')" :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
             <p @blur="updateText('subTitle')" :style="{fontSize: subTitleFontSize}" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
@@ -76,10 +76,11 @@ export default {
 .simple-title {
     transition: all .5s;
     position: relative;
-    margin-top: 30px;
     transition: all .5s;
-    margin: 0;
-    padding: 30px;
+}
+
+.content{
+    margin: 30px 0;
 }
 
 p {

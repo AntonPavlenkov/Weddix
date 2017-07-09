@@ -1,5 +1,5 @@
 <template>
-    <section class="couple-about" :class="{'mark-class': isEditMode}">
+    <section class="couple-about cmp-father" :class="{'mark-class': isEditMode}">
         <div class="content" :style="cmp.style">
             <div class="about-1">
                 <span @blur="updateText('aboutName1')" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>
