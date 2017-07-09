@@ -1,6 +1,6 @@
 <template>
   <!--<h1>elad</h1>-->
-  <section class="img-carousel">
+  <section class="img-carousel" :class="{'mark-class':isEditMode}">
     <div class="content">
       <carousel-3d>
         <slide v-for="(imgUrl, i) in cmp.data.imgUrls" :index="i" :key="i">

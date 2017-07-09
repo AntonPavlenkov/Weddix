@@ -1,14 +1,10 @@
 <template>
   <div id="app">
     <main>
-     
       <router-view>
       </router-view>
       
     </main>
-    <!--<MainFooter> 
-      
-    </MainFooter>-->
   </div>
 </template>
 
@@ -51,5 +47,11 @@ a.router-link-active{
 router-view{
   background-color: #F9FAFC;
 }
-
+.page-enter-active, .page-leave-active {
+  transition: opacity 1s, transform 1s;
+}
+.page-enter, .page-leave-to {
+  opacity: 0;
+  transform: translateX(-30%);
+}
 </style>
