@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     changeBold() {
-      this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
+      // this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
       if (this.cmpStyleEdit.style.fontWeight === 'normal')
         this.cmpStyleEdit.style.fontWeight = 'bold';
       else {
@@ -94,7 +94,7 @@ export default {
     },
 
     updateColor: function (event) {
-      this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
+      // this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
       this.color = event.color;
     },
 

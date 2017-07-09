@@ -28,7 +28,7 @@ const tmplCmps = [
     {
         type: 'LocationMap',
         label: 'Location',
-        data: { position: { lat: null, lng: null }, address: { line1: 'HaShaked Garden', line2: 'Egozi 4', line3: 'Ramat Gina' } },
+        data: { position: { lat: 32.087893, lng: 34.803038},zoom: 11, address: { line1: 'HaShaked Garden', line2: 'Egozi 4', line3: 'Ramat Gina' } },
         style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
         cmpPreview: 'http://i.imgur.com/owR4CHf.png'
     },
@@ -55,6 +55,7 @@ const tmplCmps = [
     },
     {
         type: 'ImgTitle',
+        label: 'Image with Titles',
         data: { name1: 'Guy', name2: 'Gal', imgUrl: 'https://lotuseventsmanagement.com/wp-content/uploads/2015/11/Wedding-Avatar2.png' },
         shape: 'heart',
         style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
@@ -62,6 +63,7 @@ const tmplCmps = [
     },
     {
         type: 'CountDown',
+        label:'Countdown',
         data: { date: '' },
         style: { backgroundColor: 'white' },
         cmpPreview: 'http://i.imgur.com/rrOX6tM.png'

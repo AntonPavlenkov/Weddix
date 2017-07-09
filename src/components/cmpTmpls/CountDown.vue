@@ -70,7 +70,7 @@ export default {
             this.isEditMode = false;
             this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
         },
-        enterEditMode() {
+        toggleEditMode() {
             this.isEditMode = !this.isEditMode
         },
         updateCmp(updatedCmp) {
@@ -113,7 +113,6 @@ export default {
     justify-content: center;
     position: relative;
     transition: all .5s;
-
     width: 100%;
 }
 .clock{
@@ -130,25 +129,6 @@ section.count-down.cmps-enter-to > li.flip-clock-before{
 .flip-clock-wrapper ul li a {
     display: initial;
 }
-p{
-    margin: 0;
-    padding: 0;
-}
-
-.edit-btn {
-    position: absolute;
-    left: 85%;
-    top: 10%;
-    opacity: 0.2;
-    transition: all .5s;
-}
-
-.edit-btn:hover {
-    opacity: 1;
-    cursor: pointer;
-}
-
-
 
 .fade-enter-active,
 .fade-leave-active {
@@ -156,14 +136,7 @@ p{
 }
 
 .fade-enter,
-.fade-leave-to
-/* .fade-leave-active in <2.1.8 */
-
-{
+.fade-leave-to{
     opacity: 0
-}
-
-.color-picker-btn {
-    overflow: initial;
 }
 </style>

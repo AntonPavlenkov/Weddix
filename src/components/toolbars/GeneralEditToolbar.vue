@@ -30,9 +30,6 @@ export default {
     components: {
         ColorPicker
     },
-    created() {
-        // this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
-    },
     computed: {
         cmpStyleEdit() {
             return JSON.parse(JSON.stringify(this.cmp))
@@ -40,7 +37,6 @@ export default {
     },
     data() {
         return {
-            // cmpStyleEdit: null,
             color: ""
         }
     },
@@ -54,12 +50,6 @@ export default {
         updateColor: function (event) {
             this.color = event.color;
         },
-
-        // changeBgColor(newColor) {
-        //     this.cmpStyleEdit = JSON.parse(JSON.stringify(this.cmp));
-        //     this.cmpStyleEdit.style.backgroundColor = newColor;
-        //     this.$emit('updateStyle', this.cmpStyleEdit)
-        // },
         changeCssProperty(prop, val) {
             // console.log(prop, 'prop')
             // console.log(val,'val')

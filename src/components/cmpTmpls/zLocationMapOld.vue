@@ -24,11 +24,11 @@
             <md-icon>swap_vertical_circle</md-icon>
         </md-button>
         <transition name="fade">
-            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
+            <div v-if="isEditMode" class="edit-console" v-draggable>
                 <map-toolbar :cmp="cmp" @update="updateCmp"></map-toolbar>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-            </edit-console>
+            </div>
         </transition>
     </section>
 </template>
@@ -38,7 +38,6 @@ import MapCmp from './MapCmp'
 import MapToolbar from '../toolbars/MapToolbar'
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
-import EditConsole from '../toolbars/EditConsole'
 
 const ZOOM_CLOSE = 18;
 
@@ -49,8 +48,7 @@ export default {
         TxtToolbar,
         GeneralEdit,
         MapCmp,
-        MapToolbar,
-        EditConsole
+        MapToolbar
     },
     data() {
         return {
@@ -65,7 +63,7 @@ export default {
         position() {
             return this.cmp.data.position
         },
-        zoom() {
+        zoom(){
             return this.cmp.data.zoom
         }
     },
@@ -120,11 +118,12 @@ p {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .5s
+  transition: opacity .5s
 }
 
 .fade-enter,
 .fade-leave-to {
-    opacity: 0
+  opacity: 0
 }
+
 </style>

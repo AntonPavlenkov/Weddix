@@ -1,75 +1,50 @@
 <template>
-    <section class="location-map">
+    <section class="simple-title">
         <div class="content" :style="cmp.style">
-            <!--map cmp-->
-            <map-cmp :position="position" :zoom="zoom"></map-cmp>
-            <div class="address">
-                <!--text area-->
-                <h2>{{cmp.data.address.line1}}</h2>
-                <h3>{{cmp.data.address.line2}}</h3>
-                <h3>{{cmp.data.address.line3}}</h3>
-                <md-button class="md-fab md-clean  md-mini color-picker-btn">
-                    <md-icon>navigation</md-icon>
-                    <md-tooltip md-direction="top">Take me there!</md-tooltip>
-                </md-button>
-            </div>
-    
+            <!--<p :contenteditable="isEditMode" class="main-title" @click="modifyDragMode(true)" @blur="modifyDragMode(false)">{{cmp.data.mainTitle}}</p>-->
+            <p @blur="updateText('mainTitle')" :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
+            <!--<p :contenteditable="isEditMode" class="sub-title"  @click="modifyDragMode(true)" @blur="modifyDragMode(false)"> {{cmp.data.subTitle}} </p>-->
+            <p @blur="updateText('subTitle')" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
     
-        <!-- edit buttons-->
+        <!--edit buttons-->
         <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
             <md-icon>edit</md-icon>
         </md-button>
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
             <md-icon>swap_vertical_circle</md-icon>
         </md-button>
+    
         <transition name="fade">
-            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
-                <map-toolbar :cmp="cmp" @update="updateCmp"></map-toolbar>
+            <div v-if="isEditMode" class="edit-console" v-draggable>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-            </edit-console>
+            </div>
         </transition>
     </section>
 </template>
 
 <script>
-import MapCmp from './MapCmp'
-import MapToolbar from '../toolbars/MapToolbar'
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
-import EditConsole from '../toolbars/EditConsole'
-
-const ZOOM_CLOSE = 18;
-
 export default {
-    name: 'LocationMap',
+    name: 'SimpleText',
     props: ['cmp', 'isFirst', 'isLast'],
     components: {
         TxtToolbar,
-        GeneralEdit,
-        MapCmp,
-        MapToolbar,
-        EditConsole
+        GeneralEdit
     },
     data() {
         return {
             isEditMode: false,
-            color: "",
+            color: ""
         }
     },
     computed: {
         cmpToEdit() {
             return JSON.parse(JSON.stringify(this.cmp))
-        },
-        position() {
-            return this.cmp.data.position
-        },
-        zoom() {
-            return this.cmp.data.zoom
         }
     },
-
     methods: {
         moveCmp(isUp) {
             this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
@@ -84,38 +59,39 @@ export default {
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
-        updateColor: function (event) {
-            this.color = event.color;
+        updateText(dataItem) {
+            this.cmpToEdit.data[dataItem] = event.target.innerText;
+            this.updateCmp(this.cmpToEdit);
         },
-
+        // modifyDragMode(newMode) {
+        //     if (this.isEditMode) {
+        //         console.log('inside')
+        //         this.$emit('changeDragMode', newMode)
+        //     }
+        //     else {
+        //         console.log('outside edit')
+        //         this.$emit('changeDragMode', false)
+        //     }
+        // }
     }
 }
 </script>
 
 
-<style scoped lang="scss">
-.location-map {
+<style scoped>
+.simple-title {
     transition: all .5s;
-    box-sizing: border-box;
-    width: 100%;
     position: relative;
-    margin-top: 5px;
-}
-
-.content {
-    height: 240px;
-    display: flex;
-    align-items: center;
-}
-
-.address {
-    margin: 0 auto;
-    text-align: center;
+    margin-top: 30px;
+    transition: all .5s;
+    margin: 0;
+    padding: 30px;
 }
 
 p {
     margin: 0;
     padding: 0;
+    line-height: 70px;
 }
 
 .fade-enter-active,
@@ -127,4 +103,14 @@ p {
 .fade-leave-to {
     opacity: 0
 }
+
+
+
+/*.main-title {
+    font-size: 70px;
+}
+
+.sub-title {
+    font-size: 35px;
+}*/
 </style>

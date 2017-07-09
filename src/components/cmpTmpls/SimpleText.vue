@@ -18,15 +18,10 @@
         </md-button>
     
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console" v-draggable>
-                <p>{{cmp.label}}</p>
-                <md-button class="btn-close md-icon-button" @click="toggleEditMode">
-                    <md-icon>close</md-icon>
-                    <md-tooltip md-direction="top">Close</md-tooltip>
-                </md-button>
+           <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-            </div>
+           </edit-console>
         </transition>
     </section>
 </template>
@@ -34,12 +29,14 @@
 <script>
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
+import EditConsole from '../toolbars/EditConsole'
 export default {
     name: 'SimpleText',
     props: ['cmp', 'isFirst', 'isLast'],
     components: {
         TxtToolbar,
-        GeneralEdit
+        GeneralEdit,
+        EditConsole
     },
     data() {
         return {
