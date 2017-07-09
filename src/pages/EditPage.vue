@@ -21,7 +21,7 @@
     <draggable :list="cmpsToDisplay" @end="onEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
       <transition-group name="cmps" tag="p">
         <component 
-        v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps"
+        v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps"
         class="border-default"
         >
         </component>
@@ -66,8 +66,9 @@ export default {
   },
   created() {
     console.log('edit page: Loading data from store');
-    this.$store.dispatch({ type: 'loadCmp' })
-    this.$store.dispatch({ type: 'loadPageEditObj' })
+    // this.$store.dispatch({ type: 'loadCmp' })
+    // this.$store.dispatch({ type: 'loadPageEditObj' })
+    this.$store.dispatch({ type: 'loadUser' })
   },
   data() {
     return {
@@ -88,10 +89,10 @@ export default {
 
   },
   methods: {
-    addNewCmp(newCmp) {
+    addNewCmp(newCmpType) {
       this.closeDialog('addDialog')
-      console.log(this.newCmpType, 'new cmp type', newCmp)
-      var newCmpType = newCmp;
+      console.log(this.newCmpType, 'new cmp type', newCmpType)
+      // let newCmpType = newCmp;
       this.$store.dispatch({ type: 'addCmp', newCmpType })
     },
     openDialog(ref) {

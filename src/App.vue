@@ -48,6 +48,4 @@ a.router-link-active {
 router-view {
   background-color: #F9FAFC;
 }
-
-
 </style>
