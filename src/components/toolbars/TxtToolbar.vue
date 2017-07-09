@@ -55,7 +55,7 @@
         <md-tooltip md-direction="top">Change text size</md-tooltip>
       </md-button>
       <md-menu-content>
-            <input type="range" @mousedown.stop min="12" max="60" @input="changeFOntSize">
+            <input type="range" @mousedown.stop min="12" max="60" @input="changeFOntSize" :value="fontSizeInputRangeValue">
       </md-menu-content>
     </md-menu>
   
@@ -72,6 +72,11 @@ export default {
   computed: {
     cmpStyleEdit() {
       return JSON.parse(JSON.stringify(this.cmp))
+    },
+    fontSizeInputRangeValue(){
+      var currentFontSizeValue = this.cmp.style.fontSize
+      // cut the px from the end of the value
+      return +currentFontSizeValue.substring( 0, currentFontSizeValue.indexOf("px") );
     }
   },
   data() {

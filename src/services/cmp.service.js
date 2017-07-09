@@ -70,6 +70,13 @@ const tmplCmps = [
         style: { backgroundColor: 'white' },
         cmpPreview: 'http://i.imgur.com/FbkUVty.png'
     },
+    {
+        type: 'GiftPicker',
+        label: 'Gift Picker (Textual)',
+        data: { gifts: [{giftName: 'Lamborginie', mail:''},{giftName: 'Tv', mail:''},{giftName: 'Radio', mail:''},{giftName: 'One Million Dollars', mail:''},], subTitle: 'Are getting married' },
+        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Courgette', fontSize: '16px' },
+        cmpPreview: 'http://i.imgur.com/kHKSAlf.png'
+    },
 ];
 
 function createUser(user) {
@@ -102,8 +109,17 @@ function updateUser(user) {
     console.log('put with ',user)
     saveToStorage('WeddixUser', user)
     return axios.put(`${urlUser}/${user._id}`, user)
+<<<<<<< HEAD
         .then(response => response.data)
         .catch(error => console.log);
+=======
+        .then( (response) => {
+            return response.data;
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+>>>>>>> origin/master
 }
 
 function saveToStorage(key, any) {

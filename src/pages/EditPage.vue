@@ -47,6 +47,7 @@ import ImgCarousel from '../components/cmpTmpls/ImgCarousel'
 import CoupleAbout from '../components/cmpTmpls/CoupleAbout'
 import ImgTitle from '../components/cmpTmpls/ImgTitle'
 import CountDown from '../components/cmpTmpls/CountDown'
+import GiftPicker from '../components/cmpTmpls/GiftPicker'
 export default {
   name: 'EditPage',
   components: {
@@ -57,7 +58,8 @@ export default {
     CoupleAbout,
     ImgTitle,
     draggable,
-    CountDown
+    CountDown,
+    GiftPicker
   },
   //need to consider if this is needed, or to use the load done on "welcome"
   created() {
