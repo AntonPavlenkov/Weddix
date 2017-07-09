@@ -1,10 +1,24 @@
 <template>
     <section class="count-down" :style="cmp.style">
         <div class="content" >
+
+        <div class="calendar-date">
+            <span class="day">{{this.day}}</span>
+            <span class="month">{{this.month}}<hr></span>
+            <span class="week-day">{{this.weekDay}}<hr></span>
+            <span class="year">{{this.year}}<hr></span>
+
+        </div>
+
+
         <div class="clock"></div>
 	<div class="message"></div>
         
     
+
+
+
+
         <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
             <md-icon>edit</md-icon>
             <md-tooltip md-direction="top">Edit</md-tooltip>
@@ -49,6 +63,10 @@ export default {
     },
     data() {
         return {
+            day: null,
+            year:null,
+            month:null,
+            weekDay:null,
             isEditMode: false,
             color: "",
             date: new Date(),
@@ -93,9 +111,17 @@ export default {
 		    clock.start();
         },
         setTimer(time){
-            let date = new Date;
             if(!time) return
-            this.cmpToEdit.data.date = date.setTime(time);
+            let date = new Date;
+            this.cmpToEdit.data.date = date.setTime(time)
+            let dateStr = new Date(this.cmpToEdit.data.date).toString()
+            console.log(dateStr, typeof dateStr)
+
+            this.weekDay = dateStr.slice(0,3)
+            this.month = dateStr.slice(4,7)
+            this.day = dateStr.slice(8,10)
+            this.year = dateStr.slice(11,15)
+
             this.setDate = (date.setTime(time) - Date.now())/1000
             this.clockStart()
             this.updateCmp(this.cmpToEdit)
@@ -107,6 +133,9 @@ export default {
 
 
 <style scoped>
+hr{
+    width: 80%;
+}
 .count-down {
     display: flex;
     flex-flow: row wrap;
@@ -115,20 +144,45 @@ export default {
     transition: all .5s;
     width: 100%;
 }
+.content{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
 .clock{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    justify-content: center;
-    margin: 5em 0;
     width: 100%;
 }
-section.count-down.cmps-enter-to > li.flip-clock-before{
-    position: initial;
+.calendar-date{
+    display: flex;
+    flex-flow: column wrap;
+    width: 250px;
+    height: 200px;
+    font-family: Courgette;
 }
-.flip-clock-wrapper ul li a {
-    display: initial;
+.day{
+    width: 40%;
+    height: 100%;
+    font-size: 7em;
+    align-self: center;
+    padding-top: 100px;
+    color: goldenrod;
 }
+.month,.year,.week-day{
+    width: 60%;
+    height: 33%;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 2em;
+    font-weight: bold;
+}
+/*.week-day{
+    font-size: 
+}*/
+
+
 
 .fade-enter-active,
 .fade-leave-active {
@@ -138,5 +192,13 @@ section.count-down.cmps-enter-to > li.flip-clock-before{
 .fade-enter,
 .fade-leave-to{
     opacity: 0
+}
+
+@media (max-width: 650px){
+   .count-down {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
 }
 </style>

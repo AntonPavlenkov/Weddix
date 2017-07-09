@@ -103,7 +103,7 @@ export default {
 }
 
 .content {
-    height: 240px;
+    padding: 20px 0;
     display: flex;
     align-items: center;
 }
@@ -126,5 +126,16 @@ p {
 .fade-enter,
 .fade-leave-to {
     opacity: 0
+}
+
+@media (max-width: 650px) {
+.content {
+    flex-flow: column-reverse nowrap;
+    padding: 5px;
+}
+
+
+
+
 }
 </style>
