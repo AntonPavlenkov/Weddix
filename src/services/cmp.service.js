@@ -16,22 +16,16 @@ const tmplCmps = [
             txtLine3: 'Followed by dancing into the night!',
         },
         style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '20px' },
-        cmpPreview: 'http://i.imgur.com/CzBQKi4.png'
+        cmpPreview: 'http://imgur.com/vhSs8p2.png'
     },
     {
         type: 'SimpleTitle',
         label: 'Title (Textual)',
         data: { mainTitle: 'Gal and Guy', subTitle: 'Are getting married' },
-        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Rouge script', fontSize: '30px' },
-        cmpPreview: 'http://i.imgur.com/hPmUK91.png'
+        style: { backgroundColor: 'white', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Rouge script', fontSize: '70px' },
+        cmpPreview: 'http://i.imgur.com/kHKSAlf.png'
     },
-    {
-        type: 'LocationMap',
-        label: 'Location',
-        data: { position: { lat: 32.087893, lng: 34.803038},zoom: 11, address: { line1: 'HaShaked Garden', line2: 'Egozi 4', line3: 'Ramat Gina' } },
-        style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
-        cmpPreview: 'http://i.imgur.com/owR4CHf.png'
-    },
+
     {
         type: 'ImgCarousel',
         label: 'Changing Images',
@@ -44,26 +38,35 @@ const tmplCmps = [
             ]
         },
         style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
-        cmpPreview: 'http://i.imgur.com/zPORY7y.png'
+        cmpPreview: 'http://i.imgur.com/Dz8CLuE.png'
     },
     {
         type: 'CoupleAbout',
         label: 'Introduction',
-        data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'https://wpclipart.com/holiday/wedding/bride_groom/bride_vale_flowers.png', mainImgUrl: 'https://www.shareicon.net/download/2016/05/25/770451_people_512x512.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'http://pngimg.com/uploads/groom/groom_PNG19603.png' },
+        // data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'https://wpclipart.com/holiday/wedding/bride_groom/bride_vale_flowers.png', mainImgUrl: 'https://www.shareicon.net/download/2016/05/25/770451_people_512x512.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'http://pngimg.com/uploads/groom/groom_PNG19603.png' },
+        data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'https://image.flaticon.com/icons/png/128/161/161846.png', mainImgUrl: 'https://www.shareicon.net/download/2016/05/25/770451_people_512x512.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'https://d30y9cdsu7xlg0.cloudfront.net/png/2104-200.png' },
         style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
-        cmpPreview: 'http://i.imgur.com/z6MJtQZ.png'
+        cmpPreview: 'http://i.imgur.com/hipydPu.png'
     },
     {
         type: 'ImgTitle',
         label: 'Image with Titles',
-        data: { name1: 'Guy', name2: 'Gal', imgUrl: 'https://lotuseventsmanagement.com/wp-content/uploads/2015/11/Wedding-Avatar2.png' },
+        // data: { name1: 'Guy', name2: 'Gal', imgUrl: 'https://lotuseventsmanagement.com/wp-content/uploads/2015/11/Wedding-Avatar2.png' },
+        data: { name1: 'Guy', name2: 'Gal', imgUrl: 'https://image.freepik.com/free-vector/cartoon-wedding-card_23-2147493889.jpg' },
         shape: 'heart',
+        style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Dancing Script', fontSize: '50px' },
+        cmpPreview: 'http://i.imgur.com/uNx3atU.png'
+    },
+    {
+        type: 'LocationMap',
+        label: 'Location',
+        data: { position: { lat: 32.087893, lng: 34.803038 }, zoom: 11, address: { line1: 'HaShaked Garden', line2: 'Egozi 4', line3: 'Ramat Gina' } },
         style: { backgroundColor: 'white', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px' },
-        cmpPreview: 'http://via.placeholder.com/200x150'
+        cmpPreview: 'http://i.imgur.com/YHRlnZm.png'
     },
     {
         type: 'CountDown',
-        label:'Countdown',
+        label: 'Countdown',
         data: { date: '' },
         style: { backgroundColor: 'white' },
         cmpPreview: 'http://i.imgur.com/rrOX6tM.png'

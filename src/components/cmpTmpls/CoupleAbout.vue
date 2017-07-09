@@ -7,7 +7,7 @@
                 <span @blur="updateText('aboutInfo1')" :style="cmp.style" :contenteditable="isEditMode" class="about-1-info">{{cmp.data.aboutInfo1}}</span>
             </div>
             <div class="main-img-container">
-                <img @click="setImg('mainImgUrl')" clsas="main-img" :src="cmp.data.mainImgUrl" class="main-img" width="100%">
+                <img @click="setImg('mainImgUrl')" class="main-img" :src="cmp.data.mainImgUrl">
             </div>
             <div class="about-2">
                 <span @blur="updateText('aboutName2')" :contenteditable="isEditMode" class="about-2-name">{{cmp.data.aboutName2}}</span>
@@ -114,7 +114,7 @@ export default {
 
 .about-1,
 .about-2 {
-    width: 30%;
+    width: 35%;
     text-align: center;
     line-height: 30px;
 }
@@ -136,13 +136,15 @@ export default {
 
 .about-1-img,
 .about-2-img {
+    /*height: 20%;*/
+    width: 20%;
     display: block;
     border-radius: 50%;
     margin: 0 auto;
 }
 
 .main-img-container {
-    width: 40%;
+    width: 30%;
 }
 
 .main-img {

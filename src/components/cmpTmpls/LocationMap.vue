@@ -13,7 +13,6 @@
                     <md-tooltip md-direction="top">Take me there!</md-tooltip>
                 </md-button>
             </div>
-    
         </div>
     
         <!-- edit buttons-->

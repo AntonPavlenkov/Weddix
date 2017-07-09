@@ -2,7 +2,7 @@
     <section class="location-map">
         <div class="content" :style="cmp.style">
             <!--map cmp-->
-            <map-cmp :position="position"></map-cmp>
+            <map-cmp :position="position" :zoom="zoom"></map-cmp>
             <div class="address">
                 <!--text area-->
                 <h2>{{cmp.data.address.line1}}</h2>
@@ -29,6 +29,9 @@ export default {
     computed: {
         position() {
             return this.cmp.data.position
+        },
+        zoom() {
+            return this.cmp.data.zoom
         }
     }
 }

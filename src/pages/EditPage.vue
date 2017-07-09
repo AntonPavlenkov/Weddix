@@ -152,6 +152,12 @@ export default {
   }
 }
 
+
+.content-container{
+  text-align: center;
+  width: 100%;
+}
+
 .btn-modify {
   position: absolute;
   opacity: 0.2;
