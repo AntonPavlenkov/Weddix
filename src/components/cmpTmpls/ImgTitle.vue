@@ -1,13 +1,13 @@
 <template>
     <section class="img-title" :class="{'mark-class':isEditMode}"   >
         <div class="content" :style="cmp.style">
-            <span contenteditable @blur="updateText('name1')">{{cmp.data.name1}}</span>
+            <span class="name1" contenteditable @blur="updateText('name1')">{{cmp.data.name1}}</span>
             <div class="demo" :class="{[cmp.shape]: true}">
                 <svg width="300" height="300">
                     <image :xlink:href="cmp.data.imgUrl" width="300" height="300" />
                 </svg>
             </div>
-            <span contenteditable @blur="updateText('name2')">{{cmp.data.name2}}</span>
+            <span class="name2" contenteditable @blur="updateText('name2')">{{cmp.data.name2}}</span>
             <svg class="defs">
                 <defs>
                     <clipPath id="star-clip">
@@ -96,7 +96,9 @@ export default {
     position: relative;
     transition: all .5s;
 }
-
+.name1,.name2{
+    padding: 20px 0;
+}
 .content {
     display: flex;
     justify-content: space-around;
@@ -124,6 +126,19 @@ export default {
 
 .heart image {
     clip-path: url(#heart-clip);
+}
+
+@media (max-width: 650px){
+    .content {
+    display: flex;
+    flex-flow: row wrap;
+}
+ .demo{
+    order: 3;
+    width: 100%;
+    text-align: center;
+ }
+
 }
 </style>
 
