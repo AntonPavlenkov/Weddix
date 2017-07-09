@@ -6,7 +6,7 @@
         <ul class="catalogue">
           <li class="preview" v-for="(cmp, idx) in tmplCmps" @click="addNewCmp(cmp.type)" :key="idx">
             <div :src="cmp.cmpPreview" class="content-container">
-              <h3>{{cmp.type}}</h3>
+              <h3>{{cmp.label}}</h3>
               <img :src="cmp.cmpPreview">
             </div>
           </li>
@@ -18,12 +18,9 @@
       </md-dialog-actions>
     </md-dialog>
   
-    <draggable :list="cmpsToDisplay" @end="onEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
+    <draggable :list="cmpsToDisplay" @end="onDragEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
       <transition-group name="cmps" tag="p">
-        <component 
-        v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps"
-        class="border-default"
-        >
+        <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
         </component>
       </transition-group>
     </draggable>
@@ -62,10 +59,8 @@ export default {
     draggable,
     CountDown
   },
+  //need to consider if this is needed, or to use the load done on "welcome"
   created() {
-    console.log('edit page: Loading data from store');
-    // this.$store.dispatch({ type: 'loadCmp' })
-    // this.$store.dispatch({ type: 'loadPageEditObj' })
     this.$store.dispatch({ type: 'loadUser' })
   },
   data() {
@@ -89,8 +84,6 @@ export default {
   methods: {
     addNewCmp(newCmpType) {
       this.closeDialog('addDialog')
-      console.log(this.newCmpType, 'new cmp type', newCmpType)
-      // let newCmpType = newCmp;
       this.$store.dispatch({ type: 'addCmp', newCmpType })
     },
     openDialog(ref) {
@@ -99,7 +92,7 @@ export default {
     closeDialog(ref) {
       this.$refs[ref].close();
     },
-    onEnd(ev) {
+    onDragEnd(ev) {
       var newIndex = ev.newIndex;
       var oldIndex = ev.oldIndex;
       this.$store.dispatch({ type: 'dragCmp', newIndex, oldIndex })
@@ -128,6 +121,7 @@ export default {
   border-color: #ff5722;
   z-index: 1;
 }
+
 .mark-class-edit {
   border-color: red;
   z-index: 1;
@@ -141,7 +135,8 @@ export default {
   margin: 10px auto;
   text-align: center;
 }
-.add-btn{
+
+.add-btn {
   margin: 10px;
 }
 
@@ -178,7 +173,7 @@ export default {
 }
 
 
-.content-container{
+.content-container {
   text-align: center;
   width: 100%;
 }
@@ -245,7 +240,7 @@ export default {
 .list-leave-active {
   transition: all 1s;
 }
- 
+
 .list-enter,
 .list-leave-to {
   opacity: 0;

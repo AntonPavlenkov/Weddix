@@ -1,17 +1,23 @@
 <template>
-  <transition name="fade" appear>
-    <section class="main-app ltr">
-      <div class="welcome-message">
-        <span>Create a Stunning</span>
-        <br>
-        <span> Digital Wedding</span>
-        <br>
-        <span>Invitation </span>
-        <br>
-        <md-button @click="$router.push('/page/edit')" class="md-raised md-primary">Get Started!</md-button>
+  <section>
+    <md-snackbar :md-position="'top center'" ref="snackbar" :md-duration="5000">
+      <p class="message">Welcome Back!</p>
+      <md-button class="md-accent" @click="$refs.snackbar.close()">Close</md-button>
+    </md-snackbar>
+    <transition name="fade" appear>
+      <div class="main-app ltr">
+        <div class="welcome-message">
+          <span>Create a Stunning</span>
+          <br>
+          <span> Digital Wedding</span>
+          <br>
+          <span>Invitation </span>
+          <br>
+          <md-button @click="$router.push('/page/edit')" class="md-raised md-primary">Get Started!</md-button>
+        </div>
       </div>
-    </section>
-  </transition>
+    </transition>
+  </section>
 </template>
 
 <script>
@@ -23,16 +29,27 @@ export default {
   },
   data() {
     return {
-
-
     }
-
   },
+  created() {
+    this.$store.dispatch({ type: 'loadUser' })
+  },
+  computed: {
+    isReturningUser() {
+      return this.$store.state.isReturningUser;
+    },
+  },
+  watch: {
+    isReturningUser: function (newVal) {
+      this.$refs['snackbar'].open();
+    }
+  }
 }
+
 </script>
 
 <style scoped>
-section {
+.main-app {
   height: 100vh;
   width: 100%;
   margin: 0 auto;
@@ -41,9 +58,9 @@ section {
   display: flex;
   flex-flow: col wrap;
   justify-content: center;
-}
+/*}
 
-.main-app {
+.main-app {*/
   background-position: 0% 0%;
   height: 100vh;
   background-image: url(../assets/land2.png);
@@ -82,6 +99,9 @@ span {
   margin-top: 20px;
 }
 
+.message{
+  font-family: 'Handlee';
+}
 
 .fade-enter-active,
 .fade-leave-active {

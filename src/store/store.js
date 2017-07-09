@@ -14,20 +14,12 @@ const store = new Vuex.Store({
     isEditMode: false,
     // pageEditObj: null,
     isAdding: false,
+    isReturningUser: false
     // isLoading: true
   },
   getters: {
     //create the array that holds the cmps by the correct order, for rendreing
     cmpsToDisplay: state => {
-      // if (!state.selectedCmps || !state.pageEditObj) {
-      //   return null;
-      // }
-      // //make sure both selectedCmps and cmpsOrder are up to date
-      // if (state.selectedCmps.length === state.pageEditObj.cmpsOrder.length) {
-      //   var cmpsToDisplay = [];
-      //   state.pageEditObj.cmpsOrder.forEach(cmpId => {
-      //     cmpsToDisplay.push(getCmpById(cmpId))
-      //   });
       return state.selectedCmps;
     },
     isLoading: (state, getters) => {
@@ -36,19 +28,13 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    // setIsAdding(state, { isAdding }) {
-    //   console.log('set is adding')
-    //   state.isAdding = isAdding;
-    // },
-    // loadCmp(state, { cmps }) {
-    //   state.selectedCmps = cmps;
-    // },
-    // loadPageEditObj(state, { pageEditObj }) {
-    //   state.pageEditObj = pageEditObj;
-    // },
-    loadUser(state, { user }){
+    loadUser(state, { user }) {
+      // console.log(user)
       state.user = user;
       state.selectedCmps = user.cmps;
+      if (user.cmps.length > 0) {
+        state.isReturningUser = true;
+      }
     },
     addCmp(state, { user }) {
       state.user = user;
@@ -70,26 +56,34 @@ const store = new Vuex.Store({
       state.user = user;
       state.selectedCmps = user.cmps;
     },
-
   },
   actions: {
-    loadUser(context, payload){
+    loadUser(context, payload) {
       cmpService.getUser()
-      .then(res=>{
-        payload.user = res;
-        context.commit(payload);
-      })
+        .then(res => {
+          if (res) {
+            payload.user = res;
+            context.commit(payload);
+          }
+          //if no page exists yet - create it
+          else {
+            let newUser = createEmptyPageObj('user'+findNextId())
+            cmpService.createUser(newUser)
+            .then(res=>{
+              payload.user = res;
+              context.commit(payload);
+            })
+          }
+        })
     },
     addCmp(context, payload) {//payload has newCmpType (string)
       //  find a template that matches by type 
       let newCmp = cmpService.tmplCmps.find(tmpl => tmpl.type === payload.newCmpType);
-      console.log('newCmp',newCmp)
-      // console.log('payload',payload)
-      //modify "user" and send to server with PUT
+      console.log('newCmp', newCmp)
       let userToEdit = JSON.parse(JSON.stringify(context.state.user));
       userToEdit.cmps.push(newCmp);
-      userToEdit.cmps[userToEdit.cmps.length-1]._id = findNextId();
-      console.log('user to edit',userToEdit)
+      userToEdit.cmps[userToEdit.cmps.length - 1]._id = findNextId();
+      console.log('user to edit', userToEdit)
       //put the new user obj on the payload
       payload.user = userToEdit;
       context.commit(payload);
@@ -102,8 +96,7 @@ const store = new Vuex.Store({
       // splice from coppied array and send new User to service
       let userToEdit = JSON.parse(JSON.stringify(context.state.user));
       let idxToDeleteFromCmps = getCmpIdx(payload.cmp);
-      userToEdit.cmps.splice(idxToDeleteFromCmps,1);
-      console.log('userToEdit in delete',userToEdit)
+      userToEdit.cmps.splice(idxToDeleteFromCmps, 1);
       payload.user = userToEdit;
       context.commit(payload);
       //update cmps collection in db
@@ -169,15 +162,21 @@ function getCmpById(cmpId) {
   return store.state.selectedCmps.find(cmp => cmp._id === cmpId)
 }
 
-function findNextId()
-{
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+function createEmptyPageObj(userName) {
+  return {
+    user: userName,
+    cmps: []
+  }
+}
 
-    for( var i=0; i < 5; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
+function findNextId() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    return text;
+  for (var i = 0; i < 5; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
 }
 
 
@@ -186,7 +185,7 @@ function findNextId()
 var debounced = _.debounce(function (user) {
   cmpService.updateUser(user)
     .then(res => {
-      console.log(res)
+      // console.log(res)
       // do some validation....
     })
 }, 1000);

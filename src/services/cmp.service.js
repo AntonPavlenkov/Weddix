@@ -1,5 +1,3 @@
-// const urlCmp = 'http://localhost:3003/data/cmp';
-// const urlPage = 'http://localhost:3003/data/pageEdit';
 const urlUser = 'http://localhost:3003/data/user';
 import axios from 'axios';
 
@@ -70,45 +68,43 @@ const tmplCmps = [
         label: 'Countdown',
         data: { date: '' },
         style: { backgroundColor: 'white' },
-        cmpPreview: 'http://i.imgur.com/rrOX6tM.png'
+        cmpPreview: 'http://i.imgur.com/FbkUVty.png'
     },
 ];
 
-
-
-
-function createUser() {
-    //need to write this - POST
+function createUser(user) {
+    return axios.post(urlUser, user)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => console.log);
 }
 
+//called on page load
 function getUser() {
     let dataFromLocal = loadFromStorage('WeddixUser');
-    if (dataFromLocal) return  Promise.resolve(dataFromLocal);
+    if (dataFromLocal) {
+       return  Promise.resolve(dataFromLocal);
+    }
     return axios.get(urlUser)
-        .then(function (response) {
+        .then(response => {
+            console.log('respone from get',response);
             //we need only the first (and only) user
             //in the future (when login will be implemented),
             //this will be replaced by a get with ID
             saveToStorage('WeddixUser', response.data[0])
             return response.data[0];
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .catch(error => console.log);
 }
 
 function updateUser(user) {
+    console.log('put with ',user)
     saveToStorage('WeddixUser', user)
-    console.log('send update to server of:', user)
     return axios.put(`${urlUser}/${user._id}`, user)
-        .then(function (response) {
-            return response.data;
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
+        .then(response => response.data)
+        .catch(error => console.log);
 }
-
 
 function saveToStorage(key, any) {
     try {
@@ -129,14 +125,11 @@ function loadFromStorage(key) {
     return any;
 }
 
-
-
 export default {
     tmplCmps,
     getUser,
     createUser,
     updateUser,
-
 }
 
 
