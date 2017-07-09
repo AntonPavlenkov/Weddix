@@ -114,7 +114,7 @@ export default {
 
 .about-1,
 .about-2 {
-    width: 35%;
+    width: 40%;
     text-align: center;
     line-height: 30px;
 }
@@ -160,4 +160,32 @@ export default {
 .fade-leave-to {
     opacity: 0
 }
+
+
+@media (max-width: 650px) {
+   .content {
+    box-sizing: content-box;
+    padding: 5px;;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.main-img-container {
+    width: 100%;
+}
+.about-1,
+.about-2 {
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+}
+
+.about-1-img,
+.about-2-img {
+    display: block;
+    border-radius: 0;
+}
+.main-img {
+    border-radius: 0;
+}
+  }
 </style>

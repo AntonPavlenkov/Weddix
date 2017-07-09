@@ -40,4 +40,10 @@ export default {
   width: 100%;
   height: 200px;
 }
+
+@media (max-width: 650px) {
+  .map-cmp {
+    width: 100%;
+  }
+}
 </style>
