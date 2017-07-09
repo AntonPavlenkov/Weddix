@@ -77,13 +77,13 @@ export default {
     position: relative;
     margin: 15px 0;
     transition: all .5s;
-    padding: 30px;
 }
 
 .content {
     margin: 0;
     padding: 0;
     line-height: 20px;
+    padding: 10px;
 }
 
 .fade-enter-active,
