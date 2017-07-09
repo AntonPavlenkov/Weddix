@@ -12,6 +12,10 @@
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
             <md-icon>swap_vertical_circle</md-icon>
         </md-button>
+        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
+            <md-icon>delete_forever</md-icon>
+            <md-tooltip md-direction="top">Delete</md-tooltip>
+        </md-button>
     
         <transition name="fade">
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
@@ -44,7 +48,7 @@ export default {
         cmpToEdit() {
             return JSON.parse(JSON.stringify(this.cmp))
         },
-         subTitleFontSize() {
+        subTitleFontSize() {
             var currentFontSizeValue = this.cmp.style.fontSize;
             return +currentFontSizeValue.substring(0, currentFontSizeValue.indexOf("px")) * 0.6 + 'px';
         }
@@ -97,6 +101,7 @@ p {
 .fade-leave-to {
     opacity: 0
 }
+
 
 
 

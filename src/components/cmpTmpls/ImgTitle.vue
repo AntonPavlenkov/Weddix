@@ -1,5 +1,5 @@
 <template>
-    <section class="img-title" :class="{'mark-class':isEditMode}"   >
+    <section class="img-title" :class="{'mark-class':isEditMode}">
         <div class="content" :style="cmp.style">
             <span class="name1" contenteditable @blur="updateText('name1')">{{cmp.data.name1}}</span>
             <div class="demo" :class="{[cmp.shape]: true}">
@@ -28,6 +28,10 @@
         </md-button>
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
             <md-icon>swap_vertical_circle</md-icon>
+        </md-button>
+        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
+            <md-icon>delete_forever</md-icon>
+            <md-tooltip md-direction="top">Delete</md-tooltip>
         </md-button>
     
         <transition name="fade">
@@ -70,7 +74,7 @@ export default {
 
     methods: {
         updateCmp(updatedCmp) {
-            console.log('updating',updatedCmp)
+            console.log('updating', updatedCmp)
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
         updateText(text) {
@@ -96,9 +100,12 @@ export default {
     position: relative;
     transition: all .5s;
 }
-.name1,.name2{
+
+.name1,
+.name2 {
     padding: 20px 0;
 }
+
 .content {
     display: flex;
     justify-content: space-around;
@@ -128,17 +135,16 @@ export default {
     clip-path: url(#heart-clip);
 }
 
-@media (max-width: 650px){
+@media (max-width: 650px) {
     .content {
-    display: flex;
-    flex-flow: row wrap;
-}
- .demo{
-    order: 3;
-    width: 100%;
-    text-align: center;
- }
-
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .demo {
+        order: 3;
+        width: 100%;
+        text-align: center;
+    }
 }
 </style>
 

@@ -5,8 +5,15 @@
                 <label>{{'img -' + (i+1)}}</label>
                 <md-input :value="imgUrl"></md-input>
             </md-input-container>
-            <md-button class="md-raised md-primary" @click="addPic">Add Pic</md-button>
-            <md-button class="md-raised md-primary" type="submit">submit</md-button>
+            <md-button @click="addPic" class="md-fab md-mini md-clean">
+                <md-icon>add</md-icon>
+                <md-tooltip md-direction="top">Add Image</md-tooltip>
+            </md-button>
+            <md-button class="md-fab md-mini md-clean" type="submit">
+                <md-icon>save</md-icon>
+                <md-tooltip md-direction="top">Save</md-tooltip>
+            </md-button>
+    
         </form>
     </section>
 </template>
@@ -56,6 +63,10 @@ export default {
     justify-content: space-around;
     align-items: center;
     width: 100%;
+}
+
+.urls-form{
+    text-align: center;
 }
 
 .defs {

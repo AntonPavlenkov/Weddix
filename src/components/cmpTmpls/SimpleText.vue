@@ -1,5 +1,5 @@
 <template>
-    <section class="simple-text"  :class="{'mark-class': isEditMode}">
+    <section class="simple-text" :class="{'mark-class': isEditMode}">
         <div class="content" :style="cmp.style">
             <p @blur="updateText('txtLine1')" :contenteditable="isEditMode">{{cmp.data.txtLine1}}</p>
             <p @blur="updateText('txtLine2')" :contenteditable="isEditMode">{{cmp.data.txtLine2}}</p>
@@ -15,6 +15,10 @@
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
             <md-icon>swap_vertical_circle</md-icon>
             <md-tooltip md-direction="top">Reorder</md-tooltip>
+        </md-button>
+        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
+            <md-icon>delete_forever</md-icon>
+            <md-tooltip md-direction="top">Delete</md-tooltip>
         </md-button>
     
         <transition name="fade">

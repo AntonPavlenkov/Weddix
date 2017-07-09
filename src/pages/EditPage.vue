@@ -195,7 +195,7 @@ export default {
   top: 10px;
 }
 
-.btn-modify:hover {
+.btn-modify,.btn-delete:hover {
   cursor: pointer;
 }
 
@@ -206,6 +206,12 @@ export default {
 .btn-dragndrop:hover {
   cursor: move;
 }
+
+.btn-delete{
+  top:110px;
+}
+
+
 
 .edit-console {
   display: flex;
