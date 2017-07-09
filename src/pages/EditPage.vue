@@ -110,6 +110,9 @@ export default {
   min-height: 100vh;
   line-height: 100%;
   box-sizing: border-box;
+    .cmp-father{
+        margin-top: -4px;
+    }
 }
 
 .border-default {

@@ -1,6 +1,6 @@
 <template>
-    <section class="location-map" :class="{'mark-class': isEditMode}">
-        <div class="content" :style="cmp.style">
+    <section class="location-map cmp-father" :class="{'mark-class': isEditMode}"> 
+        <div class="content" :style="cmp.style" >
             <!--map cmp-->
             <map-cmp :position="position" :zoom="zoom"></map-cmp>
             <div class="address">
@@ -103,7 +103,6 @@ export default {
     box-sizing: border-box;
     width: 100%;
     position: relative;
-    margin-top: 5px;
 }
 
 .content {

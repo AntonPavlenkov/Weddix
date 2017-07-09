@@ -1,6 +1,6 @@
 <template>
-    <section class="img-title" :class="{'mark-class':isEditMode}">
-        <div class="content" :style="cmp.style">
+    <section class="img-title cmp-father" :class="{'mark-class':isEditMode}" >
+        <div class="content" :style="cmp.style"  >
             <span class="name1" contenteditable @blur="updateText('name1')">{{cmp.data.name1}}</span>
             <div class="demo" :class="{[cmp.shape]: true}">
                 <svg width="300" height="300">
@@ -111,10 +111,6 @@ export default {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-}
-
-.demo {
-    // border: 1px solid black
 }
 
 .defs {

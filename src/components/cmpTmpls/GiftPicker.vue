@@ -1,5 +1,5 @@
 <template>
-    <section class="gift-picker" :style="cmp.style" :class="{'mark-class': isEditMode}">
+    <section class="gift-picker cmp-father" :style="cmp.style" :class="{'mark-class': isEditMode}">
         <span class="title">Gifts we want</span>
         <div class="content">
             <gift-card v-for="(gift, idx) in cmp.data.gifts" :key="idx" :gift="gift" :idx="idx" @updateGift="updateGift"></gift-card>
@@ -96,7 +96,7 @@ export default {
 <style scoped>
 .gift-picker {
     position: relative;
-    margin: 15px 0;
+    /*margin: 15px 0;*/
     transition: all .5s;
     padding: 30px;
     display: flex;
@@ -106,7 +106,7 @@ export default {
 }
 
 .content {
-    margin: 0;
+    /*margin: 0;*/
     padding: 0;
     line-height: 20px;
     display: flex;
