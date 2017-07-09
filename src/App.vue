@@ -1,14 +1,8 @@
 <template>
   <div id="app">
     <main>
-<<<<<<< HEAD
         <router-view>
         </router-view>
-=======
-      <router-view>
-      </router-view>
-      
->>>>>>> origin/master
     </main>
   </div>
 </template>
