@@ -116,7 +116,7 @@ export default {
 }
 
 .border-default {
-  border-width: 2px;
+    border-width: 2px;
   border-style: dashed;
   border-color: (rgba(0, 0, 0, 0))
 }
