@@ -1,23 +1,22 @@
 <template>
-  <section>
-    <header class="navbar">
-      <div class="logo">Weddix</div>
-      <!--<router-link to="/"> Weddix</router-link>-->
-      <md-tabs class="md-transparent" md-right @change="changeRoute">
-        <md-tab md-icon="mode_edit" md-label="EDIT" md-active md-tooltip="Edit your invitation">
-        </md-tab>
-        <md-tab md-icon="laptop" md-label="PREVIEW" md-tooltip="Preview your invitation">
-        </md-tab>
-        <md-tab md-icon="cloud_upload" md-label="PUBLISH" md-tooltip="Get a direct link">
-        </md-tab>
-  
-      </md-tabs>
-    </header>
-  
-    <router-view>
-    </router-view>
-<main-footer></main-footer>
-  </section>
+  <transition name="fade" appear>
+    <section>
+      <header class="navbar">
+        <div class="logo" @click="goHome()">Weddix</div>
+        <md-tabs class="md-transparent" md-right @change="changeRoute">
+          <md-tab md-icon="mode_edit" md-label="EDIT" md-active md-tooltip="Edit your invitation">
+          </md-tab>
+          <md-tab md-icon="laptop" md-label="PREVIEW" md-tooltip="Preview your invitation">
+          </md-tab>
+          <md-tab md-icon="cloud_upload" md-label="PUBLISH" md-tooltip="Get a direct link">
+          </md-tab>
+        </md-tabs>
+      </header>
+      <router-view>
+      </router-view>
+      <main-footer></main-footer>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -47,8 +46,12 @@ export default {
       }
       this.$router.push(destRoute);
     },
+    goHome() {
+      console.log('hohome')
+      this.$router.push('/');
+    }
   },
-  components:{
+  components: {
     MainFooter
   }
 }
@@ -75,5 +78,17 @@ section {
   font-size: 55px;
   font-weight: 900; // letter-spacing: 0.1em;
   text-shadow: 3px 3px 8px rgba(64, 117, 159, 1);
+  cursor: pointer;
+  z-index: 99;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
 }
 </style>

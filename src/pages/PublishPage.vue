@@ -1,13 +1,14 @@
 <template>
-  <section>
-    <!--<h2>PUBLISH</h2>-->
-    <div class="btn-holder" v-if="isLoading">
-      <md-spinner md-indeterminate class="btn-holder"></md-spinner>
-    </div>
-    <component v-if="cmpsToDisplay" v-for="cmp in cmpsToDisplay" v-bind:is="'Dumb'+cmp.type" :key="cmp.type" :cmp="cmp">
-    </component>
-  
-  </section>
+  <transition name="fade" appear>
+    <section>
+      <!--<h2>PUBLISH</h2>-->
+      <div class="btn-holder" v-if="isLoading">
+        <md-spinner md-indeterminate class="btn-holder"></md-spinner>
+      </div>
+      <component v-if="cmpsToDisplay" v-for="cmp in cmpsToDisplay" v-bind:is="'Dumb'+cmp.type" :key="cmp.type" :cmp="cmp">
+      </component>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -53,9 +54,19 @@ section {
   /*width: 90%;*/
   margin: 0 auto;
 }
+
 .btn-holder {
   margin-top: 10px;
   text-align: center;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
+}
 </style>

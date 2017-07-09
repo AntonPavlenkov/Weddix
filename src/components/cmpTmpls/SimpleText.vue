@@ -1,5 +1,5 @@
 <template>
-    <section class="simple-text":style="cmp.style">
+    <section class="simple-text":style="cmp.style" :class="{'mark-class': isEditMode}">
         <div class="content" >
             <p @blur="updateText('txtLine1')" :contenteditable="isEditMode">{{cmp.data.txtLine1}}</p>
             <p @blur="updateText('txtLine2')" :contenteditable="isEditMode">{{cmp.data.txtLine2}}</p>

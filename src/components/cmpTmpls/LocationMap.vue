@@ -1,6 +1,6 @@
 <template>
-    <section class="location-map">
-        <div class="content" :style="cmp.style">
+    <section class="location-map" :class="{'mark-class': isEditMode}"> 
+        <div class="content" :style="cmp.style" >
             <!--map cmp-->
             <map-cmp :position="position" :zoom="zoom"></map-cmp>
             <div class="address">
@@ -8,12 +8,11 @@
                 <h2>{{cmp.data.address.line1}}</h2>
                 <h3>{{cmp.data.address.line2}}</h3>
                 <h3>{{cmp.data.address.line3}}</h3>
-                <md-button class="md-fab md-clean  md-mini color-picker-btn">
+                <md-button class="md-fab md-clean md-mini">
                     <md-icon>navigation</md-icon>
                     <md-tooltip md-direction="top">Take me there!</md-tooltip>
                 </md-button>
             </div>
-    
         </div>
     
         <!-- edit buttons-->
@@ -55,7 +54,7 @@ export default {
     data() {
         return {
             isEditMode: false,
-            color: "",
+            // color: "",
         }
     },
     computed: {
@@ -84,9 +83,9 @@ export default {
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
-        updateColor: function (event) {
-            this.color = event.color;
-        },
+        // updateColor: function (event) {
+        //     this.color = event.color;
+        // },
 
     }
 }

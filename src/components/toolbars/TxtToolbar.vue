@@ -1,12 +1,15 @@
 <template>
   <section class="text-toolbar  md-mini">
+
   
     <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
       <md-icon>format_color_fill</md-icon>
       <color-picker :change="updateColor" @changeColor="changeCssProperty('color', $event)"></color-picker>
       <md-tooltip md-direction="top">Change color of the text</md-tooltip>
     </md-button>
-  
+    
+
+
     <md-menu md-align-trigger>
       <md-button md-menu-trigger class="md-fab md-clean  md-mini">
         <md-icon>text_format</md-icon>
@@ -52,12 +55,7 @@
         <md-tooltip md-direction="top">Change text size</md-tooltip>
       </md-button>
       <md-menu-content>
-        <md-menu-item @click="changeCssProperty('fontSize','12px')">12px</md-menu-item>
-        <md-menu-item @click="changeCssProperty('fontSize','16px')">16px</md-menu-item>
-        <md-menu-item @click="changeCssProperty('fontSize','18px')">18px</md-menu-item>
-        <md-menu-item @click="changeCssProperty('fontSize','20px')">20px</md-menu-item>
-        <md-menu-item @click="changeCssProperty('fontSize','22px')">22px</md-menu-item>
-        <md-menu-item @click="changeCssProperty('fontSize','24px')">24px</md-menu-item>
+            <input type="range" @mousedown.stop min="12" max="60" @input="changeFOntSize">
       </md-menu-content>
     </md-menu>
   
@@ -102,7 +100,10 @@ export default {
       this.cmpStyleEdit.style[prop] = val;
       this.$emit('update', this.cmpStyleEdit)
     },
-  }
+    changeFOntSize(){
+      this.changeCssProperty('fontSize', event.target.value + 'px ')
+    }
+    }
 }
 </script>
 
@@ -113,6 +114,9 @@ export default {
   flex-flow: row wrap;
   justify-content: center;
   width: 100%;
+}
+.md-menu-content{
+  min-height: 0;
 }
 
 .font-shadows {

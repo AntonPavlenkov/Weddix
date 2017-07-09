@@ -1,5 +1,5 @@
 <template>
-    <section class="count-down" :style="cmp.style">
+    <section class="count-down border-default" :style="cmp.style" :class="{'mark-class': isEditMode}">
         <div class="content" >
 
         <div class="calendar-date">

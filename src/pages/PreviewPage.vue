@@ -3,7 +3,6 @@
     <!--<h2>PREVIEW</h2>-->
     <component v-if="cmpsToDisplay" v-for="cmp in cmpsToDisplay" v-bind:is="'Dumb'+cmp.type" :key="cmp.type" :cmp="cmp">
       </component>
-  
   </section>
 </template>
 
@@ -41,4 +40,5 @@ section {
   /*width: 90%;*/
   margin: 0 auto;
 }
+
 </style>

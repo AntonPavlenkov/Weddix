@@ -1,25 +1,24 @@
 <template>
-  <section class="main-app ltr">
-  
-    <div class="welcome-message">
-      <span>Create a Stunning</span>
-      <br>
-      <span> Digital Wedding</span>
-      <br>
-      <span>Invitation </span>
-      <br>
-      <md-button @click="$router.push('/page/edit')" class="md-raised md-primary">Get Started!</md-button>
-  
-    </div>
-  <!--<main-footer></main-footer>-->
-  </section>
+  <transition name="fade" appear>
+    <section class="main-app ltr">
+      <div class="welcome-message">
+        <span>Create a Stunning</span>
+        <br>
+        <span> Digital Wedding</span>
+        <br>
+        <span>Invitation </span>
+        <br>
+        <md-button @click="$router.push('/page/edit')" class="md-raised md-primary">Get Started!</md-button>
+      </div>
+    </section>
+  </transition>
 </template>
 
 <script>
 import MainFooter from './MainFooter'
 export default {
   name: 'Welcome',
-  components:{
+  components: {
     MainFooter
   },
   data() {
@@ -81,6 +80,17 @@ span {
   width: 100%;
   display: block;
   margin-top: 20px;
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
 }
 </style>
 

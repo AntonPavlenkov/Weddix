@@ -43,17 +43,13 @@ export default {
         updateCmp(updatedCmp) {
             this.$emit('update', updatedCmp);
         },
-        // updateUrl(url) {
-        //     this.newUrl = this.cmpToEdit.data[url]
-        //     this.selectedPicture = url
-        // },
         saveNewUrl() {
-            this.cmpToEdit.data.imgUrl = this.newUrl
-            this.updateCmp(this.cmpToEdit)
+            this.cmpToEdit.data.imgUrl = this.newUrl;
+            this.updateCmp(this.cmpToEdit);
         },
         changeImageShape(newShape) {
             this.cmpToEdit.shape = newShape;
-            this.updateCmp(this.cmpToEdit)
+             this.updateCmp(this.cmpToEdit);
         }
     }
 }
