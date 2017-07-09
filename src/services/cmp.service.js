@@ -155,12 +155,33 @@ function updatePage(pageEdit) {
 function getPageEdit() {
     return axios.get(urlPage)
         .then(function (response) {
+            console.log(response.data)
             return response.data;
         })
         .catch(function (error) {
             console.log(error);
         });
 }
+
+function saveToStorage(key, any) {
+    try {
+        localStorage.setItem(key, JSON.stringify(any));
+    } catch (err) {
+        console.error('Problem saving to storage', err);
+    }
+}
+
+function loadFromStorage(key) {
+    var any = null;
+    try {
+        any = JSON.parse(localStorage.getItem(key));
+    } catch (err) {
+        console.warn('Removing Corrupted data from storage', err);
+        localStorage.removeItem(key);
+    }
+    return any;
+}
+
 
 
 export default {
