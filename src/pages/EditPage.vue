@@ -18,9 +18,12 @@
       </md-dialog-actions>
     </md-dialog>
   
-    <draggable :list="cmpsToDisplay" @end="onEnd" :options="{draggable:'section', handle:'.btn-dragndrop'}">
+    <draggable :list="cmpsToDisplay" @end="onEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
       <transition-group name="cmps" tag="p">
-        <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps">
+        <component 
+        v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="cmp._id" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps"
+        class="border-default"
+        >
         </component>
       </transition-group>
     </draggable>
@@ -109,6 +112,24 @@ export default {
 <style style lang="scss">
 .edit-page {
   min-height: 100vh;
+  line-height: 100%;
+  box-sizing: border-box;
+}
+
+.border-default {
+  border-width: 2px;
+  border-style: dashed;
+  border-color: (rgba(0, 0, 0, 0))
+}
+
+
+.mark-class {
+  border-color: #ff5722;
+  z-index: 1;
+}
+.mark-class-edit {
+  border-color: red;
+  z-index: 1;
 }
 
 .preview {
@@ -116,7 +137,7 @@ export default {
 }
 
 .btn-holder {
-  margin: 10px auto;
+  margin: 1 0px auto;
   text-align: center;
 }
 
@@ -220,7 +241,7 @@ export default {
 .list-leave-active {
   transition: all 1s;
 }
-
+ 
 .list-enter,
 .list-leave-to {
   opacity: 0;

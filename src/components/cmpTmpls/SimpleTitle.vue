@@ -1,6 +1,6 @@
 <template>
     <section class="simple-title">
-        <div class="content" :style="cmp.style">
+        <div class="content" :style="cmp.style" :class="{'mark-class': isEditMode}">
             <p @blur="updateText('mainTitle')" :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
             <p @blur="updateText('subTitle')" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
