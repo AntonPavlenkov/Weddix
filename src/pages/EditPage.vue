@@ -33,7 +33,7 @@
     </div>
   
     <div class="btn-holder">
-      <md-button class="md-icon-button md-raised md-primary" id="custom" @click="openDialog('addDialog')">
+      <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
         <md-icon>add</md-icon>
       </md-button>
     </div>
@@ -137,8 +137,11 @@ export default {
 }
 
 .btn-holder {
-  margin: 1 0px auto;
+  margin: 10px auto;
   text-align: center;
+}
+.add-btn{
+  margin: 10px;
 }
 
 .cmpStyle:hover {
