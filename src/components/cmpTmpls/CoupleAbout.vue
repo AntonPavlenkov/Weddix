@@ -1,5 +1,5 @@
 <template>
-    <section class="couple-about">
+    <section class="couple-about" :class="{'mark-class': isEditMode}">
         <div class="content" :style="cmp.style">
             <!--@click="modifyDragMode(true)" @blur="modifyDragMode(false)"-->
             <div class="about-1">

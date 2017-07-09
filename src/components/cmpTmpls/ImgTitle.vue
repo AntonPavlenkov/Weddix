@@ -1,5 +1,5 @@
 <template>
-    <section class="img-title">
+    <section class="img-title" :class="{'mark-class':isEditMode}"   >
         <div class="content" :style="cmp.style">
             <span contenteditable @blur="updateText('name1')">{{cmp.data.name1}}</span>
             <div class="demo" :class="{[cmp.shape]: true}">
@@ -94,6 +94,7 @@ export default {
 <style scoped lang="scss">
 .img-title {
     position: relative;
+    transition: all .5s;
 }
 
 .content {
