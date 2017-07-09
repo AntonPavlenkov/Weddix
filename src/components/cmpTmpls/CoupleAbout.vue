@@ -1,22 +1,17 @@
 <template>
     <section class="couple-about" :class="{'mark-class': isEditMode}">
         <div class="content" :style="cmp.style">
-            <!--@click="modifyDragMode(true)" @blur="modifyDragMode(false)"-->
             <div class="about-1">
-                <!--<span @blur="updateText('aboutName1')" @click="modifyDragMode(true)" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>-->
                 <span @blur="updateText('aboutName1')" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>
-                <img @click="updateUrl('aboutImgUrl1')" :src="cmp.data.aboutImgUrl1" class="about-1-img" width="100px" height="200px">
-                <!--<span @blur="updateText('aboutInfo1')" @click="modifyDragMode(true)" :style="cmp.style" :contenteditable="isEditMode" class="about-1-info">{{cmp.data.aboutInfo1}}</span>-->
+                <img @click="setImg('aboutImgUrl1')" :src="cmp.data.aboutImgUrl1" class="about-1-img" width="100px" height="200px">
                 <span @blur="updateText('aboutInfo1')" :style="cmp.style" :contenteditable="isEditMode" class="about-1-info">{{cmp.data.aboutInfo1}}</span>
             </div>
             <div class="main-img-container">
-                <img @click="updateUrl('mainImgUrl')" clsas="main-img" :src="cmp.data.mainImgUrl" class="main-img" width="100%">
+                <img @click="setImg('mainImgUrl')" clsas="main-img" :src="cmp.data.mainImgUrl" class="main-img" width="100%">
             </div>
             <div class="about-2">
-                <!--<span @blur="updateText('aboutName2')"  @click="modifyDragMode(true)"  :contenteditable="isEditMode" class="about-2-name">{{cmp.data.aboutName2}}</span>-->
                 <span @blur="updateText('aboutName2')" :contenteditable="isEditMode" class="about-2-name">{{cmp.data.aboutName2}}</span>
-                <img @click="updateUrl('aboutImgUrl2')" :src="cmp.data.aboutImgUrl2" class="about-2-img" width="100px" height="200px">
-                <!--<span @blur="updateText('aboutInfo2')"  @click="modifyDragMode(true)" :style="cmp.style" :contenteditable="isEditMode" class="about-2-info">{{cmp.data.aboutInfo2}}</span>-->
+                <img @click="setImg('aboutImgUrl2')" :src="cmp.data.aboutImgUrl2" class="about-2-img" width="100px" height="200px">
                 <span @blur="updateText('aboutInfo2')" :style="cmp.style" :contenteditable="isEditMode" class="about-2-info">{{cmp.data.aboutInfo2}}</span>
             </div>
     
@@ -29,19 +24,12 @@
         <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
             <md-icon>swap_vertical_circle</md-icon>
         </md-button>
-
         <transition name="fade">
-            <div v-if="isEditMode" class="edit-console" v-draggable>
-                <md-input-container v-if="newUrl" md-clearable class="input-newUrl">
-                    <label>Enter New Url</label>
-                    <md-input v-model="newUrl"></md-input>
-                </md-input-container>
-                <md-button @click="saveNewUrl" v-if="newUrl" class="md-fab md-mini md-clean">
-                    <md-icon>save</md-icon>
-                </md-button>
+            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
+                <couple-toolbar v-if="selectedImgType!==''" :cmp="cmp" :selectedImgType="selectedImgType" @update="updateCmp"></couple-toolbar>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-            </div>
+            </edit-console>
         </transition>
     </section>
 </template>
@@ -49,22 +37,23 @@
 <script>
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
+import EditConsole from '../toolbars/EditConsole'
+import CoupleToolbar from '../toolbars/CoupleToolbar'
 export default {
     name: 'CoupleAbout',
     props: ['cmp', 'isFirst', 'isLast'],
     components: {
         TxtToolbar,
-        GeneralEdit
+        GeneralEdit,
+        EditConsole,
+        CoupleToolbar        
     },
     data() {
         return {
             isEditMode: false,
-            color: "",
-            newUrl: '',
-            selectedPicture: ''
-
-
-
+            // color: "",
+            // currUrl: '',
+            selectedImgType:''
         }
     },
     computed: {
@@ -73,16 +62,12 @@ export default {
         }
     },
     methods: {
-        updateUrl(url) {
-            this.newUrl = this.cmpToEdit.data[url]
-            this.selectedPicture = url
+        setImg(imgType) {
+            // this.currUrl = this.cmpToEdit.data[imgType]
+            this.selectedImgType = imgType
+            console.log(this.selectedImgType)
         },
-        saveNewUrl() {
-            console.log(this.newUrl)
-            this.cmpToEdit.data[this.selectedPicture] = this.newUrl
-            console.log(this.cmpToEdit.data[this.selectedPicture])
-            this.updateCmp(this.cmpToEdit)
-        },
+
         moveCmp(isUp) {
             this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
         },
@@ -95,15 +80,14 @@ export default {
         },
         updateText(text) {
             this.cmpToEdit.data[text] = event.target.innerText;
-            // this.modifyDragMode(true);
             this.updateCmp(this.cmpToEdit);
         },
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
-        updateColor: function (event) {
-            this.color = event.color;
-        },
+        // updateColor: function (event) {
+        //     this.color = event.color;
+        // },
     }
 }
 </script>
@@ -167,11 +151,11 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .5s
+    transition: opacity .5s
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0
+    opacity: 0
 }
 </style>

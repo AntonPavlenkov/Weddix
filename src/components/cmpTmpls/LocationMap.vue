@@ -8,7 +8,7 @@
                 <h2>{{cmp.data.address.line1}}</h2>
                 <h3>{{cmp.data.address.line2}}</h3>
                 <h3>{{cmp.data.address.line3}}</h3>
-                <md-button class="md-fab md-clean  md-mini color-picker-btn">
+                <md-button class="md-fab md-clean md-mini">
                     <md-icon>navigation</md-icon>
                     <md-tooltip md-direction="top">Take me there!</md-tooltip>
                 </md-button>
@@ -55,7 +55,7 @@ export default {
     data() {
         return {
             isEditMode: false,
-            color: "",
+            // color: "",
         }
     },
     computed: {
@@ -84,9 +84,9 @@ export default {
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
-        updateColor: function (event) {
-            this.color = event.color;
-        },
+        // updateColor: function (event) {
+        //     this.color = event.color;
+        // },
 
     }
 }
