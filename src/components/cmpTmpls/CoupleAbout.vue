@@ -98,7 +98,6 @@ export default {
 .couple-about {
     transition: all .5s;
     box-sizing: content-box;
-    width: 100%;
     position: relative;
 }
 
