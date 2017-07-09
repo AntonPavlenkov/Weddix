@@ -109,17 +109,8 @@ function updateUser(user) {
     console.log('put with ',user)
     saveToStorage('WeddixUser', user)
     return axios.put(`${urlUser}/${user._id}`, user)
-<<<<<<< HEAD
         .then(response => response.data)
         .catch(error => console.log);
-=======
-        .then( (response) => {
-            return response.data;
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
->>>>>>> origin/master
 }
 
 function saveToStorage(key, any) {
