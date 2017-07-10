@@ -10,16 +10,7 @@
     </div>
   
     <!--edit buttons-->
-    <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
-      <md-icon>edit</md-icon>
-    </md-button>
-    <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
-      <md-icon>swap_vertical_circle</md-icon>
-    </md-button>
-    <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
-      <md-icon>delete_forever</md-icon>
-      <md-tooltip md-direction="top">Delete</md-tooltip>
-    </md-button>
+        <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
   
     <transition name="fade">
       <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
@@ -32,6 +23,7 @@
 </template>
 
 <script>
+import ModifyBtns from '../toolbars/ModifyBtns'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import CarouselToolbar from '../toolbars/CarouselToolbar'
 import EditConsole from '../toolbars/EditConsole'
@@ -56,7 +48,8 @@ export default {
     'slide': Slide,
     GeneralEdit,
     CarouselToolbar,
-    EditConsole
+    EditConsole,
+    ModifyBtns
   },
   methods: {
     moveCmp(isUp) {

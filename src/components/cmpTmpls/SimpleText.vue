@@ -1,6 +1,6 @@
 <template>
-    <section class="simple-text cmp-father"  :class="{'mark-class': isEditMode}" >
-        <div class="content"  :style="cmp.style">
+    <section class="simple-text cmp-father" :style="cmp.style">
+        <div class="content" :class="{'mark-class': isEditMode}">
             <p @blur="updateText('txtLine1')" :contenteditable="isEditMode">{{cmp.data.txtLine1}}</p>
             <p @blur="updateText('txtLine2')" :contenteditable="isEditMode">{{cmp.data.txtLine2}}</p>
             <p @blur="updateText('txtLine3')" :contenteditable="isEditMode">{{cmp.data.txtLine3}}</p>
@@ -8,18 +8,8 @@
         </div>
     
         <!--edit buttons-->
-        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
-            <md-icon>edit</md-icon>
-            <md-tooltip md-direction="top">Edit</md-tooltip>
-        </md-button>
-        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
-            <md-icon>swap_vertical_circle</md-icon>
-            <md-tooltip md-direction="top">Reorder</md-tooltip>
-        </md-button>
-        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
-            <md-icon>delete_forever</md-icon>
-            <md-tooltip md-direction="top">Delete</md-tooltip>
-        </md-button>
+        <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
+    
     
         <transition name="fade">
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
@@ -31,6 +21,7 @@
 </template>
 
 <script>
+import ModifyBtns from '../toolbars/ModifyBtns'
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
@@ -38,6 +29,7 @@ export default {
     name: 'SimpleText',
     props: ['cmp', 'isFirst', 'isLast'],
     components: {
+        ModifyBtns,
         TxtToolbar,
         GeneralEdit,
         EditConsole

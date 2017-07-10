@@ -19,18 +19,7 @@
             <div class="clock"></div>
             <div class="message"></div>
     
-            <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
-                <md-icon>edit</md-icon>
-                <md-tooltip md-direction="top">Edit</md-tooltip>
-            </md-button>
-            <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
-                <md-icon>swap_vertical_circle</md-icon>
-                <md-tooltip md-direction="top">Reorder</md-tooltip>
-            </md-button>
-            <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
-                <md-icon>delete_forever</md-icon>
-                <md-tooltip md-direction="top">Delete</md-tooltip>
-            </md-button>
+        <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
     
         </div>
         <transition name="fade">
@@ -45,6 +34,8 @@
 
 
 <script>
+import ModifyBtns from '../toolbars/ModifyBtns'
+
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import flipclock from '../../assets/Clock/flipclock.min.js'
 import '../../assets/Clock/flipclock.css'
@@ -58,8 +49,8 @@ export default {
     components: {
         GeneralEdit,
         Datepicker,
-        EditConsole
-
+        EditConsole,
+        ModifyBtns
     },
     created() {
     },
@@ -193,6 +184,7 @@ hr {
     font-size: 2em;
     font-weight: bold;
 }
+
 
 
 

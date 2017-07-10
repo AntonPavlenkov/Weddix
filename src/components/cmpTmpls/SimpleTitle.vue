@@ -1,21 +1,12 @@
 <template>
     <section class="simple-title cmp-father" :style="cmp.style">
-        <div class="content"  :class="{'mark-class': isEditMode}">
+        <div class="content" :class="{'mark-class': isEditMode}">
             <p @blur="updateText('mainTitle')" :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
             <p @blur="updateText('subTitle')" :style="{fontSize: subTitleFontSize}" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
     
         <!--edit buttons-->
-        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
-            <md-icon>edit</md-icon>
-        </md-button>
-        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
-            <md-icon>swap_vertical_circle</md-icon>
-        </md-button>
-        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
-            <md-icon>delete_forever</md-icon>
-            <md-tooltip md-direction="top">Delete</md-tooltip>
-        </md-button>
+        <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
     
         <transition name="fade">
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
@@ -27,6 +18,7 @@
 </template>
 
 <script>
+import ModifyBtns from '../toolbars/ModifyBtns'
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
@@ -36,7 +28,8 @@ export default {
     components: {
         TxtToolbar,
         GeneralEdit,
-        EditConsole
+        EditConsole,
+        ModifyBtns
     },
     data() {
         return {
@@ -83,7 +76,7 @@ export default {
     transition: all .5s;
 }
 
-.content{
+.content {
     margin: 30px 0;
 }
 
@@ -102,6 +95,10 @@ p {
 .fade-leave-to {
     opacity: 0
 }
+
+
+
+
 
 
 

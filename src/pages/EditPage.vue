@@ -157,9 +157,11 @@ export default {
   min-height: 100vh;
   line-height: 100%;
   box-sizing: border-box;
-  .cmp-father {
-    margin-top: -4px;
-  }
+}
+
+.cmp-father {
+  margin-top: -4px;
+  box-sizing: border-box;
 }
 
 .border-default {
