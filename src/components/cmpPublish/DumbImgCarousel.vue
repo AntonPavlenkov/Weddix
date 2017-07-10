@@ -13,7 +13,7 @@
 <script>
 import { Carousel3d, Slide } from 'vue-carousel-3d';
 export default {
-  name: 'img-carousel',
+  name: 'DumbImgCarousel',
   props: ['cmp'],
 }
 </script>

@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    name: 'SimpleText',
+    name: 'DumbSimpleText',
     props: ['cmp']
 }
 </script>

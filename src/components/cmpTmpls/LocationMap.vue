@@ -1,8 +1,8 @@
 <template>
     <section class="location-map cmp-father" :style="cmp.style">
-        <div class="content"  :class="{'mark-class': isEditMode}">
+        <div class="content" :class="{'mark-class': isEditMode}">
             <!--map cmp-->
-            <map-cmp :position="position" :zoom="zoom"></map-cmp>
+            <map-cmp :position="position" :zoom="zoom" :center="center"></map-cmp>
             <div class="address">
                 <!--text area-->
                 <h2>{{cmp.data.address.line1}}</h2>
@@ -64,6 +64,9 @@ export default {
         },
         zoom() {
             return this.cmp.data.zoom
+        },
+        center() {
+            return this.cmp.data.position
         }
     },
 
@@ -81,10 +84,6 @@ export default {
         updateCmp(updatedCmp) {
             this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
-        // updateColor: function (event) {
-        //     this.color = event.color;
-        // },
-
     }
 }
 </script>
@@ -95,6 +94,7 @@ export default {
     box-sizing: border-box;
     position: relative;
 }
+
 .content {
     padding: 20px 0;
     display: flex;

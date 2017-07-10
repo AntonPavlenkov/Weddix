@@ -1,20 +1,17 @@
 <template>
   <section class="map-cmp cmp-father">
-    <gmap-map class="map" :center="center" :zoom="zoom">
+    <gmap-map v-if="center" class="map" :center="center" :zoom="zoom">
       <gmap-marker :position="position"></gmap-marker>
     </gmap-map>
   </section>
 </template>
 
 <script>
-
-const CENTER_DEFAULT = { lat: 32.087893, lng: 34.803038 };
-
 export default {
   props: ['position','zoom'],
-  data() {
+  data(){
     return {
-      center: CENTER_DEFAULT,
+      center: this.position
     }
   },
   watch: {

@@ -85,14 +85,4 @@ p {
     line-height: 70px;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: all .5s
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
-    
-}
 </style>

@@ -24,7 +24,7 @@ import MainFooter from './MainFooter'
 export default {
   name: 'GeneralPage',
   computed: {
-    pageId() { return this.$store.state.pageEditObj._id }
+    pageId() { return this.$store.state.user._id }
   },
   mounted() {
     //this elemenmt is not relevant to our app
@@ -63,11 +63,6 @@ export default {
   background-color: #ecf3f3;
 }
 
-// section {
-//   margin: 0 auto;
-//   position: relative;
-// }
-
 .logo {
   position: absolute;
   left: 25px;
@@ -80,9 +75,22 @@ export default {
   z-index: 99;
 }
 
+
+.border-default {
+  border-width: 2px;
+  border-style: dashed;
+  border-color: (rgba(0, 0, 0, 0))
+}
+
+
 .cmp-father {
   margin-top: -4px;
   box-sizing: border-box;
+}
+
+.btns-row {
+  margin: 10px auto;
+  text-align: center;
 }
 
 .fade-enter-active,
@@ -95,103 +103,20 @@ export default {
   opacity: 0
 }
 
-
-
-
-
-//copied 
-
-.edit-page {
-  min-height: 100vh;
-  line-height: 100%;
-  box-sizing: border-box;
-}
-
-.cmp-father {
-  margin-top: -4px;
-  box-sizing: border-box;
-}
-
-.border-default {
-  border-width: 2px;
-  border-style: dashed;
-  border-color: (rgba(0, 0, 0, 0))
-}
-
-
-.mark-class {
-  border-color: #ff5722;
-  z-index: 1;
-}
-
 .preview {
   cursor: pointer;
 }
 
-// this is in order to fix an overlap between navbar and tooltip, define spacing with footer
-.btns-area {
-  margin-top: 20px;
-  padding-bottom: 20px;
-}
-
-.btns-row {
-  margin: 10px auto;
-  text-align: center;
-}
-
-.add-btn {
-  margin: 10px;
-}
-
-.color-picker-btn {
-  overflow: initial;
-}
-
-.cmpStyle:hover {
-  box-sizing: border-box;
-  outline: #42A5F5 solid 1px;
-}
-
-.dialog {
-  margin: 0 auto;
-  width: 70%;
-}
-
-.dialog:focus {
-  outline: none;
-}
-
-.md-dialog {
-  text-align: center;
-  .catalogue {
-    padding: 0;
-    list-style: none;
-    li {
-      margin: 10px;
-      border: 1px solid black;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-    h3 {
-      text-align: center;
-    }
-  }
-}
 
 // this is in order to fix an overlap between the nav and the first cmp (kerendot)
 .nav-divider {
   height: 4px;
 }
 
-
-
-
 .content-container {
   text-align: center;
   width: 100%;
 }
-
 
 
 .cmps-list-enter-active,

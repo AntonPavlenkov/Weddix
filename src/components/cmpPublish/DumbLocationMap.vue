@@ -2,7 +2,7 @@
      <section class="location-map cmp-father" :style="cmp.style">
         <div class="content">
             <!--map cmp-->
-            <map-cmp :position="position" :zoom="zoom"></map-cmp>
+            <map-cmp :position="position" :zoom="zoom" :center="position"></map-cmp>
             <div class="address">
                 <!--text area-->
                 <h2>{{cmp.data.address.line1}}</h2>
@@ -21,7 +21,7 @@
 import MapCmp from '../cmpTmpls/MapCmp'
 
 export default {
-    name: 'LocationMap',
+    name: 'DumbLocationMap',
     props: ['cmp'],
     components: {
         MapCmp,

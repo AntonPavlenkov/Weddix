@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    name: 'SimpleTitle',
+    name: 'DumbSimpleTitle',
     props: ['cmp'],
     computed: {
         subTitleFontSize() {
