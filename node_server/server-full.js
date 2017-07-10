@@ -17,7 +17,7 @@ const upload = require('./uploads');
 const app = express();
 
 var corsOptions = {
-	origin: /http:\/\/localhost:\d+/,
+	origin: /.*/,
 	credentials: true
 };
 

@@ -79,20 +79,16 @@ const tmplCmps = [
     },
 ];
 
-function createUser(user) {
+const createUser = (user) => {
     return axios.post(urlUser, user)
-        .then(response => {
-            return response.data;
-        })
+        .then(response => response.data)
         .catch(error => console.log);
 }
 
 //called on page load
-function getUser() {
+const getUser = () => {
     let dataFromLocal = loadFromStorage('WeddixUser');
-    if (dataFromLocal) {
-       return  Promise.resolve(dataFromLocal);
-    }
+    if (dataFromLocal) return Promise.resolve(dataFromLocal);
     return axios.get(urlUser)
         .then(response => {
             //we need only the first (and only) user
@@ -104,26 +100,22 @@ function getUser() {
         .catch(error => console.log);
 }
 
-function updateUser(user) {
+const updateUser = (user) => {
     saveToStorage('WeddixUser', user)
     return axios.put(`${urlUser}/${user._id}`, user)
         .then(response => response.data)
         .catch(error => console.log);
 }
 
-function saveToStorage(key, any) {
-    try {
-        localStorage.setItem(key, JSON.stringify(any));
-    } catch (err) {
-        console.error('Problem saving to storage', err);
-    }
+const saveToStorage = (key, any) => {
+    try { localStorage.setItem(key, JSON.stringify(any)) }
+    catch (err) { console.error('Problem saving to storage', err) }
 }
 
-function loadFromStorage(key) {
-    var any = null;
-    try {
-        any = JSON.parse(localStorage.getItem(key));
-    } catch (err) {
+const loadFromStorage = (key) => {
+    let any = null;
+    try { any = JSON.parse(localStorage.getItem(key)) }
+    catch (err) {
         console.warn('Removing Corrupted data from storage', err);
         localStorage.removeItem(key);
     }
