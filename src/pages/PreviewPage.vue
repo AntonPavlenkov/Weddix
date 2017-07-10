@@ -22,6 +22,7 @@ import DumbSimpleText from '../components/cmpPublish/DumbSimpleText'
 import DumbSimpleTitle from '../components/cmpPublish/DumbSimpleTitle'
 import DumbCountDown from '../components/cmpPublish/DumbCountDown'
 import DumbImgTitle from '../components/cmpPublish/DumbImgTitle'
+import DumbGiftPicker from '../components/cmpPublish/DumbGiftPicker'
 export default {
   name: 'PublishPage',
   components: {
@@ -32,6 +33,7 @@ export default {
     DumbLocationMap,
     DumbSimpleText,
     DumbSimpleTitle,
+    DumbGiftPicker,
     Draggable
   },
   data() {
