@@ -51,7 +51,7 @@
         <md-tooltip md-direction="top">Change text size</md-tooltip>
       </md-button>
       <md-menu-content>
-        <input type="range" @mousedown.stop min="12" max="60" @input="changeFOntSize" :value="fontSizeInputRangeValue">
+        <input type="range" @mousedown.stop min="12" max="90" @input="changeFOntSize" :value="fontSizeInputRangeValue">
       </md-menu-content>
     </md-menu>
   

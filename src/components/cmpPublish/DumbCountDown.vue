@@ -1,6 +1,5 @@
 <template>
-    <section class="count-down border-default cmp-father" :style="cmp.style" :class="{'mark-class': isEditMode}">
-    
+    <section class="count-down border-default cmp-father" :style="cmp.style">
         <div class="content">
             <div class="calendar-date">
                 <span class="day">{{this.day}}</span>
@@ -17,38 +16,22 @@
             <div class="clock-area">
                 <div class="clock"></div>
             </div>
-            <!--<div class="message"></div>-->
-            <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
         </div>
-    
-        <transition name="fade">
-            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
-                <datepicker :disabled="disabled" v-on:selected="setTimer" v-model="date"></datepicker>
-                <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-            </edit-console>
-        </transition>
     </section>
 </template>
   
 
 
 <script>
-import ModifyBtns from '../toolbars/ModifyBtns'
-import GeneralEdit from '../toolbars/generalEditToolbar'
 import flipclock from '../../assets/Clock/flipclock.min.js'
 import '../../assets/Clock/flipclock.css'
-import Datepicker from 'vuejs-datepicker';
-import EditConsole from '../toolbars/EditConsole';
 var clock;
 
 export default {
     name: 'CountDown',
-    props: ['cmp', 'isFirst', 'isLast'],
+    props: ['cmp'],
     components: {
-        GeneralEdit,
-        Datepicker,
-        EditConsole,
-        ModifyBtns
+
     },
     created() {
     },
@@ -77,20 +60,7 @@ export default {
         }
     },
     methods: {
-        moveCmp(isUp) {
-            this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
-        },
-        deleteCmp() {
-            this.isEditMode = false;
-            this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-        },
-        toggleEditMode() {
-            this.isEditMode = !this.isEditMode
-        },
-        updateCmp(updatedCmp) {
-            this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
-        },
-        clockInit() {
+       clockInit() {
             clock = $('.clock').FlipClock({
                 clockFace: 'DailyCounter',
                 autoStart: false,
@@ -120,7 +90,7 @@ export default {
 
             this.setDate = (date.setTime(time) - Date.now()) / 1000
             this.clockStart()
-            this.updateCmp(this.cmpToEdit)
+            // this.updateCmp(this.cmpToEdit)
 
         }
     }
@@ -132,8 +102,6 @@ export default {
 hr {
     width: 80%;
 }
-
-
 
 .count-down {
     display: flex;
@@ -194,12 +162,14 @@ hr {
     }
 }
 
+
 /*this meadia query was added by kerendot*/
-@media (max-width: 680px){
-    .content{
+
+@media (max-width: 680px) {
+    .content {
         flex-wrap: wrap;
         flex-direction: column;
         align-items: center;
-    }   
+    }
 }
 </style>

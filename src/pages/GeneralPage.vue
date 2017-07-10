@@ -24,7 +24,7 @@ import MainFooter from './MainFooter'
 export default {
   name: 'GeneralPage',
   computed: {
-    pageId() { return this.$store.state.pageEditObj._id }
+    pageId() { return this.$store.state.user._id }
   },
   mounted() {
     //this elemenmt is not relevant to our app
@@ -58,16 +58,9 @@ export default {
 </script>
 
 
-<style scoped lang="scss">
+<style lang="scss">
 .navbar {
   background-color: #ecf3f3;
-}
-
-
-
-section {
-  margin: 0 auto;
-  position: relative;
 }
 
 .logo {
@@ -82,13 +75,62 @@ section {
   z-index: 99;
 }
 
+
+.border-default {
+  border-width: 2px;
+  border-style: dashed;
+  border-color: (rgba(0, 0, 0, 0))
+}
+
+
+.cmp-father {
+  margin-top: -4px;
+  box-sizing: border-box;
+}
+
+.btns-row {
+  margin: 10px auto;
+  text-align: center;
+}
+
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1s;
+  transition: all 1s;
 }
 
 .fade-enter,
 .fade-leave-to {
   opacity: 0
+}
+
+.preview {
+  cursor: pointer;
+}
+
+
+// this is in order to fix an overlap between the nav and the first cmp (kerendot)
+.nav-divider {
+  height: 4px;
+}
+
+.content-container {
+  text-align: center;
+  width: 100%;
+}
+
+
+.cmps-list-enter-active,
+.cmps-list-leave-active {
+  transition: all 1s;
+}
+
+.cmps-list-enter {
+  opacity: 0;
+  transform: rotateX(180deg);
+}
+
+.cmps-list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

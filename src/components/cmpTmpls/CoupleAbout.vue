@@ -14,9 +14,8 @@
                 <img @click="setImg('aboutImgUrl2')" :src="cmp.data.aboutImgUrl2" class="about-2-img" width="100px" height="200px">
                 <span @blur="updateText('aboutInfo2')" :style="cmp.style" :contenteditable="isEditMode" class="about-2-info">{{cmp.data.aboutInfo2}}</span>
             </div>
-    
         </div>
-    
+
         <!--edit butttons-->
         <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
     
@@ -94,7 +93,6 @@ export default {
 
 <style scoped>
 .couple-about {
-    transition: all .5s;
     box-sizing: content-box;
     position: relative;
 }
@@ -134,7 +132,6 @@ export default {
 
 .about-1-img,
 .about-2-img {
-    /*height: 20%;*/
     width: 20%;
     display: block;
     border-radius: 50%;
@@ -158,7 +155,6 @@ export default {
 .fade-leave-to {
     opacity: 0
 }
-
 
 @media (max-width: 650px) {
     .content {
