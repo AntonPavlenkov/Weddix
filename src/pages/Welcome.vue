@@ -33,19 +33,14 @@ export default {
   },
   created() {
     this.$store.dispatch({ type: 'loadUser' })
-  },
+},
   computed: {
-    isReturningUser() {
-      return this.$store.state.isReturningUser;
-    },
+    isReturningUser() {return this.$store.state.isReturningUser},
   },
   watch: {
-    isReturningUser: function (newVal) {
-      this.$refs['snackbar'].open();
-    }
-  }
+    isReturningUser:   function(newVal){this.$refs['snackbar'].open()}
 }
-
+}
 </script>
 
 <style scoped>
