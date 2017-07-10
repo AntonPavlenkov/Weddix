@@ -73,7 +73,7 @@ const tmplCmps = [
     {
         type: 'GiftPicker',
         label: 'Gift Picker (Textual)',
-        data: { gifts: [{giftName: 'Lamborginie', mail:''},{giftName: 'Tv', mail:''},{giftName: 'Radio', mail:''},{giftName: 'One Million Dollars', mail:''},], subTitle: 'Are getting married' },
+        data: { gifts: [{giftName: 'Lamborginie', mail:''},{giftName: 'Tv', mail:''},{giftName: 'Radio', mail:''},{giftName: 'One Million$', mail:''},]},
         style: { backgroundColor: 'none', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Courgette', fontSize: '16px' },
         cmpPreview: 'http://i.imgur.com/kHKSAlf.png'
     },

@@ -73,7 +73,6 @@ export default {
 .simple-title {
     transition: all .5s;
     position: relative;
-    transition: all .5s;
 }
 
 .content {
@@ -88,12 +87,12 @@ p {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .5s
+    transition: opacity .5s;
 }
 
 .fade-enter,
 .fade-leave-to {
-    opacity: 0
+    opacity: 0;
 }
 
 

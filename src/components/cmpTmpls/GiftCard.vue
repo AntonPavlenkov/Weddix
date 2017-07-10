@@ -1,17 +1,17 @@
 <template>
 <section @click.stop="toggleClass" class="container">
   
-                <div :class="{ taken: giftToEdit.mail }" class="gift-card">{{giftToEdit.giftName}}</div>
-                <div :class="{ taken: giftToEdit.mail }" class="gift-card-imput">
+                <div :class="{ taken: giftToEdit.mail }" class="gift-card front">{{giftToEdit.giftName}}</div>
+                <div :class="{ taken: giftToEdit.mail }" class="gift-card-imput back">
                     <span v-if="!giftToEdit.mail">
-                    Enter your e-mail for approving gift
+                    Insert e-mail
                     </span>
                     <span v-if="giftToEdit.mail">
-                        This gift is already taken
+                        Taken
                     </span>
                     <md-input-container v-if="!giftToEdit.mail" class="input">
                         <label></label>
-                        <md-input  v-model="giftToEdit.mail"></md-input>
+                        <md-input class="mail-input"  v-model="giftToEdit.mail"></md-input>
                     </md-input-container>
                         <md-button class="aprove-btn" v-if="!giftToEdit.mail" @click.stop="updateGift(giftToEdit)">Aprove</md-button>
                 </div>
@@ -47,18 +47,14 @@ methods:{
 
 .container {
     position: relative;
-    
 }
-
-
-
 .gift-card,
 .gift-card-imput {
     z-index: 1;
-    width: 250px;
+    width: 100px;
+    height: 150px;
     line-height: 40px;
-    background-color: lightblue;
-    margin: 10px 10px 10px 10px;
+    margin: 10px 10px 25px 10px;
     cursor: pointer;
     display: block;
     text-align: center;
@@ -66,27 +62,40 @@ methods:{
     backface-visibility: hidden;
     transform-style: preserve3d;
     transition: all 0.4s;
-    border-radius: 5px;
-    border: solid lightgrey 1px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center 55%;
+    text-shadow: 0px 0px 4px rgba(255, 255, 255, 1);
 }
 .taken{
-    background-color: lightgreen;
+    
 }
-
+.gift-card{
+    background-image: url(../../assets/opened.png)
+}
 .gift-card-imput {
     position: absolute;
     z-index: 4;
     top: 0;
     left: 0;
+     background-image: url(../../assets/closed.png)
 }
 .input{
-    width: 80%;
+    position: absolute;
+    top: 70%;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
 }
-
-
-
+.aprove-btn{
+    position: absolute;
+    top: 107%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+  
 .gift-card-imput {
     transform: rotateY(-180deg);
 }
@@ -99,13 +108,4 @@ methods:{
     transform: rotateY(180deg);
 }
 
-.title {
-    margin-bottom: 5em;
-}
-
-.aprove-btn{
-    display: inline-block;
-    width: 90%;
-}
-  
 </style>

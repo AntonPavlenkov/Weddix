@@ -61,10 +61,10 @@ export default {
 /*}
 
 .main-app {*/
-  background-position: 0% 0%;
+  /*background-position: 0% 0%;*/
   height: 100vh;
   background-image: url(../assets/land2.png);
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   transition: background-position 15000ms ease-out;
 }
 
