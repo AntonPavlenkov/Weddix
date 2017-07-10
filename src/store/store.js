@@ -35,17 +35,24 @@ const store = new Vuex.Store({
       if (user.cmps.length > 0) {
         state.isReturningUser = true;
       }
+      else state.isReturningUser = false;
     },
     addCmp(state, { user }) {
       state.user = user;
       state.selectedCmps = user.cmps;
+      state.isReturningUser = true;
     },
     deleteCmp(state, { user }) {
       state.user = user;
       state.selectedCmps = user.cmps;
     },
-    updateCmp(state, { user }) {
+    updateCmp(state, { user }) {//TODO: rename the mutation to reflect "user"
       state.user = user;
+      state.selectedCmps = user.cmps;
+    },
+    updateUser(state, { user }) {
+      state.user = user;
+      console.log('user', user)
       state.selectedCmps = user.cmps;
     },
     moveCmp(state, { user }) {
@@ -58,6 +65,14 @@ const store = new Vuex.Store({
     },
   },
   actions: {
+    resetAll(context, payload) {
+      cmpService.updateUser(payload.user)
+        .then(res => {
+          payload.user = res;
+          payload.type = 'loadUser';
+          context.commit(payload);
+        })
+    },
     loadUser(context, payload) {
       cmpService.getUser()
         .then(res => {
@@ -67,12 +82,12 @@ const store = new Vuex.Store({
           }
           //if no page exists yet - create it
           else {
-            let newUser = createEmptyPageObj('user'+findNextId())
+            let newUser = createEmptyPageObj('user' + findNextId())
             cmpService.createUser(newUser)
-            .then(res=>{
-              payload.user = res;
-              context.commit(payload);
-            })
+              .then(res => {
+                payload.user = res;
+                context.commit(payload);
+              })
           }
         })
     },
@@ -113,6 +128,10 @@ const store = new Vuex.Store({
       payload.user = userToEdit;
       context.commit(payload);
       debounced(userToEdit);
+    },
+    updateUser(context, payload) {//payload has: user
+      context.commit(payload);
+      debounced(payload.user);
     },
     moveCmp(context, payload) {//payload has: cmp, isUp
       //need to find the idx of the cmp in currOrder array
@@ -165,6 +184,7 @@ function getCmpById(cmpId) {
 function createEmptyPageObj(userName) {
   return {
     user: userName,
+    pageStyle: { backgroundColor: 'none' },
     cmps: []
   }
 }

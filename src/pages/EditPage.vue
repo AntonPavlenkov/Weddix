@@ -1,5 +1,5 @@
 <template>
-  <section class="edit-page">
+  <section v-if="user" class="edit-page" :style="user.pageStyle">
     <md-dialog class="dialog" md-open-from="#custom" md-close-to="#custom" ref="addDialog">
       <md-dialog-title>Choose new component</md-dialog-title>
       <md-dialog-content>
@@ -19,7 +19,7 @@
     </md-dialog>
   
     <draggable :list="cmpsToDisplay" @end="onDragEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
-      <transition-group name="cmps" tag="p">
+      <transition-group name="cmps">
         <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
         </component>
       </transition-group>
@@ -28,10 +28,26 @@
     <div class="btn-holder" v-if="isLoading">
       <md-spinner md-indeterminate class="btn-holder"></md-spinner>
     </div>
+    <div class="btn-holder" >
+      <md-button v-if="!isReturningUser" class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
+        <md-icon>note_add</md-icon>
+        <md-tooltip md-direction="top">Start from Template</md-tooltip>
+      </md-button>
+      <md-button class="md-icon-button md-raised md-warn" @click="resetAll">
+        <md-icon>delete_forever</md-icon>
+        <md-tooltip md-direction="top">Reset All</md-tooltip>
+      </md-button>
+    </div>
   
     <div class="btn-holder">
       <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
         <md-icon>add</md-icon>
+        <md-tooltip md-direction="top">Add component</md-tooltip>
+      </md-button>
+      <md-button md-menu-trigger class="md-icon-button md-raised md-primary color-picker-btn">
+        <md-icon>format_paint</md-icon>
+        <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
+        <md-tooltip md-direction="top">Change page background color</md-tooltip>
       </md-button>
     </div>
   
@@ -48,6 +64,7 @@ import CoupleAbout from '../components/cmpTmpls/CoupleAbout'
 import ImgTitle from '../components/cmpTmpls/ImgTitle'
 import CountDown from '../components/cmpTmpls/CountDown'
 import GiftPicker from '../components/cmpTmpls/GiftPicker'
+import ColorPicker from '../components/toolbars/ColorPicker'
 export default {
   name: 'EditPage',
   components: {
@@ -59,7 +76,8 @@ export default {
     ImgTitle,
     draggable,
     CountDown,
-    GiftPicker
+    GiftPicker,
+    ColorPicker
   },
   //need to consider if this is needed, or to use the load done on "welcome"
   created() {
@@ -69,6 +87,7 @@ export default {
     return {
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null,
+      color: ""
     }
   },
   computed: {
@@ -81,9 +100,31 @@ export default {
     isLoading() {
       return this.$store.getters.isLoading;
     },
+    user() {
+      return this.$store.state.user;
+    },
+
+    userToEdit() {
+      return JSON.parse(JSON.stringify(this.$store.state.user))
+    },
+    isReturningUser() {
+      return this.$store.state.isReturningUser;
+    }
 
   },
   methods: {
+    resetAll(){
+      this.userToEdit.pageStyle= {};
+      this.userToEdit.cmps = [];
+      this.$store.dispatch({ type: 'resetAll', user: this.userToEdit})
+    },
+    getTemplate() {
+      this.addNewCmp('SimpleTitle');
+      this.addNewCmp('CoupleAbout');
+      this.addNewCmp('SimpleText');
+      this.addNewCmp('ImgCarousel');
+
+    },
     addNewCmp(newCmpType) {
       this.closeDialog('addDialog')
       this.$store.dispatch({ type: 'addCmp', newCmpType })
@@ -99,8 +140,14 @@ export default {
       var oldIndex = ev.oldIndex;
       this.$store.dispatch({ type: 'dragCmp', newIndex, oldIndex })
     },
+    updateColor: function (event) {
+      this.color = event.color;
+    },
+    changeCssProperty(prop, val) {
+      this.userToEdit.pageStyle[prop] = val;
+      this.$store.dispatch({ type: "updateUser", user: this.userToEdit });
+    }
   },
-
 }
 </script>
 
@@ -110,9 +157,9 @@ export default {
   min-height: 100vh;
   line-height: 100%;
   box-sizing: border-box;
-    .cmp-father{
-        margin-top: -4px;
-    }
+  .cmp-father {
+    margin-top: -4px;
+  }
 }
 
 .border-default {
@@ -143,6 +190,10 @@ export default {
 
 .add-btn {
   margin: 10px;
+}
+
+.color-picker-btn {
+  overflow: initial;
 }
 
 .cmpStyle:hover {
@@ -198,7 +249,8 @@ export default {
   top: 10px;
 }
 
-.btn-modify,.btn-delete:hover {
+.btn-modify,
+.btn-delete:hover {
   cursor: pointer;
 }
 
@@ -210,42 +262,13 @@ export default {
   cursor: move;
 }
 
-.btn-delete{
-  top:110px;
+.btn-delete {
+  top: 110px;
 }
 
 
 
-.edit-console {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  z-index: 99;
-  padding: 5px;
-  position: absolute;
-  width: 300px;
-  border: 1px solid lightgrey;
-  top: 10%;
-  right: 10%;
-  background-color: white;
-  opacity: 0.95;
-  box-shadow: 8px 9px 55px -7px rgba(0, 0, 0, 0.67);
-  border-radius: 5px;
-  cursor: move;
-  p {
-    width: 100%;
-    text-align: center;
-    background-color: #f9d8ce;
-    font-size: 16px;
-  }
-  .btn-close {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    cursor: pointer;
-  }
-}
+
 
 .list-enter-active,
 .list-leave-active {

@@ -25,7 +25,6 @@
         <div class="swatch" v-bind:style="{'background': color}" v-on:click="toggle"></div>
     </div>
 </template>
-
 <script>
 function hsb2hsl(h, s, b) {
     var hsl = {
