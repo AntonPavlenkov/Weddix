@@ -28,7 +28,7 @@
     <div class="btn-holder" v-if="isLoading">
       <md-spinner md-indeterminate class="btn-holder"></md-spinner>
     </div>
-    <div class="btn-holder" >
+    <div class="btn-holder">
       <md-button v-if="!isReturningUser" class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
         <md-icon>note_add</md-icon>
         <md-tooltip md-direction="top">Start from Template</md-tooltip>
@@ -113,10 +113,10 @@ export default {
 
   },
   methods: {
-    resetAll(){
-      this.userToEdit.pageStyle= {};
+    resetAll() {
+      this.userToEdit.pageStyle = {};
       this.userToEdit.cmps = [];
-      this.$store.dispatch({ type: 'resetAll', user: this.userToEdit})
+      this.$store.dispatch({ type: 'resetAll', user: this.userToEdit })
     },
     getTemplate() {
       this.addNewCmp('SimpleTitle');
@@ -159,6 +159,12 @@ export default {
   box-sizing: border-box;
 }
 
+// .content{
+//     background-attachment: fixed;
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+// }
 .cmp-father {
   margin-top: -4px;
   box-sizing: border-box;

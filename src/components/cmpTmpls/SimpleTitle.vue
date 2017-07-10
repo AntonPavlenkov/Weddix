@@ -74,10 +74,12 @@ export default {
     transition: all .5s;
     position: relative;
     transition: all .5s;
+
 }
 
 .content {
     margin: 30px 0;
+
 }
 
 p {

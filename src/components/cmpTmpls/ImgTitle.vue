@@ -89,6 +89,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+
 .img-title {
     position: relative;
     transition: all .5s;
