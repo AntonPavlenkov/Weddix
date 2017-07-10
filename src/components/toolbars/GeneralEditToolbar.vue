@@ -5,7 +5,7 @@
             <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
             <md-tooltip md-direction="top">Change background color</md-tooltip>
         </md-button>
-        <md-button class="md-fab md-clean  md-mini color-picker-btn" @click="changeCssProperty('backgroundColor','transparent')">
+        <md-button class="md-fab md-clean  md-mini" @click="changeCssProperty('backgroundColor','transparent')">
             <md-icon>format_clear</md-icon>
             <md-tooltip md-direction="top">Clear background color</md-tooltip>
         </md-button>
