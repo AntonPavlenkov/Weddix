@@ -1,7 +1,7 @@
 <template>
     <section class="count-down border-default cmp-father" :style="cmp.style" :class="{'mark-class': isEditMode}">
-        <div class="content">
     
+        <div class="content">
             <div class="calendar-date">
                 <span class="day">{{this.day}}</span>
                 <span class="month">{{this.month}}
@@ -13,15 +13,14 @@
                 <span class="year">{{this.year}}
                     <hr>
                 </span>
-    
             </div>
-    
-            <div class="clock"></div>
-            <div class="message"></div>
-    
-        <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
-    
+            <div class="clock-area">
+                <div class="clock"></div>
+            </div>
+            <!--<div class="message"></div>-->
+            <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
         </div>
+    
         <transition name="fade">
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <datepicker :disabled="disabled" v-on:selected="setTimer" v-model="date"></datepicker>
@@ -35,7 +34,6 @@
 
 <script>
 import ModifyBtns from '../toolbars/ModifyBtns'
-
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import flipclock from '../../assets/Clock/flipclock.min.js'
 import '../../assets/Clock/flipclock.css'
@@ -135,6 +133,8 @@ hr {
     width: 80%;
 }
 
+
+
 .count-down {
     display: flex;
     flex-flow: row wrap;
@@ -146,8 +146,9 @@ hr {
 
 .content {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    flex-direction: row;
+    /*justify-content: center;*/
+    align-items: center;
 }
 
 .clock {
@@ -185,13 +186,6 @@ hr {
     font-weight: bold;
 }
 
-
-
-
-/*.week-day{
-    font-size: 
-}*/
-
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity .5s
@@ -208,5 +202,14 @@ hr {
         margin: 0;
         padding: 0;
     }
+}
+
+/*this meadia query was added by kerendot*/
+@media (max-width: 680px){
+    .content{
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }   
 }
 </style>

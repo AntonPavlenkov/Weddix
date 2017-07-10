@@ -84,7 +84,7 @@ section {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1s;
+  transition: all 1s;
 }
 
 .fade-enter,

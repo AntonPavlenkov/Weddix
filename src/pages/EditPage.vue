@@ -19,7 +19,7 @@
     </md-dialog>
   
     <draggable :list="cmpsToDisplay" @end="onDragEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
-      <transition-group >
+      <transition-group name="cmps-list" appear>
         <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
         </component>
       </transition-group>
@@ -123,7 +123,7 @@ export default {
       this.addNewCmp('CoupleAbout');
       this.addNewCmp('SimpleText');
       this.addNewCmp('ImgCarousel');
-
+      this.changeCssProperty('backgroundColor','hsl(36, 99.99999999999991%, 97%)');   
     },
     addNewCmp(newCmpType) {
       this.closeDialog('addDialog')
@@ -267,21 +267,19 @@ export default {
 .btn-delete {
   top: 110px;
 }
-.list-enter-active,
-.list-leave-active {
-  // transition: all 1s;
-}
-
-.list-enter,
-.list-leave-to {
-  // opacity: 0;
-  // transform: translateZ(30px);
-}
-
-.list-complete-item {
-/*   padding: 4px;
-  margin-top: 4px;
-  border: solid 1px; */
+.cmps-list-enter-active,
+.cmps-list-leave-active {
   transition: all 1s;
 }
+
+.cmps-list-enter{
+  opacity: 0;
+  transform: rotateX(180deg);
+}
+
+.cmps-list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
 </style>
