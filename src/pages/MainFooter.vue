@@ -4,18 +4,26 @@
       <h2>Weddix</h2> by Keren,Elad and Anton </span>
     <span class="git-logo">
       <a href="https://github.com/AntonPavlenkov/wixer">
-      
-      <img class="git-img" src="../assets/github-log.png" width="40px" height="40px">
+        <img class="git-img" src="../assets/github-log.png" width="40px" height="40px">
       </a>
     </span>
   
     <span class="about-details">
       <span class="details">Keren
-        <i class="material-icons">email</i></span>
+        <a class="email-icon" href="mailto:kerendot@gmail.com">
+          <i class="material-icons">email</i>
+        </a>
+      </span>
       <span class="details">Elad
-       <i class="material-icons">email</i></span>
+        <a class="email-icon" href="mailto:okc.elad.35@gmail.com">
+          <i class="material-icons">email</i>
+        </a>
+      </span>
       <span class="details">Anton
-       <i class="material-icons">email</i></span>
+        <a class="email-icon" href="pavlenkov47@gmail.com">
+          <i class="material-icons">email</i>
+        </a>
+      </span>
     </span>
   
   </section>
@@ -53,7 +61,8 @@ export default {
   display: flex;
   flex-flow: row wrap;
 }
-.details{
+
+.details {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -62,6 +71,7 @@ export default {
 
 .git-logo {
   align-self: center;
+  margin: 10px;
 }
 
 .git-img {
@@ -73,7 +83,15 @@ export default {
   background-color: grey;
 }
 
-h2{
+.details {
+  margin: 5px;
+}
+
+a {
+  color: black;
+}
+
+h2 {
   color: #324057;
   font-size: 2em;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;

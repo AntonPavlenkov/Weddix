@@ -1,15 +1,11 @@
 <template>
   <section class="text-toolbar  md-mini">
-
   
     <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
       <md-icon>format_color_fill</md-icon>
       <color-picker :change="updateColor" @changeColor="changeCssProperty('color', $event)"></color-picker>
       <md-tooltip md-direction="top">Change color of the text</md-tooltip>
     </md-button>
-    
-
-
     <md-menu md-align-trigger>
       <md-button md-menu-trigger class="md-fab md-clean  md-mini">
         <md-icon>text_format</md-icon>
@@ -55,7 +51,7 @@
         <md-tooltip md-direction="top">Change text size</md-tooltip>
       </md-button>
       <md-menu-content>
-            <input type="range" @mousedown.stop min="12" max="60" @input="changeFOntSize" :value="fontSizeInputRangeValue">
+        <input type="range" @mousedown.stop min="12" max="60" @input="changeFOntSize" :value="fontSizeInputRangeValue">
       </md-menu-content>
     </md-menu>
   
@@ -73,10 +69,10 @@ export default {
     cmpStyleEdit() {
       return JSON.parse(JSON.stringify(this.cmp))
     },
-    fontSizeInputRangeValue(){
+    fontSizeInputRangeValue() {
       var currentFontSizeValue = this.cmp.style.fontSize
       // cut the px from the end of the value
-      return +currentFontSizeValue.substring( 0, currentFontSizeValue.indexOf("px") );
+      return +currentFontSizeValue.substring(0, currentFontSizeValue.indexOf("px"));
     }
   },
   data() {
@@ -105,10 +101,10 @@ export default {
       this.cmpStyleEdit.style[prop] = val;
       this.$emit('update', this.cmpStyleEdit)
     },
-    changeFOntSize(){
+    changeFOntSize() {
       this.changeCssProperty('fontSize', event.target.value + 'px ')
     }
-    }
+  }
 }
 </script>
 
@@ -120,7 +116,8 @@ export default {
   justify-content: center;
   width: 100%;
 }
-.md-menu-content{
+
+.md-menu-content {
   min-height: 0;
 }
 

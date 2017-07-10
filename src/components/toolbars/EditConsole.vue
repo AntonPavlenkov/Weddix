@@ -36,7 +36,7 @@ export default {
 </script>
 
 
-<style scoped <style lang="scss">
+<style scoped lang="scss">
 .edit-console {
   display: flex;
   flex-flow: row wrap;
@@ -69,7 +69,4 @@ export default {
     cursor: pointer;
   }
 }
-
-</style>
->
 </style>
