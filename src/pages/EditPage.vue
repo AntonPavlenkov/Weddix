@@ -19,7 +19,7 @@
     </md-dialog>
   
     <draggable :list="cmpsToDisplay" @end="onDragEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
-      <transition-group name="cmps">
+      <transition-group >
         <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
         </component>
       </transition-group>
@@ -265,19 +265,21 @@ export default {
 .btn-delete {
   top: 110px;
 }
-
-
-
-
-
 .list-enter-active,
 .list-leave-active {
-  transition: all 1s;
+  // transition: all 1s;
 }
 
 .list-enter,
 .list-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
+  // opacity: 0;
+  // transform: translateZ(30px);
+}
+
+.list-complete-item {
+/*   padding: 4px;
+  margin-top: 4px;
+  border: solid 1px; */
+  transition: all 1s;
 }
 </style>
