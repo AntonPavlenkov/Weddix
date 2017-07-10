@@ -110,13 +110,14 @@ export default {
   min-height: 100vh;
   line-height: 100%;
   box-sizing: border-box;
-    .cmp-father{
-        margin-top: -4px;
-    }
+}
+
+.cmp-father {
+  margin-top: -4px;
 }
 
 .border-default {
-    border-width: 2px;
+  border-width: 2px;
   border-style: dashed;
   border-color: (rgba(0, 0, 0, 0))
 }
@@ -198,7 +199,8 @@ export default {
   top: 10px;
 }
 
-.btn-modify,.btn-delete:hover {
+.btn-modify,
+.btn-delete:hover {
   cursor: pointer;
 }
 
@@ -210,8 +212,8 @@ export default {
   cursor: move;
 }
 
-.btn-delete{
-  top:110px;
+.btn-delete {
+  top: 110px;
 }
 
 
