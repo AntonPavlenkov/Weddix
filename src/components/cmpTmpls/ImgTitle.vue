@@ -1,6 +1,6 @@
 <template>
-    <section class="img-title cmp-father" :class="{'mark-class':isEditMode}" >
-        <div class="content" :style="cmp.style"  >
+    <section class="img-title cmp-father" :class="{'mark-class':isEditMode}">
+        <div class="content" :style="cmp.style">
             <span class="name1" contenteditable @blur="updateText('name1')">{{cmp.data.name1}}</span>
             <div class="demo" :class="{[cmp.shape]: true}">
                 <svg width="300" height="300">
@@ -23,16 +23,7 @@
             </svg>
         </div>
         <!--edit buttons-->
-        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
-            <md-icon>edit</md-icon>
-        </md-button>
-        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
-            <md-icon>swap_vertical_circle</md-icon>
-        </md-button>
-        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
-            <md-icon>delete_forever</md-icon>
-            <md-tooltip md-direction="top">Delete</md-tooltip>
-        </md-button>
+        <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
     
         <transition name="fade">
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
@@ -45,6 +36,7 @@
     </section>
 </template>
 <script>
+import ModifyBtns from '../toolbars/ModifyBtns'
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
@@ -56,7 +48,8 @@ export default {
         TxtToolbar,
         GeneralEdit,
         EditConsole,
-        ToolbarImgTitle
+        ToolbarImgTitle,
+        ModifyBtns
     },
     data() {
         return {

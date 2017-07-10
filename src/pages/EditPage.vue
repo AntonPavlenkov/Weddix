@@ -98,7 +98,8 @@ export default {
       var newIndex = ev.newIndex;
       var oldIndex = ev.oldIndex;
       this.$store.dispatch({ type: 'dragCmp', newIndex, oldIndex })
-    },
+    }
+
   },
 
 }

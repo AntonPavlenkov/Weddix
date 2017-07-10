@@ -1,6 +1,6 @@
 <template>
     <section class="couple-about cmp-father" :style="cmp.style">
-        <div class="content"  :class="{'mark-class': isEditMode}">
+        <div class="content" :class="{'mark-class': isEditMode}">
             <div class="about-1">
                 <span @blur="updateText('aboutName1')" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>
                 <img @click="setImg('aboutImgUrl1')" :src="cmp.data.aboutImgUrl1" class="about-1-img" width="100px" height="200px">
@@ -18,16 +18,7 @@
         </div>
     
         <!--edit butttons-->
-        <md-button class="btn-modify btn-edit md-fab md-mini md-warn" @click="toggleEditMode">
-            <md-icon>edit</md-icon>
-        </md-button>
-        <md-button class="btn-modify btn-dragndrop md-fab md-mini md-warn">
-            <md-icon>swap_vertical_circle</md-icon>
-        </md-button>
-        <md-button class="btn-modify btn-delete md-fab md-mini md-warn" @click="deleteCmp">
-            <md-icon>delete_forever</md-icon>
-            <md-tooltip md-direction="top">Delete</md-tooltip>
-        </md-button>
+        <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
     
         <transition name="fade">
     
@@ -41,6 +32,7 @@
 </template>
 
 <script>
+import ModifyBtns from '../toolbars/ModifyBtns'
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
@@ -49,6 +41,7 @@ export default {
     name: 'CoupleAbout',
     props: ['cmp', 'isFirst', 'isLast'],
     components: {
+        ModifyBtns,
         TxtToolbar,
         GeneralEdit,
         EditConsole,
