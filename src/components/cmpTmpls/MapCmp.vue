@@ -8,7 +8,10 @@
 
 <script>
 export default {
-  props: ['position','zoom'],
+    props: {
+        cmp: { type: Object, required: true },
+        isFirst: Boolean , isLast: Boolean
+    },
   data(){
     return {
       center: this.position

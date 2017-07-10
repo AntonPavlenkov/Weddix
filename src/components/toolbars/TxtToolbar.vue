@@ -1,7 +1,6 @@
 <template>
   <section class="text-toolbar  md-mini">
-  
-    <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
+        <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
       <md-icon>format_color_fill</md-icon>
       <color-picker :change="updateColor" @changeColor="changeCssProperty('color', $event)"></color-picker>
       <md-tooltip md-direction="top">Change color of the text</md-tooltip>

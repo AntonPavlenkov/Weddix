@@ -37,7 +37,10 @@ import EditConsole from '../toolbars/EditConsole'
 import GiftCard from './GiftCard'
 export default {
     name: 'GiftPicker',
-    props: ['cmp', 'isFirst', 'isLast'],
+    props: {
+        cmp: { type: Object, required: true },
+        isFirst: Boolean , isLast: Boolean
+    },
     components: {
         ModifyBtns,
         TxtToolbar,

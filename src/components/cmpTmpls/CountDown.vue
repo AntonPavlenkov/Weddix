@@ -43,7 +43,11 @@ var clock;
 
 export default {
     name: 'CountDown',
-    props: ['cmp', 'isFirst', 'isLast'],
+    // props: ['cmp', 'isFirst', 'isLast'],
+    props: {
+        cmp: { type: Object, required: true },
+        isFirst: Boolean , isLast: Boolean
+    },
     components: {
         GeneralEdit,
         Datepicker,
@@ -194,12 +198,16 @@ hr {
     }
 }
 
+
+
+
 /*this meadia query was added by kerendot*/
-@media (max-width: 680px){
-    .content{
+
+@media (max-width: 680px) {
+    .content {
         flex-wrap: wrap;
         flex-direction: column;
         align-items: center;
-    }   
+    }
 }
 </style>

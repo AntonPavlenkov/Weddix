@@ -29,7 +29,10 @@ import EditConsole from '../toolbars/EditConsole'
 import { Carousel3d, Slide } from 'vue-carousel-3d';
 export default {
   name: 'img-carousel',
-  props: ['cmp', 'isFirst', 'isLast'],
+    props: {
+        cmp: { type: Object, required: true },
+        isFirst: Boolean , isLast: Boolean
+    },
   data() {
     return {
       isEditMode: false

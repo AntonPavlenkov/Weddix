@@ -38,7 +38,10 @@ import EditConsole from '../toolbars/EditConsole'
 import CoupleToolbar from '../toolbars/CoupleToolbar'
 export default {
     name: 'CoupleAbout',
-    props: ['cmp', 'isFirst', 'isLast'],
+    props: {
+        cmp: { type: Object, required: true },
+        isFirst: Boolean , isLast: Boolean
+    },
     components: {
         ModifyBtns,
         TxtToolbar,

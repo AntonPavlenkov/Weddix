@@ -43,7 +43,10 @@ import EditConsole from '../toolbars/EditConsole'
 import ToolbarImgTitle from '../toolbars/ToolbarImgTitle'
 export default {
     name: 'ImgTitle',
-    props: ['cmp', 'isFirst', 'isLast'],
+    props: {
+        cmp: { type: Object, required: true },
+        isFirst: Boolean , isLast: Boolean
+    },
     components: {
         TxtToolbar,
         GeneralEdit,

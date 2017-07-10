@@ -40,7 +40,10 @@ const ZOOM_CLOSE = 18;
 
 export default {
     name: 'LocationMap',
-    props: ['cmp', 'isFirst', 'isLast'],
+    props: {
+        cmp: { type: Object, required: true },
+        isFirst: Boolean , isLast: Boolean
+    },
     components: {
         TxtToolbar,
         GeneralEdit,

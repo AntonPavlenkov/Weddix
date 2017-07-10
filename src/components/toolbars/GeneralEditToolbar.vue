@@ -1,26 +1,30 @@
 <template>
     <section>
-    
-        <md-menu md-align-trigger>
-            <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
-                <md-icon>panorama</md-icon>
-                <md-tooltip md-direction="top">Change background color</md-tooltip>
-            </md-button>
-            <md-menu-content>
-                <p @click="changeCssProperty('background','url(https://www2.shutterstock.com/blog/wp-content/uploads/sites/5/2014/04/img68.jpg)')">Pattren A </p>
-                <p @click="changeCssProperty('background','url(http://smartslider3.com/wp-content/uploads/slider100/parallax-background-effect.jpg)')">Pattren B</p>
-            </md-menu-content>
-        </md-menu>
-    
-        <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
-            <md-icon>format_paint</md-icon>
-            <color-picker :change="updateColor" @changeColor="changeCssProperty('background',$event)"></color-picker>
-            <md-tooltip md-direction="top">Change background color</md-tooltip>
-        </md-button>
-        <md-button class="md-fab md-clean  md-mini" @click="changeCssProperty('backgroundColor','transparent')">
-            <md-icon>format_clear</md-icon>
-            <md-tooltip md-direction="top">Clear background color</md-tooltip>
-        </md-button>
+        <div>
+                <span>Background</span>
+            <div class="bg-btns">
+                <md-menu md-align-trigger>
+                    <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
+                        <md-icon>panorama</md-icon>
+                        <md-tooltip md-direction="top">set background Image</md-tooltip>
+                    </md-button>
+                    <md-menu-content>
+                        <p @click="changeCssProperty('background','url(https://www2.shutterstock.com/blog/wp-content/uploads/sites/5/2014/04/img68.jpg)')"> Cherry Blossom </p>
+                        <p @click="changeCssProperty('background','url(http://hdwpro.com/wp-content/uploads/2017/02/Beautiful-Dove-Photos.jpg)')">Couple Of Doves </p>
+                        <p @click="changeCssProperty('background','url(http://smartslider3.com/wp-content/uploads/slider100/parallax-background-effect.jpg)')"> Harvest</p>
+                    </md-menu-content>
+                </md-menu>
+                <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
+                    <md-icon>format_paint</md-icon>
+                    <color-picker :change="updateColor" @changeColor="changeCssProperty('background',$event)"></color-picker>
+                    <md-tooltip md-direction="top">Change background color</md-tooltip>
+                </md-button>
+                <md-button class="md-fab md-clean  md-mini" @click="changeCssProperty('background','transparent')">
+                    <md-icon>format_clear</md-icon>
+                    <md-tooltip md-direction="top">Clear background color</md-tooltip>
+                </md-button>
+            </div>
+        </div>
         <md-button class="md-fab md-clean  md-mini" @click="deleteCmp">
             <md-icon>delete_forever</md-icon>
             <md-tooltip md-direction="top">Delete</md-tooltip>
@@ -85,6 +89,17 @@ export default {
     /*width: 100%;*/
     margin-top: 5px;
     transition: all .5s;
+}
+
+
+
+.bg-btns {
+    display: flex;
+}
+
+span {
+    font-size: 16px;
+        text-align: center;
 }
 
 .content {

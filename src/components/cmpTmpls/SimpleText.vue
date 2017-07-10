@@ -27,7 +27,10 @@ import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
 export default {
     name: 'SimpleText',
-    props: ['cmp', 'isFirst', 'isLast'],
+    props: {
+        cmp: { type: Object, required: true },
+        isFirst: Boolean , isLast: Boolean
+    },
     components: {
         ModifyBtns,
         TxtToolbar,
