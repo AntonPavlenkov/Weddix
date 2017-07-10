@@ -1,6 +1,6 @@
 <template>
-    <section class="location-map cmp-father" :class="{'mark-class': isEditMode}"> 
-        <div class="content" :style="cmp.style" >
+    <section class="location-map cmp-father" :style="cmp.style">
+        <div class="content"  :class="{'mark-class': isEditMode}">
             <!--map cmp-->
             <map-cmp :position="position" :zoom="zoom"></map-cmp>
             <div class="address">

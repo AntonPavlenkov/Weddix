@@ -1,6 +1,6 @@
 <template>
     <section class="simple-title cmp-father" :style="cmp.style">
-        <div class="content"  :class="{'mark-class': isEditMode}">
+        <div class="content" :class="{'mark-class': isEditMode}">
             <p @blur="updateText('mainTitle')" :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
             <p @blur="updateText('subTitle')" :style="{fontSize: subTitleFontSize}" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
@@ -18,10 +18,10 @@
         </md-button>
     
         <transition name="fade">
-            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
-                <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
-                <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
-            </edit-console>
+                <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
+                    <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
+                    <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
+                </edit-console>
         </transition>
     </section>
 </template>
@@ -83,7 +83,7 @@ export default {
     transition: all .5s;
 }
 
-.content{
+.content {
     margin: 30px 0;
 }
 
@@ -102,6 +102,8 @@ p {
 .fade-leave-to {
     opacity: 0
 }
+
+
 
 
 

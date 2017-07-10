@@ -1,6 +1,6 @@
 <template>
-    <section class="couple-about cmp-father" :class="{'mark-class': isEditMode}">
-        <div class="content" :style="cmp.style">
+    <section class="couple-about cmp-father" :style="cmp.style">
+        <div class="content"  :class="{'mark-class': isEditMode}">
             <div class="about-1">
                 <span @blur="updateText('aboutName1')" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>
                 <img @click="setImg('aboutImgUrl1')" :src="cmp.data.aboutImgUrl1" class="about-1-img" width="100px" height="200px">
