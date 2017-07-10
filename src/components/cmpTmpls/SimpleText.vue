@@ -1,6 +1,6 @@
 <template>
-    <section class="simple-text cmp-father" :style="cmp.style">
-        <div class="content" :class="{'mark-class': isEditMode}">
+    <section class="simple-text cmp-father" :style="cmp.style" :class="{'mark-class': isEditMode}">
+        <div class="content" >
             <p @blur="updateText('txtLine1')" :contenteditable="isEditMode">{{cmp.data.txtLine1}}</p>
             <p @blur="updateText('txtLine2')" :contenteditable="isEditMode">{{cmp.data.txtLine2}}</p>
             <p @blur="updateText('txtLine3')" :contenteditable="isEditMode">{{cmp.data.txtLine3}}</p>
@@ -71,7 +71,6 @@ export default {
 <style scoped>
 .simple-text {
     position: relative;
-    transition: all .5s;
 }
 
 .content {
@@ -83,7 +82,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .5s
+    transition: opacity 1s
 }
 
 .fade-enter,

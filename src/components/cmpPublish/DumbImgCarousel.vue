@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="img-carousel cmp-father" :style="cmp.style">
     <div class="content">
       <carousel-3d>
         <slide v-for="(imgUrl, i) in cmp.data.imgUrls" :index="i" :key="i">
@@ -16,57 +16,17 @@ export default {
   name: 'img-carousel',
   props: ['cmp'],
 }
-
 </script>
 
 <style scoped lang="scss">
-section {
+.img-carousel {
   position: relative;
 }
 
-.edit-btn {
-  position: absolute;
-  left: 85%;
-  top: 10%;
-  opacity: 0.2;
-  transition: all .5s;
-}
-
-.edit-btn:hover {
-  opacity: 1;
-  cursor: pointer;
-}
-
 .edit-console {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-content: space-between;
-  /*top: 0;
-    position: absolute;*/
-  background: lightgray;
-  /*width: 25%;
-    z-index: 5;*/
   .urls-form {
     width: 100%;
     text-align: center;
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity .5s
-}
-
-.fade-enter,
-.fade-leave-to
-/* .fade-leave-active in <2.1.8 */
-
-{
-  opacity: 0
-}
-
-.color-picker-btn {
-  overflow: initial;
 }
 </style>

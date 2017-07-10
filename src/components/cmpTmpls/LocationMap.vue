@@ -92,12 +92,9 @@ export default {
 
 <style scoped lang="scss">
 .location-map {
-    transition: all .5s;
     box-sizing: border-box;
-    width: 100%;
     position: relative;
 }
-
 .content {
     padding: 20px 0;
     display: flex;
@@ -107,21 +104,6 @@ export default {
 .address {
     margin: 0 auto;
     text-align: center;
-}
-
-p {
-    margin: 0;
-    padding: 0;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .5s
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0
 }
 
 @media (max-width: 650px) {

@@ -17,7 +17,9 @@
         <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
       </md-dialog-actions>
     </md-dialog>
+    
     <div class="nav-divider"></div>
+
     <draggable :list="cmpsToDisplay" @end="onDragEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
       <transition-group name="cmps-list" tag="div" appear>
         <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
@@ -37,6 +39,10 @@
         <md-button class="md-icon-button md-raised md-warn" @click="resetAll">
           <md-icon>delete_forever</md-icon>
           <md-tooltip md-direction="top">Reset All</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button md-raised md-warn" @click="createAll">
+          <md-icon>delete_forever</md-icon>
+          <md-tooltip md-direction="top">createAll</md-tooltip>
         </md-button>
       </div>
       <div class="btns-row">
@@ -130,6 +136,15 @@ export default {
       this.addNewCmp('ImgCarousel');
       this.changeCssProperty('backgroundColor', 'hsl(36, 99.99999999999991%, 97%)');
     },
+    createAll() {
+        this.addNewCmp('SimpleTitle');
+      this.addNewCmp('CoupleAbout');
+      this.addNewCmp('SimpleText');
+      this.addNewCmp('ImgCarousel');
+      this.addNewCmp('ImgTitle');
+      this.addNewCmp('LocationMap');
+      this.addNewCmp('CountDown');
+    },
     addNewCmp(newCmpType) {
       this.closeDialog('addDialog')
       this.$store.dispatch({ type: 'addCmp', newCmpType })
@@ -157,117 +172,112 @@ export default {
 </script>
 
 
-<style style lang="scss">
-.edit-page {
-  min-height: 100vh;
-  line-height: 100%;
-  box-sizing: border-box;
-}
+<style lang="scss">
+// .edit-page {
+//   min-height: 100vh;
+//   line-height: 100%;
+//   box-sizing: border-box;
+// }
 
-.cmp-father {
-  margin-top: -4px;
-  box-sizing: border-box;
-}
+// .cmp-father {
+//   margin-top: -4px;
+//   box-sizing: border-box;
+// }
 
-.border-default {
-  border-width: 2px;
-  border-style: dashed;
-  border-color: (rgba(0, 0, 0, 0))
-}
+// .border-default {
+//   border-width: 2px;
+//   border-style: dashed;
+//   border-color: (rgba(0, 0, 0, 0))
+// }
 
 
-.mark-class {
-  border-color: #ff5722;
-  z-index: 1;
-}
+// .mark-class {
+//   border-color: #ff5722;
+//   z-index: 1;
+// }
 
-.mark-class-edit {
-  border-color: red;
-  z-index: 1;
-}
+// .preview {
+//   cursor: pointer;
+// }
 
-.preview {
-  cursor: pointer;
-}
+// // this is in order to fix an overlap between navbar and tooltip, define spacing with footer
+// .btns-area {
+//   margin-top: 20px;
+//   padding-bottom: 20px;
+// }
 
-// this is in order to fix an overlap between navbar and tooltip, define spacing with footer
-.btns-area{
-  margin-top: 20px;
-  padding-bottom: 20px; 
-}
+// .btns-row {
+//   margin: 10px auto;
+//   text-align: center;
+// }
 
-.btns-row {
-  margin: 10px auto;
-  text-align: center;
-}
+// .add-btn {
+//   margin: 10px;
+// }
 
-.add-btn {
-  margin: 10px;
-}
+// .color-picker-btn {
+//   overflow: initial;
+// }
 
-.color-picker-btn {
-  overflow: initial;
-}
+// .cmpStyle:hover {
+//   box-sizing: border-box;
+//   outline: #42A5F5 solid 1px;
+// }
 
-.cmpStyle:hover {
-  box-sizing: border-box;
-  outline: #42A5F5 solid 1px;
-}
+// .dialog {
+//   margin: 0 auto;
+//   width: 70%;
+// }
 
-.dialog {
-  margin: 0 auto;
-  width: 70%;
-}
+// .dialog:focus {
+//   outline: none;
+// }
 
-.dialog:focus {
-  outline: none;
-}
+// .md-dialog {
+//   text-align: center;
+//   .catalogue {
+//     padding: 0;
+//     list-style: none;
+//     li {
+//       margin: 10px;
+//       border: 1px solid black;
+//       display: flex;
+//       flex-direction: row;
+//       align-items: center;
+//     }
+//     h3 {
+//       text-align: center;
+//     }
+//   }
+// }
 
-.md-dialog {
-  text-align: center;
-  .catalogue {
-    padding: 0;
-    list-style: none;
-    li {
-      margin: 10px;
-      border: 1px solid black;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-    h3 {
-      text-align: center;
-    }
-  }
-}
-
-// this is in order to fix an overlap between the nav and the first cmp (kerendot)
-.nav-divider {
-  height: 3px;
-}
+// // this is in order to fix an overlap between the nav and the first cmp (kerendot)
+// .nav-divider {
+//   height: 4px;
+// }
 
 
 
 
-.content-container {
-  text-align: center;
-  width: 100%;
-}
+// .content-container {
+//   text-align: center;
+//   width: 100%;
+// }
 
 
 
-.cmps-list-enter-active,
-.cmps-list-leave-active {
-  transition: all 1s;
-}
+// .cmps-list-enter-active,
+// .cmps-list-leave-active {
+//   transition: all 1s;
+// }
 
-.cmps-list-enter {
-  opacity: 0;
-  transform: rotateX(180deg);
-}
+// .cmps-list-enter {
+//   opacity: 0;
+//   transform: rotateX(180deg);
+// }
 
-.cmps-list-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
+// .cmps-list-leave-to {
+//   opacity: 0;
+//   transform: translateY(30px);
+// }
 </style>
