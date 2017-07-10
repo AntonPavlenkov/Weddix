@@ -73,11 +73,6 @@ export default {
 <style scoped>
 .simple-title {
     position: relative;
-<<<<<<< HEAD
-    transition: all .5s;
-
-=======
->>>>>>> 482996f362d84afa456fadeb7897279f11365392
 }
 
 .content {
