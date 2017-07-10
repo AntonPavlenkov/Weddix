@@ -1,14 +1,18 @@
 <template>
-    <section class="gift-picker cmp-father" :style="cmp.style" :class="{'mark-class': isEditMode}">
+    <section class="gift-picker cmp-father" :style="cmp.style" :class="{'mark-class': isEditMode,'first':isFirst}">
         <span class="title">Gifts we want</span>
+    
         <div class="content">
             <gift-card v-for="(gift, idx) in cmp.data.gifts" :key="idx" :gift="gift" :idx="idx" @updateGift="updateGift"></gift-card>
         </div>
-        <md-input-container class="input-container">
+    
+
+    
+        <md-input-container v-if="isEditMode" class="input-container">
             <label>name new gift</label>
-            <md-textarea v-model="nameNewGift"></md-textarea>
+            <md-input  v-model="nameNewGift" maxlength="15"></md-input>
         </md-input-container>
-        <md-button @click="addNewGift" class="md-icon-button md-raised btn-add-gift">
+        <md-button v-if="isEditMode" @click="addNewGift" class="md-icon-button md-raised btn-add-gift">
             <md-icon>add</md-icon>
         </md-button>
     
@@ -87,11 +91,10 @@ export default {
 <style scoped>
 .gift-picker {
     position: relative;
-    /*margin: 15px 0;*/
     transition: all .5s;
     padding: 30px;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: center;
     align-content: center;
 }
@@ -113,12 +116,12 @@ export default {
 
 .input-container {
     width: 200px;
-    order: 99;
+    align-self: center;
 }
 
 .btn-add-gift {
-    order: 100;
-    display: block;
+    display: inline-block;
+    align-self: center;
 }
 
 .gift-card,
@@ -149,8 +152,11 @@ export default {
 
 .input {
     width: 80%;
-    margin: 0 auto;
-    text-align: center;
+    align-self: center;
+}
+
+.first {
+    /*margin-top: 0;*/
 }
 
 
@@ -168,16 +174,17 @@ export default {
 }
 
 .title {
-    margin-bottom: 5em;
+    margin-bottom: 1em;
+    font-size: 2em;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .5s
+    transition: opacity .5s!important;
 }
 
 .fade-enter,
 .fade-leave-to {
-    opacity: 0
+    opacity: 0!important;
 }
 </style>

@@ -78,37 +78,41 @@
 }
 
 
-@media (max-width: 650px){ 
-  .flip-clock-wrapper ul {
-  position: relative;
-  float: left;
-  margin: 2px !important;
-  width: 30px;
-  height: 45px;
-  font-size: 40px;
-  border-radius: 6px;
-  background: #000;
-}
-.flip-clock-wrapper ul li a div div.inn {
-  font-size: 35px !important;
-}
-.flip-clock-wrapper ul li {
-  line-height: 43px!important;
-}
-.flip-clock-dot {
-  width: 5px!important;
-  height: 5px!important;
-  display: none !important;
-}
-.flip-clock-label{
-  top: -1.5em!important;
-  right: -57px!important;
-}
-.flip-clock-divider {
-  width: 3px!important;
-}
+/*changed by kerendot */
+/*@media (max-width: 650px){ */
+@media (max-width: 1200px){ 
+    .flip-clock-wrapper ul {
+    position: relative;
+    float: left;
+    margin: 2px !important;
+    width: 30px;
+    height: 45px;
+    font-size: 40px;
+    border-radius: 6px;
+    background: #000;
+  }
+  .flip-clock-wrapper ul li a div div.inn {
+    font-size: 35px !important;
+  }
+  .flip-clock-wrapper ul li {
+    line-height: 43px!important;
+  }
+  .flip-clock-dot {
+    width: 5px!important;
+    height: 5px!important;
+    display: none !important;
+  }
+  .flip-clock-label{
+    top: -1.5em!important;
+    right: -57px!important;
+  }
+  .flip-clock-divider {
+    width: 3px!important;
+  }
 
 }
+
+
 .flip-clock-wrapper ul li {
   z-index: 1;
   position: initial;
@@ -118,7 +122,7 @@
   height: 100%;
   line-height: 87px;
   text-decoration: none !important;
-}
+  }
 
 .flip-clock-wrapper ul li:first-child {
   z-index: 2; }
@@ -215,7 +219,9 @@
   display: inline-block;
   position: relative;
   width: 20px;
-  height: 100px; }
+  /*changed by kerendot*/
+  /*height: 100px; }*/
+  height: 70px; }
 
 .flip-clock-divider:first-child {
   width: 0; }

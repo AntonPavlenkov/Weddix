@@ -20,7 +20,7 @@
         </a>
       </span>
       <span class="details">Anton
-        <a class="email-icon" href="pavlenkov47@gmail.com">
+        <a class="email-icon" href="mailto:pavlenkov47@gmail.com">
           <i class="material-icons">email</i>
         </a>
       </span>

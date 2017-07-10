@@ -17,45 +17,56 @@
         <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
       </md-dialog-actions>
     </md-dialog>
-  
+    
+    <div class="nav-divider"></div>
+
     <draggable :list="cmpsToDisplay" @end="onDragEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
-      <transition-group name="cmps">
+      <transition-group name="cmps-list" tag="div" appear>
         <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
         </component>
       </transition-group>
     </draggable>
   
-    <div class="btn-holder" v-if="isLoading">
-      <md-spinner md-indeterminate class="btn-holder"></md-spinner>
+    <div class="btns-row" v-if="isLoading">
+      <md-spinner md-indeterminate class="btns-row"></md-spinner>
     </div>
-    <div class="btn-holder">
-      <md-button v-if="!isReturningUser" class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
-        <md-icon>note_add</md-icon>
-        <md-tooltip md-direction="top">Start from Template</md-tooltip>
-      </md-button>
-      <md-button class="md-icon-button md-raised md-warn" @click="resetAll">
-        <md-icon>delete_forever</md-icon>
-        <md-tooltip md-direction="top">Reset All</md-tooltip>
-      </md-button>
-    </div>
-  
-    <div class="btn-holder">
-      <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
-        <md-icon>add</md-icon>
-        <md-tooltip md-direction="top">Add component</md-tooltip>
-      </md-button>
-      <md-button md-menu-trigger class="md-icon-button md-raised md-primary color-picker-btn">
-        <md-icon>format_paint</md-icon>
-        <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
-        <md-tooltip md-direction="top">Change page background color</md-tooltip>
-      </md-button>
+    <div class="btns-area">
+      <div class="btns-row">
+        <md-button v-if="!isReturningUser" class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
+          <md-icon>note_add</md-icon>
+          <md-tooltip md-direction="top">Start from Template</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button md-raised md-warn" @click="resetAll">
+          <md-icon>delete_forever</md-icon>
+          <md-tooltip md-direction="top">Reset All</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button md-raised" @click="createAll">
+          <md-icon>stars</md-icon>
+          <md-tooltip md-direction="top">createAll</md-tooltip>
+        </md-button>
+      </div>
+      <div class="btns-row">
+        <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
+          <md-icon>add</md-icon>
+          <md-tooltip md-direction="top">Add component</md-tooltip>
+        </md-button>
+        <md-button md-menu-trigger class="md-icon-button md-raised md-primary color-picker-btn">
+          <md-icon>format_paint</md-icon>
+          <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
+          <md-tooltip md-direction="top">Change page background color</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button md-raised md-primary" @click="changeCssProperty('backgroundColor','transparent')">
+          <md-icon>format_clear</md-icon>
+          <md-tooltip md-direction="top">Clear background color</md-tooltip>
+        </md-button>
+      </div>
     </div>
   
   </section>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+import Draggable from 'vuedraggable'
 import SimpleText from '../components/cmpTmpls/SimpleText'
 import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
 import LocationMap from '../components/cmpTmpls/LocationMap'
@@ -74,7 +85,7 @@ export default {
     ImgCarousel,
     CoupleAbout,
     ImgTitle,
-    draggable,
+    Draggable,
     CountDown,
     GiftPicker,
     ColorPicker
@@ -123,7 +134,16 @@ export default {
       this.addNewCmp('CoupleAbout');
       this.addNewCmp('SimpleText');
       this.addNewCmp('ImgCarousel');
-
+      this.changeCssProperty('backgroundColor', 'hsl(36, 99.99999999999991%, 97%)');
+    },
+    createAll() {
+        this.addNewCmp('SimpleTitle');
+      this.addNewCmp('CoupleAbout');
+      this.addNewCmp('SimpleText');
+      this.addNewCmp('ImgCarousel');
+      this.addNewCmp('ImgTitle');
+      this.addNewCmp('LocationMap');
+      this.addNewCmp('CountDown');
     },
     addNewCmp(newCmpType) {
       this.closeDialog('addDialog')
@@ -152,49 +172,21 @@ export default {
 </script>
 
 
-<style style lang="scss">
-.edit-page {
-  min-height: 100vh;
-  line-height: 100%;
-  box-sizing: border-box;
-}
+<style lang="scss">
 
-// .content{
-//     background-attachment: fixed;
-//     background-position: center;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-// }
-.cmp-father {
-  margin-top: -4px;
-  box-sizing: border-box;
-}
-
-.border-default {
-  border-width: 2px;
-  border-style: dashed;
-  border-color: (rgba(0, 0, 0, 0))
-}
-
+//in this css put only thing that are exclusive to PageEdit, and can be inheritted by other cmps
 
 .mark-class {
   border-color: #ff5722;
   z-index: 1;
 }
 
-.mark-class-edit {
-  border-color: red;
-  z-index: 1;
+.btns-area {
+  margin-top: 20px;
+  padding-bottom: 20px;
 }
 
-.preview {
-  cursor: pointer;
-}
 
-.btn-holder {
-  margin: 10px auto;
-  text-align: center;
-}
 
 .add-btn {
   margin: 10px;
@@ -236,52 +228,13 @@ export default {
   }
 }
 
-
-.content-container {
-  text-align: center;
-  width: 100%;
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.1s
 }
 
-.btn-modify {
-  position: absolute;
-  opacity: 0.2;
-  transition: all .5s;
-  right: 5%;
-}
-
-.btn-modify:hover {
-  opacity: 1;
-}
-
-.btn-edit {
-  top: 10px;
-}
-
-.btn-modify,
-.btn-delete:hover {
-  cursor: pointer;
-}
-
-.btn-dragndrop {
-  top: 60px;
-}
-
-.btn-dragndrop:hover {
-  cursor: move;
-}
-
-.btn-delete {
-  top: 110px;
-}
-
-.list-enter-active,
-.list-leave-active {
-  transition: all 1s;
-}
-
-.list-enter,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
+.fade-enter,
+.fade-leave-to {
+    opacity: 0
 }
 </style>

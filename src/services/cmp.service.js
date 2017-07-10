@@ -2,7 +2,8 @@ const urlUser = 'http://localhost:3003/data/user';
 import axios from 'axios';
 
 //var to allow quick access to Lorem string
-var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, incidunt a delectus, ut saepe accusamus assumenda optio sapiente molestiae. Labore, vel rerum delectus harum quod sint distinctio earum laborum. Illum?';
+// var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, incidunt a delectus, ut saepe accusamus assumenda optio sapiente molestiae. Labore, vel rerum delectus harum quod sint distinctio earum laborum. Illum?';
+var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, incidunt a delectus';
 
 //these are the cmps templates, with some default data
 
@@ -52,7 +53,7 @@ const tmplCmps = [
         type: 'ImgTitle',
         label: 'Image with Titles',
         // data: { name1: 'Guy', name2: 'Gal', imgUrl: 'https://lotuseventsmanagement.com/wp-content/uploads/2015/11/Wedding-Avatar2.png' },
-        data: { name1: 'Guy', name2: 'none', imgUrl: 'https://image.freepik.com/free-vector/cartoon-wedding-card_23-2147493889.jpg' },
+        data: { name1: 'Guy', name2: 'Gal', imgUrl: 'https://image.freepik.com/free-vector/cartoon-wedding-card_23-2147493889.jpg' },
         shape: 'heart',
         style: { background: 'none', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Dancing Script', fontSize: '50px', backgroundAttachment: 'fixed' , backgroundPosition: 'center' , backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' },
         cmpPreview: 'http://i.imgur.com/uNx3atU.png'

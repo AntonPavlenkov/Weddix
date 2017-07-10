@@ -1,6 +1,6 @@
 <template>
-    <section class="simple-title cmp-father" :style="cmp.style">
-        <div class="content" :class="{'mark-class': isEditMode}">
+    <section class="simple-title cmp-father" :style="cmp.style" :class="{'mark-class': isEditMode}">
+        <div class="content" >
             <p @blur="updateText('mainTitle')" :contenteditable="isEditMode" class="main-title">{{cmp.data.mainTitle}}</p>
             <p @blur="updateText('subTitle')" :style="{fontSize: subTitleFontSize}" :contenteditable="isEditMode" class="sub-title"> {{cmp.data.subTitle}} </p>
         </div>
@@ -41,6 +41,7 @@ export default {
         cmpToEdit() {
             return JSON.parse(JSON.stringify(this.cmp))
         },
+        //this is used to calculate the sub title font size as 60% from main title
         subTitleFontSize() {
             var currentFontSizeValue = this.cmp.style.fontSize;
             return +currentFontSizeValue.substring(0, currentFontSizeValue.indexOf("px")) * 0.6 + 'px';
@@ -71,10 +72,12 @@ export default {
 
 <style scoped>
 .simple-title {
-    transition: all .5s;
     position: relative;
+<<<<<<< HEAD
     transition: all .5s;
 
+=======
+>>>>>>> 482996f362d84afa456fadeb7897279f11365392
 }
 
 .content {
@@ -88,31 +91,4 @@ p {
     line-height: 70px;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .5s
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0
-}
-
-
-
-
-
-
-
-
-
-
-
-/*.main-title {
-    font-size: 70px;
-}
-
-.sub-title {
-    font-size: 35px;
-}*/
 </style>

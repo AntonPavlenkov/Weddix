@@ -1,30 +1,40 @@
 <template>
-  <transition name="fade" appear>
-    <section>
-      <!--<h2>PUBLISH</h2>-->
-      <div class="btn-holder" v-if="isLoading">
-        <md-spinner md-indeterminate class="btn-holder"></md-spinner>
-      </div>
-      <component v-if="cmpsToDisplay" v-for="cmp in cmpsToDisplay" v-bind:is="'Dumb'+cmp.type" :key="cmp.type" :cmp="cmp">
-      </component>
-    </section>
-  </transition>
+  <section v-if="user" class="edit-page" :style="user.pageStyle">
+    <div class="nav-divider"></div>
+    <draggable :list="cmpsToDisplay" :options="{draggable:'none'}">
+      <transition-group name="cmps-list" tag="div" appear>
+        <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="'Dumb'+cmp.type" :key="idx" :cmp="cmp" class="border-default">
+        </component>
+      </transition-group>
+    </draggable>
+    <div class="btns-row" v-if="isLoading">
+      <md-spinner md-indeterminate class="btns-row"></md-spinner>
+    </div>
+  </section>
 </template>
 
 <script>
+import Draggable from 'vuedraggable'
 import DumbCoupleAbout from '../components/cmpPublish/DumbCoupleAbout'
 import DumbImgCarousel from '../components/cmpPublish/DumbImgCarousel'
 import DumbLocationMap from '../components/cmpPublish/DumbLocationMap'
 import DumbSimpleText from '../components/cmpPublish/DumbSimpleText'
 import DumbSimpleTitle from '../components/cmpPublish/DumbSimpleTitle'
+import DumbCountDown from '../components/cmpPublish/DumbCountDown'
+import DumbImgTitle from '../components/cmpPublish/DumbImgTitle'
+import DumbGiftPicker from '../components/cmpPublish/DumbGiftPicker'
 export default {
   name: 'PublishPage',
   components: {
+    DumbImgTitle,
+    DumbCountDown,
     DumbCoupleAbout,
     DumbImgCarousel,
     DumbLocationMap,
     DumbSimpleText,
-    DumbSimpleTitle
+    DumbSimpleTitle,
+    DumbGiftPicker,
+    Draggable
   },
   data() {
     return {
@@ -33,8 +43,7 @@ export default {
   },
   created() {
     console.log('publish page: Loading data from store');
-    this.$store.dispatch({ type: 'loadCmp' })
-    this.$store.dispatch({ type: 'loadPageEditObj' })
+    this.$store.dispatch({ type: 'loadUser' })
   },
   computed: {
     cmpsToDisplay() {
@@ -44,29 +53,17 @@ export default {
       }
       return cmps;
     },
+    user() {
+      return this.$store.state.user;
+    },
   },
 }
 </script>
 
 
 <style scoped>
-section {
-  /*width: 90%;*/
-  margin: 0 auto;
-}
-
 .btn-holder {
   margin-top: 10px;
   text-align: center;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0
 }
 </style>

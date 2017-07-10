@@ -30,3 +30,37 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+.btn-modify {
+    position: absolute;
+    opacity: 0.2;
+    transition: all .5s;
+    right: 5%;
+}
+
+.btn-modify:hover {
+    opacity: 1;
+}
+
+.btn-edit {
+    top: 10px;
+}
+
+.btn-modify,
+.btn-delete:hover {
+    cursor: pointer;
+}
+
+.btn-dragndrop {
+    top: 60px;
+}
+
+.btn-dragndrop:hover {
+    cursor: move;
+}
+
+.btn-delete {
+    top: 110px;
+}
+</style>

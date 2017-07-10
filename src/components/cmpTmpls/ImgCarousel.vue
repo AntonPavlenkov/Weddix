@@ -1,5 +1,4 @@
 <template>
-  <!--<h1>elad</h1>-->
   <section class="img-carousel cmp-father" :class="{'mark-class':isEditMode}" :style="cmp.style">
     <div class="content">
       <carousel-3d>
@@ -73,25 +72,12 @@ export default {
 
 <style scoped lang="scss">
 .img-carousel {
-  transition: all .5s;
   position: relative;
-  width: 100%;
 }
-
 .edit-console {
   .urls-form {
     width: 100%;
     text-align: center;
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity .5s
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0
 }
 </style>
