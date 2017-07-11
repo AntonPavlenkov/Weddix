@@ -1,14 +1,9 @@
 <template>
   <section v-if="user" class="edit-page" :style="user.pageStyle">
-<<<<<<< HEAD
     <div class="height-container">
 
     <md-dialog class="dialog" md-open-from="#custom" md-close-to="#custom" ref="addDialog">
       <md-dialog-title>Choose new component</md-dialog-title>
-=======
-    <md-dialog class="add-dialog" md-open-from="#custom" md-close-to="#custom" ref="addDialog">
-      <md-dialog-title>Select a new component:</md-dialog-title>
->>>>>>> cdab1976788cec208d4a61a6eca55116465c3f9c
       <md-dialog-content>
         <ul class="catalogue">
           <li class="preview" v-for="(cmp, idx) in tmplCmps" @click="addNewCmp(cmp.type)" :key="idx">
