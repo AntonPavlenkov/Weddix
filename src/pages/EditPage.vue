@@ -1,5 +1,7 @@
 <template>
   <section v-if="user" class="edit-page" :style="user.pageStyle">
+    <div class="height-container">
+
     <md-dialog class="dialog" md-open-from="#custom" md-close-to="#custom" ref="addDialog">
       <md-dialog-title>Choose new component</md-dialog-title>
       <md-dialog-content>
@@ -73,13 +75,15 @@
       </li>
   
     </ul>
-  
+    </div>
+            <main-footer></main-footer>
   </section>
 </template>
 
 <script>
 
-'../assets/arc.png'
+import MainFooter from './MainFooter'
+
 import Draggable from 'vuedraggable'
 import SimpleText from '../components/cmpTmpls/SimpleText'
 import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
@@ -93,6 +97,7 @@ import ColorPicker from '../components/toolbars/ColorPicker'
 export default {
   name: 'EditPage',
   components: {
+    MainFooter,
     SimpleText,
     SimpleTitle,
     LocationMap,
@@ -194,7 +199,6 @@ export default {
           li[a].style.transitionDelay = `${(50 * a)}ms`
           li[a].style.left = (r * Math.cos(90 / n * a * (Math.PI / 180))) + 'px';
           li[a].style.top = (r * Math.sin(90 / n * a * (Math.PI / 180))) + 'px';
-          console.log(li[a])
         }
       }
       else {
@@ -211,6 +215,10 @@ export default {
 
 <style lang="scss">
 //in this css put only thing that are exclusive to PageEdit, and can be inheritted by other cmps
+
+.height-container{
+  min-height: 80vh;
+}
 .mark-class {
   border-color: #ff5722;
   z-index: 1;

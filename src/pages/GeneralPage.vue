@@ -18,9 +18,8 @@
         <router-view>
         </router-view>
   
-        <main-footer></main-footer>
-  
       </div>
+
     </section>
   </transition>
 </template>
@@ -70,16 +69,39 @@ export default {
   flex-flow: column nowrap;
   max-height: 100vh;
   width: 100%;
-  header{
+  header {
     height: 10vh;
   }
 }
-  .page-general-content {  
-    min-height: 90vh;
-    display: flex;
-    flex-flow: column nowrap;
-    overflow-y: scroll;
+
+.page-general-content {
+  position: relative;
+  .edit-page {
+    // min-height: 80vh;
   }
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: scroll;
+
+
+}
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: tomato;
+}
+
 
 
 
