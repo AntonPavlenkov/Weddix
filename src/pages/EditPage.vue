@@ -33,38 +33,39 @@
   
     <ul id="navs" data-open="close" data-close="open" @click="openArc">
   
-      <li v-if="!isReturningUser">
-        <md-button  class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
+      <li v-if="!isReturningUser" data-action="Start ">
+        <md-button class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
           <md-icon>note_add</md-icon>
           <md-tooltip md-direction="top">Start from Template</md-tooltip>
         </md-button>
       </li>
-      <li>
-        <md-button class="md-icon-button md-raised md-warn" @click="resetAll">
+      <li data-action="Reset All">
+        <md-button
+         class="md-icon-button md-raised md-warn" @click="resetAll">
           <md-icon>delete_forever</md-icon>
           <md-tooltip md-direction="top">Reset All</md-tooltip>
         </md-button>
       </li>
-      <!--<li>
-            <md-button class="md-icon-button md-raised" @click="createAll">
-              <md-icon>stars</md-icon>
-              <md-tooltip md-direction="top">createAll</md-tooltip>
-            </md-button>
-          </li>-->
-      <li>
+      <!--<li data-action="Create All">
+        <md-button class="md-icon-button md-raised" @click="createAll">
+          <md-icon>stars</md-icon>
+          <md-tooltip md-direction="top">createAll</md-tooltip>
+        </md-button>
+      </li>-->
+      <li data-action="Add New">
         <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
           <md-icon>add</md-icon>
           <md-tooltip md-direction="top">Add component</md-tooltip>
         </md-button>
       </li>
-      <li>
+      <li data-action="Change Color">
         <md-button md-menu-trigger class="md-icon-button md-raised md-primary color-picker-btn">
           <md-icon>format_paint</md-icon>
           <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
           <md-tooltip md-direction="top">Change page background color</md-tooltip>
         </md-button>
       </li>
-      <li>
+      <li data-action="Clear Color">
         <md-button class="md-icon-button md-raised md-primary" @click="changeCssProperty('backgroundColor','transparent')">
           <md-icon>format_clear</md-icon>
           <md-tooltip md-direction="top">Clear background color</md-tooltip>
@@ -78,7 +79,7 @@
 
 <script>
 
-
+'../assets/arc.png'
 import Draggable from 'vuedraggable'
 import SimpleText from '../components/cmpTmpls/SimpleText'
 import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
@@ -215,15 +216,8 @@ export default {
   z-index: 1;
 }
 
-.btns-area {
-  margin-top: 20px;
-  padding-bottom: 20px;
-}
-
-
-
 .add-btn {
-  margin: 10px;
+  // margin: 10px;
 }
 
 .color-picker-btn {
@@ -280,11 +274,12 @@ export default {
 
 
 #navs {
+  z-index: 999;
   position: fixed;
   left: 4px;
   bottom: 4px;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   line-height: 40px;
   list-style-type: none;
   margin: 0;
@@ -292,6 +287,7 @@ export default {
   text-align: center;
   color: #fff;
   cursor: pointer;
+  
   &::after {
     position: absolute;
     left: 0;
@@ -300,7 +296,8 @@ export default {
     height: 100%;
     border-radius: 50%;
     -webkit-border-radius: 50%;
-    background-color: #4ECDC4;
+    background-position: cover;
+    background-color: #3f51b5;
   }
 }
 
@@ -315,23 +312,40 @@ export default {
   -webkit-border-radius: 50%;
 }
 
+#nav , .active li::before{
+      position: absolute;
+    content: attr(data-action);
+    white-space:nowrap;
+    top: -27px;
+    left:  10px;
+}
+
 #navs>li {
   transition: all .6s;
   -webkit-transition: all .6s;
-  -moz-transition: .6s;
-  visibility: hidden;
+  -moz-transition: .6s; // visibility: hidden;
+  color: black;
+  // &::before{
+  //   position: absolute;
+  //   content: attr(data-action);
+  //   white-space:nowrap;
+  //   top: -27px;
+  //   left:  10px;
+  // }
 }
 
 #navs:after {
-  content: attr(data-close);
+  content: '';
+  background-image: url('../assets/arc.png'); 
+  background-size: contain;
   z-index: 1;
   border-radius: 50%;
   -webkit-border-radius: 50%;
 }
 
-#navs.active:after {
-  content: attr(data-open);
-}
+// #navs.active:after {
+//   content: attr(data-open);
+// }
 
 #navs a {
   width: 40px;
