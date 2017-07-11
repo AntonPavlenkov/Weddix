@@ -42,14 +42,22 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .footer {
   width: 100%;
+  min-height: 10vh;
   background-color: #E5E9F2;
   display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-content: center;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  h2{
+    margin: 0;
+    padding: 0;
+  }
+  i{
+    height: 10px;
+  }
 }
 
 .powered-by {
