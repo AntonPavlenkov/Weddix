@@ -43,6 +43,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media (max-width: 650px) {
+  flex-flow: column nowrap;
+}
+
+
+
 .footer {
   width: 100%;
   min-height: 10vh;
@@ -51,11 +57,11 @@ export default {
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  h2{
+  h2 {
     margin: 0;
     padding: 0;
   }
-  i{
+  i {
     height: 10px;
   }
 }
@@ -68,6 +74,9 @@ export default {
   align-self: center;
   display: flex;
   flex-flow: row wrap;
+  @media (max-width: 650px) {
+    display: none;
+  }
 }
 
 .details {
