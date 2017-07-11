@@ -1,6 +1,6 @@
 <template>
-    <section class="couple-about cmp-father" :style="cmp.style">
-        <div class="content" :class="{'mark-class': isEditMode}">
+    <section class="couple-about cmp-father" :style="cmp.style" :class="{'mark-class': isEditMode}">
+        <div class="content">
             <div class="about-1">
                 <span @blur="updateText('aboutName1')" :contenteditable="isEditMode" class="about-1-name">{{cmp.data.aboutName1}}</span>
                 <img @click="setImg('aboutImgUrl1')" :src="cmp.data.aboutImgUrl1" class="about-1-img" width="100px" height="200px">
@@ -15,12 +15,11 @@
                 <span @blur="updateText('aboutInfo2')" :style="cmp.style" :contenteditable="isEditMode" class="about-2-info">{{cmp.data.aboutInfo2}}</span>
             </div>
         </div>
-
+    
         <!--edit butttons-->
         <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
     
         <transition name="fade">
-    
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <couple-toolbar v-if="selectedImgType!==''" :cmp="cmp" :selectedImgType="selectedImgType" @update="updateCmp"></couple-toolbar>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
@@ -40,7 +39,7 @@ export default {
     name: 'CoupleAbout',
     props: {
         cmp: { type: Object, required: true },
-        isFirst: Boolean , isLast: Boolean
+        isFirst: Boolean, isLast: Boolean
     },
     components: {
         ModifyBtns,
@@ -52,8 +51,6 @@ export default {
     data() {
         return {
             isEditMode: false,
-            // color: "",
-            // currUrl: '',
             selectedImgType: ''
         }
     },
@@ -64,7 +61,6 @@ export default {
     },
     methods: {
         setImg(imgType) {
-            // this.currUrl = this.cmpToEdit.data[imgType]
             this.selectedImgType = imgType
             console.log(this.selectedImgType)
         },
@@ -96,7 +92,6 @@ export default {
 
 <style scoped>
 .couple-about {
-    box-sizing: content-box;
     position: relative;
 }
 
@@ -158,6 +153,7 @@ export default {
 .fade-leave-to {
     opacity: 0
 }
+
 
 @media (max-width: 650px) {
     .content {

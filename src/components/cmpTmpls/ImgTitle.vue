@@ -131,6 +131,10 @@ export default {
 .heart image {
     clip-path: url(#heart-clip);
 }
+ .heart{
+     margin-top: 30px;
+
+ }
 
 @media (max-width: 650px) {
     .content {

@@ -87,10 +87,6 @@ export default {
   background-color: #ecf3f3;
 }
 
-// section {
-//   margin: 0 auto;
-//   position: relative;
-// }
 .logo {
   position: absolute;
   left: 25px;

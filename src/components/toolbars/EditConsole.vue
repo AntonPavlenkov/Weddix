@@ -54,6 +54,7 @@ export default {
   box-shadow: 8px 9px 55px -7px rgba(0, 0, 0, 0.67);
   border-radius: 5px;
   font-family: 'cursive';
+  font-weight: normal;
   color: black;
   cursor: move;
   p {
