@@ -33,8 +33,8 @@
   
     <ul id="navs" data-open="close" data-close="open" @click="openArc">
   
-      <li>
-        <md-button v-if="!isReturningUser" class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
+      <li v-if="!isReturningUser">
+        <md-button  class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
           <md-icon>note_add</md-icon>
           <md-tooltip md-direction="top">Start from Template</md-tooltip>
         </md-button>
@@ -45,12 +45,12 @@
           <md-tooltip md-direction="top">Reset All</md-tooltip>
         </md-button>
       </li>
-      <li>
-        <md-button class="md-icon-button md-raised" @click="createAll">
-          <md-icon>stars</md-icon>
-          <md-tooltip md-direction="top">createAll</md-tooltip>
-        </md-button>
-      </li>
+      <!--<li>
+            <md-button class="md-icon-button md-raised" @click="createAll">
+              <md-icon>stars</md-icon>
+              <md-tooltip md-direction="top">createAll</md-tooltip>
+            </md-button>
+          </li>-->
       <li>
         <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
           <md-icon>add</md-icon>
@@ -184,11 +184,12 @@ export default {
       let ul = event.target;
       let li = event.target.children;
       let i = li.length;
-      let n = i;
-      let r = 120;
+      let n = i - 1;
+      let r = 200;
       event.target.classList.toggle('active')
       if (ul.classList.contains('active')) {
         for (var a = 0; a < i; a++) {
+          li[a].style.visibility = 'initial'
           li[a].style.transitionDelay = `${(50 * a)}ms`
           li[a].style.left = (r * Math.cos(90 / n * a * (Math.PI / 180))) + 'px';
           li[a].style.top = (-r * Math.sin(90 / n * a * (Math.PI / 180))) + 'px';
@@ -196,7 +197,8 @@ export default {
         }
       }
       else {
-        for(var a = 0; a < i; a++){
+        for (var a = 0; a < i; a++) {
+          li[a].style.visibility = 'hidden'
           li[a].removeAttribute('style')
         }
       }
@@ -290,6 +292,16 @@ export default {
   text-align: center;
   color: #fff;
   cursor: pointer;
+  &::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    background-color: #4ECDC4;
+  }
 }
 
 #navs>li,
@@ -301,13 +313,13 @@ export default {
   height: 100%;
   border-radius: 50%;
   -webkit-border-radius: 50%;
-  background-color: #4ECDC4;
 }
 
 #navs>li {
   transition: all .6s;
   -webkit-transition: all .6s;
   -moz-transition: .6s;
+  visibility: hidden;
 }
 
 #navs:after {
