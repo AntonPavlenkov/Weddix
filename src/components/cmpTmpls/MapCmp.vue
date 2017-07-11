@@ -11,7 +11,6 @@ export default {
     props: {
         position: { type: Object, required: true }, 
         zoom: {type: Number, required: true},
-        // isFirst: Boolean , isLast: Boolean
     },
   data(){
     return {
@@ -24,7 +23,7 @@ export default {
         this.center = newPosition;
       },
       deep: true
-    }
+    },
   }
 }
 </script> 

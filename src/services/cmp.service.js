@@ -16,7 +16,7 @@ const tmplCmps = [
             txtLine2: 'We\'ll meet on 7pm for light dinner',
             txtLine3: 'Followed by dancing into the night!',
         },
-        style: { background: 'none', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '20px'    , backgroundAttachment: 'fixed' , backgroundPosition: 'center' , backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' },
+        style: { background: 'none', textAlign: 'center', fontWeight: 'bold', color: 'black', fontFamily: 'Rouge script', fontSize: '36px'    , backgroundAttachment: 'fixed' , backgroundPosition: 'center' , backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' },
         cmpPreview: 'http://imgur.com/vhSs8p2.png'
     },
     {
@@ -46,7 +46,7 @@ const tmplCmps = [
         label: 'Introduction',
         // data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'https://wpclipart.com/holiday/wedding/bride_groom/bride_vale_flowers.png', mainImgUrl: 'https://www.shareicon.net/download/2016/05/25/770451_people_512x512.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'http://pngimg.com/uploads/groom/groom_PNG19603.png' },
         data: { aboutName1: 'Cinderella', aboutInfo1: loremIpsumHolder, aboutImgUrl1: 'https://image.flaticon.com/icons/png/128/161/161846.png', mainImgUrl: 'https://www.shareicon.net/download/2016/05/25/770451_people_512x512.png', aboutName2: 'Prince', aboutInfo2: loremIpsumHolder, aboutImgUrl2: 'https://d30y9cdsu7xlg0.cloudfront.net/png/2104-200.png' },
-        style: { background: 'none', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px', backgroundAttachment: 'fixed' , backgroundPosition: 'center' , backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' },
+        style: { background: 'none', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Rouge script', fontSize: '36px', backgroundAttachment: 'fixed' , backgroundPosition: 'center' , backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' },
         cmpPreview: 'http://i.imgur.com/hipydPu.png'
     },
     {
@@ -62,22 +62,22 @@ const tmplCmps = [
         type: 'LocationMap',
         label: 'Location',
         data: { position: { lat: 32.087893, lng: 34.803038 }, zoom: 11, address: { line1: 'HaShaked Garden', line2: 'Egozi 4', line3: 'Ramat Gina' } },
-        style: { background: 'none', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Average', fontSize: '16px',backgroundAttachment: 'fixed' , backgroundPosition: 'center' , backgroundRepeat: 'no-repeat' , backgroundSize: 'cover'   },
+        style: { background: 'none', textAlign: 'left', fontWeight: 'normal', color: 'black', fontFamily: 'Courgette', fontSize: '18px',backgroundAttachment: 'fixed' , backgroundPosition: 'center' , backgroundRepeat: 'no-repeat' , backgroundSize: 'cover'   },
         cmpPreview: 'http://i.imgur.com/YHRlnZm.png'
     },
     {
         type: 'CountDown',
-        label: 'Countdown',
+        label: 'Animated Countdown',
         data: { date: '' },
         style: { background: 'none' },
-        cmpPreview: 'http://i.imgur.com/FbkUVty.png'
+        cmpPreview: 'http://i.imgur.com/Yps0Ko6.png'
     },
     {
         type: 'GiftPicker',
-        label: 'Gift Picker (Textual)',
-        data: { gifts: [{ giftName: 'Lamborginie', mail: '' }, { giftName: 'Tv', mail: '' }, { giftName: 'Radio', mail: '' }, { giftName: 'One Million Dollars', mail: '' },], subTitle: 'Are getting married' },
+        label: 'Dynamic Gift Picker',
+        data: { gifts: []},
         style: { background: 'none', textAlign: 'center', fontWeight: 'normal', color: 'black', fontFamily: 'Courgette', fontSize: '16px', backgroundAttachment: 'fixed' , backgroundPosition: 'center' , backgroundRepeat: 'no-repeat' , backgroundSize: 'cover'  },
-        cmpPreview: 'http://i.imgur.com/kHKSAlf.png'
+        cmpPreview: 'http://i.imgur.com/BsKbq3Q.png'
     },
 ];
 

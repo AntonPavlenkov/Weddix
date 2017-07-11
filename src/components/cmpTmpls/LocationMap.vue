@@ -36,13 +36,14 @@ import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
 
-const ZOOM_CLOSE = 18;
+// const ZOOM_CLOSE = 18;
 
 export default {
     name: 'LocationMap',
     props: {
         cmp: { type: Object, required: true },
-        isFirst: Boolean , isLast: Boolean
+        isFirst: Boolean,
+        isLast: Boolean
     },
     components: {
         TxtToolbar,
@@ -55,7 +56,7 @@ export default {
     data() {
         return {
             isEditMode: false,
-            // color: "",
+            resetZoomNeeded: false
         }
     },
     computed: {

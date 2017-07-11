@@ -2,7 +2,7 @@
     <section class="img-title cmp-father" :class="{'mark-class':isEditMode}">
         <div class="content" :style="cmp.style">
             <span class="name1" contenteditable @blur="updateText('name1')">{{cmp.data.name1}}</span>
-            <div class="demo" :class="{[cmp.shape]: true}">
+            <div class="shape" :class="{[cmp.shape]: true}">
                 <svg width="300" height="300">
                     <image :xlink:href="cmp.data.imgUrl" width="300" height="300" />
                 </svg>
@@ -99,9 +99,12 @@ export default {
     transition: all .5s;
 }
 
-.name1,
-.name2 {
-    padding: 20px 0;
+.name2{
+    margin-right: 100px;
+}
+
+.name1{
+    margin-left: 100px;
 }
 
 .content {
@@ -134,7 +137,7 @@ export default {
         display: flex;
         flex-flow: row wrap;
     }
-    .demo {
+    .shape {
         order: 3;
         width: 100%;
         text-align: center;
