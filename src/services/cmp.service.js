@@ -17,7 +17,7 @@ const tmplCmps = [
             txtLine3: 'Followed by dancing into the night!',
         },
         style: { background: 'none', textAlign: 'center', fontWeight: 'bold', color: 'black', fontFamily: 'Rouge script', fontSize: '36px'    , backgroundAttachment: 'fixed' , backgroundPosition: 'center' , backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' },
-        cmpPreview: 'http://imgur.com/vhSs8p2.png'
+        cmpPreview: 'http://imgur.com/vhSs8p2.png'  
     },
     {
         type: 'SimpleTitle',

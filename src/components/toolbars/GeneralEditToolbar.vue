@@ -9,9 +9,9 @@
                         <md-tooltip md-direction="top">set background Image</md-tooltip>
                     </md-button>
                     <md-menu-content>
-                        <p @click="changeCssProperty('background','url(https://www2.shutterstock.com/blog/wp-content/uploads/sites/5/2014/04/img68.jpg)')"> Cherry Blossom </p>
-                        <p @click="changeCssProperty('background','url(http://hdwpro.com/wp-content/uploads/2017/02/Beautiful-Dove-Photos.jpg)')">Couple Of Doves </p>
-                        <p @click="changeCssProperty('background','url(http://smartslider3.com/wp-content/uploads/slider100/parallax-background-effect.jpg)')"> Harvest</p>
+                        <p @click="setParallax('url(https://www2.shutterstock.com/blog/wp-content/uploads/sites/5/2014/04/img68.jpg)')"> Cherry Blossom </p>
+                        <p @click="setParallax('url(http://hdwpro.com/wp-content/uploads/2017/02/Beautiful-Dove-Photos.jpg)')">Couple Of Doves </p>
+                        <p @click="setParallax('url(http://smartslider3.com/wp-content/uploads/slider100/parallax-background-effect.jpg)')"> Harvest</p>
                     </md-menu-content>
                 </md-menu>
                 <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
@@ -74,6 +74,11 @@ export default {
             // console.log(prop, 'prop')
             // console.log(val,'val')
             this.cmpStyleEdit.style[prop] = val;
+            this.$emit('update', this.cmpStyleEdit)
+        },
+        setParallax(imgUrl) {
+            console.log(imgUrl)
+            this.cmpStyleEdit.style.background = `${imgUrl} center center / cover no-repeat fixed`;
             this.$emit('update', this.cmpStyleEdit)
         }
     },

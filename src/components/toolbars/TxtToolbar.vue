@@ -11,12 +11,12 @@
         <md-tooltip md-direction="top">Choose text format</md-tooltip>
       </md-button>
       <md-menu-content>
-        <md-menu-item class="font-shadows" @click="changeCssProperty('fontFamily','Shadows Into Light')">Shadows Into Light</md-menu-item>
+        <!--<md-menu-item class="font-shadows" @click="changeCssProperty('fontFamily','Shadows Into Light')">Shadows Into Light</md-menu-item>-->
         <md-menu-item class="font-dancing" @click="changeCssProperty('fontFamily','Dancing Script')">Dancing Script</md-menu-item>
         <md-menu-item class="font-rouge" @click="changeCssProperty('fontFamily','Rouge Script')">Rouge Script</md-menu-item>
         <md-menu-item class="font-courgette" @click="changeCssProperty('fontFamily','Courgette')">Courgette</md-menu-item>
         <md-menu-item class="font-handlee" @click="changeCssProperty('fontFamily','Handlee')">Handlee</md-menu-item>
-        <md-menu-item class="font-cursive" @click="changeCssProperty('fontFamily','cursive')">Cursive</md-menu-item>
+        <!--<md-menu-item class="font-cursive" @click="changeCssProperty('fontFamily','cursive')">Cursive</md-menu-item>-->
         <md-menu-item class="font-average" @click="changeCssProperty('fontFamily','Average')">Average</md-menu-item>
         <md-menu-item class="font-montserrat" @click="changeCssProperty('fontFamily','Montserrat')">Montserrat</md-menu-item>
         <!--<md-menu-item @click="changeCssProperty('fontFamily','fantasy')">Fantasy</md-menu-item>-->
