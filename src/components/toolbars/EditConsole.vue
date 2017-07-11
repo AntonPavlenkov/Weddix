@@ -1,5 +1,5 @@
 <template>
-    <section class="edit-console">
+    <section  class="edit-console">
         <md-button class="btn-close md-icon-button" @click="toggleEditMode">
             <md-icon>close</md-icon>
             <md-tooltip md-direction="top">Close</md-tooltip>

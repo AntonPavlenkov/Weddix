@@ -293,7 +293,7 @@ export default {
   z-index: 999;
   position: fixed;
   left: 4px;
-  top: 11vh;
+  top: 14vh;
   width: 60px;
   height: 60px;
   line-height: 40px;

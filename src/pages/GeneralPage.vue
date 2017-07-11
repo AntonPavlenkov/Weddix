@@ -3,7 +3,7 @@
     <section class="page-general-container">
       <header class="navbar">
         <div class="logo" @click="goHome()">Weddix</div>
-        <md-tabs class="md-transparent" md-right @change="changeRoute">
+        <md-tabs class="md-transparent" md-right md-dynamic-height @change="changeRoute">
           <md-tab md-icon="mode_edit" md-label="EDIT" md-active md-tooltip="Edit your invitation">
           </md-tab>
           <md-tab md-icon="laptop" md-label="PREVIEW" md-tooltip="Preview your invitation">
@@ -70,15 +70,12 @@ export default {
   max-height: 100vh;
   width: 100%;
   header {
-    height: 10vh;
+    height: 12vh;
   }
 }
 
 .page-general-content {
   position: relative;
-  .edit-page {
-    // min-height: 80vh;
-  }
   display: flex;
   flex-flow: column nowrap;
   overflow-y: scroll;
@@ -107,6 +104,13 @@ export default {
 
 .navbar {
   background-color: #ecf3f3;
+  @media (max-width: 650px) {
+
+    .logo{
+      font-size: 30px;
+    }
+
+  }
 }
 
 .logo {
@@ -119,6 +123,7 @@ export default {
   text-shadow: 3px 3px 8px rgba(64, 117, 159, 1);
   cursor: pointer;
   z-index: 99;
+  transition: font-size .5s;
 }
 
 

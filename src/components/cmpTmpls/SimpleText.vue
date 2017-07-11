@@ -12,7 +12,7 @@
     
     
         <transition name="fade">
-            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
+            <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable v-draggable-touch>
                 <txt-toolbar :cmp="cmp" @update="updateCmp"></txt-toolbar>
                 <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
             </edit-console>
