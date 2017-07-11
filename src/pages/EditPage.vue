@@ -193,7 +193,7 @@ export default {
           li[a].style.visibility = 'initial'
           li[a].style.transitionDelay = `${(50 * a)}ms`
           li[a].style.left = (r * Math.cos(90 / n * a * (Math.PI / 180))) + 'px';
-          li[a].style.top = (-r * Math.sin(90 / n * a * (Math.PI / 180))) + 'px';
+          li[a].style.top = (r * Math.sin(90 / n * a * (Math.PI / 180))) + 'px';
           console.log(li[a])
         }
       }
@@ -277,7 +277,7 @@ export default {
   z-index: 999;
   position: fixed;
   left: 4px;
-  bottom: 4px;
+  top: 11vh;
   width: 60px;
   height: 60px;
   line-height: 40px;
@@ -314,10 +314,17 @@ export default {
 
 #nav , .active li::before{
       position: absolute;
+      padding: 0;
+      margin: 0;
     content: attr(data-action);
     white-space:nowrap;
     top: -27px;
     left:  10px;
+    font-weight: bold;
+        text-shadow: 0 4px white;
+
+    // background: red;
+    // border-radius: 2em;
 }
 
 #navs>li {
@@ -336,7 +343,7 @@ export default {
 
 #navs:after {
   content: '';
-  background-image: url('../assets/arc.png'); 
+  background-image: url('../assets/arc.svg'); 
   background-size: contain;
   z-index: 1;
   border-radius: 50%;
