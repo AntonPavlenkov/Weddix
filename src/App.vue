@@ -8,11 +8,10 @@
 </template>
 
 <script>
-import MainFooter from './pages/MainFooter'
+
 export default {
   name: 'app',
   components: {
-    MainFooter
   },
   methods: {
     changeRoute(dir) {

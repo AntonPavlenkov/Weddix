@@ -151,11 +151,13 @@ hr {
 .content {
     display: flex;
     flex-direction: row;
-    /*justify-content: center;*/
+    justify-content: center;
     align-items: center;
 }
 
 .clock {
+    position: relative;
+    left: -20px;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;

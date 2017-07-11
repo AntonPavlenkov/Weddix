@@ -144,6 +144,7 @@ span {
 
 .start-btn {
   /*  styling */
+  cursor: pointer;
   font-family: 'Dancing Script', cursive;
   font-size: 1em;
   margin-top: 50px;

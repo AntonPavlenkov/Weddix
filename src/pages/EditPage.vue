@@ -1,85 +1,87 @@
 <template>
   <section v-if="user" class="edit-page" :style="user.pageStyle">
-    <md-dialog class="add-dialog" md-open-from="#custom" md-close-to="#custom" ref="addDialog">
-      <md-dialog-title>Select a new component:</md-dialog-title>
-      <md-dialog-content>
-        <ul class="catalogue">
-          <li class="preview" v-for="(cmp, idx) in tmplCmps" @click="addNewCmp(cmp.type)" :key="idx">
-            <div :src="cmp.cmpPreview" class="content-container">
-              <h3>{{cmp.label}}</h3>
-              <img :src="cmp.cmpPreview">
-            </div>
-          </li>
-        </ul>
-      </md-dialog-content>
+    <div class="height-container">
   
-      <md-dialog-actions>
-        <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
-      </md-dialog-actions>
-    </md-dialog>
+      <md-dialog class="dialog" md-open-from="#custom" md-close-to="#custom" ref="addDialog">
+        <md-dialog-title>Choose new component</md-dialog-title>
+        <md-dialog-content>
+          <ul class="catalogue">
+            <li class="preview" v-for="(cmp, idx) in tmplCmps" @click="addNewCmp(cmp.type)" :key="idx">
+              <div :src="cmp.cmpPreview" class="content-container">
+                <h3>{{cmp.label}}</h3>
+                <img :src="cmp.cmpPreview">
+              </div>
+            </li>
+          </ul>
+        </md-dialog-content>
   
-    <div class="nav-divider"></div>
+        <md-dialog-actions>
+          <md-button class="md-primary" @click="closeDialog('addDialog')">Cancel</md-button>
+        </md-dialog-actions>
+      </md-dialog>
   
-    <draggable :list="cmpsToDisplay" @end="onDragEnd" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
-      <transition-group name="cmps-list" tag="div" appear>
-        <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
-        </component>
-      </transition-group>
-    </draggable>
+      <div class="nav-divider"></div>
+      <draggable v-model="cmpsToDisplay"  :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
+        <transition-group name="cmps-list" tag="div" appear>
+          <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
+          </component>
+        </transition-group>
+      </draggable>
   
-    <div class="btns-row" v-if="isLoading">
-      <md-spinner md-indeterminate class="btns-row"></md-spinner>
+      <div class="btns-row" v-if="isLoading">
+        <md-spinner md-indeterminate class="btns-row"></md-spinner>
+      </div>
+  
+      <ul id="navs" data-open="close" data-close="open" @click="openArc">
+  
+        <li v-if="!isReturningUser" data-action="Start ">
+          <md-button class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
+            <md-icon>note_add</md-icon>
+            <md-tooltip md-direction="top">Start from Template</md-tooltip>
+          </md-button>
+        </li>
+        <li data-action="Reset All">
+          <md-button class="md-icon-button md-raised md-warn" @click="resetAll">
+            <md-icon>delete_forever</md-icon>
+            <md-tooltip md-direction="top">Reset All</md-tooltip>
+          </md-button>
+        </li>
+        <!--<li data-action="Create All">
+          <md-button class="md-icon-button md-raised" @click="createAll">
+            <md-icon>stars</md-icon>
+            <md-tooltip md-direction="top">createAll</md-tooltip>
+          </md-button>
+        </li>-->
+        <li data-action="Add New">
+          <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
+            <md-icon>add</md-icon>
+            <md-tooltip md-direction="top">Add component</md-tooltip>
+          </md-button>
+        </li>
+        <li data-action="Change Color">
+          <md-button md-menu-trigger class="md-icon-button md-raised md-primary color-picker-btn">
+            <md-icon>format_paint</md-icon>
+            <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
+            <md-tooltip md-direction="top">Change page background color</md-tooltip>
+          </md-button>
+        </li>
+        <li data-action="Clear Color">
+          <md-button class="md-icon-button md-raised md-primary" @click="changeCssProperty('backgroundColor','transparent')">
+            <md-icon>format_clear</md-icon>
+            <md-tooltip md-direction="top">Clear background color</md-tooltip>
+          </md-button>
+        </li>
+  
+      </ul>
     </div>
-  
-    <ul id="navs" data-open="close" data-close="open" @click="openArc">
-  
-      <li v-if="!isReturningUser" data-action="Start ">
-        <md-button class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
-          <md-icon>note_add</md-icon>
-          <md-tooltip md-direction="top">Start from Template</md-tooltip>
-        </md-button>
-      </li>
-      <li data-action="Reset All">
-        <md-button
-         class="md-icon-button md-raised md-warn" @click="resetAll">
-          <md-icon>delete_forever</md-icon>
-          <md-tooltip md-direction="top">Reset All</md-tooltip>
-        </md-button>
-      </li>
-      <!--<li data-action="Create All">
-        <md-button class="md-icon-button md-raised" @click="createAll">
-          <md-icon>stars</md-icon>
-          <md-tooltip md-direction="top">createAll</md-tooltip>
-        </md-button>
-      </li>-->
-      <li data-action="Add New">
-        <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
-          <md-icon>add</md-icon>
-          <md-tooltip md-direction="top">Add component</md-tooltip>
-        </md-button>
-      </li>
-      <li data-action="Change Color">
-        <md-button md-menu-trigger class="md-icon-button md-raised md-primary color-picker-btn">
-          <md-icon>format_paint</md-icon>
-          <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
-          <md-tooltip md-direction="top">Change page background color</md-tooltip>
-        </md-button>
-      </li>
-      <li data-action="Clear Color">
-        <md-button class="md-icon-button md-raised md-primary" @click="changeCssProperty('backgroundColor','transparent')">
-          <md-icon>format_clear</md-icon>
-          <md-tooltip md-direction="top">Clear background color</md-tooltip>
-        </md-button>
-      </li>
-  
-    </ul>
-  
+    <main-footer></main-footer>
   </section>
 </template>
 
 <script>
 
-'../assets/arc.png'
+import MainFooter from './MainFooter'
+
 import Draggable from 'vuedraggable'
 import SimpleText from '../components/cmpTmpls/SimpleText'
 import SimpleTitle from '../components/cmpTmpls/SimpleTitle'
@@ -93,6 +95,7 @@ import ColorPicker from '../components/toolbars/ColorPicker'
 export default {
   name: 'EditPage',
   components: {
+    MainFooter,
     SimpleText,
     SimpleTitle,
     LocationMap,
@@ -116,8 +119,13 @@ export default {
     }
   },
   computed: {
-    cmpsToDisplay() {
-      return this.$store.getters.cmpsToDisplay;
+    cmpsToDisplay: {
+      get() {
+        return this.$store.getters.cmpsToDisplay;
+      },
+      set(newValue) {
+        this.$store.dispatch({ type: 'dragCmp', cmps: newValue })
+      }
     },
     lastIdxCmps() {
       return this.cmpsToDisplay.length - 1;
@@ -169,11 +177,6 @@ export default {
     closeDialog(ref) {
       this.$refs[ref].close();
     },
-    onDragEnd(ev) {
-      var newIndex = ev.newIndex;
-      var oldIndex = ev.oldIndex;
-      this.$store.dispatch({ type: 'dragCmp', newIndex, oldIndex })
-    },
     updateColor: function (event) {
       this.color = event.color;
     },
@@ -193,8 +196,7 @@ export default {
           li[a].style.visibility = 'initial'
           li[a].style.transitionDelay = `${(50 * a)}ms`
           li[a].style.left = (r * Math.cos(90 / n * a * (Math.PI / 180))) + 'px';
-          li[a].style.top = (-r * Math.sin(90 / n * a * (Math.PI / 180))) + 'px';
-          console.log(li[a])
+          li[a].style.top = (r * Math.sin(90 / n * a * (Math.PI / 180))) + 'px';
         }
       }
       else {
@@ -211,6 +213,10 @@ export default {
 
 <style lang="scss">
 //in this css put only thing that are exclusive to PageEdit, and can be inheritted by other cmps
+.height-container {
+  min-height: 80vh;
+}
+
 .mark-class {
   border-color: #ff5722;
   z-index: 1;
@@ -232,17 +238,17 @@ export default {
 .add-dialog {
   margin: 0 auto;
   width: 70%;
-
 }
 
 .add-dialog:focus {
   outline: none;
 }
 
-.md-dialog-title{
+.md-dialog-title {
   background-color: #ecf3f3;
   height: 200px;
 }
+
 .md-dialog {
   border-radius: 10px;
   text-align: center;
@@ -250,16 +256,15 @@ export default {
     padding: 0;
     list-style: none;
     li {
-      margin: 10px;
-      // border: 1px solid black;
-      box-shadow: 2px 0px 7px 0px rgba(0,0,0,0.75);
+      margin: 10px; // border: 1px solid black;
+      box-shadow: 2px 0px 7px 0px rgba(0, 0, 0, 0.75);
       display: flex;
       flex-direction: row;
       align-items: center;
     }
     h3 {
       text-align: center;
-      background-color: #f9d8ce ;
+      background-color: #f9d8ce;
     }
   }
 }
@@ -285,7 +290,7 @@ export default {
   z-index: 999;
   position: fixed;
   left: 4px;
-  bottom: 4px;
+  top: 14vh;
   width: 60px;
   height: 60px;
   line-height: 40px;
@@ -295,7 +300,7 @@ export default {
   text-align: center;
   color: #fff;
   cursor: pointer;
-  
+
   &::after {
     position: absolute;
     left: 0;
@@ -320,20 +325,25 @@ export default {
   -webkit-border-radius: 50%;
 }
 
-#nav , .active li::before{
-      position: absolute;
-    content: attr(data-action);
-    white-space:nowrap;
-    top: -27px;
-    left:  10px;
+#nav,
+.active li::before {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  content: attr(data-action);
+  white-space: nowrap;
+  top: -27px;
+  left: 10px;
+  font-weight: bold;
+  text-shadow: 0 4px white; // background: red;
+  // border-radius: 2em;
 }
 
 #navs>li {
   transition: all .6s;
   -webkit-transition: all .6s;
   -moz-transition: .6s; // visibility: hidden;
-  color: black;
-  // &::before{
+  color: black; // &::before{
   //   position: absolute;
   //   content: attr(data-action);
   //   white-space:nowrap;
@@ -344,7 +354,7 @@ export default {
 
 #navs:after {
   content: '';
-  background-image: url('../assets/arc.png'); 
+  background-image: url('../assets/arc.svg');
   background-size: contain;
   z-index: 1;
   border-radius: 50%;
@@ -354,7 +364,6 @@ export default {
 // #navs.active:after {
 //   content: attr(data-open);
 // }
-
 #navs a {
   width: 40px;
   height: 40px;

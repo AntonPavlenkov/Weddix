@@ -50,14 +50,15 @@ export default {
 
 
 .footer {
+  position: relative;
   width: 100%;
-  min-height: 10vh;
   background-color: #E5E9F2;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 0 20px;
+  margin-top: 1vh;
   h2{
     margin: 0;
     padding: 0;

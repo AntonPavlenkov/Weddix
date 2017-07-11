@@ -3,7 +3,7 @@
     <section class="page-general-container">
       <header class="navbar">
         <div class="logo" @click="goHome()">Weddix</div>
-        <md-tabs class="md-transparent" md-right @change="changeRoute">
+        <md-tabs class="md-transparent" md-right md-dynamic-height @change="changeRoute">
           <md-tab md-icon="mode_edit" md-label="EDIT" md-active md-tooltip="Edit your invitation">
           </md-tab>
           <md-tab md-icon="laptop" md-label="PREVIEW" md-tooltip="Preview your invitation">
@@ -18,9 +18,8 @@
         <router-view>
         </router-view>
   
-        <main-footer></main-footer>
-  
       </div>
+
     </section>
   </transition>
 </template>
@@ -69,21 +68,48 @@ export default {
   flex-flow: column nowrap;
   max-height: 100vh;
   width: 100%;
-  header{
-    height: 10vh;
+  header {
+    height: 12vh;
   }
 }
-  .page-general-content {  
-    min-height: 90vh;
-    display: flex;
-    flex-flow: column nowrap;
-    overflow-y: scroll;
-  }
+
+.page-general-content {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: scroll;
+
+
+}
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: tomato;
+}
+
 
 
 
 .navbar {
   background-color: #ecf3f3;
+  @media (max-width: 650px) {
+
+    .logo{
+      font-size: 30px;
+    }
+
+  }
 }
 
 .logo {
@@ -96,6 +122,7 @@ export default {
   text-shadow: 3px 3px 8px rgba(64, 117, 159, 1);
   cursor: pointer;
   z-index: 99;
+  transition: font-size .5s;
 }
 
 
@@ -118,12 +145,12 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 1s;
+  transition: all 1s!important;
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0
+  opacity: 0 !important;
 }
 
 .preview {
