@@ -149,22 +149,31 @@ const store = new Vuex.Store({
         })
     },
     dragCmp(context, payload) {
-      var newIndex = payload.newIndex;
-      var oldIndex = payload.oldIndex;
-      console.log('newIndex', newIndex)
-      console.log('oldIndex', oldIndex)
       let userToEdit = JSON.parse(JSON.stringify(context.state.user));
-      let cmps = userToEdit.cmps
-      //swap the cmps:
-      var draggedCmp = cmps[oldIndex];
-      cmps[oldIndex] = cmps[newIndex];
-      cmps[oldIndex] = draggedCmp;
+      userToEdit.cmps = payload.cmps;
       payload.user = userToEdit;
       context.commit(payload);
       cmpService.updateUser(userToEdit)
         .then(() => {
           // do some validation....
         })
+
+      // var newIndex = payload.newIndex;
+      // var oldIndex = payload.oldIndex;
+      // console.log('newIndex', newIndex)
+      // console.log('oldIndex', oldIndex)
+      // let userToEdit = JSON.parse(JSON.stringify(context.state.user));
+      // let cmps = userToEdit.cmps
+      // //swap the cmps:
+      // var draggedCmp = cmps[oldIndex];
+      // cmps[oldIndex] = cmps[newIndex];
+      // cmps[oldIndex] = draggedCmp;
+      // payload.user = userToEdit;
+      // context.commit(payload);
+      // cmpService.updateUser(userToEdit)
+      //   .then(() => {
+      //     // do some validation....
+      //   })
     }
   }
 })
