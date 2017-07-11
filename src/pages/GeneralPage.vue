@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" appear>
-    <section>
+    <section class="page-general-container">
       <header class="navbar">
         <div class="logo" @click="goHome()">Weddix</div>
         <md-tabs class="md-transparent" md-right @change="changeRoute">
@@ -12,9 +12,15 @@
           </md-tab>
         </md-tabs>
       </header>
-      <router-view>
-      </router-view>
-      <main-footer></main-footer>
+  
+      <div class="page-general-content">
+  
+        <router-view>
+        </router-view>
+  
+        <main-footer></main-footer>
+  
+      </div>
     </section>
   </transition>
 </template>
@@ -59,6 +65,24 @@ export default {
 
 
 <style lang="scss">
+.page-general-container {
+  display: flex;
+  flex-flow: column nowrap;
+  max-height: 100vh;
+  width: 100%;
+  header{
+    height: 10vh;
+  }
+}
+  .page-general-content {  
+    min-height: 90vh;
+    display: flex;
+    flex-flow: column nowrap;
+    overflow-y: scroll;
+  }
+
+
+
 .navbar {
   background-color: #ecf3f3;
 }
@@ -67,7 +91,6 @@ export default {
 //   margin: 0 auto;
 //   position: relative;
 // }
-
 .logo {
   position: absolute;
   left: 25px;
