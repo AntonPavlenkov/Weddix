@@ -51,6 +51,7 @@ export default {
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
+  padding: 20px;
   h2{
     margin: 0;
     padding: 0;
