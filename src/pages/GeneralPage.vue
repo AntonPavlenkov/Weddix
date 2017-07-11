@@ -141,12 +141,12 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 1s;
+  transition: all 1s!important;
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0
+  opacity: 0 !important;
 }
 
 .preview {
