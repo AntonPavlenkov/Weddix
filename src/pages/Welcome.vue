@@ -2,7 +2,7 @@
   <section>
     <md-snackbar :md-position="'top center'" ref="snackbar" :md-duration="5000">
       <p class="snack-message">Welcome Back!</p>
-      <md-button class="md-accent" @click="$refs.snackbar.close()">Close</md-button>
+      <md-button @click="$refs.snackbar.close()">Close</md-button>
     </md-snackbar>
     <transition name="fade" appear>
   
