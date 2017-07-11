@@ -53,7 +53,6 @@ export default {
       this.$router.push(destRoute);
     },
     goHome() {
-      console.log('hohome')
       this.$router.push('/');
     }
   },
