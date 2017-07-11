@@ -228,6 +228,11 @@ export default {
   }
 }
 
+.md-tooltip{
+    font-size: 16px;
+    text-align: center;
+}
+
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.1s

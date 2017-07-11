@@ -1,7 +1,7 @@
 <template>
     <section>
         <div>
-                <span>Background</span>
+            <!--<span>Background</span>-->
             <div class="bg-btns">
                 <md-menu md-align-trigger>
                     <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
@@ -95,11 +95,6 @@ export default {
 
 .bg-btns {
     display: flex;
-}
-
-span {
-    font-size: 16px;
-        text-align: center;
 }
 
 .content {

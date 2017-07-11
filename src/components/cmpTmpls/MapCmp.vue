@@ -9,8 +9,9 @@
 <script>
 export default {
     props: {
-        cmp: { type: Object, required: true },
-        isFirst: Boolean , isLast: Boolean
+        position: { type: Object, required: true }, 
+        zoom: {type: Number, required: true},
+        // isFirst: Boolean , isLast: Boolean
     },
   data(){
     return {
