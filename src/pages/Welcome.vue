@@ -2,24 +2,33 @@
   <section>
     <md-snackbar :md-position="'top center'" ref="snackbar" :md-duration="5000">
       <p class="snack-message">Welcome Back!</p>
-      <md-button class="md-accent" @click="$refs.snackbar.close()">Close</md-button>
+      <md-button @click="$refs.snackbar.close()">Close</md-button>
     </md-snackbar>
     <transition name="fade" appear>
+  
       <div class="main-app ltr">
         <div class="welcome-message">
           <div>Create </div>
-          <!--<br>-->
           <div>Your Own Dynamic </div>
-          <!--<br>-->
-          <div class="big-title">Wedding Invitation</div>
-          <!--<br>-->
-          <!--<md-button @click="$router.push('/page/edit')" class="md-raised md-primary start-btn">Get Started!</md-button>-->
+  
+          <div class="big-title">Wedding Invitation
+            <div class="heart">
+              <svg id="Layer_1" x="0px" y="0px" viewBox="0 0 250 250" enable-background="new 0 0 250 250" xml:space="preserve">
+                <path class="path path1" fill="red" stroke="#FFFFFF" stroke-width="10" stroke-miterlimit="0" d="M50.3,87.7c2-4.3,9.5-12.8,18-18.8c10.2-7.2,26-13.2,25.9-30.2C94,7.6,60.9,2.6,50,28.3
+                		C38.5,1.6,6,7.8,5.7,38.8c-0.1,17,15.5,23.4,25.9,30.2C41.7,75.7,48.9,84.7,50,88.5C50.1,88.3,50.2,88,50.3,87.7" />
+              </svg>
+            </div>
+          </div>
+          <br/>
+  
           <button @click="$router.push('/page/edit')" class="start-btn">Get Started!
             <i></i>
           </button>
         </div>
+  
       </div>
     </transition>
+  
   </section>
 </template>
 
@@ -47,7 +56,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.main-app {
+  .main-app {
   height: 100vh;
   width: 100%;
   margin: 0 auto;
@@ -83,7 +92,20 @@ export default {
   text-shadow: 4px 4px 8px rgba(154, 150, 150, 1);
   .big-title {
     font-size: 1.3em;
+    position: relative;
   }
+  .heart {
+    position: absolute;
+    left: 29%;
+    top: -6.5%;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+#Layer_1 {
+  width: 50px;
+  height: 60px;
 }
 
 
@@ -294,6 +316,22 @@ i {
   }
 }
 
+.path {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: dash 5s linear alternate infinite;
+}
+
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (max-width: 650px) {
   .welcome-message {
     font-size: 2em;
@@ -309,6 +347,16 @@ i {
     .big-title {
       font-size: 1.3em;
     }
+    // .heart {
+    //   position: absolute;
+    //   left: 29%;
+    //   top: -6.5%;
+    // }
+  }
+
+  #Layer_1 {
+    width: 35px;
+    height: 45px;
   }
 }
 </style>
