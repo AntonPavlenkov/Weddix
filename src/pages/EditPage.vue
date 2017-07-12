@@ -47,11 +47,11 @@
           </md-button>
         </li>
         <!--<li data-action="Create All">
-                <md-button class="md-icon-button md-raised" @click="createAll">
-                  <md-icon>stars</md-icon>
-                  <md-tooltip md-direction="top">createAll</md-tooltip>
-                </md-button>
-              </li>-->
+                    <md-button class="md-icon-button md-raised" @click="createAll">
+                      <md-icon>stars</md-icon>
+                      <md-tooltip md-direction="top">createAll</md-tooltip>
+                    </md-button>
+                  </li>-->
         <li data-action="Add New">
           <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
             <md-icon>add</md-icon>
@@ -202,17 +202,20 @@ export default {
       }
       else {
         for (var a = 0; a < i; a++) {
-          li[a].style.visibility = 'hidden'
+          li[a].style.visibility = 'hidden';
           li[a].removeAttribute('style')
         }
       }
     },
     closeArc() {
-      var li = this.$el.querySelectorAll('[data-action]')
-      for (var a = 0 ; a < li.length ; a++ ) {
-        li[a].style.visibility = 'hidden';
-        li[a].removeAttribute('style')
+      let ul = this.$el.querySelector('#navs');
+      ul.classList.toggle('active');
+      let li = ul.children;
+      for (let i = 0 ; i < li.length ; i++) {
+        li[i].style.visibility = 'hidden';
+        li[i].removeAttribute('style')
       }
+
     }
 
 
