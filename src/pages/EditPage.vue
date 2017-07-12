@@ -39,12 +39,14 @@
       <!--START MESSAGE-->
   
       <div class="start-message" v-if="(!isReturningUser && !isArcClicked && !isLoading)">
-        <p>Start building your invitation by adding components!</p>
-        <svg class="start-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9" style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
-          <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow" d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1" />
-          <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58" />
-          <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9" />
-        </svg>
+        <p>Start building your invitation
+          <p>
+            by adding components!</p>
+          <svg class="start-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9" style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
+            <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow" d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1" />
+            <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58" />
+            <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9" />
+          </svg>
       </div>
   
       <!--ACTIONS-ARC-->
@@ -62,11 +64,11 @@
           </md-button>
         </li>
         <!--<li data-action="Create All">
-                              <md-button class="md-icon-button md-raised" @click="createAll">
-                                <md-icon>stars</md-icon>
-                                <md-tooltip md-direction="top">createAll</md-tooltip>
-                              </md-button>
-                            </li>-->
+                                <md-button class="md-icon-button md-raised" @click="createAll">
+                                  <md-icon>stars</md-icon>
+                                  <md-tooltip md-direction="top">createAll</md-tooltip>
+                                </md-button>
+                              </li>-->
         <li data-action="Add New">
           <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
             <md-icon>add</md-icon>
@@ -74,7 +76,7 @@
           </md-button>
         </li>
         <li data-action="Set Color">
-          <md-button md-menu-trigger class="md-icon-button md-raised md-primary color-picker-btn">
+          <md-button md-menu-trigger id="color-picker-btn" class="md-icon-button md-raised md-primary">
             <md-icon>format_paint</md-icon>
             <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
             <md-tooltip md-direction="top">Change page background color</md-tooltip>
@@ -166,6 +168,7 @@ export default {
       this.userToEdit.pageStyle = {};
       this.userToEdit.cmps = [];
       this.$store.dispatch({ type: 'resetAll', user: this.userToEdit })
+      this.closeArc();
     },
     getTemplate() {
       this.addNewCmp('SimpleTitle');
@@ -188,7 +191,7 @@ export default {
       this.$store.dispatch({ type: 'addCmp', newCmpType })
     },
     openDialog(ref) {
-      this.closeArc()
+      this.closeArc();
       this.$refs[ref].open();
     },
     closeDialog(ref) {
@@ -259,8 +262,8 @@ export default {
   // margin: 10px;
 }
 
-.color-picker-btn {
-  overflow: initial;
+#color-picker-btn {
+  overflow: initial!important;
 }
 
 .cmpStyle:hover {
@@ -419,9 +422,9 @@ export default {
   width: 100px;
   height: 100px;
   margin: 0 auto;
-  transform: scale(1, -1) rotate(120deg);
+  transform: scale(0.7, -0.7) rotate(120deg);
   position: absolute;
-  top: 8%;
+  top: 3%;
   left: 15%;
 
   .draw-arrow {
@@ -455,6 +458,19 @@ export default {
 @keyframes draw {
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+@media (max-width: 850px) {
+  .start-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 650px){
+    .start-message {
+    font-size: 1.8em;
+    margin-top:130px;
   }
 }
 </style>

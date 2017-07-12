@@ -10,8 +10,8 @@
           </md-tab>
           <md-tab md-icon="cloud_upload" md-label="PUBLISH" md-tooltip="Get a direct link">
           </md-tab>
-          <md-tab md-icon="fingerprint" md-label="ABOUT" md-tooltip=" about us">
-          </md-tab>
+          <!--<md-tab md-icon="fingerprint" md-label="ABOUT" md-tooltip=" about us">
+          </md-tab>-->
         </md-tabs>
       </header>
   
