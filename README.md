@@ -1,6 +1,7 @@
 # Weddix 
+## An app to allow a user to create dynamic wedding invitation
 > A Vue.js project
-> An app to allow a user to create dynamic wedding invitation
+
 
 ## Build Setup
 
@@ -8,7 +9,7 @@
 # install dependencies
 npm install
 
-#in node_server folder
+# in node_server folder
 npm install
 
 # serve with hot reload at localhost:8080
