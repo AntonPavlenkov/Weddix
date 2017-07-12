@@ -10,6 +10,8 @@
           </md-tab>
           <md-tab md-icon="cloud_upload" md-label="PUBLISH" md-tooltip="Get a direct link">
           </md-tab>
+          <md-tab md-icon="fingerprint" md-label="ABOUT" md-tooltip=" about us">
+          </md-tab>
         </md-tabs>
       </header>
   
@@ -19,7 +21,7 @@
         </router-view>
   
       </div>
-
+  
     </section>
   </transition>
 </template>
@@ -48,6 +50,10 @@ export default {
           break;
         case 2:
           destRoute = '/publish/' + this.pageId;
+          break;
+        case 3:
+          console.log('eld')
+          destRoute = '/page/about';
       }
       this.$router.push(destRoute);
     },
@@ -79,24 +85,20 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   overflow-y: scroll;
-
-
-}
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
 }
 
-::-webkit-scrollbar
-{
-	width: 6px;
-	background-color: #F5F5F5;
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color: tomato;
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: tomato;
 }
 
 
@@ -106,10 +108,9 @@ export default {
   background-color: #ecf3f3;
   @media (max-width: 650px) {
 
-    .logo{
+    .logo {
       font-size: 30px;
     }
-
   }
 }
 

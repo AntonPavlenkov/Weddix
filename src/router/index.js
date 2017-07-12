@@ -5,6 +5,7 @@ import EditPage from '@/pages/EditPage'
 import PublishPage from '@/pages/PublishPage'
 import GeneralPage from '@/pages/GeneralPage'
 import PreviewPage from '@/pages/PreviewPage'
+import AboutPage from '@/pages/AboutPage'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
           path: 'preview',
           name: 'PreviewPage',
           component: PreviewPage
+        },
+        {
+          path: 'about',
+          name: 'AboutPage',
+          component: AboutPage
         }
       ]
     },
