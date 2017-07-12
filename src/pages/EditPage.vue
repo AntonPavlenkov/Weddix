@@ -193,7 +193,7 @@ export default {
       let r = 200;
       event.target.classList.toggle('active')
       if (ul.classList.contains('active')) {
-        for (var a = 0; a < i; a++) {
+        for (let a = 0; a < i; a++) {
           li[a].style.visibility = 'initial'
           li[a].style.transitionDelay = `${(50 * a)}ms`
           li[a].style.left = (r * Math.cos(90 / n * a * (Math.PI / 180))) + 'px';
@@ -201,7 +201,7 @@ export default {
         }
       }
       else {
-        for (var a = 0; a < i; a++) {
+        for (let a = 0; a < i; a++) {
           li[a].style.visibility = 'hidden';
           li[a].removeAttribute('style')
         }
@@ -215,10 +215,7 @@ export default {
         li[i].style.visibility = 'hidden';
         li[i].removeAttribute('style')
       }
-
     }
-
-
   }
 }
 </script>
