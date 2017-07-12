@@ -21,7 +21,7 @@
       </md-dialog>
   
       <div class="nav-divider"></div>
-      <draggable v-model="cmpsToDisplay"  :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
+      <draggable v-model="cmpsToDisplay" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
         <transition-group name="cmps-list" tag="div" appear>
           <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
           </component>
@@ -32,7 +32,7 @@
         <md-spinner md-indeterminate class="btns-row"></md-spinner>
       </div>
   
-      <ul id="navs" data-open="close" data-close="open" @click="openArc">
+      <ul id="navs" data-open="close" data-close="open" @click="arcClicked">
   
         <li v-if="!isReturningUser" data-action="Start ">
           <md-button class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
@@ -47,11 +47,11 @@
           </md-button>
         </li>
         <!--<li data-action="Create All">
-          <md-button class="md-icon-button md-raised" @click="createAll">
-            <md-icon>stars</md-icon>
-            <md-tooltip md-direction="top">createAll</md-tooltip>
-          </md-button>
-        </li>-->
+                <md-button class="md-icon-button md-raised" @click="createAll">
+                  <md-icon>stars</md-icon>
+                  <md-tooltip md-direction="top">createAll</md-tooltip>
+                </md-button>
+              </li>-->
         <li data-action="Add New">
           <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
             <md-icon>add</md-icon>
@@ -172,6 +172,7 @@ export default {
       this.$store.dispatch({ type: 'addCmp', newCmpType })
     },
     openDialog(ref) {
+      this.closeArc()
       this.$refs[ref].open();
     },
     closeDialog(ref) {
@@ -184,7 +185,7 @@ export default {
       this.userToEdit.pageStyle[prop] = val;
       this.$store.dispatch({ type: "updateUser", user: this.userToEdit });
     },
-    openArc(event) {
+    arcClicked(event) {
       let ul = event.target;
       let li = event.target.children;
       let i = li.length;
@@ -205,7 +206,16 @@ export default {
           li[a].removeAttribute('style')
         }
       }
+    },
+    closeArc() {
+      var li = this.$el.querySelectorAll('[data-action]')
+      for (var a = 0 ; a < li.length ; a++ ) {
+        li[a].style.visibility = 'hidden';
+        li[a].removeAttribute('style')
+      }
     }
+
+
   }
 }
 </script>
