@@ -83,11 +83,13 @@ export default {
   flex-flow: row nowrap;
   align-items: center;
     margin: 5px;
+    text-decoration: none;
   .email-icon {
-    margin-top:-12px;
+    margin-top:-14px;
     display: flex;
     justify-content: center;
     align-content: center;
+    
   }
 }
 
@@ -104,8 +106,6 @@ export default {
 .git-img:hover {
   background-color: grey;
 }
-
-
 
 a {
   color: black;
