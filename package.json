@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "node-server": "node node_server/server-full.js",
+    "node-server": "node node_server/server.js",
     "start": "npm-run-all --parallel dev node-server",
     "build": "node build/build.js"
   },
