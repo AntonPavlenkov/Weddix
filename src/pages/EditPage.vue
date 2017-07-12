@@ -38,7 +38,7 @@
   
       <!--START MESSAGE-->
   
-      <div class="start-message" v-if="(!isReturningUser && !isArcClicked)">
+      <div class="start-message" v-if="(!isReturningUser && !isArcClicked && !isLoading)">
         <p>Start building your invitation by adding components!</p>
         <svg class="start-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9" style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
           <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow" d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1" />
