@@ -12,7 +12,7 @@
       <div class="details">Keren
         <a class="email-icon" href="mailto:kerendot@gmail.com">
           <i class="material-icons">email</i>
-        </a>        
+        </a>
       </div>
       <div class="details">Elad
         <a class="email-icon" href="mailto:okc.elad.35@gmail.com">
@@ -82,14 +82,16 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-    margin: 5px;
-    text-decoration: none;
+  margin: 5px;
   .email-icon {
-    margin-top:-14px;
+    margin-top: -14px;
     display: flex;
     justify-content: center;
     align-content: center;
-    
+    color: black;
+  }
+  .email-icon:hover {
+    text-decoration: none;
   }
 }
 
@@ -107,9 +109,6 @@ export default {
   background-color: grey;
 }
 
-a {
-  color: black;
-}
 
 h2 {
   color: #324057;

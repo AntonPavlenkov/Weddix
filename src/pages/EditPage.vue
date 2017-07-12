@@ -3,7 +3,7 @@
     <div class="height-container">
   
       <!--ADD CMP MODAL-->
-      <md-dialog class="dialog" md-open-from="#custom" md-close-to="#custom" ref="addDialog">
+      <md-dialog class="add-dialog" md-open-from="#custom" md-close-to="#custom" ref="addDialog">
         <md-dialog-title>Choose new component</md-dialog-title>
         <md-dialog-content>
           <ul class="catalogue">
@@ -62,11 +62,11 @@
           </md-button>
         </li>
         <!--<li data-action="Create All">
-                            <md-button class="md-icon-button md-raised" @click="createAll">
-                              <md-icon>stars</md-icon>
-                              <md-tooltip md-direction="top">createAll</md-tooltip>
-                            </md-button>
-                          </li>-->
+                              <md-button class="md-icon-button md-raised" @click="createAll">
+                                <md-icon>stars</md-icon>
+                                <md-tooltip md-direction="top">createAll</md-tooltip>
+                              </md-button>
+                            </li>-->
         <li data-action="Add New">
           <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
             <md-icon>add</md-icon>
@@ -271,6 +271,7 @@ export default {
 .add-dialog {
   margin: 0 auto;
   width: 70%;
+  font-family: 'Handlee';
 }
 
 .add-dialog:focus {
