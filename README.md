@@ -1,5 +1,5 @@
 # Weddix 
-## An app to allow a user to create dynamic wedding invitation
+### An app to allow a user to create dynamic wedding invitation
 > A Vue.js project
 
 
