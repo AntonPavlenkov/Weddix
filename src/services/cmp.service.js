@@ -1,5 +1,9 @@
-const urlUser = 'http://localhost:3003/data/user';
+// const urlUser = 'http://localhost:/data/user';
 import axios from 'axios';
+
+var port = process.env.PORT || 3003;
+const urlUser = `http://localhost:${port}/data/user`;
+
 
 //var to allow quick access to Lorem string
 // var loremIpsumHolder = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, incidunt a delectus, ut saepe accusamus assumenda optio sapiente molestiae. Labore, vel rerum delectus harum quod sint distinctio earum laborum. Illum?';
