@@ -9,9 +9,9 @@
                         <md-tooltip md-direction="top">set background Image</md-tooltip>
                     </md-button>
                     <md-menu-content>
-                        <p @click="setParallax('url(https://www2.shutterstock.com/blog/wp-content/uploads/sites/5/2014/04/img68.jpg)')"> Cherry Blossom </p>
-                        <p @click="setParallax('url(http://hdwpro.com/wp-content/uploads/2017/02/Beautiful-Dove-Photos.jpg)')">Couple Of Doves </p>
-                        <p @click="setParallax('url(http://smartslider3.com/wp-content/uploads/slider100/parallax-background-effect.jpg)')"> Harvest</p>
+                        <md-menu-item @click="setParallax('url(https://www2.shutterstock.com/blog/wp-content/uploads/sites/5/2014/04/img68.jpg)')"> Cherry Blossom </md-menu-item>
+                        <md-menu-item @click="setParallax('url(http://hdwpro.com/wp-content/uploads/2017/02/Beautiful-Dove-Photos.jpg)')">Couple Of Doves </md-menu-item>
+                        <md-menu-item @click="setParallax('url(http://smartslider3.com/wp-content/uploads/slider100/parallax-background-effect.jpg)')"> Harvest</md-menu-item>
                     </md-menu-content>
                 </md-menu>
                 <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">

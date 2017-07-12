@@ -45,11 +45,10 @@
           <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58" />
           <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9" />
         </svg>
-  
       </div>
   
       <!--ACTIONS-ARC-->
-      <ul id="navs" data-open="close" data-close="open" @click="toggleArc">
+      <ul id="navs" data-open="close" data-close="open" @click="arcClicked">
         <li v-if="!isReturningUser" data-action="Start ">
           <md-button class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
             <md-icon>note_add</md-icon>
@@ -63,11 +62,11 @@
           </md-button>
         </li>
         <!--<li data-action="Create All">
-                          <md-button class="md-icon-button md-raised" @click="createAll">
-                            <md-icon>stars</md-icon>
-                            <md-tooltip md-direction="top">createAll</md-tooltip>
-                          </md-button>
-                        </li>-->
+                            <md-button class="md-icon-button md-raised" @click="createAll">
+                              <md-icon>stars</md-icon>
+                              <md-tooltip md-direction="top">createAll</md-tooltip>
+                            </md-button>
+                          </li>-->
         <li data-action="Add New">
           <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
             <md-icon>add</md-icon>
@@ -189,6 +188,7 @@ export default {
       this.$store.dispatch({ type: 'addCmp', newCmpType })
     },
     openDialog(ref) {
+      this.closeArc()
       this.$refs[ref].open();
     },
     closeDialog(ref) {
@@ -201,8 +201,7 @@ export default {
       this.userToEdit.pageStyle[prop] = val;
       this.$store.dispatch({ type: "updateUser", user: this.userToEdit });
     },
-    toggleArc(event) {
-      this.isArcClicked = true;
+    arcClicked(event) {
       let ul = event.target;
       let li = event.target.children;
       let i = li.length;
@@ -210,7 +209,7 @@ export default {
       let r = 200;
       event.target.classList.toggle('active')
       if (ul.classList.contains('active')) {
-        for (var a = 0; a < i; a++) {
+        for (let a = 0; a < i; a++) {
           li[a].style.visibility = 'initial'
           li[a].style.transitionDelay = `${(50 * a)}ms`
           li[a].style.left = (r * Math.cos(90 / n * a * (Math.PI / 180))) + 'px';
@@ -218,10 +217,19 @@ export default {
         }
       }
       else {
-        for (var a = 0; a < i; a++) {
-          li[a].style.visibility = 'hidden'
+        for (let a = 0; a < i; a++) {
+          li[a].style.visibility = 'hidden';
           li[a].removeAttribute('style')
         }
+      }
+    },
+    closeArc() {
+      let ul = this.$el.querySelector('#navs');
+      ul.classList.toggle('active');
+      let li = ul.children;
+      for (let i = 0; i < li.length; i++) {
+        li[i].style.visibility = 'hidden';
+        li[i].removeAttribute('style')
       }
     }
   }
@@ -239,8 +247,7 @@ export default {
   font-family: 'Handlee';
   text-align: center;
   font-size: 2.5em;
-  line-height: 1.2em;
-  // margin-top: 20px;
+  line-height: 1.2em; // margin-top: 20px;
 }
 
 .mark-class {
@@ -298,7 +305,7 @@ export default {
 .md-tooltip {
   font-size: 16px;
   text-align: center;
-    font-family: 'Handlee', 'Arial Narrow Bold', sans-serif;
+  font-family: 'Handlee', 'Arial Narrow Bold', sans-serif;
 }
 
 .fade-enter-active,
@@ -363,8 +370,7 @@ export default {
   top: -27px;
   left: 10px;
   font-weight: bold;
-  text-shadow: -1px 0 #ffffff, 0 1px #ffffff, 1px 0 #ffffff, 0 -1px #ffffff;
-  // border-radius: 2em;
+  text-shadow: -1px 0 #ffffff, 0 1px #ffffff, 1px 0 #ffffff, 0 -1px #ffffff; // border-radius: 2em;
 }
 
 #navs>li {
@@ -436,7 +442,7 @@ export default {
   .draw-arrow.tail-1 {
     animation-delay: 2.9s;
     stroke-dashoffset: 700;
-      stroke-dasharray: 300;
+    stroke-dasharray: 300;
   }
   .draw-arrow.tail-2 {
     animation-delay: 3s;
@@ -450,5 +456,4 @@ export default {
     stroke-dashoffset: 0;
   }
 }
-
 </style>
