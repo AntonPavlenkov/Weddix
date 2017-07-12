@@ -19,7 +19,7 @@
         </router-view>
   
       </div>
-
+  
     </section>
   </transition>
 </template>
@@ -49,7 +49,8 @@ export default {
         case 2:
           destRoute = '/publish/' + this.pageId;
       }
-      this.$router.push(destRoute);
+      if (destRoute.startsWith('/publish'))  window.open(destRoute)
+      else this.$router.push(destRoute);
     },
     goHome() {
       this.$router.push('/');
@@ -69,7 +70,7 @@ export default {
   max-height: 100vh;
   width: 100%;
   header {
-    height: 12vh;
+    height: 10vh;
   }
 }
 
@@ -78,24 +79,20 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   overflow-y: scroll;
-
-
-}
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
 }
 
-::-webkit-scrollbar
-{
-	width: 6px;
-	background-color: #F5F5F5;
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color: tomato;
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: tomato;
 }
 
 
@@ -103,12 +100,17 @@ export default {
 
 .navbar {
   background-color: #ecf3f3;
+
+  letter-spacing: 0.2em;
+  span {
+    font-family: 'Handlee';
+    font-weight: bold; 
+  }
   @media (max-width: 650px) {
 
-    .logo{
+    .logo {
       font-size: 30px;
     }
-
   }
 }
 

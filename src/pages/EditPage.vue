@@ -2,6 +2,7 @@
   <section v-if="user" class="edit-page" :style="user.pageStyle">
     <div class="height-container">
   
+      <!--ADD CMP MODAL-->
       <md-dialog class="dialog" md-open-from="#custom" md-close-to="#custom" ref="addDialog">
         <md-dialog-title>Choose new component</md-dialog-title>
         <md-dialog-content>
@@ -21,19 +22,34 @@
       </md-dialog>
   
       <div class="nav-divider"></div>
-      <draggable v-model="cmpsToDisplay"  :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
+  
+      <!--COMPONENTS-->
+      <draggable v-model="cmpsToDisplay" :options="{draggable:'section', handle:'.btn-dragndrop', chosenClass:'mark-class'}">
         <transition-group name="cmps-list" tag="div" appear>
           <component v-for="(cmp, idx) in cmpsToDisplay" v-bind:is="cmp.type" :key="idx" :cmp="cmp" :isFirst="idx === 0" :isLast="idx === lastIdxCmps" class="border-default">
           </component>
         </transition-group>
       </draggable>
   
+      <!--LOADING SPINNER-->
       <div class="btns-row" v-if="isLoading">
         <md-spinner md-indeterminate class="btns-row"></md-spinner>
       </div>
   
-      <ul id="navs" data-open="close" data-close="open" @click="openArc">
+      <!--START MESSAGE-->
   
+      <div class="start-message" v-if="(!isReturningUser && !isArcClicked)">
+        <p>Start building your invitation by adding components!</p>
+        <svg class="start-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9" style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
+          <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow" d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1" />
+          <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58" />
+          <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9" />
+        </svg>
+  
+      </div>
+  
+      <!--ACTIONS-ARC-->
+      <ul id="navs" data-open="close" data-close="open" @click="toggleArc">
         <li v-if="!isReturningUser" data-action="Start ">
           <md-button class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
             <md-icon>note_add</md-icon>
@@ -47,18 +63,18 @@
           </md-button>
         </li>
         <!--<li data-action="Create All">
-          <md-button class="md-icon-button md-raised" @click="createAll">
-            <md-icon>stars</md-icon>
-            <md-tooltip md-direction="top">createAll</md-tooltip>
-          </md-button>
-        </li>-->
+                          <md-button class="md-icon-button md-raised" @click="createAll">
+                            <md-icon>stars</md-icon>
+                            <md-tooltip md-direction="top">createAll</md-tooltip>
+                          </md-button>
+                        </li>-->
         <li data-action="Add New">
           <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
             <md-icon>add</md-icon>
             <md-tooltip md-direction="top">Add component</md-tooltip>
           </md-button>
         </li>
-        <li data-action="Change Color">
+        <li data-action="Set Color">
           <md-button md-menu-trigger class="md-icon-button md-raised md-primary color-picker-btn">
             <md-icon>format_paint</md-icon>
             <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
@@ -71,7 +87,6 @@
             <md-tooltip md-direction="top">Clear background color</md-tooltip>
           </md-button>
         </li>
-  
       </ul>
     </div>
     <main-footer></main-footer>
@@ -109,13 +124,15 @@ export default {
   },
   //need to consider if this is needed, or to use the load done on "welcome"
   created() {
-    this.$store.dispatch({ type: 'loadUser' })
+    this.$store.dispatch({ type: 'loadUser' });
+    this.isArcClicked = false;
   },
   data() {
     return {
       tmplCmps: this.$store.state.tmplCmps,
       newCmpType: null,
-      color: ""
+      color: "",
+      isArcClicked: false
     }
   },
   computed: {
@@ -184,7 +201,8 @@ export default {
       this.userToEdit.pageStyle[prop] = val;
       this.$store.dispatch({ type: "updateUser", user: this.userToEdit });
     },
-    openArc(event) {
+    toggleArc(event) {
+      this.isArcClicked = true;
       let ul = event.target;
       let li = event.target.children;
       let i = li.length;
@@ -214,7 +232,15 @@ export default {
 <style lang="scss">
 //in this css put only thing that are exclusive to PageEdit, and can be inheritted by other cmps
 .height-container {
-  min-height: 80vh;
+  min-height: 77vh;
+}
+
+.start-message {
+  font-family: 'Handlee';
+  text-align: center;
+  font-size: 2.5em;
+  line-height: 1.2em;
+  // margin-top: 20px;
 }
 
 .mark-class {
@@ -272,6 +298,7 @@ export default {
 .md-tooltip {
   font-size: 16px;
   text-align: center;
+    font-family: 'Handlee', 'Arial Narrow Bold', sans-serif;
 }
 
 .fade-enter-active,
@@ -289,7 +316,7 @@ export default {
 #navs {
   z-index: 999;
   position: fixed;
-  left: 4px;
+  left: 10px;
   top: 14vh;
   width: 60px;
   height: 60px;
@@ -300,6 +327,7 @@ export default {
   text-align: center;
   color: #fff;
   cursor: pointer;
+  font-family: 'Handlee';
 
   &::after {
     position: absolute;
@@ -335,7 +363,7 @@ export default {
   top: -27px;
   left: 10px;
   font-weight: bold;
-  text-shadow: 0 4px white; // background: red;
+  text-shadow: -1px 0 #ffffff, 0 1px #ffffff, 1px 0 #ffffff, 0 -1px #ffffff;
   // border-radius: 2em;
 }
 
@@ -374,4 +402,53 @@ export default {
   color: #fff;
   font-size: 0.8em;
 }
+
+
+
+
+
+/////////Start-Arrow////////////
+.start-arrow {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  transform: scale(1, -1) rotate(120deg);
+  position: absolute;
+  top: 8%;
+  left: 15%;
+
+  .draw-arrow {
+    stroke-width: 5;
+    stroke: dodgerblue;
+    fill: none;
+    animation-fill-mode: forwards;
+
+    animation-iteration-count: infinite;
+    animation-name: draw;
+
+    animation-timing-function: linear;
+
+
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation-duration: 3.7s;
+  }
+  .draw-arrow.tail-1 {
+    animation-delay: 2.9s;
+    stroke-dashoffset: 700;
+      stroke-dasharray: 300;
+  }
+  .draw-arrow.tail-2 {
+    animation-delay: 3s;
+    stroke-dashoffset: 1000;
+  }
+}
+
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 </style>

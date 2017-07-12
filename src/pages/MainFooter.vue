@@ -1,30 +1,30 @@
 <template>
   <section class="footer">
     <span class="powered-by">
-      <h2>Weddix</h2> by Keren,Elad and Anton </span>
+      <h2 class="logo-small">Weddix</h2> by Keren, Elad and Anton </span>
     <span class="git-logo">
       <a href="https://github.com/AntonPavlenkov/wixer">
         <img class="git-img" src="../assets/github-log.png" width="40px" height="40px">
       </a>
     </span>
   
-    <span class="about-details">
-      <span class="details">Keren
+    <div class="about-details">
+      <div class="details">Keren
         <a class="email-icon" href="mailto:kerendot@gmail.com">
           <i class="material-icons">email</i>
-        </a>
-      </span>
-      <span class="details">Elad
+        </a>        
+      </div>
+      <div class="details">Elad
         <a class="email-icon" href="mailto:okc.elad.35@gmail.com">
           <i class="material-icons">email</i>
         </a>
-      </span>
-      <span class="details">Anton
+      </div>
+      <div class="details">Anton
         <a class="email-icon" href="mailto:pavlenkov47@gmail.com">
           <i class="material-icons">email</i>
         </a>
-      </span>
-    </span>
+      </div>
+    </div>
   
   </section>
 </template>
@@ -32,13 +32,6 @@
 <script>
 export default {
   name: 'Footer',
-
-  data() {
-    return {
-
-
-    }
-  }
 }
 </script>
 
@@ -47,9 +40,12 @@ export default {
   flex-flow: column nowrap;
 }
 
-
+.logo-small {
+  font-family: 'Rouge Script', cursive;
+}
 
 .footer {
+  font-family: 'Handlee', 'Arial Narrow Bold', sans-serif;
   position: relative;
   width: 100%;
   background-color: #E5E9F2;
@@ -59,7 +55,7 @@ export default {
   align-items: center;
   padding: 0 20px;
   margin-top: 1vh;
-  h2{
+  h2 {
     margin: 0;
     padding: 0;
   }
@@ -75,17 +71,24 @@ export default {
 .about-details {
   align-self: center;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   @media (max-width: 650px) {
     display: none;
   }
 }
 
 .details {
+  height: 30px;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
-  align-content: center;
+  align-items: center;
+    margin: 5px;
+  .email-icon {
+    margin-top:-12px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
 }
 
 .git-logo {
@@ -102,9 +105,7 @@ export default {
   background-color: grey;
 }
 
-.details {
-  margin: 5px;
-}
+
 
 a {
   color: black;
@@ -112,8 +113,7 @@ a {
 
 h2 {
   color: #324057;
-  font-size: 2em;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 2em; // font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 </style>
 

@@ -53,7 +53,7 @@ export default {
   opacity: 0.95;
   box-shadow: 8px 9px 55px -7px rgba(0, 0, 0, 0.67);
   border-radius: 5px;
-  font-family: 'cursive';
+  font-family: 'Handlee', 'Arial Narrow Bold', sans-serif;
   font-weight: normal;
   color: black;
   cursor: move;

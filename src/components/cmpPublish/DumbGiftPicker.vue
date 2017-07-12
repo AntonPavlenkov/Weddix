@@ -10,7 +10,7 @@
 <script>
 import DumbGiftCard from './DumbGiftCard'
 export default {
-    name: 'GiftPicker',
+    name: 'DumbGiftPicker',
     props: ['cmp'],
     components: {
       DumbGiftCard

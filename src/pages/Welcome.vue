@@ -348,11 +348,6 @@ i {
     .big-title {
       font-size: 1.3em;
     }
-    // .heart {
-    //   position: absolute;
-    //   left: 29%;
-    //   top: -6.5%;
-    // }
   }
 
   #Layer_1 {

@@ -90,7 +90,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 .couple-about {
     position: relative;
 }
@@ -133,7 +133,8 @@ export default {
     width: 20%;
     display: block;
     border-radius: 50%;
-    margin: 0 auto;
+    margin: 20px auto;
+
 }
 
 .main-img-container {
@@ -165,6 +166,11 @@ export default {
     }
     .main-img-container {
         width: 100%;
+        display: flex;
+        justify-content: center;
+        .main-img{
+            height: 300px;
+        }
     }
     .about-1,
     .about-2 {

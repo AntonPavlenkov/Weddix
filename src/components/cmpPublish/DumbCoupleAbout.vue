@@ -26,10 +26,8 @@ export default {
 </script>
 
 
-<style scoped>
-.couple-about {
-
-}
+<style scoped lang="scss">
+.couple-about {}
 
 .content {
     box-sizing: border-box;
@@ -49,7 +47,7 @@ export default {
 .about-2-img {
     display: block;
     border-radius: 50%;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 .main-img-container {
@@ -70,6 +68,11 @@ export default {
     }
     .main-img-container {
         width: 100%;
+        display: flex;
+        justify-content: center;
+        .main-img {
+            height: 300px;
+        }
     }
     .about-1,
     .about-2 {
