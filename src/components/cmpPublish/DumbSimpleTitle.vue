@@ -26,7 +26,7 @@ export default {
 }
 
 .content {
-    margin: 30px 0;
+    padding: 30px 0;
 }
 
 p {

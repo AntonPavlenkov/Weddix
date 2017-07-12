@@ -1,6 +1,6 @@
 <template>
   <section class="text-toolbar  md-mini">
-    <md-button md-menu-trigger class="md-fab md-clean  md-mini color-picker-btn">
+    <md-button id="color-picker-btn1" md-menu-trigger class="md-fab md-clean md-mini">
       <md-icon>format_color_fill</md-icon>
       <color-picker :change="updateColor" @changeColor="changeCssProperty('color', $event)"></color-picker>
       <md-tooltip md-direction="top">Change color of the text</md-tooltip>
@@ -170,7 +170,7 @@ export default {
   width: 100%;
 }
 
-#color-picker-btn {
+#color-picker-btn1 {
   overflow: initial!important;
 }
 </style>

@@ -76,7 +76,7 @@
           </md-button>
         </li>
         <li data-action="Set Color">
-          <md-button md-menu-trigger id="color-picker-btn" class="md-icon-button md-raised md-primary">
+          <md-button md-menu-trigger id="color-picker-btn3" class="md-icon-button md-raised md-primary">
             <md-icon>format_paint</md-icon>
             <color-picker :change="updateColor" @changeColor="changeCssProperty('backgroundColor',$event)"></color-picker>
             <md-tooltip md-direction="top">Change page background color</md-tooltip>
@@ -262,7 +262,7 @@ export default {
   // margin: 10px;
 }
 
-#color-picker-btn {
+#color-picker-btn3 {
   overflow: initial!important;
 }
 

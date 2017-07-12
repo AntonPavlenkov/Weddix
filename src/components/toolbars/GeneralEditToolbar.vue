@@ -4,7 +4,7 @@
             <!--<span>Background</span>-->
             <div class="bg-btns">
                 <md-menu md-align-trigger>
-                    <md-button id="color-picker-btn" md-menu-trigger class="md-fab md-clean  md-mini">
+                    <md-button md-menu-trigger class="md-fab md-clean  md-mini">
                         <md-icon>panorama</md-icon>
                         <md-tooltip md-direction="top">set background Image</md-tooltip>
                     </md-button>
@@ -14,7 +14,7 @@
                         <md-menu-item @click="setParallax('url(http://smartslider3.com/wp-content/uploads/slider100/parallax-background-effect.jpg)')"> Harvest</md-menu-item>
                     </md-menu-content>
                 </md-menu>
-                <md-button md-menu-trigger id="color-picker-btn" class="md-fab md-clean  md-mini">
+                <md-button md-menu-trigger id="color-picker-btn2" class="md-fab md-clean  md-mini">
                     <md-icon>format_paint</md-icon>
                     <color-picker :change="updateColor" @changeColor="changeCssProperty('background',$event)"></color-picker>
                     <md-tooltip md-direction="top">Change background color</md-tooltip>
@@ -135,7 +135,7 @@ p {
     z-index: 5;*/
 }
 
-#color-picker-btn {
+#color-picker-btn2 {
     overflow: initial!important;
 }
 
