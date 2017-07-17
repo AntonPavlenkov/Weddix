@@ -3,7 +3,7 @@
     <span class="powered-by">
       <h2 class="logo-small">Weddix</h2> by Keren, Elad and Anton </span>
     <span class="git-logo">
-      <a href="https://github.com/AntonPavlenkov/wixer">
+      <a href="https://github.com/AntonPavlenkov/weddix" target="_blank">
         <img class="git-img" src="../assets/github-log.png" width="40px" height="40px">
       </a>
     </span>
@@ -45,10 +45,12 @@ export default {
 }
 
 .footer {
+  height: 60px;
   font-family: 'Handlee', 'Arial Narrow Bold', sans-serif;
-  position: relative;
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  background-color: #E5E9F2;
+  background-color: #ecf3f3;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;

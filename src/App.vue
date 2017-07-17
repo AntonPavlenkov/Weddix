@@ -22,29 +22,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 body {
   margin: 0;
   padding: 0;
-  background-color: #F9FAFC;
+  /*this is in order to diable horizontal scroll due to off-canvas menu*/
+  overflow-x: hidden;
 }
 
-header {
-  text-align: center;
-}
-
-.home {
-  cursor: pointer;
-  color: palevioletred;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 1.3em;
-}
-
-a.router-link-active {
-  text-decoration-style: none;
-}
-
-router-view {
-  background-color: #F9FAFC;
-}
 </style>

@@ -242,8 +242,10 @@ export default {
 
 <style lang="scss">
 //in this css put only thing that are exclusive to PageEdit, and can be inheritted by other cmps
+
 .height-container {
-  min-height: 77vh;
+  // min-height: 77vh;
+  padding-bottom: 60px;
 }
 
 .start-message {
@@ -256,10 +258,6 @@ export default {
 .mark-class {
   border-color: #ff5722;
   z-index: 1;
-}
-
-.add-btn {
-  // margin: 10px;
 }
 
 #color-picker-btn3 {
@@ -323,9 +321,8 @@ export default {
 }
 
 
-
 #navs {
-  z-index: 999;
+  z-index: 98;
   position: fixed;
   left: 10px;
   top: 14vh;
@@ -424,7 +421,7 @@ export default {
   margin: 0 auto;
   transform: scale(0.7, -0.7) rotate(120deg);
   position: absolute;
-  top: 3%;
+  top: 12%;
   left: 15%;
 
   .draw-arrow {
