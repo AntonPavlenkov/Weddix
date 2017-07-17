@@ -66,18 +66,18 @@ export default {
   flex-flow: col wrap;
   justify-content: center;
   height: 100vh;
-  background-image: url(../assets/land2.png);
-  background-repeat: no-repeat;
-  transition: background-position 15000ms ease-out;
+  // background-image: url(../assets/land2.png);
+  // background-repeat: no-repeat;
+  // transition: background-position 15000ms ease-out;
 }
 
-.main-app.ltr {
-  background-position: 100% top;
-}
+// .main-app.ltr {
+//   background-position: 100% top;
+// }
 
-.main-app.ltr:hover {
-  background-position: 0 top;
-}
+// .main-app.ltr:hover {
+//   background-position: 0 top;
+// }
 
 .welcome-message {
   font-size: 4em;

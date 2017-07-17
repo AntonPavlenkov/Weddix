@@ -3,7 +3,7 @@
     <section class="page-general-container">
       <header class="navbar">
         <div class="logo" @click="goHome()">Weddix</div>
-        <md-tabs class="md-transparent navbar-tabs" md-right md-dynamic-height :md-navigation="false" @change="changeRoute">
+        <md-tabs id="navbar-tabs" class="md-transparent" md-right md-dynamic-height :md-navigation="false" @change="changeRoute">
           <md-tab md-icon="mode_edit" md-label="EDIT" md-active md-tooltip="Edit your invitation">
           </md-tab>
           <md-tab md-icon="laptop" md-label="PREVIEW" md-tooltip="Preview your invitation">
@@ -257,7 +257,7 @@ export default {
 }
 
 @media (max-width: 420px) {
-  .navbar-tabs {
+  #navbar-tabs {
     display: none;
   }
 
