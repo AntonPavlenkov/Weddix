@@ -50,7 +50,7 @@
       </div>
   
       <!--ACTIONS-ARC-->
-      <ul id="navs" data-open="close" data-close="open" @click="arcClicked">
+      <ul id="navs" @click="arcClicked">
         <li v-if="!isReturningUser" data-action="Start ">
           <md-button class="md-icon-button md-raised md-warn add-btn" id="custom" @click="getTemplate()">
             <md-icon>note_add</md-icon>
@@ -64,11 +64,11 @@
           </md-button>
         </li>
         <!--<li data-action="Create All">
-                                <md-button class="md-icon-button md-raised" @click="createAll">
-                                  <md-icon>stars</md-icon>
-                                  <md-tooltip md-direction="top">createAll</md-tooltip>
-                                </md-button>
-                              </li>-->
+                                  <md-button class="md-icon-button md-raised" @click="createAll">
+                                    <md-icon>stars</md-icon>
+                                    <md-tooltip md-direction="top">createAll</md-tooltip>
+                                  </md-button>
+                                </li>-->
         <li data-action="Add New">
           <md-button class="md-icon-button md-raised md-primary add-btn" id="custom" @click="openDialog('addDialog')">
             <md-icon>add</md-icon>
@@ -85,7 +85,7 @@
         <li data-action="Clear Color">
           <md-button class="md-icon-button md-raised md-primary" @click="changeCssProperty('backgroundColor','transparent')">
             <md-icon>format_clear</md-icon>
-            <md-tooltip md-direction="top">Clear background color</md-tooltip>
+            <md-tooltip md-direction="top">Clear background</md-tooltip>
           </md-button>
         </li>
       </ul>
@@ -209,14 +209,15 @@ export default {
       let li = event.target.children;
       let i = li.length;
       let n = i - 1;
-      let r = 200;
+      let r = 170;
       event.target.classList.toggle('active')
       if (ul.classList.contains('active')) {
+        this.isArcClicked = true;
         for (let a = 0; a < i; a++) {
           li[a].style.visibility = 'initial'
           li[a].style.transitionDelay = `${(50 * a)}ms`
           li[a].style.left = (r * Math.cos(90 / n * a * (Math.PI / 180))) + 'px';
-          li[a].style.top = (r * Math.sin(90 / n * a * (Math.PI / 180))) + 'px';
+          li[a].style.top = (-r * Math.sin(90 / n * a * (Math.PI / 180))) + 'px';
         }
       }
       else {
@@ -242,7 +243,6 @@ export default {
 
 <style lang="scss">
 //in this css put only thing that are exclusive to PageEdit, and can be inheritted by other cmps
-
 .height-container {
   // min-height: 77vh;
   padding-bottom: 60px;
@@ -325,7 +325,7 @@ export default {
   z-index: 98;
   position: fixed;
   left: 10px;
-  top: 14vh;
+  bottom: 10vh;
   width: 60px;
   height: 60px;
   line-height: 40px;
@@ -378,13 +378,7 @@ export default {
   transition: all .6s;
   -webkit-transition: all .6s;
   -moz-transition: .6s; // visibility: hidden;
-  color: black; // &::before{
-  //   position: absolute;
-  //   content: attr(data-action);
-  //   white-space:nowrap;
-  //   top: -27px;
-  //   left:  10px;
-  // }
+  color: black;
 }
 
 #navs:after {
@@ -396,9 +390,6 @@ export default {
   -webkit-border-radius: 50%;
 }
 
-// #navs.active:after {
-//   content: attr(data-open);
-// }
 #navs a {
   width: 40px;
   height: 40px;
@@ -419,10 +410,10 @@ export default {
   width: 100px;
   height: 100px;
   margin: 0 auto;
-  transform: scale(0.7, -0.7) rotate(120deg);
+  transform: scale(0.5, 0.5) rotate(85deg);
   position: absolute;
-  top: 12%;
-  left: 15%;
+  bottom: 100px;
+  left: 50px;
 
   .draw-arrow {
     stroke-width: 5;
@@ -458,16 +449,10 @@ export default {
   }
 }
 
-@media (max-width: 850px) {
-  .start-arrow {
-    display: none;
-  }
-}
-
-@media (max-width: 650px){
-    .start-message {
+@media (max-width: 650px) {
+  .start-message {
     font-size: 1.8em;
-    margin-top:130px;
+    margin-top: 130px;
   }
 }
 </style>
