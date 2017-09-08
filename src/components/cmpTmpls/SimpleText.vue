@@ -25,8 +25,10 @@ import ModifyBtns from '../toolbars/ModifyBtns'
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
+import EditableFuncs from '../mixins/EditableFuncs'
 export default {
     name: 'SimpleText',
+    mixins: [EditableFuncs],
     props: {
         cmp: { type: Object, required: true },
         isFirst: Boolean , isLast: Boolean
@@ -39,29 +41,12 @@ export default {
     },
     data() {
         return {
-            isEditMode: false,
-            color: "",
+            color: ""
         }
     },
     computed: {
-        cmpToEdit() {
-            return JSON.parse(JSON.stringify(this.cmp))
-        }
     },
     methods: {
-        moveCmp(isUp) {
-            this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
-        },
-        deleteCmp() {
-            this.isEditMode = false;
-            this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-        },
-        toggleEditMode() {
-            this.isEditMode = !this.isEditMode
-        },
-        updateCmp(updatedCmp) {
-            this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
-        },
         updateText(dataItem) {
             this.cmpToEdit.data[dataItem] = event.target.innerText;
             this.updateCmp(this.cmpToEdit);

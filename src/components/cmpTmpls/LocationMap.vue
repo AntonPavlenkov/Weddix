@@ -35,11 +35,13 @@ import MapToolbar from '../toolbars/MapToolbar'
 import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
+import EditableFuncs from '../mixins/EditableFuncs'
 
 // const ZOOM_CLOSE = 18;
 
 export default {
     name: 'LocationMap',
+    mixins: [EditableFuncs],
     props: {
         cmp: { type: Object, required: true },
         isFirst: Boolean,
@@ -55,14 +57,10 @@ export default {
     },
     data() {
         return {
-            isEditMode: false,
             resetZoomNeeded: false
         }
     },
     computed: {
-        cmpToEdit() {
-            return JSON.parse(JSON.stringify(this.cmp))
-        },
         position() {
             return this.cmp.data.position
         },
@@ -75,19 +73,6 @@ export default {
     },
 
     methods: {
-        moveCmp(isUp) {
-            this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
-        },
-        deleteCmp() {
-            this.isEditMode = false;
-            this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-        },
-        toggleEditMode() {
-            this.isEditMode = !this.isEditMode
-        },
-        updateCmp(updatedCmp) {
-            this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
-        },
     }
 }
 </script>

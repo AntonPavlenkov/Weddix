@@ -1,6 +1,6 @@
 <template>
     <section class="count-down border-default cmp-father" :style="cmp.style" :class="{'mark-class': isEditMode}">
-    
+
         <div class="content">
             <div class="calendar-date">
                 <span class="day">{{this.day}}</span>
@@ -20,7 +20,7 @@
             <!--<div class="message"></div>-->
             <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
         </div>
-    
+
         <transition name="fade">
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <datepicker :disabled="disabled" v-on:selected="setTimer" v-model="date"></datepicker>
@@ -39,14 +39,17 @@ import flipclock from '../../assets/Clock/flipclock.min.js'
 import '../../assets/Clock/flipclock.css'
 import Datepicker from 'vuejs-datepicker';
 import EditConsole from '../toolbars/EditConsole';
+import EditableFuncs from '../mixins/EditableFuncs'
+
 var clock;
 
 export default {
     name: 'CountDown',
-    // props: ['cmp', 'isFirst', 'isLast'],
+    mixins: [EditableFuncs],
     props: {
         cmp: { type: Object, required: true },
-        isFirst: Boolean , isLast: Boolean
+        isFirst: Boolean, 
+        isLast: Boolean
     },
     components: {
         GeneralEdit,
@@ -66,7 +69,6 @@ export default {
             year: null,
             month: null,
             weekDay: null,
-            isEditMode: false,
             color: "",
             date: new Date(),
             setDate: null,
@@ -75,31 +77,13 @@ export default {
             }
         }
     },
-    computed: {
-        cmpToEdit() {
-            return JSON.parse(JSON.stringify(this.cmp))
-        }
-    },
     methods: {
-        moveCmp(isUp) {
-            this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
-        },
-        deleteCmp() {
-            this.isEditMode = false;
-            this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-        },
-        toggleEditMode() {
-            this.isEditMode = !this.isEditMode
-        },
-        updateCmp(updatedCmp) {
-            this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
-        },
         clockInit() {
             clock = $('.clock').FlipClock({
                 clockFace: 'DailyCounter',
                 autoStart: false,
                 callbacks: {
-                    stop: function () {
+                    stop: function() {
                         // $('.message').html('The clock has stopped!')
                     }
                 }
@@ -199,6 +183,7 @@ hr {
         padding: 0;
     }
 }
+
 
 
 

@@ -15,10 +15,10 @@
                 <span @blur="updateText('aboutInfo2')" :style="cmp.style" :contenteditable="isEditMode" class="about-2-info">{{cmp.data.aboutInfo2}}</span>
             </div>
         </div>
-    
+
         <!--edit butttons-->
         <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
-    
+
         <transition name="fade">
             <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
                 <couple-toolbar v-if="selectedImgType!==''" :cmp="cmp" :selectedImgType="selectedImgType" @update="updateCmp"></couple-toolbar>
@@ -35,11 +35,15 @@ import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
 import CoupleToolbar from '../toolbars/CoupleToolbar'
+import EditableFuncs from '../mixins/EditableFuncs'
+
 export default {
     name: 'CoupleAbout',
+    mixins: [EditableFuncs],
     props: {
         cmp: { type: Object, required: true },
-        isFirst: Boolean, isLast: Boolean
+        isFirst: Boolean, 
+        isLast: Boolean
     },
     components: {
         ModifyBtns,
@@ -50,13 +54,7 @@ export default {
     },
     data() {
         return {
-            isEditMode: false,
             selectedImgType: ''
-        }
-    },
-    computed: {
-        cmpToEdit() {
-            return JSON.parse(JSON.stringify(this.cmp))
         }
     },
     methods: {
@@ -64,23 +62,9 @@ export default {
             this.selectedImgType = imgType
             console.log(this.selectedImgType)
         },
-
-        moveCmp(isUp) {
-            this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
-        },
-        deleteCmp() {
-            this.isEditMode = false;
-            this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-        },
-        toggleEditMode() {
-            this.isEditMode = !this.isEditMode
-        },
         updateText(text) {
             this.cmpToEdit.data[text] = event.target.innerText;
             this.updateCmp(this.cmpToEdit);
-        },
-        updateCmp(updatedCmp) {
-            this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
         },
         // updateColor: function (event) {
         //     this.color = event.color;
@@ -134,7 +118,6 @@ export default {
     display: block;
     border-radius: 50%;
     margin: 20px auto;
-
 }
 
 .main-img-container {
@@ -168,7 +151,7 @@ export default {
         width: 100%;
         display: flex;
         justify-content: center;
-        .main-img{
+        .main-img {
             height: 300px;
         }
     }

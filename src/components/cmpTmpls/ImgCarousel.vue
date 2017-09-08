@@ -7,17 +7,17 @@
         </slide>
       </carousel-3d>
     </div>
-  
+
     <!--edit buttons-->
-        <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
-  
+    <modify-btns @deleteCmp="deleteCmp" @toggleEditMode="toggleEditMode"></modify-btns>
+
     <transition name="fade">
       <edit-console :cmp="cmp" v-if="isEditMode" @toggleEditMode="toggleEditMode" v-draggable>
         <carousel-toolbar :cmp="cmp" @update="updateCmp"></carousel-toolbar>
         <general-edit :cmp="cmp" :isFirst="isFirst" :isLast="isLast" @delete="deleteCmp" @move="moveCmp" @update="updateCmp"></general-edit>
       </edit-console>
     </transition>
-  
+
   </section>
 </template>
 
@@ -27,22 +27,15 @@ import GeneralEdit from '../toolbars/generalEditToolbar'
 import CarouselToolbar from '../toolbars/CarouselToolbar'
 import EditConsole from '../toolbars/EditConsole'
 import { Carousel3d, Slide } from 'vue-carousel-3d';
+import EditableFuncs from '../mixins/EditableFuncs'
+
 export default {
   name: 'img-carousel',
-    props: {
-        cmp: { type: Object, required: true },
-        isFirst: Boolean , isLast: Boolean
-    },
-  data() {
-    return {
-      isEditMode: false
-    }
-  },
-
-  computed: {
-    cmpToEdit() {
-      return JSON.parse(JSON.stringify(this.cmp))
-    }
+  mixins: [EditableFuncs],
+  props: {
+    cmp: { type: Object, required: true },
+    isFirst: Boolean, 
+    isLast: Boolean
   },
 
   components: {
@@ -54,20 +47,6 @@ export default {
     ModifyBtns
   },
   methods: {
-    moveCmp(isUp) {
-      this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
-    },
-    deleteCmp() {
-      this.isEditMode = false;
-      this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-
-    },
-    toggleEditMode() {
-      this.isEditMode = !this.isEditMode
-    },
-    updateCmp(updatedCmp) {
-      this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
-    },
   }
 }
 
@@ -77,6 +56,7 @@ export default {
 .img-carousel {
   position: relative;
 }
+
 .edit-console {
   .urls-form {
     width: 100%;

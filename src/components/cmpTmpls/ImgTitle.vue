@@ -41,11 +41,15 @@ import TxtToolbar from '../toolbars/TxtToolbar'
 import GeneralEdit from '../toolbars/generalEditToolbar'
 import EditConsole from '../toolbars/EditConsole'
 import ToolbarImgTitle from '../toolbars/ToolbarImgTitle'
+import EditableFuncs from '../mixins/EditableFuncs'
+
 export default {
     name: 'ImgTitle',
+    mixins: [EditableFuncs],
     props: {
         cmp: { type: Object, required: true },
-        isFirst: Boolean , isLast: Boolean
+        isFirst: Boolean, 
+        isLast: Boolean
     },
     components: {
         TxtToolbar,
@@ -56,36 +60,16 @@ export default {
     },
     data() {
         return {
-            isEditMode: false,
             newUrl: "",
             color: "",
             shape: 'heart'
         }
     },
-    computed: {
-        cmpToEdit() {
-            return JSON.parse(JSON.stringify(this.cmp))
-        }
-    },
 
     methods: {
-        updateCmp(updatedCmp) {
-            console.log('updating', updatedCmp)
-            this.$store.dispatch({ type: "updateCmp", cmp: updatedCmp });
-        },
         updateText(text) {
             this.cmpToEdit.data[text] = event.target.innerText
             this.updateCmp(this.cmpToEdit)
-        },
-        moveCmp(isUp) {
-            this.$store.dispatch({ type: "moveCmp", cmp: this.cmpToEdit, isUp });
-        },
-        deleteCmp() {
-            this.isEditMode = false;
-            this.$store.dispatch({ type: "deleteCmp", cmp: this.cmpToEdit });
-        },
-        toggleEditMode() {
-            this.isEditMode = !this.isEditMode
         },
     }
 }
